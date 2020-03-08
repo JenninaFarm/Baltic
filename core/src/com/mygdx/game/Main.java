@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Main extends Game {
+	//commit
 	SpriteBatch batch;
 	MainMenuScreen mainMenuScreen;
 	MapScreen mapScreen;
