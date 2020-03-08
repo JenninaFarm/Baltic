@@ -7,6 +7,13 @@ import com.mygdx.game.Main;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.pauseWhenBackground = true;
+		config.pauseWhenMinimized = true;
+		config.title = "Project Baltic";
+		config.height = 480;
+		config.width = 800;
+		config.x = 0;
+		config.y = 0;
 		new LwjglApplication(new Main(), config);
 	}
 }
