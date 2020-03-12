@@ -22,7 +22,7 @@ public class MainMenuScreen implements Screen {
 
         //uutta
         stage = new Stage(new FitViewport(1000, 500), batch);
-        buttonIcon = new ButtonActor();
+        buttonIcon = new ButtonActor(main);
         stage.addActor(buttonIcon);
 
         Gdx.input.setInputProcessor(stage);
@@ -42,10 +42,6 @@ public class MainMenuScreen implements Screen {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-        if(Gdx.input.justTouched()) {
-            main.switchScreen(2, 0);
-        }
     }
 
     @Override
