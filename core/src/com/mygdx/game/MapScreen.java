@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MapScreen extends ApplicationAdapter implements Screen {
 
@@ -19,6 +21,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private OrthographicCamera camera;
     static final float WORLD_WIDTH = 100;
     static final float WORLD_HEIGHT = 50;
+
+    private Stage stage;
+    private MapButton mapButton;
+    private boolean visible = false;
 
     public MapScreen(Main m) {
         main = m;
@@ -36,6 +42,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.zoom = 100;
         camera.update();
+
+        stage = new Stage(new FitViewport(1000, 500), batch);
+        mapButton = new MapButton(main);
+        stage.addActor(mapButton);
+
+
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -56,6 +69,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         batch.begin();
         mapSprite.draw(batch);
         batch.end();
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     private void handleInput() {

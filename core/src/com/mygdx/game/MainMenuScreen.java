@@ -15,6 +15,7 @@ public class MainMenuScreen implements Screen {
     //uutta
     private Stage stage;
     private ButtonActor buttonIcon;
+    private boolean visible = true;
 
     public MainMenuScreen(Main m) {
         main = m;
@@ -39,6 +40,10 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.end();
+
+       /* if(Gdx.input.justTouched()) {
+            main.switchScreen(2,0);
+        }*/
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
