@@ -28,7 +28,7 @@ public class MapButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("there");
-                main.switchScreen(1, 0);
+                main.switchScreen(3, 1);
                 return true;
             }
         });

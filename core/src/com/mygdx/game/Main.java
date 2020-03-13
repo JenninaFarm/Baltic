@@ -33,13 +33,13 @@ public class Main extends Game {
 		optionsScreen = new OptionsScreen(this);
 
 		setScreen(mainMenuScreen);
+		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
 	public void switchScreen(int x, int y) {
 		if(x == 1) {
 			setScreen(mainMenuScreen);
 			Gdx.input.setInputProcessor(mainMenuScreen.getStage());
-
 		} else if (x == 2) {
 			setScreen(mapScreen);
 			Gdx.input.setInputProcessor(mapScreen.getStage());

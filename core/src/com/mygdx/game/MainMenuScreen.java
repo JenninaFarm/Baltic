@@ -13,7 +13,6 @@ public class MainMenuScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
 
-    //uutta
     private Stage stage;
     private ButtonActor buttonIcon;
 
@@ -21,7 +20,6 @@ public class MainMenuScreen implements Screen {
         main = m;
         batch = main.getBatch();
 
-        //uutta
         stage = new Stage(new FitViewport(1000, 500), batch);
         buttonIcon = new ButtonActor(main);
         stage.addActor(buttonIcon);
