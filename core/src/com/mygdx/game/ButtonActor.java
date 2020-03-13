@@ -16,7 +16,6 @@ public class ButtonActor extends Actor {
     public ButtonActor(Main m) {
         main = m;
         button = new Texture(Gdx.files.internal("test_icon.jpg"));
-        setX(0);
         setY(0);
         setWidth(button.getWidth());
         setHeight(button.getHeight());
@@ -24,7 +23,7 @@ public class ButtonActor extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("here");
+                System.out.println("to map");
                 main.switchScreen(2, 0);
                 return true;
             }
