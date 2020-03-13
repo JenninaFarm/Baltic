@@ -7,21 +7,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class OptionsScreen implements Screen {
+public class ResearchScreen implements Screen {
 
     private Main main;
     private SpriteBatch batch;
-
     private Stage stage;
-    //private OptionButton optionButton;
+    //private ResearchButton researchButton;
 
-    public OptionsScreen(Main m) {
+    public ResearchScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(1000, 500), batch);
-        //optionButton = new OptionButton(main);
-        //stage.addActor(optionButton);
+        //researchButton = new ResearchButton(main);
+        //stage.addActor(researchButton);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -33,7 +32,7 @@ public class OptionsScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         batch.end();
