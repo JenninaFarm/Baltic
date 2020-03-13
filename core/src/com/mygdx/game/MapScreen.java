@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -18,10 +19,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Main main;
     private SpriteBatch batch;
-    private Sprite mapSprite;
-    private OrthographicCamera camera;
-    static final float WORLD_WIDTH = 100;
-    static final float WORLD_HEIGHT = 50;
+    private Actor map;
 
     private Stage stage;
     private MapButton mapButton;
@@ -31,25 +29,17 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         main = m;
         batch = main.getBatch();
 
-        mapSprite = new Sprite(new Texture(Gdx.files.internal("map.jpg")));
-        mapSprite.setPosition(0, 0);
-        mapSprite.setSize(WORLD_WIDTH, WORLD_HEIGHT);
-
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-
-        camera = new OrthographicCamera(300, 300 * (h / w));
-
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        camera.zoom = 100;
-        camera.update();
-
         stage = new Stage(new FitViewport(1000, 500), batch);
         mapButton = new MapButton(main);
+        map = new MapBackground();
+        map.setPosition(0, 0);
+
+        stage.addActor(map);
         stage.addActor(mapButton);
 
-
         Gdx.input.setInputProcessor(stage);
+
+        ((OrthographicCamera)stage.getCamera()).zoom += 1000;
     }
 
     @Override
@@ -61,54 +51,49 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public void render(float delta) {
 
         handleInput();
-        camera.update();
-        batch.setProjectionMatrix(camera.combined);
+        stage.getCamera().update();
 
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        mapSprite.draw(batch);
-        batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
     private void handleInput() {
+
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            camera.zoom += 0.02;
+            ((OrthographicCamera)stage.getCamera()).zoom += 0.3f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.Q)) {
-            camera.zoom -= 0.02;
+            ((OrthographicCamera)stage.getCamera()).zoom -= 0.3f;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            camera.translate(-1, 0, 0);
+            stage.getCamera().translate(-7, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            camera.translate(1, 0, 0);
+            stage.getCamera().translate(7, 0, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            camera.translate(0, -1, 0);
+            stage.getCamera().translate(0, -7, 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            camera.translate(0, 1, 0);
+            stage.getCamera().translate(0, 7, 0);
         }
 
-        camera.zoom = MathUtils.clamp(camera.zoom, 1.5f, 100/camera.viewportWidth);
+        ((OrthographicCamera)stage.getCamera()).zoom = MathUtils.clamp(((OrthographicCamera)stage.getCamera()).zoom, 10f, 1000/stage.getCamera().viewportWidth);
+        float effectiveViewportWidth = stage.getCamera().viewportWidth * ((OrthographicCamera)stage.getCamera()).zoom;
+        float effectiveViewportHeight = stage.getCamera().viewportHeight * ((OrthographicCamera)stage.getCamera()).zoom;
 
-        float effectiveViewportWidth = camera.viewportWidth * camera.zoom;
-        float effectiveViewportHeight = camera.viewportHeight * camera.zoom;
-
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 100 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 50 - effectiveViewportHeight / 2f);
+        stage.getCamera().position.x = MathUtils.clamp(stage.getCamera().position.x, effectiveViewportWidth / 2f, 1000 - effectiveViewportWidth / 2f);
+        stage.getCamera().position.y = MathUtils.clamp(stage.getCamera().position.y, effectiveViewportHeight / 2f, 500 - effectiveViewportHeight / 2f);
     }
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = 30f;
-        camera.viewportHeight = 30f * height / width;
-        camera.update();
+        stage.getCamera().viewportWidth = 30f;
+        stage.getCamera().viewportHeight = 30f * height / width;
+        stage.getCamera().update();
     }
 
     @Override
@@ -128,7 +113,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void dispose() {
-        mapSprite.getTexture().dispose();
     }
 
     public Stage getStage() {
