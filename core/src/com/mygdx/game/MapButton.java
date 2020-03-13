@@ -10,15 +10,19 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class MapButton extends Actor {
 
     private Main main;
-    Texture button;
+    private Texture button;
+    private float width;
+    private float height;
 
     public MapButton(Main m) {
         main = m;
-        button = new Texture(Gdx.files.internal("test_icon.jpg"));
+        button = new Texture(Gdx.files.internal("farm-icon.png"));
         setX(0);
         setY(0);
-        setWidth(button.getWidth());
-        setHeight(button.getHeight());
+        width = button.getWidth()/4f;
+        height = button.getHeight()/4f;
+        setWidth(width);
+        setHeight(height);
         setBounds(0, 0, getWidth(), getHeight());
 
         addListener(new InputListener() {
@@ -31,7 +35,7 @@ public class MapButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), button.getWidth(), button.getHeight());
+        batch.draw(button, this.getX(), this.getY(), width, height);
     }
 
     @Override

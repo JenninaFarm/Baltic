@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -128,5 +129,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     @Override
     public void dispose() {
         mapSprite.getTexture().dispose();
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }
