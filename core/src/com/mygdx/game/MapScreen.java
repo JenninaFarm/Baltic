@@ -28,6 +28,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private boolean visible = false;
 
     public MapScreen(Main m) {
+        //commit
         main = m;
         batch = main.getBatch();
 
