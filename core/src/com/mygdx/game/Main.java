@@ -12,12 +12,14 @@ public class Main extends Game {
 	SpriteBatch batch;
 	MainMenuScreen mainMenuScreen;
 	MapScreen mapScreen;
+	FarmScreen<> farmScreens;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
+
 		setScreen(mainMenuScreen);
 	}
 
@@ -29,7 +31,8 @@ public class Main extends Game {
 		} else if (x == 2) {
 			setScreen(mapScreen);
 			Gdx.input.setInputProcessor(mapScreen.getStage());
-
+		} else if(x == 3) {
+			setScreen(farmScreen);
 		}
 	}
 

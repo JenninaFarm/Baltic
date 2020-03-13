@@ -1,30 +1,27 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class MainMenuScreen implements Screen {
+public class OptionsScreen implements Screen {
 
     private Main main;
     private SpriteBatch batch;
 
-    //uutta
     private Stage stage;
-    private ButtonActor buttonIcon;
+    //private OptionButton optionButton;
 
-    public MainMenuScreen(Main m) {
+    public OptionsScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
-        //uutta
         stage = new Stage(new FitViewport(1000, 500), batch);
-        buttonIcon = new ButtonActor(main);
-        stage.addActor(buttonIcon);
+        //optionButton = new OptionButton(main);
+        //stage.addActor(optionButton);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -68,9 +65,5 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
 
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 }
