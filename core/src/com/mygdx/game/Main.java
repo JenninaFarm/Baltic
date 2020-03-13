@@ -19,6 +19,7 @@ public class Main extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 		setScreen(mainMenuScreen);
+		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
 	public void switchScreen(int x, int y) {

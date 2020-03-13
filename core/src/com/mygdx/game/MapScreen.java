@@ -20,9 +20,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Actor map;
-
     private Stage stage;
-    private MapButton mapButton;
+
+    private MapButton farmOne;
+    private MapButton farmTwo;
+    private MapButton farmThree;
+    private MapButton farmFour;
+
     private boolean visible = false;
 
     public MapScreen(Main m) {
@@ -30,12 +34,20 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(1000, 500), batch);
-        mapButton = new MapButton(main);
+
+        farmOne = new MapButton(main, 250, 20);
+        farmTwo = new MapButton(main, 450, 150);
+        farmThree = new MapButton(main, 750, 70);
+        farmFour = new MapButton(main,700, 300);
+
         map = new MapBackground();
         map.setPosition(0, 0);
 
         stage.addActor(map);
-        stage.addActor(mapButton);
+        stage.addActor(farmOne);
+        stage.addActor(farmTwo);
+        stage.addActor(farmThree);
+        stage.addActor(farmFour);
 
         Gdx.input.setInputProcessor(stage);
 
