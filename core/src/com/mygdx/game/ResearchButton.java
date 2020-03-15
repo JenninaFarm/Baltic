@@ -13,9 +13,11 @@ public class ResearchButton extends Actor {
     private float width;
     private float height;
     private int index;
+    private int cost;
 
-    public ResearchButton(Main m, TextureRegion buttonTexture, int i) {
+    public ResearchButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
         index = i;
+        cost = costAmount;
         main = m;
         button = buttonTexture;
         width = button.getRegionWidth()/2f;
@@ -28,6 +30,17 @@ public class ResearchButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                int currentMoney = main.getMoney();
+                if(currentMoney >= cost) {
+                    System.out.println("bought");
+                    main.setMoney(currentMoney-cost);
+                } else {
+                    System.out.println("Not enough money!");
+                    System.out.println(index);
+                    System.out.println(cost);
+                    System.out.println(main.getMoney());
+                }
+                //switch screen for now
                 if(index == 0) {
                     System.out.println("to main");
                     main.switchScreen(1, 0);

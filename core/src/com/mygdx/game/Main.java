@@ -19,7 +19,7 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		money = 3000;
+		money = 6000;
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 

@@ -16,7 +16,7 @@ public class ResearchScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
-    private ArrayList<ResearchButton> researchButtons = new ArrayList<ResearchButton>();
+    private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private TextureRegion [] buttonTextureArray;
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
@@ -38,7 +38,8 @@ public class ResearchScreen implements Screen {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
         for(int i=0; i<researchAmount; i++){
-            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i));
+            int costAmount = 2000 + 2000*(int)Math.pow(2, i);
+            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i, costAmount));
         }
     }
 
