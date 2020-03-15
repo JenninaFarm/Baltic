@@ -10,8 +10,8 @@ public class DesktopLauncher {
 		config.pauseWhenBackground = true;
 		config.pauseWhenMinimized = true;
 		config.title = "Project Baltic";
-		config.height = 500;
-		config.width = 1000;
+		config.height = 450;
+		config.width = 800;
 		config.x = 0;
 		config.y = 0;
 		new LwjglApplication(new Main(), config);

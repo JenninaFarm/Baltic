@@ -16,7 +16,6 @@ public class ButtonActor extends Actor {
     public ButtonActor(Main m) {
         main = m;
         button = new Texture(Gdx.files.internal("test_icon.jpg"));
-        setY(0);
         setWidth(button.getWidth());
         setHeight(button.getHeight());
         setBounds(0, 0, getWidth(), getHeight());

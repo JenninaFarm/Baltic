@@ -15,6 +15,6 @@ public class MapBackground extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(map, this.getX(), this.getY(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.draw(map, this.getX(), this.getY(), 800, 450);
     }
 }
