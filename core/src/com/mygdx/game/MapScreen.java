@@ -28,7 +28,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private MapButton farmFour;
 
     public MapScreen(Main m) {
-        //commit
         main = m;
         batch = main.getBatch();
 
