@@ -27,8 +27,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private MapButton farmThree;
     private MapButton farmFour;
 
-    private boolean visible = false;
-
     public MapScreen(Main m) {
         //commit
         main = m;
