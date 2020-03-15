@@ -35,8 +35,6 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     private Camera camera;
 
-    private boolean visible = false;
-
     public MapScreen(Main m) {
         //commit
         main = m;
@@ -181,11 +179,17 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
+        Gdx.app.log("INFO", "In pan");
+
+        ((OrthographicCamera)camera).translate(-deltaX, deltaY);
+        camera.update();
         return false;
     }
 
     @Override
     public boolean panStop(float x, float y, int pointer, int button) {
+        Gdx.app.log("INFO", "panStop");
+        ((OrthographicCamera)camera).zoom = ((OrthographicCamera)camera).zoom;
         return false;
     }
 
@@ -193,14 +197,13 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     public boolean zoom(float initialDistance, float distance) {
         String message = "Zoom performed";
         Gdx.app.log("INFO", message);
-        System.out.println("zoom");
         ((OrthographicCamera)camera).zoom = (initialDistance / distance) * ((OrthographicCamera)camera).zoom;
         camera.update();
         return true;
     }
+
     @Override
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-
         return false;
     }
 
