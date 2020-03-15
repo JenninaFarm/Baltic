@@ -28,14 +28,12 @@ public class MapButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("to research");
-                main.switchScreen(4, 1);
+                System.out.println("to farm");
+                main.switchScreen(3, 1);
                 return true;
             }
         });
     }
-
-    // moi
 
     public void draw(Batch batch, float alpha) {
         batch.draw(button, this.getX(), this.getY(), width, height);

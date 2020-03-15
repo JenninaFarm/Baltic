@@ -14,10 +14,12 @@ public class Main extends Game {
 	private int farmAmount = 4;
 	private ResearchScreen researchScreen;
 	private OptionsScreen optionsScreen;
+	private int money;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		money = 6000;
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 
@@ -52,6 +54,18 @@ public class Main extends Game {
 			setScreen(optionsScreen);
 			Gdx.input.setInputProcessor(optionsScreen.getStage());
 		}
+	}
+
+	public void setMoney(int amount) {
+		if(amount < 0) {
+			System.out.println("Program is failing. No enough money to this action.");
+		} else {
+			money = amount;
+		}
+	}
+
+	public int getMoney() {
+		return money;
 	}
 
 	public SpriteBatch getBatch() {

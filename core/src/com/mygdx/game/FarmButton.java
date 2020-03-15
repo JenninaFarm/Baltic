@@ -6,8 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class ResearchButton extends Actor {
-
+public class FarmButton extends Actor {
     private Main main;
     private TextureRegion button;
     private float width;
@@ -15,10 +14,10 @@ public class ResearchButton extends Actor {
     private int index;
     private int cost;
 
-    public ResearchButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
+    public FarmButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
         index = i;
-        cost = costAmount;
         main = m;
+        cost = costAmount;
         button = buttonTexture;
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
