@@ -39,7 +39,8 @@ public class FarmScreen implements Screen {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
         for(int i=0; i<upgradeAmount; i++){
-            farmButtons.add(new FarmButton(main, buttonTextureArray[i], i));
+            int costAmount = 1000 + 2000*(int)Math.pow(2, i);
+            farmButtons.add(new FarmButton(main, buttonTextureArray[i], i, costAmount));
         }
     }
 

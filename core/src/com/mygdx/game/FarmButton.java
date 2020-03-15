@@ -12,10 +12,12 @@ public class FarmButton extends Actor {
     private float width;
     private float height;
     private int index;
+    private int cost;
 
-    public FarmButton(Main m, TextureRegion buttonTexture, int i) {
+    public FarmButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
         index = i;
         main = m;
+        cost = costAmount;
         button = buttonTexture;
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
@@ -27,6 +29,17 @@ public class FarmButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                int currentMoney = main.getMoney();
+                if(currentMoney >= cost) {
+                    System.out.println("bought");
+                    main.setMoney(currentMoney-cost);
+                } else {
+                    System.out.println("Not enough money!");
+                    System.out.println(index);
+                    System.out.println(cost);
+                    System.out.println(main.getMoney());
+                }
+                //switch screen for now
                 if(index == 0) {
                     System.out.println("to main");
                     main.switchScreen(1, 0);
