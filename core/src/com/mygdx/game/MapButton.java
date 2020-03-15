@@ -35,6 +35,8 @@ public class MapButton extends Actor {
         });
     }
 
+    // moi
+
     public void draw(Batch batch, float alpha) {
         batch.draw(button, this.getX(), this.getY(), width, height);
     }
