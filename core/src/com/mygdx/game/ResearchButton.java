@@ -1,8 +1,7 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -10,17 +9,17 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class ResearchButton extends Actor {
 
     private Main main;
-    private Texture button;
+    private TextureRegion button;
     private float width;
     private float height;
     private int index;
 
-    public ResearchButton(Main m, Texture buttonTexture, int i) {
+    public ResearchButton(Main m, TextureRegion buttonTexture, int i) {
         index = i;
         main = m;
         button = buttonTexture;
-        width = button.getWidth()/2f;
-        height = button.getHeight()/2f;
+        width = button.getRegionWidth()/2f;
+        height = button.getRegionHeight()/2f;
         setX(1000/2f - width/2f);
         setY(500/2f - height/2f - index*height);
         setWidth(width);

@@ -16,10 +16,9 @@ public class ResearchScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
-    private ResearchButton researchButton;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<ResearchButton>();
-    private ArrayList<Texture> buttonTextures = new ArrayList<Texture>();
-    private int researchAmount = 2;
+    private TextureRegion [] buttonTextureArray;
+    private int researchAmount = 6;
     private Texture tutkimus1;
 
     public ResearchScreen(Main m) {
@@ -28,16 +27,32 @@ public class ResearchScreen implements Screen {
 
         stage = new Stage(new FitViewport(1000, 500), batch);
         tutkimus1 = new Texture(Gdx.files.internal("tutkimus1.jpg"));
-        Texture tutkimus2 = new Texture(Gdx.files.internal("tutkimus2.jpg"));
-        buttonTextures.add(tutkimus1);
-        buttonTextures.add(tutkimus2);
+
+        createButtonArray();
+        createButtons();
+        addActors();
+
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void createButtonArray() {
+        TextureRegion [][] buttonRegion = TextureRegion.split(
+                tutkimus1,
+                tutkimus1.getWidth() / 3,
+                tutkimus1.getHeight() / 2);
+        buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
+    }
+
+    private  void createButtons() {
         for(int i=0; i<researchAmount; i++){
-            researchButtons.add(new ResearchButton(main, buttonTextures.get(i), i));
+            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i));
         }
+    }
+
+    private void addActors() {
         for(int i=0; i<researchAmount; i++) {
             stage.addActor(researchButtons.get(i));
         }
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
