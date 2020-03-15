@@ -25,4 +25,12 @@ public class Utils {
         }
         return temp;
     }
+
+    public static TextureRegion[][] createTextureRegion2DArray(Texture t) {
+        TextureRegion [][] regionArray = TextureRegion.split(
+                t,
+                t.getWidth() / 3,
+                t.getHeight() / 2);
+        return regionArray;
+    }
 }

@@ -4,27 +4,50 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import java.util.ArrayList;
 
 public class MainMenuScreen implements Screen {
 
     private Main main;
     private SpriteBatch batch;
-
     private Stage stage;
-    private ButtonActor buttonIcon;
+
+    private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
+    private TextureRegion[] buttonTextureArray;
+    private int buttonAmount = 2;
+    private Texture buttonRegionTexture;
 
     public MainMenuScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(1000, 500), batch);
-        buttonIcon = new ButtonActor(main);
-        stage.addActor(buttonIcon);
+        buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
+
+        createButtons();
+        addActors();
 
         Gdx.input.setInputProcessor(stage);
+    }
+
+    private void createButtons() {
+        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
+        buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
+        for(int i=0; i<buttonAmount; i++){
+            mainMenuButtons.add(new MainMenuButton(main, buttonTextureArray[i], i));
+        }
+    }
+
+    private void addActors() {
+        for(int i=0; i<buttonAmount; i++) {
+            stage.addActor(mainMenuButtons.get(i));
+        }
     }
 
     @Override
