@@ -21,12 +21,13 @@ public class OptionsScreen implements Screen {
     private TextureRegion[] buttonTextureArray;
     private int buttonAmount = 3;
     private Texture buttonRegionTexture;
+    private ReturnButton returnButton;
 
 
     public OptionsScreen(Main m) {
         main = m;
         batch = main.getBatch();
-        stage = new Stage(new FitViewport(1000, 500), batch);
+        stage = new Stage(new FitViewport(800, 450), batch);
         buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
 
         createButtons();
@@ -41,12 +42,14 @@ public class OptionsScreen implements Screen {
         for(int i=0; i<buttonAmount; i++){
             optionsButtons.add(new OptionsButton(main, buttonTextureArray[i], i));
         }
+        returnButton = new ReturnButton(main, 1);
     }
 
     private void addActors() {
         for(int i=0; i<buttonAmount; i++) {
             stage.addActor(optionsButtons.get(i));
         }
+        stage.addActor(returnButton);
     }
 
     @Override

@@ -30,6 +30,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     private MapButton farmTwo;
     private MapButton farmThree;
     private MapButton farmFour;
+    private MapResearchButton research;
+    private ReturnButton returnButton;
 
     private Vector2 dragNew, dragOld;
 
@@ -38,17 +40,18 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     private boolean visible = false;
 
     public MapScreen(Main m) {
-        //commit
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
-        farmOne = new MapButton(main, 200, 20);
-        farmTwo = new MapButton(main, 360, 150);
-        farmThree = new MapButton(main, 600, 70);
-        farmFour = new MapButton(main,560, 270);
+        farmOne = new MapButton(main, 200, 20, 1);
+        farmTwo = new MapButton(main, 360, 150, 2);
+        farmThree = new MapButton(main, 600, 70, 3);
+        farmFour = new MapButton(main,560, 270, 4);
+        research = new MapResearchButton(main, 670, 215);
+        returnButton = new ReturnButton(main, 1);
 
         map = new MapBackground();
         map.setSize(800, 450);
@@ -59,6 +62,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         stage.addActor(farmTwo);
         stage.addActor(farmThree);
         stage.addActor(farmFour);
+        stage.addActor(research);
+        stage.addActor(returnButton);
 
         GestureDetector gd = new GestureDetector(this);
         inputMultiplex = new InputMultiplexer();

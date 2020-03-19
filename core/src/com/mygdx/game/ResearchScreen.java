@@ -20,12 +20,13 @@ public class ResearchScreen implements Screen {
     private TextureRegion [] buttonTextureArray;
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
+    private ReturnButton returnButton;
 
     public ResearchScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
-        stage = new Stage(new FitViewport(1000, 500), batch);
+        stage = new Stage(new FitViewport(800, 450), batch);
         buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
 
         createButtons();
@@ -41,12 +42,14 @@ public class ResearchScreen implements Screen {
             int costAmount = 2000 + 2000*(int)Math.pow(2, i);
             researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i, costAmount));
         }
+        returnButton = new ReturnButton(main, 2);
     }
 
     private void addActors() {
         for(int i=0; i<researchAmount; i++) {
             stage.addActor(researchButtons.get(i));
         }
+        stage.addActor(returnButton);
     }
 
     @Override

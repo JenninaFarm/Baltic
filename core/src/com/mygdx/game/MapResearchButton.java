@@ -7,19 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class MapButton extends Actor {
+public class MapResearchButton extends Actor {
 
     private Main main;
     private Texture button;
     private float width;
     private float height;
-    private int index;
 
-    public MapButton(Main m, int x, int y, int i) {
-
-        index = i;
+    public MapResearchButton(Main m, int x, int y) {
         main = m;
-        button = new Texture(Gdx.files.internal("farm-icon.png"));
+        button = new Texture(Gdx.files.internal("researchmapicon.png"));
         setX(x);
         setY(y);
         width = button.getWidth()/7f;
@@ -30,8 +27,8 @@ public class MapButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("to farm");
-                main.switchScreen(3, index);
+                System.out.println("to research");
+                main.switchScreen(4, 0);
                 return true;
             }
         });
@@ -39,10 +36,5 @@ public class MapButton extends Actor {
 
     public void draw(Batch batch, float alpha) {
         batch.draw(button, this.getX(), this.getY(), width, height);
-    }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
     }
 }
