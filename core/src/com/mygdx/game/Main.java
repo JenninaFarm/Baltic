@@ -14,6 +14,7 @@ public class Main extends Game {
 	private int farmAmount = 4;
 	private ResearchScreen researchScreen;
 	private OptionsScreen optionsScreen;
+
 	private int money;
 
 	@Override

@@ -47,6 +47,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         farmTwo = new MapButton(main, 360, 150);
         farmThree = new MapButton(main, 600, 70);
         farmFour = new MapButton(main,560, 270);
+        MoneyButton coin = new MoneyButton(main, 100, 100);
 
         map = new MapBackground();
         map.setSize(800, 450);
@@ -57,6 +58,9 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         stage.addActor(farmTwo);
         stage.addActor(farmThree);
         stage.addActor(farmFour);
+        stage.addActor(coin);
+
+
 
         GestureDetector gd = new GestureDetector(this);
         inputMultiplex = new InputMultiplexer();

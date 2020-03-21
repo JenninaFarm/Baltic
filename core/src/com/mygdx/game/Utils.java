@@ -33,4 +33,12 @@ public class Utils {
                 t.getHeight() / 2);
         return regionArray;
     }
+
+    public static int getCurrentTimeInSeconds() {
+        Long timeMillis = System.currentTimeMillis();
+        int tempMillis = timeMillis.intValue();
+        int tempSec = tempMillis/1000;
+
+        return tempSec;
+    }
 }
