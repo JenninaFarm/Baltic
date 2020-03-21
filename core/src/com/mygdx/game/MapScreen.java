@@ -17,49 +17,42 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import java.util.ArrayList;
+
 public class MapScreen extends ApplicationAdapter implements Screen, GestureListener {
 
     private Main main;
     private SpriteBatch batch;
     private Actor map;
     private Stage stage;
+    private int actorAmount = 4;
 
     public static InputMultiplexer inputMultiplex;
 
-    private MapButton farmOne;
-    private MapButton farmTwo;
-    private MapButton farmThree;
-    private MapButton farmFour;
+    private ArrayList<MoneyButton> coins = new ArrayList<>();
+    private ArrayList<MapButton> farms = new ArrayList<>();
 
     private Vector2 dragNew, dragOld;
 
     private Camera camera;
 
     public MapScreen(Main m) {
-        //commit
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
-        farmOne = new MapButton(main, 200, 20);
-        farmTwo = new MapButton(main, 360, 150);
-        farmThree = new MapButton(main, 600, 70);
-        farmFour = new MapButton(main,560, 270);
-        MoneyButton coin = new MoneyButton(main, 100, 100);
+        createFarms();
+        createCoins();
 
         map = new MapBackground();
         map.setSize(800, 450);
         map.setPosition(0, 0);
 
         stage.addActor(map);
-        stage.addActor(farmOne);
-        stage.addActor(farmTwo);
-        stage.addActor(farmThree);
-        stage.addActor(farmFour);
-        stage.addActor(coin);
 
+        addCoinsAndFarmsToStage();
 
 
         GestureDetector gd = new GestureDetector(this);
@@ -69,6 +62,27 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         Gdx.input.setInputProcessor(gd);
 
         ((OrthographicCamera)camera).zoom += 25;
+    }
+
+    private void addCoinsAndFarmsToStage() {
+        for(int i=0; i<actorAmount; i++) {
+            stage.addActor(farms.get(i));
+            stage.addActor(coins.get(i));
+        }
+    }
+
+    private void createCoins() {
+        coins.add(new MoneyButton(main, 250, 70));
+        coins.add(new MoneyButton(main, 410, 200));
+        coins.add(new MoneyButton(main, 650, 120));
+        coins.add(new MoneyButton(main, 610, 320));
+    }
+
+    private void createFarms() {
+        farms.add(new MapButton(main, 200, 20));
+        farms.add(new MapButton(main, 360, 150));
+        farms.add(new MapButton(main, 600, 70));
+        farms.add(new MapButton(main,560, 270));
     }
 
     @Override
