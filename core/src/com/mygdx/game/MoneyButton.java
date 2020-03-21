@@ -15,9 +15,9 @@ public class MoneyButton extends Actor {
     private float height;
 
     private int timeLastClicked;
-    private int currentTimeInSeconds;
     private int timeWhenClickedInSec;
     private int money;
+    private double multiplier = 0.5;
 
     public MoneyButton(Main m, int x, int y) {
 
@@ -31,7 +31,6 @@ public class MoneyButton extends Actor {
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
         timeLastClicked = Utils.getCurrentTimeInSeconds();
-        System.out.println("timeLastClicked - created now: " + timeLastClicked);
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -46,21 +45,23 @@ public class MoneyButton extends Actor {
         });
     }
 
+    private void setMultiplier(double x) {
+        multiplier += x;
+    }
+
     private void countMoney() {
         int timePassedInSec = timeWhenClickedInSec - timeLastClicked;
         System.out.println("timePassed: " + timePassedInSec);
 
-        money = (int)(timePassedInSec * 0.5);
+        money = (int)(timePassedInSec * multiplier);
         timeLastClicked = timeWhenClickedInSec;
-        System.out.println("NEW timeLastClicked: " + timeLastClicked);
-
     }
 
     public void draw(Batch batch, float alpha) {
         int currentTime = Utils.getCurrentTimeInSeconds();
-        int timePassedInSec = timeLastClicked - currentTime;
-        System.out.println("timePassed in draw: " + timePassedInSec);
-        if(timePassedInSec < -5) {
+        int timePassedInSec = currentTime - timeLastClicked;
+        int potentialMoney = (int)(timePassedInSec * multiplier);
+        if(potentialMoney > 5 * multiplier) {
             batch.draw(button, this.getX(), this.getY(), width, height);
         }
     }
