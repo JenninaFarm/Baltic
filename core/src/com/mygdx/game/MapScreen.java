@@ -84,10 +84,10 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     }
 
     private void createFarms() {
-        farms.add(new MapButton(main, 200, 20));
-        farms.add(new MapButton(main, 360, 150));
-        farms.add(new MapButton(main, 600, 70));
-        farms.add(new MapButton(main,560, 270));
+        farms.add(new MapButton(main, 200, 20, 1));
+        farms.add(new MapButton(main, 360, 150, 2));
+        farms.add(new MapButton(main, 600, 70, 3));
+        farms.add(new MapButton(main,560, 270, 4));
     }
 
     @Override

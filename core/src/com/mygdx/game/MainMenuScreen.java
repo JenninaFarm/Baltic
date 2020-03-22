@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen {
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
-        buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
+        buttonRegionTexture = new Texture(Gdx.files.internal("mainButtons.png"));
 
         createButtons();
         addActors();
