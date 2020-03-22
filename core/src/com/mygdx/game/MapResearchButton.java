@@ -7,31 +7,28 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public class ReturnButton extends Actor {
+public class MapResearchButton extends Actor {
 
     private Main main;
     private Texture button;
     private float width;
     private float height;
-    private int index;
 
-    public ReturnButton(Main m, int i) {
-
-        index = i;
+    public MapResearchButton(Main m, int x, int y) {
         main = m;
-        button = new Texture(Gdx.files.internal("test_icon.jpg"));
-        setX(30);
-        setY(430);
-        width = button.getWidth()/4f;
-        height = button.getHeight()/4f;
+        button = new Texture(Gdx.files.internal("researchmapicon.png"));
+        setX(x);
+        setY(y);
+        width = button.getWidth()/7f;
+        height = button.getHeight()/7f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("return");
-                main.switchScreen(index, 0);
+                System.out.println("to research");
+                main.switchScreen(4, 0);
                 return true;
             }
         });

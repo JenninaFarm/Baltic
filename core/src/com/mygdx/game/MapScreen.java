@@ -31,6 +31,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
+    private MapResearchButton research;
+    private ReturnButton returnButton;
 
     private Vector2 dragNew, dragOld;
 
@@ -43,6 +45,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
+        research = new MapResearchButton(main, 670, 215);
+        returnButton = new ReturnButton(main, 1);
         createFarms();
         createCoins();
 
@@ -53,7 +57,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         stage.addActor(map);
 
         addCoinsAndFarmsToStage();
-
+        stage.addActor(research);
+        stage.addActor(returnButton);
 
         GestureDetector gd = new GestureDetector(this);
         inputMultiplex = new InputMultiplexer();
@@ -215,6 +220,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     public boolean zoom(float initialDistance, float distance) {
         String message = "Zoom performed";
         Gdx.app.log("INFO", message);
+        System.out.println("zoom");
         ((OrthographicCamera)camera).zoom = (initialDistance / distance) * ((OrthographicCamera)camera).zoom;
         camera.update();
         return true;
@@ -222,6 +228,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     @Override
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+
         return false;
     }
 

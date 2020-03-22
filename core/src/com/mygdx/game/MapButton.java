@@ -15,9 +15,11 @@ public class MapButton extends Actor {
     private Texture button;
     private float width;
     private float height;
+    private int index;
 
-    public MapButton(Main m, int x, int y) {
+    public MapButton(Main m, int x, int y, int i) {
 
+        index = i;
         main = m;
         button = new Texture(Gdx.files.internal("farm-icon.png"));
         setX(x);
@@ -31,7 +33,7 @@ public class MapButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("to farm");
-                main.switchScreen(3, 1);
+                main.switchScreen(3, index);
                 return true;
             }
         });

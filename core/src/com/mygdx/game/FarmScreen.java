@@ -16,6 +16,7 @@ public class FarmScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
+    private ReturnButton returnButton;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
     private TextureRegion[] buttonTextureArray;
@@ -42,12 +43,14 @@ public class FarmScreen implements Screen {
             int costAmount = 1000 + 2000*(int)Math.pow(2, i);
             farmButtons.add(new FarmButton(main, buttonTextureArray[i], i, costAmount));
         }
+        returnButton = new ReturnButton(main, 2);
     }
 
     private void addActors() {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i));
         }
+        stage.addActor(returnButton);
     }
 
     @Override
