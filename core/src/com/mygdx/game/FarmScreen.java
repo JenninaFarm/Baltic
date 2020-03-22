@@ -48,12 +48,12 @@ public class FarmScreen implements Screen {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
 
-        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 2.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 3.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 2.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 4));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 2.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 3));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 5.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 6));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 5));
 
         returnButton = new ReturnButton(main, 2);
     }

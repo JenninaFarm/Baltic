@@ -55,7 +55,9 @@ public class FarmButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
+        if(available) {
+            batch.draw(button, this.getX(), this.getY(), width, height);
+        }
     }
 
     @Override
