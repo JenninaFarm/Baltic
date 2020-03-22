@@ -17,11 +17,12 @@ public class MoneyButton extends Actor {
     private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
-    private double multiplier = 0.5;
+    private double multiplier;
 
     public MoneyButton(Main m, int x, int y) {
 
         main = m;
+        multiplier = main.getMultiplier();
         button = new Texture(Gdx.files.internal("coin-icon.png"));
         setX(x);
         setY(y);
@@ -43,10 +44,6 @@ public class MoneyButton extends Actor {
                 return true;
             }
         });
-    }
-
-    private void setMultiplier(double x) {
-        multiplier += x;
     }
 
     private void countMoney() {

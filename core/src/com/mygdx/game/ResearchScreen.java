@@ -2,11 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ public class ResearchScreen implements Screen {
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
     private ReturnButton returnButton;
+    private Label moneyLabel;
 
     public ResearchScreen(Main m) {
         main = m;
@@ -31,6 +36,7 @@ public class ResearchScreen implements Screen {
 
         createButtons();
         addActors();
+        createMoneyLabel();
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -52,6 +58,19 @@ public class ResearchScreen implements Screen {
         stage.addActor(returnButton);
     }
 
+    private void createMoneyLabel() {
+        Label.LabelStyle label1Style = new Label.LabelStyle();
+        BitmapFont myFont = new BitmapFont(Gdx.files.internal("sansFont.fnt"));
+        label1Style.font = myFont;
+        label1Style.fontColor = Color.RED;
+
+        moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
+        moneyLabel.setSize(800 ,30);
+        moneyLabel.setPosition(200,400);
+        moneyLabel.setAlignment(Align.center);
+        stage.addActor(moneyLabel);
+    }
+
     @Override
     public void show() {
 
@@ -65,6 +84,7 @@ public class ResearchScreen implements Screen {
         batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
+        moneyLabel.setText(main.getMoney());
         stage.draw();
     }
 
@@ -94,6 +114,5 @@ public class ResearchScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

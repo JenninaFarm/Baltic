@@ -16,6 +16,8 @@ public class Main extends Game {
 	private OptionsScreen optionsScreen;
 
 	private int money;
+	private double multiplier = 0.5;
+	private double balticSituation = 0;
 
 	@Override
 	public void create () {
@@ -59,7 +61,7 @@ public class Main extends Game {
 
 	public void setMoney(int amount) {
 		if(amount < 0) {
-			System.out.println("Program is failing. No enough money to this action.");
+			System.out.println("Program is failing. Not enough money to this action.");
 		} else {
 			money = amount;
 		}
@@ -67,6 +69,18 @@ public class Main extends Game {
 
 	public int getMoney() {
 		return money;
+	}
+
+	public void setMultiplier(double amount) {
+		if(amount < 0) {
+			System.out.println("Program is failing. Multiplier is below zero.");
+		} else {
+			multiplier = amount;
+		}
+	}
+
+	public double getMultiplier() {
+		return multiplier;
 	}
 
 	public SpriteBatch getBatch() {

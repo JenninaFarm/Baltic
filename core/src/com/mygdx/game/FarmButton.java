@@ -39,14 +39,14 @@ public class FarmButton extends Actor {
                     System.out.println(cost);
                     System.out.println(main.getMoney());
                 }
-                //switch screen for now
+                /*switch screen for now
                 if(index == 0) {
                     System.out.println("to main");
                     main.switchScreen(1, 0);
                 } else if(index == 1) {
                     System.out.println("to map");
                     main.switchScreen(2, 0);
-                }
+                }*/
 
                 return true;
             }

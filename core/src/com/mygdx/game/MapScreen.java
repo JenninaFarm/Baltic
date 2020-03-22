@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.Screen;
@@ -15,6 +17,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     private ArrayList<MapButton> farms = new ArrayList<>();
     private MapResearchButton research;
     private ReturnButton returnButton;
+    private Label moneyLabel;
 
     private Vector2 dragNew, dragOld;
 
@@ -55,6 +60,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         map.setPosition(0, 0);
 
         stage.addActor(map);
+        createMoneyLabel();
 
         addCoinsAndFarmsToStage();
         stage.addActor(research);
@@ -90,6 +96,19 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         farms.add(new MapButton(main,560, 270, 4));
     }
 
+    private void createMoneyLabel() {
+        Label.LabelStyle label1Style = new Label.LabelStyle();
+        BitmapFont myFont = new BitmapFont(Gdx.files.internal("sansFont.fnt"));
+        label1Style.font = myFont;
+        label1Style.fontColor = Color.RED;
+
+        moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
+        moneyLabel.setSize(800 ,30);
+        moneyLabel.setPosition(50,400);
+        moneyLabel.setAlignment(Align.center);
+        stage.addActor(moneyLabel);
+    }
+
     @Override
     public void show() {
     }
@@ -102,6 +121,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        moneyLabel.setText(main.getMoney());
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
