@@ -100,7 +100,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         handleInput();
         camera.update();
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());

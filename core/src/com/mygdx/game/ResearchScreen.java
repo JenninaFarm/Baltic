@@ -36,8 +36,8 @@ public class ResearchScreen implements Screen {
     }
 
     private  void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
+        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
+        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
         for(int i=0; i<researchAmount; i++){
             int costAmount = 2000 + 2000*(int)Math.pow(2, i);
             researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i, costAmount));
