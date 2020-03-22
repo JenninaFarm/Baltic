@@ -16,7 +16,6 @@ public class Main extends Game {
 	private OptionsScreen optionsScreen;
 
 	private int money;
-	private double multiplier = 0.5;
 	private double balticSituation = 0;
 
 	@Override
@@ -47,8 +46,8 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(mapScreen.getStage());
 		} else if(x == 3) {
 			if(y > 0) {
-				setScreen(farmScreens.get(y - 1));
-				Gdx.input.setInputProcessor(farmScreens.get(y - 1).getStage());
+				setScreen(farmScreens.get(y));
+				Gdx.input.setInputProcessor(farmScreens.get(y).getStage());
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
@@ -69,18 +68,6 @@ public class Main extends Game {
 
 	public int getMoney() {
 		return money;
-	}
-
-	public void setMultiplier(double amount) {
-		if(amount < 0) {
-			System.out.println("Program is failing. Multiplier is below zero.");
-		} else {
-			multiplier = amount;
-		}
-	}
-
-	public double getMultiplier() {
-		return multiplier;
 	}
 
 	public SpriteBatch getBatch() {
