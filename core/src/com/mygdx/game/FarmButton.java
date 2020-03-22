@@ -21,8 +21,8 @@ public class FarmButton extends Actor {
         button = buttonTexture;
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
-        setX(1000/2f - width/2f);
-        setY(500/2f - height/2f - index*height);
+        setX(800/2f - width/2f);
+        setY(400 - height/2f - index*height);
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
