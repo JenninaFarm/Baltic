@@ -77,10 +77,10 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     }
 
     private void createCoins() {
-        coins.add(new MoneyButton(main, 250, 70));
-        coins.add(new MoneyButton(main, 410, 200));
-        coins.add(new MoneyButton(main, 650, 120));
-        coins.add(new MoneyButton(main, 610, 320));
+        coins.add(new MoneyButton(main, 245, 65));
+        coins.add(new MoneyButton(main, 405, 195));
+        coins.add(new MoneyButton(main, 645, 115));
+        coins.add(new MoneyButton(main, 604, 315));
     }
 
     private void createFarms() {

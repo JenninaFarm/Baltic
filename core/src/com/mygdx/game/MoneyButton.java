@@ -22,11 +22,11 @@ public class MoneyButton extends Actor {
     public MoneyButton(Main m, int x, int y) {
 
         main = m;
-        button = new Texture(Gdx.files.internal("test_icon.jpg"));
+        button = new Texture(Gdx.files.internal("coin-icon.png"));
         setX(x);
         setY(y);
-        width = button.getWidth()/5f;
-        height = button.getHeight()/5f;
+        width = button.getWidth()/3f;
+        height = button.getHeight()/3f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
