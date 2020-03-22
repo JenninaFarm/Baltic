@@ -33,21 +33,13 @@ public class ResearchButton extends Actor {
                 int currentMoney = main.getMoney();
                 if(currentMoney >= cost) {
                     System.out.println("bought");
-                    main.setMoney(currentMoney-cost);
+                    main.setMoney(currentMoney - cost);
+                    main.setAvailable(index);
                 } else {
                     System.out.println("Not enough money!");
-                    System.out.println(index);
                     System.out.println(cost);
                     System.out.println(main.getMoney());
                 }
-                /*switch screen for now
-                if(index == 0) {
-                    System.out.println("to main");
-                    main.switchScreen(1, 0);
-                } else if(index == 1) {
-                    System.out.println("to map");
-                    main.switchScreen(2, 0);
-                }*/
 
                 return true;
             }

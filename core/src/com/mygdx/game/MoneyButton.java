@@ -17,7 +17,7 @@ public class MoneyButton extends Actor {
     private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
-    private double multiplier = 1;
+    private double multiplier = 4;
 
     public MoneyButton(Main m, int x, int y) {
 
@@ -62,8 +62,9 @@ public class MoneyButton extends Actor {
         }
     }
 
-    public void setAddToMultiplier(double x) {
+    public void addToMultiplier(double x) {
         multiplier += x;
+        System.out.println("new multiplier:" + multiplier);
     }
 
     @Override
