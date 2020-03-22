@@ -36,8 +36,8 @@ public class OptionsScreen implements Screen {
     }
 
     private void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
+        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 2);
+        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 2);
         for(int i=0; i<buttonAmount; i++){
             optionsButtons.add(new OptionsButton(main, buttonTextureArray[i], i));
         }

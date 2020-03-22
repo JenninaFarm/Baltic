@@ -23,7 +23,7 @@ public class ResearchButton extends Actor {
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
         setX(1000/2f - width/2f);
-        setY(500/2f - height/2f - index*height);
+        setY(450 - height/2f - index*height);
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());

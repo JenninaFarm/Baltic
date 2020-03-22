@@ -26,11 +26,11 @@ public class Utils {
         return temp;
     }
 
-    public static TextureRegion[][] createTextureRegion2DArray(Texture t) {
+    public static TextureRegion[][] createTextureRegion2DArray(Texture t, int columns, int rows) {
         TextureRegion [][] regionArray = TextureRegion.split(
                 t,
-                t.getWidth() / 3,
-                t.getHeight() / 2);
+                t.getWidth() / columns,
+                t.getHeight() / rows);
         return regionArray;
     }
 

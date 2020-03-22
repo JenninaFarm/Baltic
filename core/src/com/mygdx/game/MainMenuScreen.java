@@ -28,7 +28,7 @@ public class MainMenuScreen implements Screen {
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(1000, 500), batch);
-        buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
+        buttonRegionTexture = new Texture(Gdx.files.internal("mainButtons.png"));
 
         createButtons();
         addActors();
@@ -37,8 +37,8 @@ public class MainMenuScreen implements Screen {
     }
 
     private void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 3, 2);
+        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 1);
+        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 1);
         for(int i=0; i<buttonAmount; i++){
             mainMenuButtons.add(new MainMenuButton(main, buttonTextureArray[i], i));
         }
@@ -57,7 +57,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 1, 1, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());
