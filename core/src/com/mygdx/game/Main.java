@@ -11,12 +11,13 @@ public class Main extends Game {
 	private MainMenuScreen mainMenuScreen;
 	private MapScreen mapScreen;
 	private ArrayList<FarmScreen> farmScreens;
+	private ArrayList<MoneyButton> coins = new ArrayList<>();
+
 	private int farmAmount = 4;
 	private ResearchScreen researchScreen;
 	private OptionsScreen optionsScreen;
 
 	private int money;
-	private double multiplier = 0.5;
 	private double balticSituation = 0;
 
 	@Override
@@ -28,8 +29,10 @@ public class Main extends Game {
 
 		farmScreens = new ArrayList<FarmScreen>();
 		for(int i=0; i<farmAmount; i++) {
-			farmScreens.add(new FarmScreen(this));
+			farmScreens.add(new FarmScreen(this, i));
 		}
+
+		createCoins();
 
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);
@@ -46,9 +49,9 @@ public class Main extends Game {
 			setScreen(mapScreen);
 			Gdx.input.setInputProcessor(mapScreen.getStage());
 		} else if(x == 3) {
-			if(y > 0) {
-				setScreen(farmScreens.get(y - 1));
-				Gdx.input.setInputProcessor(farmScreens.get(y - 1).getStage());
+			if(y >= 0) {
+				setScreen(farmScreens.get(y));
+				Gdx.input.setInputProcessor(farmScreens.get(y).getStage());
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
@@ -67,20 +70,28 @@ public class Main extends Game {
 		}
 	}
 
+	private void createCoins() {
+		coins.add(new MoneyButton(this, 245, 65));
+		coins.add(new MoneyButton(this, 405, 195));
+		coins.add(new MoneyButton(this, 645, 115));
+		coins.add(new MoneyButton(this, 604, 315));
+
+		mapScreen.addCoinsToStage(coins);
+	}
+
+	public void setMultiplier(double multiplier, int farmIndex) {
+		coins.get(farmIndex).addToMultiplier(multiplier);
+	}
+
+	public void setAvailable(int index) {
+		for(int i=0; i<farmAmount; i++) {
+			farmScreens.get(i).setAvailable(index);
+		}
+
+	}
+
 	public int getMoney() {
 		return money;
-	}
-
-	public void setMultiplier(double amount) {
-		if(amount < 0) {
-			System.out.println("Program is failing. Multiplier is below zero.");
-		} else {
-			multiplier = amount;
-		}
-	}
-
-	public double getMultiplier() {
-		return multiplier;
 	}
 
 	public SpriteBatch getBatch() {

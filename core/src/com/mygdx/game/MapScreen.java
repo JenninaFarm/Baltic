@@ -33,7 +33,6 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     public static InputMultiplexer inputMultiplex;
 
-    private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
     private MapResearchButton research;
     private ReturnButton returnButton;
@@ -53,7 +52,6 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         research = new MapResearchButton(main, 670, 215);
         returnButton = new ReturnButton(main, 1);
         createFarms();
-        createCoins();
 
         map = new MapBackground();
         map.setSize(800, 450);
@@ -78,22 +76,20 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
     private void addCoinsAndFarmsToStage() {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
+        }
+    }
+
+    public void addCoinsToStage(ArrayList<MoneyButton> coins) {
+        for(int i=0; i<actorAmount; i++) {
             stage.addActor(coins.get(i));
         }
     }
 
-    private void createCoins() {
-        coins.add(new MoneyButton(main, 245, 65));
-        coins.add(new MoneyButton(main, 405, 195));
-        coins.add(new MoneyButton(main, 645, 115));
-        coins.add(new MoneyButton(main, 604, 315));
-    }
-
     private void createFarms() {
-        farms.add(new MapButton(main, 200, 20, 1));
-        farms.add(new MapButton(main, 360, 150, 2));
-        farms.add(new MapButton(main, 600, 70, 3));
-        farms.add(new MapButton(main,560, 270, 4));
+        farms.add(new MapButton(main, 200, 20, 0));
+        farms.add(new MapButton(main, 360, 150, 1));
+        farms.add(new MapButton(main, 600, 70, 2));
+        farms.add(new MapButton(main,560, 270, 3));
     }
 
     private void createMoneyLabel() {

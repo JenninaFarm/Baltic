@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class FarmScreen implements Screen {
 
     private Main main;
+    private int farmIndex;
     private SpriteBatch batch;
     private Stage stage;
     private ReturnButton returnButton;
@@ -28,8 +29,9 @@ public class FarmScreen implements Screen {
     private Texture buttonRegionTexture;
     private Label moneyLabel;
 
-    public FarmScreen(Main m) {
+    public FarmScreen(Main m, int i) {
         main = m;
+        farmIndex = i;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
@@ -45,10 +47,14 @@ public class FarmScreen implements Screen {
     private  void createButtons() {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
-        for(int i=0; i<upgradeAmount; i++){
-            int costAmount = 1000 + 1500*(int)Math.pow(2, i);
-            farmButtons.add(new FarmButton(main, buttonTextureArray[i], i, costAmount));
-        }
+
+        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 5.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 6));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 4.5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 5));
+
         returnButton = new ReturnButton(main, 2);
     }
 
@@ -57,6 +63,10 @@ public class FarmScreen implements Screen {
             stage.addActor(farmButtons.get(i));
         }
         stage.addActor(returnButton);
+    }
+
+    public void setAvailable(int index) {
+        farmButtons.get(index).setAvailable();
     }
 
     private void createMoneyLabel() {

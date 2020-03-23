@@ -11,18 +11,23 @@ public class FarmButton extends Actor {
     private TextureRegion button;
     private float width;
     private float height;
-    private int index;
-    private int cost;
+    private int buttonIndex;
+    private int farmIndex;
 
-    public FarmButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
-        index = i;
+    private int cost;
+    private boolean available = false;
+    private boolean sold = false;
+
+    public FarmButton(Main m, TextureRegion buttonTexture, int buttonI, final int farmI, final double multiplier) {
+        buttonIndex = buttonI;
+        farmIndex = farmI;
         main = m;
-        cost = costAmount;
+        cost = 1000 + 1500*(int)Math.pow(2, buttonI);
         button = buttonTexture;
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
         setX(800/2f - width/2f);
-        setY(400 - height/2f - index*height);
+        setY(400 - height/2f - buttonIndex*height);
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -30,31 +35,31 @@ public class FarmButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                if(currentMoney >= cost) {
+                if(available && currentMoney >= cost) {
                     System.out.println("bought");
+                    sold = true;
                     main.setMoney(currentMoney-cost);
+                    main.setMultiplier(multiplier, farmI);
+
                 } else {
-                    System.out.println("Not enough money!");
-                    System.out.println(index);
+                    System.out.println("Not enough money or upgrade not available!");
                     System.out.println(cost);
                     System.out.println(main.getMoney());
                 }
-                /*switch screen for now
-                if(index == 0) {
-                    System.out.println("to main");
-                    main.switchScreen(1, 0);
-                } else if(index == 1) {
-                    System.out.println("to map");
-                    main.switchScreen(2, 0);
-                }*/
 
                 return true;
             }
         });
     }
 
+    public void setAvailable() {
+        available = true;
+    }
+
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
+        if(available && !sold) {
+            batch.draw(button, this.getX(), this.getY(), width, height);
+        }
     }
 
     @Override

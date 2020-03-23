@@ -17,12 +17,11 @@ public class MoneyButton extends Actor {
     private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
-    private double multiplier;
+    private double multiplier = 4;
 
     public MoneyButton(Main m, int x, int y) {
 
         main = m;
-        multiplier = main.getMultiplier();
         button = new Texture(Gdx.files.internal("coin-icon.png"));
         setX(x);
         setY(y);
@@ -61,6 +60,11 @@ public class MoneyButton extends Actor {
         if(potentialMoney > 5 * multiplier) {
             batch.draw(button, this.getX(), this.getY(), width, height);
         }
+    }
+
+    public void addToMultiplier(double x) {
+        multiplier += x;
+        System.out.println("new multiplier:" + multiplier);
     }
 
     @Override
