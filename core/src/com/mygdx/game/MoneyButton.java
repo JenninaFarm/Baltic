@@ -25,8 +25,8 @@ public class MoneyButton extends Actor {
         button = new Texture(Gdx.files.internal("coin-icon.png"));
         setX(x);
         setY(y);
-        width = button.getWidth()/3f;
-        height = button.getHeight()/3f;
+        width = button.getWidth()/2f;
+        height = button.getHeight()/2f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());

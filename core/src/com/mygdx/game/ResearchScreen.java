@@ -128,7 +128,9 @@ public class ResearchScreen implements Screen {
     public Stage getStage() {
         return stage;
     }
-    public Stage getStageUI() { return stageUI; }
+    public Stage getStageUI() {
+        return stageUI;
+    }
 
     @Override
     public void resize(int width, int height) {

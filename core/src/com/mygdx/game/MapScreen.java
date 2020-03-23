@@ -58,7 +58,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
                 System.out.println("zoom " + initialDistance + ", " + distance);
-                ((OrthographicCamera)camera).zoom = (initialDistance / distance) * ((OrthographicCamera)camera).zoom;
+                ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
                 camera.update();
             }
         });
@@ -67,14 +67,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stage.addActor(map);
         stage.addActor(research);
-        addCoinsAndFarmsToStage();
+        addFarmsToStage();
 
         createMoneyLabel();
 
         ((OrthographicCamera)camera).zoom += 25.6f;
     }
 
-    private void addCoinsAndFarmsToStage() {
+    private void addFarmsToStage() {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
@@ -160,8 +160,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             }
         }
 
-
-        ((OrthographicCamera)camera).zoom = MathUtils.clamp(((OrthographicCamera)camera).zoom, 1, 800/camera.viewportWidth);
+        ((OrthographicCamera)camera).zoom = MathUtils.clamp(((OrthographicCamera)camera).zoom, 10, 800/camera.viewportWidth);
         float effectiveViewportWidth = camera.viewportWidth * ((OrthographicCamera)camera).zoom;
         float effectiveViewportHeight = camera.viewportHeight * ((OrthographicCamera)camera).zoom;
 
@@ -200,5 +199,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public Stage getStage() {
         return stage;
     }
-    public Stage getStageUI() { return stageUI; }
+    public Stage getStageUI() {
+        return stageUI;
+    }
 }
