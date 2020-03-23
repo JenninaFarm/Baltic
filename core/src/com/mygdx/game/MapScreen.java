@@ -16,8 +16,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -56,6 +58,13 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         map = new MapBackground();
         map.setSize(800, 450);
         map.setPosition(0, 0);
+        map.addListener(new ActorGestureListener() {
+            public void zoom (InputEvent event, float initialDistance, float distance) {
+                System.out.println("zoom " + initialDistance + ", " + distance);
+                ((OrthographicCamera)camera).zoom = (initialDistance / distance) * ((OrthographicCamera)camera).zoom;
+                camera.update();
+            }
+        });
 
         stage.addActor(map);
         createMoneyLabel();
@@ -159,7 +168,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         }
 
 
-        ((OrthographicCamera)camera).zoom = MathUtils.clamp(((OrthographicCamera)camera).zoom, 1, 5000/camera.viewportWidth);
+        ((OrthographicCamera)camera).zoom = MathUtils.clamp(((OrthographicCamera)camera).zoom, 1, 800/camera.viewportWidth);
         float effectiveViewportWidth = camera.viewportWidth * ((OrthographicCamera)camera).zoom;
         float effectiveViewportHeight = camera.viewportHeight * ((OrthographicCamera)camera).zoom;
 
