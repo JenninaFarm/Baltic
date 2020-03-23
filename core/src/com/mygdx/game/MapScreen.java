@@ -3,11 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -25,16 +22,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 
-public class MapScreen extends ApplicationAdapter implements Screen, GestureListener {
+public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Main main;
     private SpriteBatch batch;
     private Actor map;
     private Stage stage;
+    private Stage stageUI;
     private int actorAmount = 4;
-
-    public static InputMultiplexer inputMultiplex;
-
+    private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
     private MapResearchButton research;
     private ReturnButton returnButton;
@@ -48,6 +44,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         main = m;
         batch = main.getBatch();
 
+        stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
@@ -66,18 +63,13 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
             }
         });
 
+        stageUI.addActor(returnButton);
+
         stage.addActor(map);
-        createMoneyLabel();
-
-        addCoinsAndFarmsToStage();
         stage.addActor(research);
-        stage.addActor(returnButton);
+        addCoinsAndFarmsToStage();
 
-        GestureDetector gd = new GestureDetector(this);
-        inputMultiplex = new InputMultiplexer();
-        inputMultiplex.addProcessor(stage);
-        inputMultiplex.addProcessor(gd);
-        Gdx.input.setInputProcessor(gd);
+        createMoneyLabel();
 
         ((OrthographicCamera)camera).zoom += 25.6f;
     }
@@ -111,7 +103,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         moneyLabel.setSize(800 ,30);
         moneyLabel.setPosition(50,400);
         moneyLabel.setAlignment(Align.center);
-        stage.addActor(moneyLabel);
+        stageUI.addActor(moneyLabel);
     }
 
     @Override
@@ -123,14 +115,15 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
         handleInput();
         camera.update();
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        moneyLabel.setText(main.getMoney());
-
         stage.act(Gdx.graphics.getDeltaTime());
+        moneyLabel.setText(main.getMoney());
         stage.draw();
+
+        stageUI.act(Gdx.graphics.getDeltaTime());
+        stageUI.draw();
     }
 
     private void handleInput() {
@@ -200,66 +193,12 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
 
     @Override
     public void dispose() {
+        stage.dispose();
+        stageUI.dispose();
     }
 
     public Stage getStage() {
         return stage;
     }
-
-    @Override
-    public boolean touchDown(float x, float y, int a, int b) {
-        return false;
-    }
-
-    @Override
-    public boolean tap(float x, float y, int count, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean longPress(float x, float y) {
-        return false;
-    }
-
-    @Override
-    public boolean fling(float velocityX, float velocityY, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
-        Gdx.app.log("INFO", "In pan");
-
-        ((OrthographicCamera)camera).translate(-deltaX, deltaY);
-        camera.update();
-        return false;
-    }
-
-    @Override
-    public boolean panStop(float x, float y, int pointer, int button) {
-        Gdx.app.log("INFO", "panStop");
-        ((OrthographicCamera)camera).zoom = ((OrthographicCamera)camera).zoom;
-        return false;
-    }
-
-    @Override
-    public boolean zoom(float initialDistance, float distance) {
-        String message = "Zoom performed";
-        Gdx.app.log("INFO", message);
-        System.out.println("zoom");
-        ((OrthographicCamera)camera).zoom = (initialDistance / distance) * ((OrthographicCamera)camera).zoom;
-        camera.update();
-        return true;
-    }
-
-    @Override
-    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-        System.out.println("pinching");
-        return false;
-    }
-
-    @Override
-    public void pinchStop() {
-
-    }
+    public Stage getStageUI() { return stageUI; }
 }

@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
@@ -24,6 +25,7 @@ public class ResearchScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
+    private Stage stageUI;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
@@ -33,11 +35,14 @@ public class ResearchScreen implements Screen {
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
+
     public ResearchScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
+        stageUI = new Stage(new FitViewport(800, 450), batch);
+
         buttonRegionTexture = new Texture(Gdx.files.internal("researchButtons.png"));
         boughtRegionTexture = new Texture(Gdx.files.internal("researchButtonsBought.png"));
 
@@ -46,8 +51,6 @@ public class ResearchScreen implements Screen {
         createButtons();
         addActors();
         createMoneyLabel();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     private  void createButtons() {
@@ -63,10 +66,10 @@ public class ResearchScreen implements Screen {
     }
 
     private void addActors() {
+        stageUI.addActor(returnButton);
         for(int i=0; i<researchAmount; i++) {
             stage.addActor(researchButtons.get(i));
         }
-        stage.addActor(returnButton);
     }
 
     private void createMoneyLabel() {
@@ -79,7 +82,7 @@ public class ResearchScreen implements Screen {
         moneyLabel.setSize(800 ,30);
         moneyLabel.setPosition(200,400);
         moneyLabel.setAlignment(Align.center);
-        stage.addActor(moneyLabel);
+        stageUI.addActor(moneyLabel);
     }
 
     @Override
@@ -94,12 +97,13 @@ public class ResearchScreen implements Screen {
         camera.update();
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         moneyLabel.setText(main.getMoney());
         stage.draw();
+
+        stageUI.act(Gdx.graphics.getDeltaTime());
+        stageUI.draw();
     }
 
     private void handleInput() {
@@ -124,6 +128,7 @@ public class ResearchScreen implements Screen {
     public Stage getStage() {
         return stage;
     }
+    public Stage getStageUI() { return stageUI; }
 
     @Override
     public void resize(int width, int height) {
@@ -147,5 +152,7 @@ public class ResearchScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
+        stageUI.dispose();
     }
 }

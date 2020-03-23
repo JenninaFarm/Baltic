@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
@@ -47,7 +48,8 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 		} else if (x == 2) {
 			setScreen(mapScreen);
-			Gdx.input.setInputProcessor(mapScreen.getStage());
+			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStage(), mapScreen.getStageUI());
+			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
@@ -55,7 +57,8 @@ public class Main extends Game {
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
-			Gdx.input.setInputProcessor(researchScreen.getStage());
+			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI());
+			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 5) {
 			setScreen(optionsScreen);
 			Gdx.input.setInputProcessor(optionsScreen.getStage());
