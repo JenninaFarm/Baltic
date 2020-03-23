@@ -10,16 +10,19 @@ public class ResearchButton extends Actor {
 
     private Main main;
     private TextureRegion button;
+    private TextureRegion boughtTexture;
     private float width;
     private float height;
     private int index;
     private int cost;
+    private boolean bought = false;
 
-    public ResearchButton(Main m, TextureRegion buttonTexture, int i, int costAmount) {
+    public ResearchButton(Main m, TextureRegion buttonTexture, TextureRegion bTexture, int i, int costAmount) {
         index = i;
         cost = costAmount;
         main = m;
         button = buttonTexture;
+        boughtTexture = bTexture;
         width = button.getRegionWidth()/2f;
         height = button.getRegionHeight()/2f;
         setX(800/2f - width/2f);
@@ -35,10 +38,13 @@ public class ResearchButton extends Actor {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
+                    bought = true;
+                } else if(bought) {
+                    System.out.println("Already researched");
                 } else {
                     System.out.println("Not enough money!");
-                    System.out.println(cost);
-                    System.out.println(main.getMoney());
+                    System.out.println("cost: " + cost);
+                    System.out.println("current balance: " + main.getMoney());
                 }
 
                 return true;
@@ -47,7 +53,11 @@ public class ResearchButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
+        if(!bought) {
+            batch.draw(button, this.getX(), this.getY(), width, height);
+        } else {
+            batch.draw(boughtTexture, this.getX(), this.getY(), width, height);
+        }
     }
 
     @Override

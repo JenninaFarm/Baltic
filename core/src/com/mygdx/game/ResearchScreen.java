@@ -25,9 +25,9 @@ public class ResearchScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
-    private TextureRegion [] buttonTextureArray;
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
+    private Texture boughtRegionTexture;
     private ReturnButton returnButton;
     private Label moneyLabel;
     private Camera camera;
@@ -39,6 +39,7 @@ public class ResearchScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         buttonRegionTexture = new Texture(Gdx.files.internal("researchButtons.png"));
+        boughtRegionTexture = new Texture(Gdx.files.internal("researchButtonsBought.png"));
 
         camera = stage.getCamera();
 
@@ -51,10 +52,12 @@ public class ResearchScreen implements Screen {
 
     private  void createButtons() {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
+        TextureRegion [] buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
+        TextureRegion [][] buttonRegionBought = Utils.createTextureRegion2DArray(boughtRegionTexture, 2, 3);
+        TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3);
         for(int i=0; i<researchAmount; i++){
             int costAmount = 2000 + 2000*(int)Math.pow(2, i);
-            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], i, costAmount));
+            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], buttonTextureArrayBought[i], i, costAmount));
         }
         returnButton = new ReturnButton(main, 2);
     }
