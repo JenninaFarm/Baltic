@@ -16,6 +16,7 @@ public class FarmButton extends Actor {
 
     private int cost;
     private boolean available = false;
+    private boolean sold = false;
 
     public FarmButton(Main m, TextureRegion buttonTexture, int buttonI, final int farmI, final double multiplier) {
         buttonIndex = buttonI;
@@ -36,6 +37,7 @@ public class FarmButton extends Actor {
                 int currentMoney = main.getMoney();
                 if(available && currentMoney >= cost) {
                     System.out.println("bought");
+                    sold = true;
                     main.setMoney(currentMoney-cost);
                     main.setMultiplier(multiplier, farmI);
 
@@ -55,7 +57,7 @@ public class FarmButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        if(available) {
+        if(available && !sold) {
             batch.draw(button, this.getX(), this.getY(), width, height);
         }
     }
