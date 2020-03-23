@@ -72,7 +72,7 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         inputMultiplex.addProcessor(gd);
         Gdx.input.setInputProcessor(gd);
 
-        ((OrthographicCamera)camera).zoom += 25;
+        ((OrthographicCamera)camera).zoom += 25.6f;
     }
 
     private void addCoinsAndFarmsToStage() {
@@ -167,8 +167,8 @@ public class MapScreen extends ApplicationAdapter implements Screen, GestureList
         float effectiveViewportWidth = camera.viewportWidth * ((OrthographicCamera)camera).zoom;
         float effectiveViewportHeight = camera.viewportHeight * ((OrthographicCamera)camera).zoom;
 
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 5000 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 5000 - effectiveViewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 800 - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 450 - effectiveViewportHeight / 2f);
     }
 
     @Override
