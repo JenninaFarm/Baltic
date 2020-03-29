@@ -64,12 +64,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         });
 
         stageUI.addActor(returnButton);
+        createMoneyLabel();
 
         stage.addActor(map);
         stage.addActor(research);
         addFarmsToStage();
-
-        createMoneyLabel();
 
         ((OrthographicCamera)camera).zoom += 25.6f;
     }
@@ -101,7 +100,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
         moneyLabel.setSize(800 ,30);
-        moneyLabel.setPosition(50,400);
+        moneyLabel.setPosition(200,400);
         moneyLabel.setAlignment(Align.center);
         stageUI.addActor(moneyLabel);
     }
