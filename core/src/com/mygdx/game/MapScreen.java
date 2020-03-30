@@ -49,7 +49,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         camera = stage.getCamera();
 
         research = new MapResearchButton(main, 670, 215);
-        returnButton = new ReturnButton(main, 1);
         createFarms();
 
         map = new MapBackground();
@@ -63,13 +62,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             }
         });
 
-        stageUI.addActor(returnButton);
-
         stage.addActor(map);
         stage.addActor(research);
         addFarmsToStage();
-
         createMoneyLabel();
+
+        returnButton = new ReturnButton(main, 1);
+        stageUI.addActor(returnButton);
 
         ((OrthographicCamera)camera).zoom += 25.6f;
     }
@@ -187,7 +186,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     @Override
     public void hide() {
-
+        Save.saveVariables();
     }
 
     @Override

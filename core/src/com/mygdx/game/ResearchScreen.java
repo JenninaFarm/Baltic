@@ -27,6 +27,7 @@ public class ResearchScreen implements Screen {
     private Stage stage;
     private Stage stageUI;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
+    private static boolean [] booleans;
     private int researchAmount = 6;
     private Texture buttonRegionTexture;
     private Texture boughtRegionTexture;
@@ -53,15 +54,19 @@ public class ResearchScreen implements Screen {
         createMoneyLabel();
     }
 
-    private  void createButtons() {
+    public static void setBooleanArray(boolean [] array) {
+
+        booleans = array;
+    }
+    private void createButtons() {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
         TextureRegion [] buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
         TextureRegion [][] buttonRegionBought = Utils.createTextureRegion2DArray(boughtRegionTexture, 2, 3);
         TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3);
         for(int i=0; i<researchAmount; i++){
             int costAmount = 2000 + 2000*(int)Math.pow(2, i);
-            researchButtons.add(new ResearchButton(main, buttonTextureArray[i], buttonTextureArrayBought[i], i, costAmount));
-        }
+                researchButtons.add(new ResearchButton(main, buttonTextureArray[i], buttonTextureArrayBought[i], i, costAmount, booleans[i]));
+            }
         returnButton = new ReturnButton(main, 2);
     }
 
@@ -149,7 +154,7 @@ public class ResearchScreen implements Screen {
 
     @Override
     public void hide() {
-
+        Save.saveVariables();
     }
 
     @Override

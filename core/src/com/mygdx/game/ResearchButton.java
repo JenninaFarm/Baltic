@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+import java.util.ArrayList;
+
 public class ResearchButton extends Actor {
 
     private Main main;
@@ -15,12 +17,15 @@ public class ResearchButton extends Actor {
     private float height;
     private int index;
     private int cost;
-    private boolean bought = false;
+    private boolean bought;
 
-    public ResearchButton(Main m, TextureRegion buttonTexture, TextureRegion bTexture, int i, int costAmount) {
+    private static boolean [] researchBooleans = new boolean [6];
+
+    public ResearchButton(Main m, TextureRegion buttonTexture, TextureRegion bTexture, int i, int costAmount, boolean b) {
         index = i;
         cost = costAmount;
         main = m;
+        bought = b;
         button = buttonTexture;
         boughtTexture = bTexture;
         width = button.getRegionWidth()/2f;
@@ -34,11 +39,12 @@ public class ResearchButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                if(currentMoney >= cost) {
+                if(currentMoney >= cost && !bought) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
                     bought = true;
+                    researchBooleans[index] = true;
                 } else if(bought) {
                     System.out.println("Already researched");
                 } else {
@@ -50,6 +56,10 @@ public class ResearchButton extends Actor {
                 return true;
             }
         });
+    }
+
+    public static boolean [] getResearchBooleans() {
+        return researchBooleans;
     }
 
     public void draw(Batch batch, float alpha) {

@@ -18,13 +18,13 @@ public class Main extends Game {
 	private ResearchScreen researchScreen;
 	private OptionsScreen optionsScreen;
 
-	private int money;
+	private static int money;
 	private double balticSituation = 0;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		money = 6000;
+		Save.loadVariables();
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 
@@ -65,7 +65,7 @@ public class Main extends Game {
 		}
 	}
 
-	public void setMoney(int amount) {
+	public static void setMoney(int amount) {
 		if(amount < 0) {
 			System.out.println("Program is failing. Not enough money to this action.");
 		} else {
@@ -93,7 +93,7 @@ public class Main extends Game {
 
 	}
 
-	public int getMoney() {
+	public static int getMoney() {
 		return money;
 	}
 
