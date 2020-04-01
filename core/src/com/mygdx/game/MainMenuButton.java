@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class MainMenuButton extends Actor {
 
@@ -16,6 +20,9 @@ public class MainMenuButton extends Actor {
     private float width;
     private float height;
     private int index;
+
+    private Skin mySkin;
+    private Button textButton;
 
     public MainMenuButton(Main m, TextureRegion buttonTexture, int i) {
         main = m;
@@ -42,6 +49,39 @@ public class MainMenuButton extends Actor {
                 return true;
             }
         });
+    }
+
+    public MainMenuButton(Main m, String label, int i) {
+        main = m;
+        mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        index = i;
+
+        width = 100;
+        height = 20;
+
+        textButton = new TextButton(label, mySkin);
+        textButton.setSize(width, height);
+        textButton.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
+        textButton.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                if (index == 0) {
+                    System.out.println("to map");
+                    main.switchScreen(2, 0);
+                } else if (index == 1) {
+                    System.out.println("to options");
+                    main.switchScreen(5, 0);
+                }
+                return true;
+            }
+        });
+    }
+
+    public Button getButton() {
+        return textButton;
     }
 
     public void draw(Batch batch, float alpha) {

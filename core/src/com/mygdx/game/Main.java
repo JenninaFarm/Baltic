@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class Main extends Game {
 	private int money;
 	private double balticSituation = 0;
 
+	private Skin mySkin;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -32,6 +35,8 @@ public class Main extends Game {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.add(new FarmScreen(this, i));
 		}
+
+		mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
 
 		createCoins();
 
@@ -100,6 +105,8 @@ public class Main extends Game {
 	public SpriteBatch getBatch() {
 		return batch;
 	}
+
+	public Skin getMySkin() { return mySkin;}
 
 	@Override
 	public void render () {
