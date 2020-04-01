@@ -15,7 +15,6 @@ public class Save {
         for(int i=0; i<6; i++) {
             prefs.putBoolean("research" + i, research[i]);
         }
-
         prefs.flush();
     }
 
