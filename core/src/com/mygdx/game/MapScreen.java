@@ -103,7 +103,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         moneyLabel.setSize(800 ,30);
         moneyLabel.setPosition(50,400);
         moneyLabel.setAlignment(Align.center);
-        //stageUI.addActor(moneyLabel);
+        stageUI.addActor(moneyLabel);
     }
 
     @Override
