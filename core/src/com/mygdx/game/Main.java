@@ -67,7 +67,7 @@ public class Main extends Game {
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
-			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI());
+			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI(), researchScreen.getStageInfo());
 			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 5) {
 			setScreen(optionsScreen);
@@ -90,6 +90,14 @@ public class Main extends Game {
 		coins.add(new MoneyButton(this, 604, 315));
 
 		mapScreen.addCoinsToStage(coins);
+	}
+
+	public void addResearchScreenStage(InfoLabel infoLabel) {
+		researchScreen.addToStage(infoLabel);
+	}
+
+	public void clearInfoLabel() {
+		researchScreen.clearStageInfo();
 	}
 
 	public void setMultiplier(double multiplier, int farmIndex) {
