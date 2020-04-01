@@ -28,9 +28,9 @@ public class OptionsScreen implements Screen {
 
 
     private ArrayList<OptionsButton> optionsButtons = new ArrayList<OptionsButton>();
-    private TextureRegion[] buttonTextureArray;
+    //private TextureRegion[] buttonTextureArray;
     private int buttonAmount = 3;
-    private Texture buttonRegionTexture;
+    //private Texture buttonRegionTexture;
     private ReturnButton returnButton;
 
 
@@ -41,7 +41,7 @@ public class OptionsScreen implements Screen {
         //table = new Table();
         Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
 
-        buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
+        //buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
 
         createButtons();
         addActors();
@@ -52,12 +52,6 @@ public class OptionsScreen implements Screen {
     }
 
     private void createButtons() {
-        /*TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 2);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 2);
-        for(int i=0; i<buttonAmount; i++){
-            optionsButtons.add(new OptionsButton(main, buttonTextureArray[i], i));
-        }*/
-
         I18NBundle myBundle = main.getMyBundle();
         optionsButtons.add(new OptionsButton(main, myBundle.get("options1"), 0));
         optionsButtons.add(new OptionsButton(main, myBundle.get("options2"), 1));
