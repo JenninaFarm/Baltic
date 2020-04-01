@@ -7,7 +7,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -17,6 +24,7 @@ public class MainMenuScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
+    private Table table;
 
     private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
     private TextureRegion[] buttonTextureArray;
@@ -28,10 +36,12 @@ public class MainMenuScreen implements Screen {
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
+        table = new Table();
         buttonRegionTexture = new Texture(Gdx.files.internal("mainButtons.png"));
 
         createButtons();
         addActors();
+        //stage.addActor(table);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -39,14 +49,20 @@ public class MainMenuScreen implements Screen {
     private void createButtons() {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 1);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 1);
-        for(int i=0; i<buttonAmount; i++){
+        /*for(int i=0; i<buttonAmount; i++){
             mainMenuButtons.add(new MainMenuButton(main, buttonTextureArray[i], i));
-        }
+        }*/
+        mainMenuButtons.add(new MainMenuButton(main, "peliin", 0));
+        mainMenuButtons.add(new MainMenuButton(main, "asetukset", 1));
     }
 
     private void addActors() {
         for(int i=0; i<buttonAmount; i++) {
-            stage.addActor(mainMenuButtons.get(i));
+            Button button = mainMenuButtons.get(i).getButton();
+            stage.addActor(button);
+            //table.add(button).center();
+            //table.row();
+            //stage.addActor(mainMenuButtons.get(i));
         }
     }
 
