@@ -57,7 +57,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         map.setPosition(0, 0);
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
-                System.out.println("zoom " + initialDistance + ", " + distance);
+                //System.out.println("zoom " + initialDistance + ", " + distance);
                 ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
                 camera.update();
             }
@@ -103,7 +103,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         moneyLabel.setSize(800 ,30);
         moneyLabel.setPosition(50,400);
         moneyLabel.setAlignment(Align.center);
-        stageUI.addActor(moneyLabel);
+        //stageUI.addActor(moneyLabel);
     }
 
     @Override

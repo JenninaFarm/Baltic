@@ -53,7 +53,7 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 		} else if (x == 2) {
 			setScreen(mapScreen);
-			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStage(), mapScreen.getStageUI());
+			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStageUI(), mapScreen.getStage());
 			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 3) {
 			if(y >= 0) {
