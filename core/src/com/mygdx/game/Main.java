@@ -5,8 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Main extends Game {
 	private SpriteBatch batch;
@@ -23,10 +25,13 @@ public class Main extends Game {
 	private double balticSituation = 0;
 
 	private Skin mySkin;
+	private I18NBundle myBundle;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		Locale locale = new Locale("en", "UK");
+		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
 		Save.loadVariables();
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
@@ -104,6 +109,10 @@ public class Main extends Game {
 
 	public SpriteBatch getBatch() {
 		return batch;
+	}
+
+	public I18NBundle getMyBundle() {
+		return myBundle;
 	}
 
 	public Skin getMySkin() { return mySkin;}

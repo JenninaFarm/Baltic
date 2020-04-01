@@ -57,7 +57,7 @@ public class MainMenuButton extends Actor {
         index = i;
 
         width = 100;
-        height = 20;
+        height = 50;
 
         textButton = new TextButton(label, mySkin);
         textButton.setSize(width, height);
