@@ -12,7 +12,6 @@ public class Main extends Game {
 	private MainMenuScreen mainMenuScreen;
 	private MapScreen mapScreen;
 	private ArrayList<FarmScreen> farmScreens;
-	private ArrayList<MoneyButton> coins = new ArrayList<>();
 
 	private int farmAmount = 4;
 	private ResearchScreen researchScreen;
@@ -32,8 +31,6 @@ public class Main extends Game {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.add(new FarmScreen(this, i));
 		}
-
-		createCoins();
 
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);
@@ -73,24 +70,10 @@ public class Main extends Game {
 		}
 	}
 
-	private void createCoins() {
-		coins.add(new MoneyButton(this, 245, 65));
-		coins.add(new MoneyButton(this, 405, 195));
-		coins.add(new MoneyButton(this, 645, 115));
-		coins.add(new MoneyButton(this, 604, 315));
-
-		mapScreen.addCoinsToStage(coins);
-	}
-
-	public void setMultiplier(double multiplier, int farmIndex) {
-		coins.get(farmIndex).addToMultiplier(multiplier);
-	}
-
 	public void setAvailable(int index) {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.get(i).setAvailable(index);
 		}
-
 	}
 
 	public static int getMoney() {

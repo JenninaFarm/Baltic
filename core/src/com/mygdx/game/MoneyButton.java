@@ -7,6 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+import java.util.ArrayList;
+
+import static com.mygdx.game.MapScreen.coins;
+
 public class MoneyButton extends Actor {
 
     private Main main;
@@ -17,12 +21,17 @@ public class MoneyButton extends Actor {
     private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
-    private double multiplier = 4;
+    private static int index;
+    private static float multiplier;
 
-    public MoneyButton(Main m, int x, int y) {
+    private static float [] multipliers = new float[5];
+
+    public MoneyButton(Main m, int x, int y, int i, float mp) {
 
         main = m;
         button = new Texture(Gdx.files.internal("coin-icon.png"));
+        index = i;
+        multiplier = mp;
         setX(x);
         setY(y);
         width = button.getWidth()/2f;
@@ -62,9 +71,18 @@ public class MoneyButton extends Actor {
         }
     }
 
-    public void addToMultiplier(double x) {
+    public static void setMultiplier(float mp, int i) {
+        coins.get(i).addToMultiplier(mp);
+    }
+
+    public static void addToMultiplier(float x) {
         multiplier += x;
         System.out.println("new multiplier:" + multiplier);
+        multipliers[index] = multiplier;
+    }
+
+    public static float[] getMultipliers() {
+        return multipliers;
     }
 
     @Override
