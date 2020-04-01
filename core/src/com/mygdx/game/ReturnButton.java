@@ -19,11 +19,11 @@ public class ReturnButton extends Actor {
 
         index = i;
         main = m;
-        button = new Texture(Gdx.files.internal("test_icon.jpg"));
+        button = new Texture(Gdx.files.internal("back_button.png"));
         setX(0);
         setY(400);
-        width = button.getWidth()/2f;
-        height = button.getHeight()/2f;
+        width = button.getWidth()/5f;
+        height = button.getHeight()/5f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
