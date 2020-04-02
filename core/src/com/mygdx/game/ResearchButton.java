@@ -1,48 +1,60 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.I18NBundle;
 
-import java.util.ArrayList;
 
 public class ResearchButton extends Actor {
 
     private Main main;
-    private TextureRegion button;
-    private TextureRegion boughtTexture;
+    private Button button1;
     private float width;
     private float height;
     private int index;
     private int cost;
     private boolean bought;
 
+    private InfoLabel infoLabel;
+
     private static boolean [] researchBooleans = new boolean [6];
 
-    public ResearchButton(Main m, TextureRegion buttonTexture, TextureRegion bTexture, int i, int costAmount, boolean b) {
-        index = i;
-        cost = costAmount;
+    public ResearchButton(Main m, String label, int i, int costAmount, boolean b) {
         main = m;
+        cost = costAmount;
         bought = b;
-        button = buttonTexture;
-        boughtTexture = bTexture;
-        width = button.getRegionWidth()/2f;
-        height = button.getRegionHeight()/2f;
-        setX(800/2f - width/2f);
-        setY(400 - height/2f - index*height);
-        setWidth(width);
-        setHeight(height);
-        setBounds(getX(), getY(), getWidth(), getHeight());
+        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        index = i;
 
-        addListener(new InputListener() {
+        width = 200;
+        height = 50;
+
+        button1 = new TextButton(label, mySkin);
+        button1.setSize(width, height);
+        button1.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
+        button1.getStyle().checked = button1.getStyle().down;
+        button1.setChecked(false);
+        button1.setTouchable(Touchable.enabled);
+
+        button1.addListener(new InputListener() {
+
+            @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
+                button1.setTouchable(Touchable.disabled);
+
                 if(currentMoney >= cost && !bought) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
+                    button1.setChecked(false);
                     bought = true;
                     researchBooleans[index] = true;
                 } else if(bought) {
@@ -53,21 +65,33 @@ public class ResearchButton extends Actor {
                     System.out.println("current balance: " + main.getMoney());
                 }
 
-                return true;
+                return false;
+            }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                I18NBundle myBundle = main.getMyBundle();
+                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index));
+                main.addResearchScreenStage(infoLabel);
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                main.clearInfoLabel();
             }
         });
     }
+
+    public Button getButton() {
+        return button1;
+    }
+
 
     public static boolean [] getResearchBooleans() {
         return researchBooleans;
     }
 
     public void draw(Batch batch, float alpha) {
-        if(!bought) {
-            batch.draw(button, this.getX(), this.getY(), width, height);
-        } else {
-            batch.draw(boughtTexture, this.getX(), this.getY(), width, height);
-        }
     }
 
     @Override

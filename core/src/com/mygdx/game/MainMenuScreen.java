@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -52,8 +53,9 @@ public class MainMenuScreen implements Screen {
         /*for(int i=0; i<buttonAmount; i++){
             mainMenuButtons.add(new MainMenuButton(main, buttonTextureArray[i], i));
         }*/
-        mainMenuButtons.add(new MainMenuButton(main, "peliin", 0));
-        mainMenuButtons.add(new MainMenuButton(main, "asetukset", 1));
+        I18NBundle myBundle = main.getMyBundle();
+        mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main1"), 0));
+        mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main2"), 1));
     }
 
     private void addActors() {

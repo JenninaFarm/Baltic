@@ -14,8 +14,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class ResearchScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Stage stageUI;
+    private Stage stageInfo;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static boolean [] booleans;
     private int researchAmount = 6;
@@ -43,6 +47,7 @@ public class ResearchScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
+        stageInfo = new Stage(new FitViewport(800, 450), batch);
 
         buttonRegionTexture = new Texture(Gdx.files.internal("researchButtons.png"));
         boughtRegionTexture = new Texture(Gdx.files.internal("researchButtonsBought.png"));
@@ -59,22 +64,36 @@ public class ResearchScreen implements Screen {
         booleans = array;
     }
     private void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
+        /*TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
         TextureRegion [] buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
         TextureRegion [][] buttonRegionBought = Utils.createTextureRegion2DArray(boughtRegionTexture, 2, 3);
-        TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3);
+        TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3); */
+        I18NBundle myBundle = main.getMyBundle();
         for(int i=0; i<researchAmount; i++){
             int costAmount = 2000 + 2000*(int)Math.pow(2, i);
-                researchButtons.add(new ResearchButton(main, buttonTextureArray[i], buttonTextureArrayBought[i], i, costAmount, booleans[i]));
-            }
+            researchButtons.add(new ResearchButton(main, myBundle.get("research" + (i+1)), i, costAmount, booleans[i]));
+
+        }
+        //I18NBundle myBundle = main.getMyBundle();
+
         returnButton = new ReturnButton(main, 2);
     }
 
     private void addActors() {
         stageUI.addActor(returnButton);
         for(int i=0; i<researchAmount; i++) {
-            stage.addActor(researchButtons.get(i));
+            Button button = researchButtons.get(i).getButton();
+            stage.addActor(button);
         }
+    }
+
+    public void addToStage(InfoLabel infoLabel) {
+        TextArea textArea = infoLabel.getInfoLabel();
+        stageInfo.addActor(textArea);
+    }
+
+    public void clearStageInfo() {
+        stageInfo.clear();
     }
 
     private void createMoneyLabel() {
@@ -109,6 +128,8 @@ public class ResearchScreen implements Screen {
 
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
+
+        stageInfo.draw();
     }
 
     private void handleInput() {
@@ -135,6 +156,10 @@ public class ResearchScreen implements Screen {
     }
     public Stage getStageUI() {
         return stageUI;
+    }
+
+    public Stage getStageInfo() {
+        return stageInfo;
     }
 
     @Override
