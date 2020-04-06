@@ -90,18 +90,17 @@ public class ResearchButton extends Actor {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                main.clearInfoLabel();
+                main.clearInfoLabel(0);
             }
         });
     }
 
-    public void setAvailable() {
+    public void setResearchAvailable() {
         available = true;
         if(!bought) {
             button1.setChecked(false);
             button1.setTouchable(Touchable.enabled);
         }
-
     }
 
     public Button getButton() {

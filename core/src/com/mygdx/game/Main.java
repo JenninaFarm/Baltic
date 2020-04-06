@@ -61,7 +61,8 @@ public class Main extends Game {
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
-				Gdx.input.setInputProcessor(farmScreens.get(y).getStage());
+				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageInfo());
+				Gdx.input.setInputProcessor(multiplexer);
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
@@ -85,8 +86,13 @@ public class Main extends Game {
 		researchScreen.addToStage(infoLabel);
 	}
 
-	public void clearInfoLabel() {
+	public void addFarmScreenStage(InfoLabel infoLabel, int index) {
+		farmScreens.get(index).addToStage(infoLabel);
+	}
+
+	public void clearInfoLabel(int index) {
 		researchScreen.clearStageInfo();
+		farmScreens.get(index).clearStageInfo();
 	}
 
 	public void setAvailable(int index) {

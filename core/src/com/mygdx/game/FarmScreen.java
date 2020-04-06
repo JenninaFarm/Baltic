@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -21,11 +22,12 @@ public class FarmScreen implements Screen {
     private int farmIndex;
     private SpriteBatch batch;
     private Stage stage;
+    private Stage stageInfo;
     private ReturnButton returnButton;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
     private TextureRegion[] buttonTextureArray;
-    private int upgradeAmount = 5;
+    private int upgradeAmount = 6;
     private Texture buttonRegionTexture;
     private Label moneyLabel;
 
@@ -38,6 +40,7 @@ public class FarmScreen implements Screen {
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
+        stageInfo = new Stage(new FitViewport(800, 450), batch);
         buttonRegionTexture = new Texture(Gdx.files.internal("farmButtons.png"));
 
         createButtons();
@@ -48,25 +51,31 @@ public class FarmScreen implements Screen {
     }
 
     private  void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
 
-        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 4.5f, availableArray[farmIndex][0], boughtArray[farmIndex][0]));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 5.5f, availableArray[farmIndex][1], boughtArray[farmIndex][1]));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 4.5f, availableArray[farmIndex][2], boughtArray[farmIndex][2]));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 6, availableArray[farmIndex][3], boughtArray[farmIndex][3]));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 4.5f, availableArray[farmIndex][4], boughtArray[farmIndex][4]));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 5, availableArray[farmIndex][5], boughtArray[farmIndex][5]));
+        for(int i=0; i<upgradeAmount; i++) {
+            farmButtons.add(new FarmButton(main, i, farmIndex, availableArray[farmIndex][i], boughtArray[farmIndex][i]));
+        }
 
         returnButton = new ReturnButton(main, 2);
     }
 
+
     private void addActors() {
         for(int i=0; i<upgradeAmount; i++) {
-            stage.addActor(farmButtons.get(i));
+            stage.addActor(farmButtons.get(i).getButton());
         }
         stage.addActor(returnButton);
     }
+
+    public void addToStage(InfoLabel infoLabel) {
+        TextArea textArea = infoLabel.getInfoLabel();
+        stageInfo.addActor(textArea);
+    }
+
+    public void clearStageInfo() {
+        stageInfo.clear();
+    }
+
 
     public void setAvailable(int index) {
         farmButtons.get(index).setAvailable();
@@ -108,11 +117,16 @@ public class FarmScreen implements Screen {
         stage.act(Gdx.graphics.getDeltaTime());
         moneyLabel.setText(main.getMoney());
         stage.draw();
+        stageInfo.draw();
     }
 
     public Stage getStage() {
         return stage;
     }
+    public Stage getStageInfo() {
+        return stageInfo;
+    }
+
 
     @Override
     public void resize(int width, int height) {
@@ -136,6 +150,7 @@ public class FarmScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        stageInfo.dispose();
     }
 }

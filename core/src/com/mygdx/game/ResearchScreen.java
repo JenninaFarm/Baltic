@@ -140,43 +140,43 @@ public class ResearchScreen implements Screen {
     }
 
     private void setResearchesAvailable() {
-        researchButtons.get(0).setAvailable();
-        researchButtons.get(4).setAvailable();
-        //researchButtons.get(6).setAvailable();
-        //researchButtons.get(9).setAvailable();
+        researchButtons.get(0).setResearchAvailable();
+        researchButtons.get(4).setResearchAvailable();
+        //researchButtons.get(6).setResearchAvailable();
+        //researchButtons.get(9).setResearchAvailable();
 
         for(int i=0; i<3; i++) {
             if(booleans[i]) {
-                researchButtons.get(i+1).setAvailable();
+                researchButtons.get(i+1).setResearchAvailable();
             }
         }
         if(booleans[4] /*&& booleans[8]*/) {
-            researchButtons.get(5).setAvailable();
+            researchButtons.get(5).setResearchAvailable();
         }
         /*
         for(int i=0; i<2; i++) {
             if(booleans[i+6]) {
-                researchButtons.get(i+7).setAvailable();
+                researchButtons.get(i+7).setResearchAvailable();
             }
         }
         if(booleans[9]) {
-            researchButtons.get(10).setAvailable();
+            researchButtons.get(10).setResearchAvailable();
         }
         if(booleans[10]) {
-            researchButtons.get(11).setAvailable();
-            researchButtons.get(12).setAvailable();
-            researchButtons.get(13).setAvailable();
+            researchButtons.get(11).setResearchAvailable();
+            researchButtons.get(12).setResearchAvailable();
+            researchButtons.get(13).setResearchAvailable();
         }
         if(booleans[13]) {
-            researchButtons.get(14).setAvailable();
-            researchButtons.get(15).setAvailable();
+            researchButtons.get(14).setResearchAvailable();
+            researchButtons.get(15).setResearchAvailable();
         }
         if(booleans[14]) {
-            researchButtons.get(16).setAvailable();
+            researchButtons.get(16).setResearchAvailable();
         }
         if(booleans[15]) {
-            researchButtons.get(17).setAvailable();
-            researchButtons.get(18).setAvailable();
+            researchButtons.get(17).setResearchAvailable();
+            researchButtons.get(18).setResearchAvailable();
            TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
         }*/
     }
@@ -187,7 +187,6 @@ public class ResearchScreen implements Screen {
     public Stage getStageUI() {
         return stageUI;
     }
-
     public Stage getStageInfo() {
         return stageInfo;
     }
