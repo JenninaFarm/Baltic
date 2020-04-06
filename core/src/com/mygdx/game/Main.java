@@ -89,10 +89,6 @@ public class Main extends Game {
 		researchScreen.clearStageInfo();
 	}
 
-	public void setMultiplier(double multiplier, int farmIndex) {
-		coins.get(farmIndex).addToMultiplier(multiplier);
-	}
-
 	public void setAvailable(int index) {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.get(i).setAvailable(index);

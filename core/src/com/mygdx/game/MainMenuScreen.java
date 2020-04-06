@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,6 +27,7 @@ public class MainMenuScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Table table;
+    private Actor background;
 
     private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
     private TextureRegion[] buttonTextureArray;
@@ -39,6 +41,10 @@ public class MainMenuScreen implements Screen {
         stage = new Stage(new FitViewport(800, 450), batch);
         table = new Table();
         buttonRegionTexture = new Texture(Gdx.files.internal("mainButtons.png"));
+
+        background = new StartmenuBackground();
+        background.setSize(800, 450);
+        background.setPosition(0, 0);
 
         createButtons();
         addActors();
@@ -59,6 +65,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void addActors() {
+        stage.addActor(background);
         for(int i=0; i<buttonAmount; i++) {
             Button button = mainMenuButtons.get(i).getButton();
             stage.addActor(button);

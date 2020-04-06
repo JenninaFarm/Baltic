@@ -49,7 +49,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
-        research = new MapResearchButton(main, 670, 215);
+        research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         createFarms();
         createCoins();
@@ -88,10 +88,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createCoins() {
-        coins.add(new MoneyButton(main, 245, 65, 0, savedMultipliers[0]));
-        coins.add(new MoneyButton(main, 405, 195, 1, savedMultipliers[1]));
-        coins.add(new MoneyButton(main, 645, 115, 2, savedMultipliers[2]));
-        coins.add(new MoneyButton(main, 604, 315, 3, savedMultipliers[3]));
+        coins.add(new MoneyButton(main, 198, 82, 0, savedMultipliers[0]));
+        coins.add(new MoneyButton(main, 395, 225, 1, savedMultipliers[1]));
+        coins.add(new MoneyButton(main, 665, 130, 2, savedMultipliers[2]));
+        coins.add(new MoneyButton(main, 615, 340, 3, savedMultipliers[3]));
     }
 
     private void addCoinsToStage() {
@@ -101,10 +101,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createFarms() {
-        farms.add(new MapButton(main, 200, 20, 0));
-        farms.add(new MapButton(main, 360, 150, 1));
-        farms.add(new MapButton(main, 600, 70, 2));
-        farms.add(new MapButton(main,560, 270, 3));
+        farms.add(new MapButton(main, 150, 50, 0));
+        farms.add(new MapButton(main, 350, 190, 1));
+        farms.add(new MapButton(main, 620, 100, 2));
+        farms.add(new MapButton(main,570, 310, 3));
     }
 
     private void createMoneyLabel() {
