@@ -64,18 +64,9 @@ public class ResearchScreen implements Screen {
         booleans = array;
     }
     private void createButtons() {
-        /*TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
-        TextureRegion [] buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
-        TextureRegion [][] buttonRegionBought = Utils.createTextureRegion2DArray(boughtRegionTexture, 2, 3);
-        TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3); */
-        I18NBundle myBundle = main.getMyBundle();
         for(int i=0; i<researchAmount; i++){
-            int costAmount = 2000 + 2000*(int)Math.pow(2, i);
-            researchButtons.add(new ResearchButton(main, myBundle.get("research" + (i+1)), i, costAmount, booleans[i]));
-
+            researchButtons.add(new ResearchButton(main, i, booleans[i]));
         }
-        //I18NBundle myBundle = main.getMyBundle();
-
         returnButton = new ReturnButton(main, 2);
     }
 
@@ -186,5 +177,6 @@ public class ResearchScreen implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
+        stageInfo.dispose();
     }
 }
