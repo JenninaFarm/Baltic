@@ -32,7 +32,7 @@ public class ResearchScreen implements Screen {
     private Stage stageInfo;
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static boolean [] booleans;
-    private int researchAmount = 6;
+    private int researchAmount = 19;
     private ReturnButton returnButton;
     private Label moneyLabel;
     private Camera camera;
@@ -142,18 +142,18 @@ public class ResearchScreen implements Screen {
     private void setResearchesAvailable() {
         researchButtons.get(0).setResearchAvailable();
         researchButtons.get(4).setResearchAvailable();
-        //researchButtons.get(6).setResearchAvailable();
-        //researchButtons.get(9).setResearchAvailable();
+        researchButtons.get(6).setResearchAvailable();
+        researchButtons.get(9).setResearchAvailable();
 
         for(int i=0; i<3; i++) {
             if(booleans[i]) {
                 researchButtons.get(i+1).setResearchAvailable();
             }
         }
-        if(booleans[4] /*&& booleans[8]*/) {
+        if(booleans[4] && booleans[8]) {
             researchButtons.get(5).setResearchAvailable();
         }
-        /*
+
         for(int i=0; i<2; i++) {
             if(booleans[i+6]) {
                 researchButtons.get(i+7).setResearchAvailable();
@@ -177,8 +177,8 @@ public class ResearchScreen implements Screen {
         if(booleans[15]) {
             researchButtons.get(17).setResearchAvailable();
             researchButtons.get(18).setResearchAvailable();
-           TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
-        }*/
+          // TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
+        }
     }
 
     public Stage getStage() {

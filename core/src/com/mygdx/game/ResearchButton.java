@@ -25,7 +25,7 @@ public class ResearchButton extends Actor {
 
     private InfoLabel infoLabel;
 
-    private static boolean [] researchBooleans = new boolean [6];
+    private static boolean [] researchBooleans = new boolean [19];
 
     public ResearchButton(Main m, int i, boolean b) {
         main = m;

@@ -4,10 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -26,9 +24,7 @@ public class FarmScreen implements Screen {
     private ReturnButton returnButton;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
-    private TextureRegion[] buttonTextureArray;
-    private int upgradeAmount = 6;
-    private Texture buttonRegionTexture;
+    private int upgradeAmount = 19;
     private Label moneyLabel;
 
     private static boolean [][] availableArray;
@@ -41,7 +37,6 @@ public class FarmScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageInfo = new Stage(new FitViewport(800, 450), batch);
-        buttonRegionTexture = new Texture(Gdx.files.internal("farmButtons.png"));
 
         createButtons();
         addActors();
