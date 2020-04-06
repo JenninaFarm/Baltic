@@ -21,40 +21,54 @@ public class ResearchButton extends Actor {
     private int index;
     private int cost;
     private boolean bought;
+    private boolean available = false;
 
     private InfoLabel infoLabel;
 
     private static boolean [] researchBooleans = new boolean [6];
 
-    public ResearchButton(Main m, String label, int i, int costAmount, boolean b) {
+    public ResearchButton(Main m, int i, boolean b) {
         main = m;
-        cost = costAmount;
-        bought = b;
-        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
         index = i;
+        bought = b;
+
+        I18NBundle myBundle = main.getMyBundle();
+        cost = Integer.parseInt(myBundle.get("researchCost" + index));
+        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
 
         width = 200;
         height = 50;
 
-        button1 = new TextButton(label, mySkin);
+        button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);
-        button1.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
+        button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
         button1.getStyle().checked = button1.getStyle().down;
-        button1.setChecked(false);
-        button1.setTouchable(Touchable.enabled);
+
+
+        if(bought) {
+            button1.setChecked(true);
+            button1.setDisabled(true);
+
+        } else if(available){
+            button1.setChecked(false);
+        } else {
+            button1.setChecked(true);
+            button1.setTouchable(Touchable.disabled);
+        }
 
         button1.addListener(new InputListener() {
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                button1.setTouchable(Touchable.disabled);
 
                 if(currentMoney >= cost && !bought) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
-                    button1.setChecked(false);
+                    //button1.setTouchable(Touchable.disabled);
+                    button1.setChecked(true);
+                    button1.setDisabled(true);
                     bought = true;
                     researchBooleans[index] = true;
                 } else if(bought) {
@@ -64,7 +78,6 @@ public class ResearchButton extends Actor {
                     System.out.println("cost: " + cost);
                     System.out.println("current balance: " + main.getMoney());
                 }
-
                 return false;
             }
 
@@ -80,6 +93,15 @@ public class ResearchButton extends Actor {
                 main.clearInfoLabel();
             }
         });
+    }
+
+    public void setAvailable() {
+        available = true;
+        if(!bought) {
+            button1.setChecked(false);
+            button1.setTouchable(Touchable.enabled);
+        }
+
     }
 
     public Button getButton() {

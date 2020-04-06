@@ -33,8 +33,6 @@ public class ResearchScreen implements Screen {
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static boolean [] booleans;
     private int researchAmount = 6;
-    private Texture buttonRegionTexture;
-    private Texture boughtRegionTexture;
     private ReturnButton returnButton;
     private Label moneyLabel;
     private Camera camera;
@@ -49,9 +47,6 @@ public class ResearchScreen implements Screen {
         stageUI = new Stage(new FitViewport(800, 450), batch);
         stageInfo = new Stage(new FitViewport(800, 450), batch);
 
-        buttonRegionTexture = new Texture(Gdx.files.internal("researchButtons.png"));
-        boughtRegionTexture = new Texture(Gdx.files.internal("researchButtonsBought.png"));
-
         camera = stage.getCamera();
 
         createButtons();
@@ -64,18 +59,9 @@ public class ResearchScreen implements Screen {
         booleans = array;
     }
     private void createButtons() {
-        /*TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
-        TextureRegion [] buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
-        TextureRegion [][] buttonRegionBought = Utils.createTextureRegion2DArray(boughtRegionTexture, 2, 3);
-        TextureRegion [] buttonTextureArrayBought = Utils.transformTo1D(buttonRegionBought, 2, 3); */
-        I18NBundle myBundle = main.getMyBundle();
         for(int i=0; i<researchAmount; i++){
-            int costAmount = 2000 + 2000*(int)Math.pow(2, i);
-            researchButtons.add(new ResearchButton(main, myBundle.get("research" + (i+1)), i, costAmount, booleans[i]));
-
+            researchButtons.add(new ResearchButton(main, i, booleans[i]));
         }
-        //I18NBundle myBundle = main.getMyBundle();
-
         returnButton = new ReturnButton(main, 2);
     }
 
@@ -122,6 +108,8 @@ public class ResearchScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        setResearchesAvailable();
+
         stage.act(Gdx.graphics.getDeltaTime());
         moneyLabel.setText(main.getMoney());
         stage.draw();
@@ -149,6 +137,48 @@ public class ResearchScreen implements Screen {
 
         camera.position.x = MathUtils.clamp(camera.position.x, 800 / 2f, 800 - 800 / 2f);
         camera.position.y = MathUtils.clamp(camera.position.y, 0, 450 - 450 / 2f);
+    }
+
+    private void setResearchesAvailable() {
+        researchButtons.get(0).setAvailable();
+        researchButtons.get(4).setAvailable();
+        //researchButtons.get(6).setAvailable();
+        //researchButtons.get(9).setAvailable();
+
+        for(int i=0; i<3; i++) {
+            if(booleans[i]) {
+                researchButtons.get(i+1).setAvailable();
+            }
+        }
+        if(booleans[4] /*&& booleans[8]*/) {
+            researchButtons.get(5).setAvailable();
+        }
+        /*
+        for(int i=0; i<2; i++) {
+            if(booleans[i+6]) {
+                researchButtons.get(i+7).setAvailable();
+            }
+        }
+        if(booleans[9]) {
+            researchButtons.get(10).setAvailable();
+        }
+        if(booleans[10]) {
+            researchButtons.get(11).setAvailable();
+            researchButtons.get(12).setAvailable();
+            researchButtons.get(13).setAvailable();
+        }
+        if(booleans[13]) {
+            researchButtons.get(14).setAvailable();
+            researchButtons.get(15).setAvailable();
+        }
+        if(booleans[14]) {
+            researchButtons.get(16).setAvailable();
+        }
+        if(booleans[15]) {
+            researchButtons.get(17).setAvailable();
+            researchButtons.get(18).setAvailable();
+           TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
+        }*/
     }
 
     public Stage getStage() {
@@ -186,5 +216,6 @@ public class ResearchScreen implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
+        stageInfo.dispose();
     }
 }
