@@ -11,7 +11,7 @@ public class Save {
     private static float [] multipliers = MoneyButton.getMultipliers();
 
     private static int farmAmount = 5;
-    private static int researchAmount = 6;
+    private static int researchAmount = 19;
 
     public static void saveVariables() {
 
