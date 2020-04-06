@@ -15,10 +15,13 @@ public class FarmButton extends Actor {
     private int farmIndex;
 
     private int cost;
-    private boolean available = false;
-    private boolean sold = false;
+    private boolean available;
+    private boolean bought;
 
-    public FarmButton(Main m, TextureRegion buttonTexture, int buttonI, final int farmI, final double multiplier) {
+    private static boolean [][] availableBooleans = new boolean[5][6];
+    private static boolean [][] boughtBooleans = new boolean[5][6];
+
+    public FarmButton(Main m, TextureRegion buttonTexture, int buttonI, final int farmI, final float multiplier, boolean a, boolean b) {
         buttonIndex = buttonI;
         farmIndex = farmI;
         main = m;
@@ -31,16 +34,20 @@ public class FarmButton extends Actor {
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
+        available = a;
+        bought = b;
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
                 if(available && currentMoney >= cost) {
                     System.out.println("bought");
-                    sold = true;
+                    bought = true;
                     main.setMoney(currentMoney-cost);
-                    main.setMultiplier(multiplier, farmI);
-
+                    MoneyButton.addToMultiplier(multiplier, farmIndex);
+                    boughtBooleans[farmIndex][buttonIndex] =  true;
+                    Save.saveVariables();
+                    Save.loadVariables();
                 } else {
                     System.out.println("Not enough money or upgrade not available!");
                     System.out.println(cost);
@@ -54,10 +61,19 @@ public class FarmButton extends Actor {
 
     public void setAvailable() {
         available = true;
+        availableBooleans[farmIndex][buttonIndex] = true;
+    }
+
+    public static boolean [][] getAvailableBooleans() {
+        return availableBooleans;
+    }
+
+    public static boolean [][] getBoughtBooleans() {
+        return boughtBooleans;
     }
 
     public void draw(Batch batch, float alpha) {
-        if(available && !sold) {
+        if(available && !bought) {
             batch.draw(button, this.getX(), this.getY(), width, height);
         }
     }

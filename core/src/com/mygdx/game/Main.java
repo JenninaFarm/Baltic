@@ -43,8 +43,6 @@ public class Main extends Game {
 
 		mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
 
-		createCoins();
-
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);
 
@@ -83,15 +81,6 @@ public class Main extends Game {
 		}
 	}
 
-	private void createCoins() {
-		coins.add(new MoneyButton(this, 245, 65));
-		coins.add(new MoneyButton(this, 405, 195));
-		coins.add(new MoneyButton(this, 645, 115));
-		coins.add(new MoneyButton(this, 604, 315));
-
-		mapScreen.addCoinsToStage(coins);
-	}
-
 	public void addResearchScreenStage(InfoLabel infoLabel) {
 		researchScreen.addToStage(infoLabel);
 	}
@@ -108,7 +97,6 @@ public class Main extends Game {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.get(i).setAvailable(index);
 		}
-
 	}
 
 	public static int getMoney() {

@@ -29,6 +29,9 @@ public class FarmScreen implements Screen {
     private Texture buttonRegionTexture;
     private Label moneyLabel;
 
+    private static boolean [][] availableArray;
+    private static boolean [][] boughtArray;
+
     public FarmScreen(Main m, int i) {
         main = m;
         farmIndex = i;
@@ -48,12 +51,12 @@ public class FarmScreen implements Screen {
         TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 3);
         buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 3);
 
-        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 4.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 5.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 4.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 6));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 4.5));
-        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 5));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[0], 0, farmIndex, 4.5f, availableArray[farmIndex][0], boughtArray[farmIndex][0]));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[1], 1, farmIndex, 5.5f, availableArray[farmIndex][1], boughtArray[farmIndex][1]));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[2], 2, farmIndex, 4.5f, availableArray[farmIndex][2], boughtArray[farmIndex][2]));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[3], 3, farmIndex, 6, availableArray[farmIndex][3], boughtArray[farmIndex][3]));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[4], 4, farmIndex, 4.5f, availableArray[farmIndex][4], boughtArray[farmIndex][4]));
+        farmButtons.add(new FarmButton(main, buttonTextureArray[5], 5, farmIndex, 5, availableArray[farmIndex][5], boughtArray[farmIndex][5]));
 
         returnButton = new ReturnButton(main, 2);
     }
@@ -80,6 +83,14 @@ public class FarmScreen implements Screen {
         moneyLabel.setPosition(200,400);
         moneyLabel.setAlignment(Align.center);
         stage.addActor(moneyLabel);
+    }
+
+    public static void setAvailableArray(boolean [][] array) {
+        availableArray = array;
+    }
+
+    public static void setBoughtArray(boolean [][] arrayb) {
+        boughtArray = arrayb;
     }
 
     @Override
