@@ -25,7 +25,7 @@ public class OptionsScreen implements Screen {
     private Stage stage;
     //private Table table;
     //private Skin mySkin;
-
+    private StartmenuBackground background;
 
     private ArrayList<OptionsButton> optionsButtons = new ArrayList<OptionsButton>();
     //private TextureRegion[] buttonTextureArray;
@@ -40,6 +40,10 @@ public class OptionsScreen implements Screen {
         stage = new Stage(new FitViewport(800, 450), batch);
         //table = new Table();
         Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+
+        background = new StartmenuBackground();
+        background.setSize(800, 450);
+        background.setPosition(0, 0);
 
         //buttonRegionTexture = new Texture(Gdx.files.internal("tutkimus1.jpg"));
 
@@ -60,6 +64,7 @@ public class OptionsScreen implements Screen {
     }
 
     private void addActors() {
+        stage.addActor(background);
         for(int i=0; i<buttonAmount; i++) {
             Button button = optionsButtons.get(i).getButton();
             stage.addActor(button);
