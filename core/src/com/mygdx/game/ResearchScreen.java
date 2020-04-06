@@ -33,8 +33,6 @@ public class ResearchScreen implements Screen {
     private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static boolean [] booleans;
     private int researchAmount = 6;
-    private Texture buttonRegionTexture;
-    private Texture boughtRegionTexture;
     private ReturnButton returnButton;
     private Label moneyLabel;
     private Camera camera;
@@ -48,9 +46,6 @@ public class ResearchScreen implements Screen {
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
         stageInfo = new Stage(new FitViewport(800, 450), batch);
-
-        buttonRegionTexture = new Texture(Gdx.files.internal("researchButtons.png"));
-        boughtRegionTexture = new Texture(Gdx.files.internal("researchButtonsBought.png"));
 
         camera = stage.getCamera();
 
@@ -113,6 +108,8 @@ public class ResearchScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        setResearchesAvailable();
+
         stage.act(Gdx.graphics.getDeltaTime());
         moneyLabel.setText(main.getMoney());
         stage.draw();
@@ -140,6 +137,22 @@ public class ResearchScreen implements Screen {
 
         camera.position.x = MathUtils.clamp(camera.position.x, 800 / 2f, 800 - 800 / 2f);
         camera.position.y = MathUtils.clamp(camera.position.y, 0, 450 - 450 / 2f);
+    }
+
+    private void setResearchesAvailable() {
+        researchButtons.get(0).setAvailable();
+        researchButtons.get(4).setAvailable();
+        //researchButtons.get(6).setAvailable();// rearchButtons.get(9).setAvailable();
+
+        for(int i=1; i<4; i++) {
+            if(booleans[i-1]) {
+                researchButtons.get(i).setAvailable();
+            }
+        }
+        if(booleans[4] /*&& booleans[8]*/) {
+            researchButtons.get(5).setAvailable();
+        }
+        for(int i=)
     }
 
     public Stage getStage() {

@@ -44,7 +44,17 @@ public class ResearchButton extends Actor {
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
         button1.getStyle().checked = button1.getStyle().down;
 
-        setResearchTree();
+
+        if(bought) {
+            button1.setChecked(true);
+            button1.setDisabled(true);
+
+        } else if(available){
+            button1.setChecked(false);
+        } else {
+            button1.setChecked(true);
+            button1.setTouchable(Touchable.disabled);
+        }
 
         button1.addListener(new InputListener() {
 
@@ -57,7 +67,6 @@ public class ResearchButton extends Actor {
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
                     //button1.setTouchable(Touchable.disabled);
-                    //setResearchTree();
                     button1.setChecked(true);
                     button1.setDisabled(true);
                     bought = true;
@@ -86,27 +95,13 @@ public class ResearchButton extends Actor {
         });
     }
 
-    private void setResearchTree() {
-        if(bought) {
-            button1.setChecked(true);
-            button1.setDisabled(true);
-
-        } else {
-            if(index == 0 || index == 4) {
-                available = true;
-            } else if(index == 1 || index == 2 || index == 3) {
-                if(researchBooleans[index-1]) {
-                    available = true;
-                }
-            }
-
-            if(available) {
-                button1.setChecked(false);
-            } else {
-                button1.setChecked(true);
-                button1.setTouchable(Touchable.disabled);
-            }
+    public void setAvailable() {
+        available = true;
+        if(!bought) {
+            button1.setChecked(false);
+            button1.setTouchable(Touchable.enabled);
         }
+
     }
 
     public Button getButton() {
