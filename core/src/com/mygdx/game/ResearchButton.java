@@ -21,6 +21,7 @@ public class ResearchButton extends Actor {
     private int index;
     private int cost;
     private boolean bought;
+    private boolean available = false;
 
     private InfoLabel infoLabel;
 
@@ -43,14 +44,7 @@ public class ResearchButton extends Actor {
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
         button1.getStyle().checked = button1.getStyle().down;
 
-        if(bought) {
-            button1.setChecked(true);
-            //button1.setTouchable(Touchable.disabled);
-            button1.setDisabled(true);
-
-        } else {
-            button1.setChecked(false);
-        }
+        setResearchTree();
 
         button1.addListener(new InputListener() {
 
@@ -62,8 +56,10 @@ public class ResearchButton extends Actor {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
-                    button1.setTouchable(Touchable.disabled);
-                    //button1.setDisabled(false);
+                    //button1.setTouchable(Touchable.disabled);
+                    //setResearchTree();
+                    button1.setChecked(true);
+                    button1.setDisabled(true);
                     bought = true;
                     researchBooleans[index] = true;
                 } else if(bought) {
@@ -88,6 +84,29 @@ public class ResearchButton extends Actor {
                 main.clearInfoLabel();
             }
         });
+    }
+
+    private void setResearchTree() {
+        if(bought) {
+            button1.setChecked(true);
+            button1.setDisabled(true);
+
+        } else {
+            if(index == 0 || index == 4) {
+                available = true;
+            } else if(index == 1 || index == 2 || index == 3) {
+                if(researchBooleans[index-1]) {
+                    available = true;
+                }
+            }
+
+            if(available) {
+                button1.setChecked(false);
+            } else {
+                button1.setChecked(true);
+                button1.setTouchable(Touchable.disabled);
+            }
+        }
     }
 
     public Button getButton() {
