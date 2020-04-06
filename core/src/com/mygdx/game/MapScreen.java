@@ -35,6 +35,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public static float [] savedMultipliers;
     private MapResearchButton research;
     private ReturnButton returnButton;
+    private Meter meter;
     private Label moneyLabel;
 
     private Vector2 dragNew, dragOld;
@@ -51,6 +52,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
+        meter = new Meter(main);
         createFarms();
         createCoins();
 
@@ -69,6 +71,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stage.addActor(map);
         stage.addActor(research);
+        stage.addActor(meter);
         addFarmsToStage();
         addCoinsToStage();
 
