@@ -30,7 +30,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Stage stage;
     private Stage stageUI;
     private int actorAmount = 4;
-    public static ArrayList<MoneyButton> coins = new ArrayList<>();
+    private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
     public static float [] savedMultipliers;
     private MapResearchButton research;
@@ -70,6 +70,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(map);
         stage.addActor(research);
         addFarmsToStage();
+        addCoinsToStage();
 
         createMoneyLabel();
 
@@ -91,18 +92,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         coins.add(new MoneyButton(main, 405, 195, 1, savedMultipliers[1]));
         coins.add(new MoneyButton(main, 645, 115, 2, savedMultipliers[2]));
         coins.add(new MoneyButton(main, 604, 315, 3, savedMultipliers[3]));
-
-        addCoinsToStage(coins);
     }
 
-    public void addCoinsToStage(ArrayList<MoneyButton> coins) {
+    private void addCoinsToStage() {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(coins.get(i));
         }
     }
-
-
-
 
     private void createFarms() {
         farms.add(new MapButton(main, 200, 20, 0));

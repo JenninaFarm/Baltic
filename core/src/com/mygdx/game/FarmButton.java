@@ -44,8 +44,10 @@ public class FarmButton extends Actor {
                     System.out.println("bought");
                     bought = true;
                     main.setMoney(currentMoney-cost);
-                    MoneyButton.setMultiplier(multiplier, farmIndex);
+                    MoneyButton.addToMultiplier(multiplier, farmIndex);
                     boughtBooleans[farmIndex][buttonIndex] =  true;
+                    Save.saveVariables();
+                    Save.loadVariables();
                 } else {
                     System.out.println("Not enough money or upgrade not available!");
                     System.out.println(cost);

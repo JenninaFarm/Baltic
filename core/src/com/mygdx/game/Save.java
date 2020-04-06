@@ -48,7 +48,7 @@ public class Save {
         Main.setMoney(prefs.getInteger("money", 600000));
 
         for(int i=0; i<farmAmount; i++) {
-            multipliers[i] = prefs.getFloat("multiplier" + 1, 4);
+            multipliers[i] = prefs.getFloat("multiplier" + i, 4);
         }
         MapScreen.setSavedMultipliers(multipliers);
 
