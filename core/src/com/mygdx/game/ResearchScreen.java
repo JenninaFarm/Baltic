@@ -48,7 +48,8 @@ public class ResearchScreen implements Screen {
         stageInfo = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
-
+        returnButton = new ReturnButton(main, 2);
+        stageUI.addActor(returnButton);
         createButtons();
         addActors();
         createMoneyLabel();
@@ -62,11 +63,9 @@ public class ResearchScreen implements Screen {
         for(int i=0; i<researchAmount; i++){
             researchButtons.add(new ResearchButton(main, i, booleans[i]));
         }
-        returnButton = new ReturnButton(main, 2);
     }
 
     private void addActors() {
-        stageUI.addActor(returnButton);
         for(int i=0; i<researchAmount; i++) {
             Button button = researchButtons.get(i).getButton();
             stage.addActor(button);

@@ -77,7 +77,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         createMoneyLabel();
 
-        ((OrthographicCamera)camera).zoom += 25.6f;
+        ((OrthographicCamera)camera).zoom += 27f;
     }
 
     private void addFarmsToStage() {
@@ -91,10 +91,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createCoins() {
-        coins.add(new MoneyButton(main, 198, 82, 0, savedMultipliers[0]));
-        coins.add(new MoneyButton(main, 395, 225, 1, savedMultipliers[1]));
-        coins.add(new MoneyButton(main, 665, 130, 2, savedMultipliers[2]));
-        coins.add(new MoneyButton(main, 615, 340, 3, savedMultipliers[3]));
+        coins.add(new MoneyButton(main, 197, 82, 0, savedMultipliers[0]));
+        coins.add(new MoneyButton(main, 396, 225, 1, savedMultipliers[1]));
+        coins.add(new MoneyButton(main, 667, 133, 2, savedMultipliers[2]));
+        coins.add(new MoneyButton(main, 617, 342, 3, savedMultipliers[3]));
     }
 
     private void addCoinsToStage() {

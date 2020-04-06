@@ -19,8 +19,8 @@ public class MapResearchButton extends Actor {
         button = new Texture(Gdx.files.internal("researchmapicon.png"));
         setX(x);
         setY(y);
-        width = button.getWidth()/7f;
-        height = button.getHeight()/7f;
+        width = button.getWidth()/6f;
+        height = button.getHeight()/6f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());

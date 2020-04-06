@@ -29,8 +29,8 @@ public class MoneyButton extends Actor {
         multipliers[i] = mp;
         setX(x);
         setY(y);
-        width = button.getWidth()/2f;
-        height = button.getHeight()/2f;
+        width = button.getWidth()/1.7f;
+        height = button.getHeight()/1.7f;
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -39,11 +39,13 @@ public class MoneyButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
-                countMoney();
+                if((timeWhenClickedInSec - timeLastClicked) >= 5) {
+                    countMoney();
 
-                System.out.println("money collected:" + money);
-                main.setMoney(main.getMoney() + money);
-                System.out.println("balance now:" + main.getMoney());
+                    System.out.println("money collected:" + money);
+                    main.setMoney(main.getMoney() + money);
+                    System.out.println("balance now:" + main.getMoney());
+                }
                 return true;
             }
         });

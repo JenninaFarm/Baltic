@@ -61,7 +61,7 @@ public class Main extends Game {
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
-				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageInfo());
+				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI(), farmScreens.get(y).getStageInfo());
 				Gdx.input.setInputProcessor(multiplexer);
 			}
 		} else if (x == 4) {

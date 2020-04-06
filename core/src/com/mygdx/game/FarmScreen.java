@@ -2,10 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -20,12 +24,15 @@ public class FarmScreen implements Screen {
     private int farmIndex;
     private SpriteBatch batch;
     private Stage stage;
+    private Stage stageUI;
     private Stage stageInfo;
     private ReturnButton returnButton;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
     private int upgradeAmount = 19;
     private Label moneyLabel;
+    private Vector2 dragNew, dragOld;
+    private Camera camera;
 
     private static boolean [][] availableArray;
     private static boolean [][] boughtArray;
@@ -35,23 +42,23 @@ public class FarmScreen implements Screen {
         farmIndex = i;
         batch = main.getBatch();
 
+        stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
         stageInfo = new Stage(new FitViewport(800, 450), batch);
 
+        camera = stage.getCamera();
+        returnButton = new ReturnButton(main, 2);
+
         createButtons();
+        stageUI.addActor(returnButton);
         addActors();
         createMoneyLabel();
-
-        Gdx.input.setInputProcessor(stage);
     }
 
     private  void createButtons() {
-
         for(int i=0; i<upgradeAmount; i++) {
             farmButtons.add(new FarmButton(main, i, farmIndex, availableArray[farmIndex][i], boughtArray[farmIndex][i]));
         }
-
-        returnButton = new ReturnButton(main, 2);
     }
 
 
@@ -59,7 +66,6 @@ public class FarmScreen implements Screen {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
         }
-        stage.addActor(returnButton);
     }
 
     public void addToStage(InfoLabel infoLabel) {
@@ -86,7 +92,26 @@ public class FarmScreen implements Screen {
         moneyLabel.setSize(800 ,30);
         moneyLabel.setPosition(200,400);
         moneyLabel.setAlignment(Align.center);
-        stage.addActor(moneyLabel);
+        stageUI.addActor(moneyLabel);
+    }
+
+    private void handleInput() {
+
+        if (Gdx.input.justTouched()){
+            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            dragOld = dragNew;
+        }
+
+        if (Gdx.input.isTouched()){
+            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            if (!dragNew.equals(dragOld)){
+                ((OrthographicCamera)camera).translate(0, dragNew.y - dragOld.y);
+                dragOld = dragNew;
+            }
+        }
+
+        camera.position.x = MathUtils.clamp(camera.position.x, 300, 500);
+        camera.position.y = MathUtils.clamp(camera.position.y, -400, 250);
     }
 
     public static void setAvailableArray(boolean [][] array) {
@@ -104,6 +129,9 @@ public class FarmScreen implements Screen {
 
     @Override
     public void render(float delta) {
+
+        handleInput();
+        camera.update();
         Gdx.gl.glClearColor(0, 1, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
@@ -113,6 +141,8 @@ public class FarmScreen implements Screen {
         moneyLabel.setText(main.getMoney());
         stage.draw();
         stageInfo.draw();
+        stageUI.act(Gdx.graphics.getDeltaTime());
+        stageUI.draw();
     }
 
     public Stage getStage() {
@@ -120,6 +150,9 @@ public class FarmScreen implements Screen {
     }
     public Stage getStageInfo() {
         return stageInfo;
+    }
+    public Stage getStageUI() {
+        return stageUI;
     }
 
 
