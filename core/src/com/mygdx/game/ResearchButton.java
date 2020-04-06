@@ -45,8 +45,8 @@ public class ResearchButton extends Actor {
 
         if(bought) {
             button1.setChecked(true);
-            button1.setTouchable(Touchable.disabled);
-            System.out.println("In bought change things");
+            //button1.setTouchable(Touchable.disabled);
+            button1.setDisabled(true);
 
         } else {
             button1.setChecked(false);
@@ -63,6 +63,7 @@ public class ResearchButton extends Actor {
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
                     button1.setTouchable(Touchable.disabled);
+                    //button1.setDisabled(false);
                     bought = true;
                     researchBooleans[index] = true;
                 } else if(bought) {
