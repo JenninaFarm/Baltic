@@ -142,17 +142,43 @@ public class ResearchScreen implements Screen {
     private void setResearchesAvailable() {
         researchButtons.get(0).setAvailable();
         researchButtons.get(4).setAvailable();
-        //researchButtons.get(6).setAvailable();// rearchButtons.get(9).setAvailable();
+        //researchButtons.get(6).setAvailable();
+        //researchButtons.get(9).setAvailable();
 
-        for(int i=1; i<4; i++) {
-            if(booleans[i-1]) {
-                researchButtons.get(i).setAvailable();
+        for(int i=0; i<3; i++) {
+            if(booleans[i]) {
+                researchButtons.get(i+1).setAvailable();
             }
         }
         if(booleans[4] /*&& booleans[8]*/) {
             researchButtons.get(5).setAvailable();
         }
-        for(int i=)
+        /*
+        for(int i=0; i<2; i++) {
+            if(booleans[i+6]) {
+                researchButtons.get(i+7).setAvailable();
+            }
+        }
+        if(booleans[9]) {
+            researchButtons.get(10).setAvailable();
+        }
+        if(booleans[10]) {
+            researchButtons.get(11).setAvailable();
+            researchButtons.get(12).setAvailable();
+            researchButtons.get(13).setAvailable();
+        }
+        if(booleans[13]) {
+            researchButtons.get(14).setAvailable();
+            researchButtons.get(15).setAvailable();
+        }
+        if(booleans[14]) {
+            researchButtons.get(16).setAvailable();
+        }
+        if(booleans[15]) {
+            researchButtons.get(17).setAvailable();
+            researchButtons.get(18).setAvailable();
+           TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
+        }*/
     }
 
     public Stage getStage() {
