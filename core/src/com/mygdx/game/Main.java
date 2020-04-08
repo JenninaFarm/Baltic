@@ -15,7 +15,6 @@ public class Main extends Game {
 	private MainMenuScreen mainMenuScreen;
 	private MapScreen mapScreen;
 	private ArrayList<FarmScreen> farmScreens;
-	private ArrayList<MoneyButton> coins = new ArrayList<>();
 
 	private int farmAmount = 4;
 	private ResearchScreen researchScreen;
