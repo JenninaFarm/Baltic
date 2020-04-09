@@ -10,12 +10,12 @@ public class Save {
     private static boolean [][] farmBought = FarmButton.getBoughtBooleans();
     private static float [] multipliers = MoneyButton.getMultipliers();
 
+    private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
+
     private static int farmAmount = 5;
     private static int researchAmount = 19;
 
     public static void saveVariables() {
-
-        Preferences prefs =  Gdx.app.getPreferences("savefile");
 
         prefs.putInteger("money", Main.getMoney());
 
@@ -44,7 +44,6 @@ public class Save {
 
     public static void loadVariables() {
 
-        Preferences prefs =  Gdx.app.getPreferences("savefile");
         Main.setMoney(prefs.getInteger("money", 600000));
 
         for(int i=0; i<farmAmount; i++) {
@@ -66,6 +65,45 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             for(int j=0; j<researchAmount; j++) {
+                farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
+            }
+        }
+        FarmScreen.setBoughtArray(farmBought);
+    }
+
+    public static void newGame() {
+
+        prefs.putInteger("money", 600000);
+        prefs.flush();
+        Main.setMoney(prefs.getInteger("money"));
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putFloat("multiplier" + i, 4);
+            prefs.flush();
+            multipliers[i] = prefs.getFloat("multiplier" + i);
+        }
+        MapScreen.setSavedMultipliers(multipliers);
+
+        for(int i=0; i<researchAmount; i++) {
+            prefs.putBoolean("research" + i, false);
+            prefs.flush();
+            research[i] = prefs.getBoolean("research" + i);
+        }
+        ResearchScreen.setBooleanArray(research);
+
+        for(int i=0; i<farmAmount; i++) {
+            for(int j=0; j<researchAmount; j++) {
+                prefs.putBoolean("farmavailable" + i + j, false);
+                prefs.flush();
+                farmAvailable[i][j] = prefs.getBoolean("farmavailable" + i + j);
+            }
+        }
+        FarmScreen.setAvailableArray(farmAvailable);
+
+        for(int i=0; i<farmAmount; i++) {
+            for(int j=0; j<researchAmount; j++) {
+                prefs.putBoolean("farmbought" + i + j, false);
+                prefs.flush();
                 farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
             }
         }
