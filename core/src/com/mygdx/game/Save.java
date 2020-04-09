@@ -71,4 +71,43 @@ public class Save {
         }
         FarmScreen.setBoughtArray(farmBought);
     }
+
+    public static void newGame() {
+
+        Preferences prefs =  Gdx.app.getPreferences("savefile");
+        prefs.putInteger("money", 600000);
+        Main.setMoney(prefs.getInteger("money"));
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putFloat("multiplier" + i, 4);
+            multipliers[i] = prefs.getFloat("multiplier" + i);
+        }
+        MapScreen.setSavedMultipliers(multipliers);
+
+        for(int i=0; i<researchAmount; i++) {
+            prefs.putBoolean("research" + i, false);
+            research[i] = prefs.getBoolean("research" + i);
+        }
+        ResearchScreen.setBooleanArray(research);
+
+        for(int i=0; i<farmAmount; i++) {
+            for(int j=0; j<researchAmount; j++) {
+                prefs.putBoolean("farmavailable" + i + j, false);
+                farmAvailable[i][j] = prefs.getBoolean("farmavailable" + i + j);
+            }
+        }
+        FarmScreen.setAvailableArray(farmAvailable);
+
+        for(int i=0; i<farmAmount; i++) {
+            for(int j=0; j<researchAmount; j++) {
+                prefs.putBoolean("farmbought" + i + j, false);
+                farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
+            }
+        }
+        FarmScreen.setBoughtArray(farmBought);
+
+        ResearchScreen.setResearchesAvailable();
+        saveVariables();
+        loadVariables();
+    }
 }

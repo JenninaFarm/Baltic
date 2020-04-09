@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -40,6 +41,8 @@ public class OptionsButton extends Actor {
                 } else if (index == 1) {
                     System.out.println("to map");
                     main.switchScreen(2, 0);
+                } else if (index == 2) {
+                    Save.newGame();
                 }
                 return true;
             }

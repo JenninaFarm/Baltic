@@ -30,7 +30,7 @@ public class ResearchScreen implements Screen {
     private Stage stage;
     private Stage stageUI;
     private Stage stageInfo;
-    private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
+    private static ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static boolean [] booleans;
     private int researchAmount = 19;
     private ReturnButton returnButton;
@@ -138,7 +138,7 @@ public class ResearchScreen implements Screen {
         camera.position.y = MathUtils.clamp(camera.position.y, 50, 225);
     }
 
-    private void setResearchesAvailable() {
+    public static void setResearchesAvailable() {
         researchButtons.get(0).setResearchAvailable();
         researchButtons.get(4).setResearchAvailable();
         researchButtons.get(6).setResearchAvailable();
