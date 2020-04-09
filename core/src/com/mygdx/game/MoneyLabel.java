@@ -22,8 +22,8 @@ public class MoneyLabel extends Actor {
         money = main.nonStaticGetMoney();
 
         moneyLabel = new TextArea(Integer.toString(money), mySkin);
-        moneyLabel.setX(500);
-        moneyLabel.setY(412);
+        moneyLabel.setX(630);
+        moneyLabel.setY(407);
         moneyLabel.setWidth(150);
         moneyLabel.setHeight(33);
         coin = new Texture(Gdx.files.internal("coin-icon.png"));
