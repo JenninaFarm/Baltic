@@ -27,6 +27,7 @@ public class FarmScreen implements Screen {
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
     private int upgradeAmount = 19;
     private MoneyLabel moneyLabel;
+    private IncomeLabel incomeLabel;
     private Vector2 dragNew, dragOld;
     private Camera camera;
 
@@ -45,6 +46,7 @@ public class FarmScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
+        incomeLabel = new IncomeLabel(main, "farm");
 
         createButtons();
         addActors();
@@ -61,6 +63,7 @@ public class FarmScreen implements Screen {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
         }
+        stageUI.addActor(incomeLabel);
         stageUI.addActor(moneyLabel);
         stageUI.addActor(returnButton);
     }
