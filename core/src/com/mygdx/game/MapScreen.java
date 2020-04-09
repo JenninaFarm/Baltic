@@ -36,7 +36,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private MapResearchButton research;
     private ReturnButton returnButton;
     private Meter meter;
-    private Label moneyLabel;
+    private MoneyLabel moneyLabel;
 
     private Vector2 dragNew, dragOld;
 
@@ -52,6 +52,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
+        moneyLabel = new MoneyLabel(main);
         meter = new Meter(main);
         createFarms();
         createCoins();
@@ -67,22 +68,22 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             }
         });
 
+        addActorsToStage();
+
+        ((OrthographicCamera)camera).zoom += 27f;
+    }
+
+    private void addActorsToStage() {
+        stageUI.addActor(moneyLabel);
         stageUI.addActor(returnButton);
 
         stage.addActor(map);
         stage.addActor(research);
         stage.addActor(meter);
-        addFarmsToStage();
-        addCoinsToStage();
 
-        createMoneyLabel();
-
-        ((OrthographicCamera)camera).zoom += 27f;
-    }
-
-    private void addFarmsToStage() {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
+            stage.addActor(coins.get(i));
         }
     }
 
@@ -97,12 +98,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         coins.add(new MoneyButton(main, 617, 342, 3, savedMultipliers[3]));
     }
 
-    private void addCoinsToStage() {
-        for(int i=0; i<actorAmount; i++) {
-            stage.addActor(coins.get(i));
-        }
-    }
-
     private void createFarms() {
         farms.add(new MapButton(main, 150, 50, 0));
         farms.add(new MapButton(main, 350, 190, 1));
@@ -110,18 +105,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         farms.add(new MapButton(main,570, 310, 3));
     }
 
-    private void createMoneyLabel() {
-        Label.LabelStyle label1Style = new Label.LabelStyle();
-        BitmapFont myFont = new BitmapFont(Gdx.files.internal("sansFont.fnt"));
-        label1Style.font = myFont;
-        label1Style.fontColor = Color.RED;
-
-        moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
-        moneyLabel.setSize(800 ,30);
-        moneyLabel.setPosition(50,400);
-        moneyLabel.setAlignment(Align.center);
-        stageUI.addActor(moneyLabel);
-    }
 
     @Override
     public void show() {
@@ -136,7 +119,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());
-        moneyLabel.setText(main.getMoney());
         stage.draw();
 
         stageUI.act(Gdx.graphics.getDeltaTime());

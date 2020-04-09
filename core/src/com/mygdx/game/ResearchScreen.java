@@ -34,7 +34,7 @@ public class ResearchScreen implements Screen {
     private static boolean [] booleans;
     private int researchAmount = 19;
     private ReturnButton returnButton;
-    private Label moneyLabel;
+    private MoneyLabel moneyLabel;
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
@@ -49,10 +49,9 @@ public class ResearchScreen implements Screen {
 
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
-        stageUI.addActor(returnButton);
+        moneyLabel = new MoneyLabel(main);
         createButtons();
         addActors();
-        createMoneyLabel();
     }
 
     public static void setBooleanArray(boolean [] array) {
@@ -70,6 +69,8 @@ public class ResearchScreen implements Screen {
             Button button = researchButtons.get(i).getButton();
             stage.addActor(button);
         }
+        stageUI.addActor(moneyLabel);
+        stageUI.addActor(returnButton);
     }
 
     public void addToStage(InfoLabel infoLabel) {
@@ -81,18 +82,6 @@ public class ResearchScreen implements Screen {
         stageInfo.clear();
     }
 
-    private void createMoneyLabel() {
-        Label.LabelStyle label1Style = new Label.LabelStyle();
-        BitmapFont myFont = new BitmapFont(Gdx.files.internal("sansFont.fnt"));
-        label1Style.font = myFont;
-        label1Style.fontColor = Color.RED;
-
-        moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
-        moneyLabel.setSize(800 ,30);
-        moneyLabel.setPosition(200,400);
-        moneyLabel.setAlignment(Align.center);
-        stageUI.addActor(moneyLabel);
-    }
 
     @Override
     public void show() {
@@ -110,7 +99,6 @@ public class ResearchScreen implements Screen {
         setResearchesAvailable();
 
         stage.act(Gdx.graphics.getDeltaTime());
-        moneyLabel.setText(main.getMoney());
         stage.draw();
 
         stageUI.act(Gdx.graphics.getDeltaTime());

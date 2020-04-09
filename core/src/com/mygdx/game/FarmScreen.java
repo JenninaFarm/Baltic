@@ -3,17 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -30,7 +26,7 @@ public class FarmScreen implements Screen {
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
     private int upgradeAmount = 19;
-    private Label moneyLabel;
+    private MoneyLabel moneyLabel;
     private Vector2 dragNew, dragOld;
     private Camera camera;
 
@@ -48,11 +44,10 @@ public class FarmScreen implements Screen {
 
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
+        moneyLabel = new MoneyLabel(main);
 
         createButtons();
-        stageUI.addActor(returnButton);
         addActors();
-        createMoneyLabel();
     }
 
     private  void createButtons() {
@@ -66,6 +61,8 @@ public class FarmScreen implements Screen {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
         }
+        stageUI.addActor(moneyLabel);
+        stageUI.addActor(returnButton);
     }
 
     public void addToStage(InfoLabel infoLabel) {
@@ -82,18 +79,6 @@ public class FarmScreen implements Screen {
         farmButtons.get(index).setAvailable();
     }
 
-    private void createMoneyLabel() {
-        Label.LabelStyle label1Style = new Label.LabelStyle();
-        BitmapFont myFont = new BitmapFont(Gdx.files.internal("sansFont.fnt"));
-        label1Style.font = myFont;
-        label1Style.fontColor = Color.RED;
-
-        moneyLabel = new Label(Integer.toString(main.getMoney()), label1Style);
-        moneyLabel.setSize(800 ,30);
-        moneyLabel.setPosition(200,400);
-        moneyLabel.setAlignment(Align.center);
-        stageUI.addActor(moneyLabel);
-    }
 
     private void handleInput() {
 
@@ -138,7 +123,6 @@ public class FarmScreen implements Screen {
         batch.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
-        moneyLabel.setText(main.getMoney());
         stage.draw();
         stageInfo.draw();
         stageUI.act(Gdx.graphics.getDeltaTime());

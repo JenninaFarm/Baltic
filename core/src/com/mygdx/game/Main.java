@@ -113,6 +113,10 @@ public class Main extends Game {
 		return money;
 	}
 
+	public int nonStaticGetMoney() {
+		return money;
+	}
+
 	public int getBalticSituation() { return balticSituation; };
 
 	public SpriteBatch getBatch() {
