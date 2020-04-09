@@ -30,9 +30,10 @@ public class ResearchScreen implements Screen {
     private Stage stage;
     private Stage stageUI;
     private Stage stageInfo;
-    private ArrayList<ResearchButton> researchButtons = new ArrayList<>();
+    //private static ArrayList<ResearchButton> researchButtons = new ArrayList<>();
+    private static ResearchButton [] researchButtons = new ResearchButton [19];
     private static boolean [] booleans;
-    private int researchAmount = 19;
+    private static int researchAmount = 19;
     private ReturnButton returnButton;
     private MoneyLabel moneyLabel;
     private Camera camera;
@@ -60,13 +61,13 @@ public class ResearchScreen implements Screen {
     }
     private void createButtons() {
         for(int i=0; i<researchAmount; i++){
-            researchButtons.add(new ResearchButton(main, i, booleans[i]));
+            researchButtons[i] = (new ResearchButton(main, i, booleans[i]));
         }
     }
 
     private void addActors() {
         for(int i=0; i<researchAmount; i++) {
-            Button button = researchButtons.get(i).getButton();
+            Button button = researchButtons[i].getButton();
             stage.addActor(button);
         }
         stageUI.addActor(moneyLabel);
@@ -126,44 +127,44 @@ public class ResearchScreen implements Screen {
         camera.position.y = MathUtils.clamp(camera.position.y, 50, 225);
     }
 
-    private void setResearchesAvailable() {
-        researchButtons.get(0).setResearchAvailable();
-        researchButtons.get(4).setResearchAvailable();
-        researchButtons.get(6).setResearchAvailable();
-        researchButtons.get(9).setResearchAvailable();
+    public static void setResearchesAvailable() {
+        researchButtons[0].setResearchAvailable();
+        researchButtons[4].setResearchAvailable();
+        researchButtons[6].setResearchAvailable();
+        researchButtons[9].setResearchAvailable();
 
         for(int i=0; i<3; i++) {
             if(booleans[i]) {
-                researchButtons.get(i+1).setResearchAvailable();
+                researchButtons[i+1].setResearchAvailable();
             }
         }
         if(booleans[4] && booleans[8]) {
-            researchButtons.get(5).setResearchAvailable();
+            researchButtons[5].setResearchAvailable();
         }
 
         for(int i=0; i<2; i++) {
             if(booleans[i+6]) {
-                researchButtons.get(i+7).setResearchAvailable();
+                researchButtons[i+7].setResearchAvailable();
             }
         }
         if(booleans[9]) {
-            researchButtons.get(10).setResearchAvailable();
+            researchButtons[10].setResearchAvailable();
         }
         if(booleans[10]) {
-            researchButtons.get(11).setResearchAvailable();
-            researchButtons.get(12).setResearchAvailable();
-            researchButtons.get(13).setResearchAvailable();
+            researchButtons[11].setResearchAvailable();
+            researchButtons[12].setResearchAvailable();
+            researchButtons[13].setResearchAvailable();
         }
         if(booleans[13]) {
-            researchButtons.get(14).setResearchAvailable();
-            researchButtons.get(15).setResearchAvailable();
+            researchButtons[14].setResearchAvailable();
+            researchButtons[15].setResearchAvailable();
         }
         if(booleans[14]) {
-            researchButtons.get(16).setResearchAvailable();
+            researchButtons[16].setResearchAvailable();
         }
         if(booleans[15]) {
-            researchButtons.get(17).setResearchAvailable();
-            researchButtons.get(18).setResearchAvailable();
+            researchButtons[17].setResearchAvailable();
+            researchButtons[18].setResearchAvailable();
           // TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
         }
     }
@@ -196,6 +197,13 @@ public class ResearchScreen implements Screen {
     @Override
     public void hide() {
         Save.saveVariables();
+    }
+
+    public static void newGameReset(Main main) {
+        for (int i=0; i<researchAmount; i++) {
+            researchButtons[i] = new ResearchButton(main, i, false);
+        }
+        setResearchesAvailable();
     }
 
     @Override

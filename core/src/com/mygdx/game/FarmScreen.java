@@ -56,7 +56,6 @@ public class FarmScreen implements Screen {
         }
     }
 
-
     private void addActors() {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
