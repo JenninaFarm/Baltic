@@ -116,6 +116,7 @@ public class ResearchButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
+        //button1.draw(batch, alpha);
     }
 
     @Override
