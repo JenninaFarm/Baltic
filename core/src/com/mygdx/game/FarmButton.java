@@ -78,9 +78,11 @@ public class FarmButton extends Actor {
                 if(available && currentMoney >= cost && !bought) {
                     System.out.println("bought");
                     bought = true;
+                    button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
                     button1.setDisabled(true);
                     main.setMoney(currentMoney-cost);
+                    main.addBalticSituation(balticSituation);
                     MoneyButton.addToMultiplier(multiplier, farmIndex);
                     boughtBooleans[farmIndex][buttonIndex] =  true;
                     Save.saveVariables();
