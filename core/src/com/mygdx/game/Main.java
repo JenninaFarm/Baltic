@@ -35,12 +35,12 @@ public class Main extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 
-		farmScreens = new ArrayList<FarmScreen>();
+		farmScreens = new ArrayList<>();
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.add(new FarmScreen(this, i));
 		}
 
-		mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);

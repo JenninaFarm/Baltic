@@ -19,7 +19,7 @@ public class OptionsButton extends Actor {
 
     public OptionsButton(Main m, String label, int i) {
         main = m;
-        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         index = i;
 
         width = 200;

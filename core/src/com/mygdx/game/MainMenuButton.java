@@ -53,10 +53,10 @@ public class MainMenuButton extends Actor {
 
     public MainMenuButton(Main m, String label, int i) {
         main = m;
-        mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         index = i;
 
-        width = 100;
+        width = 150;
         height = 50;
 
         textButton = new TextButton(label, mySkin);

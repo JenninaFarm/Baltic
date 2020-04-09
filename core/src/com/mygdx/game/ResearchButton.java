@@ -34,7 +34,8 @@ public class ResearchButton extends Actor {
 
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + index));
-        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
 
         width = 200;
         height = 50;
@@ -46,6 +47,7 @@ public class ResearchButton extends Actor {
 
 
         if(bought) {
+            button1.getStyle().checked = button1.getStyle().over;
             button1.setChecked(true);
             button1.setDisabled(true);
 
@@ -67,6 +69,7 @@ public class ResearchButton extends Actor {
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
                     //button1.setTouchable(Touchable.disabled);
+                    button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
                     button1.setDisabled(true);
                     bought = true;

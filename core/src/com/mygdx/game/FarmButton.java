@@ -44,7 +44,7 @@ public class FarmButton extends Actor {
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + buttonIndex)) / 2;
         multiplier = parseFloat(myBundle.get("upgradeMultiplier" + buttonIndex));
-        Skin mySkin = new Skin(Gdx.files.internal("testUiSkin.json"));
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
         width = 200;
         height = 50;
