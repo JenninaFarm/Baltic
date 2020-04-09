@@ -58,7 +58,6 @@ public class FarmButton extends Actor {
         button1 = new TextButton(myBundle.get("research" + buttonIndex), mySkin);
         button1.setSize(width, height);
         button1.setPosition(getX(), getY());
-        button1.getStyle().checked = button1.getStyle().down;
 
         if(bought) {
             button1.getStyle().checked = button1.getStyle().over;
@@ -68,6 +67,7 @@ public class FarmButton extends Actor {
         } else if(available){
             button1.setChecked(false);
         } else {
+            button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
             button1.setTouchable(Touchable.disabled);
         }

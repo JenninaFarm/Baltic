@@ -225,8 +225,10 @@
 		"font": "Baloo2-Regular20",
 		"fontColor": "black",
 		"up": "round-green",
-		"down": "round-red",
-		"over": "round-dark-green"
+		"down": "round-dark-green",
+		"over": "round-dark-green",
+		"checked": "round-red",
+		"checkedOver": "round-red"
 	},
 	"toggle": {
 		"font": "font",

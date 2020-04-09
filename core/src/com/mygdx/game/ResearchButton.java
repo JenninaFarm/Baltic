@@ -43,7 +43,6 @@ public class ResearchButton extends Actor {
         button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
-        button1.getStyle().checked = button1.getStyle().down;
 
 
         if(bought) {
@@ -54,6 +53,7 @@ public class ResearchButton extends Actor {
         } else if(available){
             button1.setChecked(false);
         } else {
+            button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
             button1.setTouchable(Touchable.disabled);
         }
