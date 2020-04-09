@@ -10,12 +10,12 @@ public class Save {
     private static boolean [][] farmBought = FarmButton.getBoughtBooleans();
     private static float [] multipliers = MoneyButton.getMultipliers();
 
+    private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
+
     private static int farmAmount = 5;
     private static int researchAmount = 19;
 
     public static void saveVariables() {
-
-        Preferences prefs =  Gdx.app.getPreferences("savefile");
 
         prefs.putInteger("money", Main.getMoney());
 
@@ -44,7 +44,6 @@ public class Save {
 
     public static void loadVariables() {
 
-        Preferences prefs =  Gdx.app.getPreferences("savefile");
         Main.setMoney(prefs.getInteger("money", 600000));
 
         for(int i=0; i<farmAmount; i++) {
@@ -74,7 +73,6 @@ public class Save {
 
     public static void newGame() {
 
-        Preferences prefs =  Gdx.app.getPreferences("savefile");
         prefs.putInteger("money", 600000);
         Main.setMoney(prefs.getInteger("money"));
 
@@ -105,9 +103,5 @@ public class Save {
             }
         }
         FarmScreen.setBoughtArray(farmBought);
-
-        ResearchScreen.setResearchesAvailable();
-        saveVariables();
-        loadVariables();
     }
 }

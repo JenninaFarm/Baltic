@@ -114,6 +114,10 @@ public class Main extends Game {
 
 	public Skin getMySkin() { return mySkin;}
 
+	public static void callCreate(Main m) {
+		m.create();
+	}
+
 	@Override
 	public void render () {
 		super.render();

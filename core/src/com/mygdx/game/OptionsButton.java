@@ -43,6 +43,10 @@ public class OptionsButton extends Actor {
                     main.switchScreen(2, 0);
                 } else if (index == 2) {
                     Save.newGame();
+                    Save.saveVariables();
+                    Save.loadVariables();
+                    ResearchScreen.newGameReset(main);
+                    Main.callCreate(main);
                 }
                 return true;
             }
