@@ -27,6 +27,7 @@ public class FarmButton extends Actor {
     private float multiplier;
     private boolean available;
     private boolean bought;
+    private int balticSituation;
 
     private InfoLabel infoLabel;
 
@@ -44,6 +45,8 @@ public class FarmButton extends Actor {
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + buttonIndex)) / 2;
         multiplier = parseFloat(myBundle.get("upgradeMultiplier" + buttonIndex));
+        balticSituation = Integer.parseInt(myBundle.get("upgradeBaltic" + buttonIndex));
+
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
         width = 200;

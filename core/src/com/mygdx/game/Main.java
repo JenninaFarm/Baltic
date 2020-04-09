@@ -21,7 +21,7 @@ public class Main extends Game {
 	private OptionsScreen optionsScreen;
 
 	private static int money;
-	private double balticSituation = 0;
+	private int balticSituation = 0;
 
 	private Skin mySkin;
 	private I18NBundle myBundle;
@@ -81,6 +81,15 @@ public class Main extends Game {
 		}
 	}
 
+	public void addBalticSituation(int amount) {
+		if(amount < 0 || amount > 4) {
+			System.out.println("Program is failing. Amount not possible");
+		} else {
+			balticSituation += amount;
+			System.out.println("baltic Situation = " + balticSituation);
+		}
+	}
+
 	public void addResearchScreenStage(InfoLabel infoLabel) {
 		researchScreen.addToStage(infoLabel);
 	}
@@ -103,6 +112,8 @@ public class Main extends Game {
 	public static int getMoney() {
 		return money;
 	}
+
+	public int getBalticSituation() { return balticSituation; };
 
 	public SpriteBatch getBatch() {
 		return batch;
