@@ -58,6 +58,7 @@ public class FarmButton extends Actor {
         button1.getStyle().checked = button1.getStyle().down;
 
         if(bought) {
+            button1.getStyle().checked = button1.getStyle().over;
             button1.setChecked(true);
             button1.setDisabled(true);
 
