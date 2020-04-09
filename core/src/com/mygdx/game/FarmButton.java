@@ -35,7 +35,7 @@ public class FarmButton extends Actor {
     private static boolean [][] availableBooleans = new boolean[5][19];
     private static boolean [][] boughtBooleans = new boolean[5][19];
 
-    public FarmButton(Main m, int buttonI, int farmI, boolean a, boolean b) {
+    public FarmButton(Main m, final int buttonI, int farmI, boolean a, boolean b) {
         main = m;
         buttonIndex = buttonI;
         farmIndex = farmI;
@@ -75,6 +75,11 @@ public class FarmButton extends Actor {
         button1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
+                if(currentMoney < cost) {
+                    button1.setDisabled(true);
+                } else {
+                    button1.setDisabled(false);
+                }
                 if(available && currentMoney >= cost && !bought) {
                     System.out.println("bought");
                     bought = true;

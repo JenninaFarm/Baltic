@@ -64,11 +64,10 @@ public class ResearchButton extends Actor {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
 
-                if(currentMoney >= cost && !bought) {
+                if(currentMoney >= cost && !bought && available) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     main.setAvailable(index);
-                    //button1.setTouchable(Touchable.disabled);
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
                     button1.setDisabled(true);
