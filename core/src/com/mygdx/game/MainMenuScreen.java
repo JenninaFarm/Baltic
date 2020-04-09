@@ -40,7 +40,6 @@ public class MainMenuScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         table = new Table();
-        buttonRegionTexture = new Texture(Gdx.files.internal("mainButtons.png"));
 
         background = new StartmenuBackground();
         background.setSize(800, 450);
@@ -48,17 +47,11 @@ public class MainMenuScreen implements Screen {
 
         createButtons();
         addActors();
-        //stage.addActor(table);
 
         Gdx.input.setInputProcessor(stage);
     }
 
     private void createButtons() {
-        TextureRegion [][] buttonRegion = Utils.createTextureRegion2DArray(buttonRegionTexture, 2, 1);
-        buttonTextureArray = Utils.transformTo1D(buttonRegion, 2, 1);
-        /*for(int i=0; i<buttonAmount; i++){
-            mainMenuButtons.add(new MainMenuButton(main, buttonTextureArray[i], i));
-        }*/
         I18NBundle myBundle = main.getMyBundle();
         mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main1"), 0));
         mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main2"), 1));
@@ -69,9 +62,6 @@ public class MainMenuScreen implements Screen {
         for(int i=0; i<buttonAmount; i++) {
             Button button = mainMenuButtons.get(i).getButton();
             stage.addActor(button);
-            //table.add(button).center();
-            //table.row();
-            //stage.addActor(mainMenuButtons.get(i));
         }
     }
 
