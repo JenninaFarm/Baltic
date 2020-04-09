@@ -11,30 +11,39 @@ public class IncomeLabel extends Actor {
 
     private Main main;
     private TextArea label;
-    private int money;
+    private int index;
+    private float [] multipliers;
     private Texture coin;
     private String per;
 
 
-    public IncomeLabel(Main m, String perWhat) {
+    public IncomeLabel(Main m, String perWhat, int i) {
         main = m;
         per = perWhat;
+        index = i;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
-        money = main.nonStaticGetMoney();
 
 
-        label = new TextArea(Integer.toString(money), mySkin);
+        label = new TextArea(Integer.toString(0), mySkin);
         label.setX(470);
         label.setY(412);
-        label.setWidth(200);
+        label.setWidth(230);
         label.setHeight(33);
         coin = new Texture(Gdx.files.internal("coin-icon.png"));
     }
 
 
     public void draw(Batch batch, float alpha) {
-        money = main.nonStaticGetMoney();
-        label.setText("   /h " + per + " " + money);
+        multipliers = MoneyButton.getMultipliers();
+        int incomePerMin = 0;
+        if(index < 5) {
+            incomePerMin = (int)(multipliers[index] * 60);
+        } else {
+            for(int i=0; i<4; i++) {
+                incomePerMin += (int)(multipliers[i] * 60);
+            }
+        }
+        label.setText("   /min " + per + " " + incomePerMin);
         label.draw(batch, alpha);
         batch.draw(coin, label.getX(), label.getY() + 2, 30, 30);
     }

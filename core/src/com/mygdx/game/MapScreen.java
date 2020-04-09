@@ -15,9 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -37,6 +35,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private ReturnButton returnButton;
     private Meter meter;
     private MoneyLabel moneyLabel;
+    private IncomeLabel incomeLabel;
 
     private Vector2 dragNew, dragOld;
 
@@ -53,6 +52,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         moneyLabel = new MoneyLabel(main);
+        incomeLabel = new IncomeLabel(main, "total", 5);
         meter = new Meter(main);
         createFarms();
         createCoins();
@@ -62,7 +62,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         map.setPosition(0, 0);
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
-                //System.out.println("zoom " + initialDistance + ", " + distance);
                 ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
                 camera.update();
             }
@@ -75,6 +74,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private void addActorsToStage() {
         stageUI.addActor(moneyLabel);
+        stageUI.addActor(incomeLabel);
         stageUI.addActor(returnButton);
 
         stage.addActor(map);

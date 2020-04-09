@@ -46,7 +46,7 @@ public class FarmScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
-        incomeLabel = new IncomeLabel(main, "farm");
+        setIncomeLabel();
 
         createButtons();
         addActors();
@@ -58,6 +58,9 @@ public class FarmScreen implements Screen {
         }
     }
 
+    private void setIncomeLabel() {
+        incomeLabel = new IncomeLabel(main, "farm", farmIndex);
+    }
 
     private void addActors() {
         for(int i=0; i<upgradeAmount; i++) {
