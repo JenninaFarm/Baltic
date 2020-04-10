@@ -29,8 +29,8 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		Locale locale = new Locale("en", "UK");
-		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
+		Locale locale = new Locale("fi", "FI");
+		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), "UTF-8");
 		Save.loadVariables();
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);

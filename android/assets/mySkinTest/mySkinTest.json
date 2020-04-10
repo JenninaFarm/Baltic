@@ -3,11 +3,11 @@
 	"Baloo2-Regular20": {
 		"file": "Baloo2-Regular20.fnt"
 	},
+	"baloo2regular": {
+		"file": "baloo2regular.fnt"
+	},
 	"font": {
 		"file": "font-export.fnt"
-	},
-	"title": {
-		"file": "font-title-export.fnt"
 	}
 },
 "com.badlogic.gdx.graphics.Color": {
@@ -161,10 +161,6 @@
 	"default": {
 		"font": "font",
 		"fontColor": "black"
-	},
-	"title": {
-		"font": "title",
-		"fontColor": "black"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
@@ -222,7 +218,7 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
 	"default": {
-		"font": "Baloo2-Regular20",
+		"font": "baloo2regular",
 		"fontColor": "black",
 		"up": "round-green",
 		"down": "round-dark-green",
@@ -238,18 +234,11 @@
 		"over": "round-light-gray",
 		"checked": "round-dark-gray",
 		"checkedOver": "round-light-gray"
-	},
-	"special": {
-		"font": "title",
-		"fontColor": "black",
-		"up": "round-gray",
-		"down": "round-dark-gray",
-		"over": "round-light-gray"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
 	"default": {
-		"font": "font",
+		"font": "baloo2regular",
 		"fontColor": "white",
 		"background": "round-dark-gray",
 		"cursor": "cursor",
