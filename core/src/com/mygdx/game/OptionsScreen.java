@@ -18,7 +18,7 @@ public class OptionsScreen implements Screen {
     private Stage stage;
     private StartmenuBackground background;
 
-    private ArrayList<OptionsButton> optionsButtons = new ArrayList<OptionsButton>();
+    private ArrayList<OptionsButton> optionsButtons = new ArrayList<>();
     private int buttonAmount = 5;
     private ReturnButton returnButton;
 
