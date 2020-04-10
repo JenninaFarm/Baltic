@@ -43,10 +43,11 @@ public class OptionsButton extends Actor {
                 } else if (index == 1) {
 
                 } else if (index == 2) {
-                    main.createBundle(new Locale("fi", "FI"));
+                    main.changeLocale(new Locale("fi", "FI"));
+                    Main.callCreate(main);
                 } else if(index == 3) {
-                    main.createBundle(new Locale("en", "GB"));
-
+                    main.changeLocale(new Locale("en", "GB"));
+                    Main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();
                     Save.saveVariables();

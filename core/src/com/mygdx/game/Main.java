@@ -25,12 +25,13 @@ public class Main extends Game {
 
 	private Skin mySkin;
 	private I18NBundle myBundle;
+	private Locale locale = new Locale("en", "GB");
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-		createBundle(new Locale("en", "GB"));
+		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
 		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
 		Save.loadVariables();
@@ -49,8 +50,8 @@ public class Main extends Game {
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
-	public void createBundle(Locale locale) {
-		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
+	public void changeLocale(Locale l) {
+		locale = l;
 	}
 
 	public void switchScreen(int x, int y) {
