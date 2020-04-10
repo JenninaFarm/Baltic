@@ -56,7 +56,7 @@ public class MoneyButton extends Actor {
                     MoveToAction moveAction = new MoveToAction();
 
                     moveAction.setPosition(300, 410);
-                    moveAction.setDuration(0.8f);
+                    moveAction.setDuration(0.5f);
 
                     MoneyButton.this.addAction(moveAction);
                 }
