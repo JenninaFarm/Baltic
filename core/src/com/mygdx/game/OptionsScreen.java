@@ -19,7 +19,7 @@ public class OptionsScreen implements Screen {
     private StartmenuBackground background;
 
     private ArrayList<OptionsButton> optionsButtons = new ArrayList<OptionsButton>();
-    private int buttonAmount = 3;
+    private int buttonAmount = 5;
     private ReturnButton returnButton;
 
 
@@ -40,9 +40,9 @@ public class OptionsScreen implements Screen {
 
     private void createButtons() {
         I18NBundle myBundle = main.getMyBundle();
-        optionsButtons.add(new OptionsButton(main, myBundle.get("options1"), 0));
-        optionsButtons.add(new OptionsButton(main, myBundle.get("options2"), 1));
-        optionsButtons.add(new OptionsButton(main, myBundle.get("options3"), 2));
+        for(int i=0; i<buttonAmount; i++) {
+            optionsButtons.add(new OptionsButton(main, myBundle.get("options" + i), i));
+        }
         returnButton = new ReturnButton(main, 1);
     }
 

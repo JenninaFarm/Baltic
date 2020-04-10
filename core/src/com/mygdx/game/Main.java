@@ -29,9 +29,12 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		Locale locale = new Locale("en", "GB");
-		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
+
+		createBundle(new Locale("en", "GB"));
+		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
 		Save.loadVariables();
+
 		mainMenuScreen = new MainMenuScreen(this);
 		mapScreen = new MapScreen(this);
 
@@ -39,14 +42,15 @@ public class Main extends Game {
 		for(int i=0; i<farmAmount; i++) {
 			farmScreens.add(new FarmScreen(this, i));
 		}
-
-		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
-
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);
 
 		setScreen(mainMenuScreen);
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
+	}
+
+	public void createBundle(Locale locale) {
+		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
 	}
 
 	public void switchScreen(int x, int y) {

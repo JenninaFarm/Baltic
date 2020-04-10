@@ -11,9 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+import java.util.Locale;
+
 public class OptionsButton extends Actor {
     private Main main;
-    private Button button;
+    private Button button1;
     private float width;
     private float height;
     private int index;
@@ -26,22 +28,26 @@ public class OptionsButton extends Actor {
         width = 200;
         height = 50;
 
-        button = new TextButton(label, mySkin);
-        button.setSize(width, height);
-        button.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
-        button.addListener(new InputListener() {
+        button1 = new TextButton(label, mySkin);
+        button1.setSize(width, height);
+        button1.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
+        button1.setDisabled(true);
+        button1.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             }
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
-                    System.out.println("to main");
-                    main.switchScreen(1, 0);
+
                 } else if (index == 1) {
-                    System.out.println("to map");
-                    main.switchScreen(2, 0);
+
                 } else if (index == 2) {
+                    main.createBundle(new Locale("fi", "FI"));
+                } else if(index == 3) {
+                    main.createBundle(new Locale("en", "GB"));
+
+                } else if (index == 4) {
                     Save.newGame();
                     Save.saveVariables();
                     Save.loadVariables();
@@ -54,7 +60,7 @@ public class OptionsButton extends Actor {
     }
 
     public Button getButton() {
-        return button;
+        return button1;
     }
 
     public void draw(Batch batch, float alpha) {
