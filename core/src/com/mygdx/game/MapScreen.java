@@ -27,6 +27,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Actor map;
     private Stage stage;
     private Stage stageUI;
+    private Stage stageInfo;
     private int actorAmount = 4;
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
@@ -47,6 +48,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
+        stageInfo = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
         research = new MapResearchButton(main, 680, 270);
@@ -83,8 +85,20 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
-            stage.addActor(coins.get(i));
         }
+        stage.addActor(coins.get(0));
+    }
+
+    public void addCoin(int index) {
+        stage.addActor(coins.get(index));
+    }
+
+    public void addInfoLabel(InfoLabel infoLabel) {
+        stageInfo.addActor(infoLabel);
+    }
+
+    public void clearInfoLabel() {
+        stageInfo.clear();
     }
 
     public static void setSavedMultipliers(float [] array) {
@@ -99,10 +113,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createFarms() {
-        farms.add(new MapButton(main, 150, 50, 0));
-        farms.add(new MapButton(main, 350, 190, 1));
-        farms.add(new MapButton(main, 620, 100, 2));
-        farms.add(new MapButton(main,570, 310, 3));
+        farms.add(new MapButton(main, this, 150, 50, 0));
+        farms.add(new MapButton(main, this, 350, 190, 1));
+        farms.add(new MapButton(main, this, 620, 100, 2));
+        farms.add(new MapButton(main, this,570, 310, 3));
     }
 
 
@@ -123,6 +137,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
+        stageInfo.draw();
     }
 
     private void handleInput() {
@@ -193,6 +208,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
+        stageInfo.dispose();
     }
 
     public Stage getStage() {
@@ -201,4 +217,5 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public Stage getStageUI() {
         return stageUI;
     }
+    public Stage getStageInfo() {return stageInfo;}
 }

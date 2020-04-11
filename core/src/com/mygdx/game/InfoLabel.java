@@ -25,7 +25,7 @@ public class InfoLabel extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
+        textArea.draw(batch, parentAlpha);
     }
 
 }
