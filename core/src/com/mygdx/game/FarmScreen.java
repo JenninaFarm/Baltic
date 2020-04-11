@@ -27,6 +27,7 @@ public class FarmScreen implements Screen {
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<>();
     private FarmWorker workerButton;
+    private WorkerLabel workerLabel;
     private int upgradeAmount = 19;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
@@ -48,6 +49,7 @@ public class FarmScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
+        workerLabel = new WorkerLabel(main, this);
         setIncomeLabel();
 
         createButtons();
@@ -72,6 +74,7 @@ public class FarmScreen implements Screen {
         stage.addActor(workerButton.getButton());
         stageUI.addActor(incomeLabel);
         stageUI.addActor(moneyLabel);
+        stageUI.addActor(workerLabel);
         stageUI.addActor(returnButton);
     }
 
@@ -120,6 +123,7 @@ public class FarmScreen implements Screen {
     public void addWorker() {
         if(workerAmount < 4) {
             workerAmount++;
+            workerLabel.setWorkerLabel(workerAmount);
         }
     }
 
