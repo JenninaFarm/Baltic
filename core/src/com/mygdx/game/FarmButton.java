@@ -25,6 +25,8 @@ public class FarmButton extends Actor {
 
     private int cost;
     private float multiplier;
+    private boolean researched = false;
+    private boolean readyToUpgrade = false;
     private boolean available;
     private boolean bought;
     private int balticSituation;
@@ -115,13 +117,32 @@ public class FarmButton extends Actor {
         });
     }
 
-    public void setAvailable() {
-        available = true;
-        if(!bought) {
+    public void setResearched() {
+        researched = true;
+        if(!bought && readyToUpgrade) {
             button1.setChecked(false);
             button1.setTouchable(Touchable.enabled);
+            available = true;
+            availableBooleans[farmIndex][buttonIndex] = true;
         }
-        availableBooleans[farmIndex][buttonIndex] = true;
+    }
+
+    public void setReadyToUpgrade() {
+        readyToUpgrade = true;
+        if(researched && !bought) {
+            button1.setChecked(false);
+            button1.setTouchable(Touchable.enabled);
+            available = true;
+            availableBooleans[farmIndex][buttonIndex] = true;
+        }
+    }
+
+    public void setUnavailable() {
+        available = false;
+        button1.getStyle().checked = button1.getStyle().checkedOver;
+        button1.setChecked(true);
+        button1.setTouchable(Touchable.disabled);
+        availableBooleans[farmIndex][buttonIndex] = false;
     }
 
     public Button getButton() {

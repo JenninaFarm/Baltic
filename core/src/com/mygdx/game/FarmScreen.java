@@ -18,6 +18,7 @@ public class FarmScreen implements Screen {
 
     private Main main;
     private int farmIndex;
+    private int workerAmount = 1;
     private SpriteBatch batch;
     private Stage stage;
     private Stage stageUI;
@@ -81,8 +82,8 @@ public class FarmScreen implements Screen {
     }
 
 
-    public void setAvailable(int index) {
-        farmButtons.get(index).setAvailable();
+    public void setResearched(int index) {
+        farmButtons.get(index).setResearched();
     }
 
 
@@ -128,11 +129,68 @@ public class FarmScreen implements Screen {
         batch.begin();
         batch.end();
 
+        setUpgradesAvailable();
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         stageInfo.draw();
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
+    }
+
+    public void setUpgradesAvailable() {
+        farmButtons.get(0).setReadyToUpgrade();
+        farmButtons.get(4).setReadyToUpgrade();
+
+        for(int i=0; i<3; i++) {
+            if(boughtArray[farmIndex][i] && workerAmount == i+1) {
+                farmButtons.get(i+1).setReadyToUpgrade();
+            }
+        }
+
+        if(workerAmount == 2) {
+            farmButtons.get(6).setReadyToUpgrade();
+            if(boughtArray[farmIndex][1]) {
+                farmButtons.get(9).setReadyToUpgrade();
+            }
+            for(int i=0; i<2; i++) {
+                if(boughtArray[farmIndex][i+6]) {
+                    farmButtons.get(i+7).setReadyToUpgrade();
+                }
+            }
+            if(boughtArray[farmIndex][9]) {
+                farmButtons.get(10).setReadyToUpgrade();
+            }
+            if(boughtArray[farmIndex][10]) {
+                farmButtons.get(11).setReadyToUpgrade();
+                farmButtons.get(13).setReadyToUpgrade();
+            }
+            if(boughtArray[farmIndex][13]) {
+                farmButtons.get(14).setReadyToUpgrade();
+                farmButtons.get(15).setReadyToUpgrade();
+            }
+        }
+
+        if(workerAmount == 3) {
+            if(boughtArray[farmIndex][4] && boughtArray[farmIndex][8]){
+                farmButtons.get(5).setReadyToUpgrade();
+            }
+            if(boughtArray[farmIndex][10]) {
+                farmButtons.get(12).setReadyToUpgrade();
+            }
+        }
+
+        if(workerAmount == 4) {
+            if(boughtArray[farmIndex][15]) {
+                farmButtons.get(17).setReadyToUpgrade();
+                farmButtons.get(18).setReadyToUpgrade();
+                if(boughtArray[farmIndex][17]) {
+                    farmButtons.get(18).setUnavailable();
+                } else if(boughtArray[farmIndex][18]) {
+                    farmButtons.get(17).setUnavailable();
+                }
+            }
+        }
     }
 
     public Stage getStage() {

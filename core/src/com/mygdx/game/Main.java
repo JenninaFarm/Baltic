@@ -108,9 +108,9 @@ public class Main extends Game {
 		farmScreens.get(index).clearStageInfo();
 	}
 
-	public void setAvailable(int index) {
+	public void setResearched(int index) {
 		for(int i=0; i<farmAmount; i++) {
-			farmScreens.get(i).setAvailable(index);
+			farmScreens.get(i).setResearched(index);
 		}
 	}
 

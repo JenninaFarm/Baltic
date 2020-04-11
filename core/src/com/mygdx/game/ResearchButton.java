@@ -67,7 +67,7 @@ public class ResearchButton extends Actor {
                 if(currentMoney >= cost && !bought && available) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
-                    main.setAvailable(index);
+                    main.setResearched(index);
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
                     button1.setDisabled(true);

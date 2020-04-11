@@ -30,7 +30,6 @@ public class ResearchScreen implements Screen {
     private Stage stage;
     private Stage stageUI;
     private Stage stageInfo;
-    //private static ArrayList<ResearchButton> researchButtons = new ArrayList<>();
     private static ResearchButton [] researchButtons = new ResearchButton [19];
     private static boolean [] booleans;
     private static int researchAmount = 19;
@@ -165,7 +164,6 @@ public class ResearchScreen implements Screen {
         if(booleans[15]) {
             researchButtons[17].setResearchAvailable();
             researchButtons[18].setResearchAvailable();
-          // TÄHÄN JOTAIN MITEN SAADAAN JOKO 17 TAI 18. EI VOI OSTAA MOLENPIA
         }
     }
 
