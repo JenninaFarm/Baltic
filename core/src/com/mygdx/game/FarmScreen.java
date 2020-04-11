@@ -25,7 +25,8 @@ public class FarmScreen implements Screen {
     private Stage stageInfo;
     private ReturnButton returnButton;
 
-    private ArrayList<FarmButton> farmButtons = new ArrayList<FarmButton>();
+    private ArrayList<FarmButton> farmButtons = new ArrayList<>();
+    private FarmWorker workerButton;
     private int upgradeAmount = 19;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
@@ -57,6 +58,7 @@ public class FarmScreen implements Screen {
         for(int i=0; i<upgradeAmount; i++) {
             farmButtons.add(new FarmButton(main, i, farmIndex, availableArray[farmIndex][i], boughtArray[farmIndex][i]));
         }
+        workerButton = new FarmWorker(main, this);
     }
 
     private void setIncomeLabel() {
@@ -67,6 +69,7 @@ public class FarmScreen implements Screen {
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
         }
+        stage.addActor(workerButton.getButton());
         stageUI.addActor(incomeLabel);
         stageUI.addActor(moneyLabel);
         stageUI.addActor(returnButton);
@@ -112,6 +115,16 @@ public class FarmScreen implements Screen {
 
     public static void setBoughtArray(boolean [][] arrayb) {
         boughtArray = arrayb;
+    }
+
+    public void addWorker() {
+        if(workerAmount < 4) {
+            workerAmount++;
+        }
+    }
+
+    public int getWorkerAmount() {
+        return workerAmount;
     }
 
     @Override
@@ -227,6 +240,7 @@ public class FarmScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        stageUI.dispose();
         stageInfo.dispose();
     }
 }
