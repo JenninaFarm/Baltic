@@ -18,7 +18,6 @@ public class FarmScreen implements Screen {
 
     private Main main;
     private int farmIndex;
-    private int workerAmount = 1;
     private SpriteBatch batch;
     private Stage stage;
     private Stage stageUI;
@@ -36,6 +35,7 @@ public class FarmScreen implements Screen {
 
     private static boolean [][] availableArray;
     private static boolean [][] boughtArray;
+    private static int [] workerAmount = new int[4];
 
     public FarmScreen(Main m, int i) {
         main = m;
@@ -112,6 +112,10 @@ public class FarmScreen implements Screen {
         camera.position.y = MathUtils.clamp(camera.position.y, -400, 250);
     }
 
+    public static int[] getWorkerAmountArray() {
+        return workerAmount;
+    }
+
     public static void setAvailableArray(boolean [][] array) {
         availableArray = array;
     }
@@ -120,15 +124,19 @@ public class FarmScreen implements Screen {
         boughtArray = arrayb;
     }
 
+    public static void setWorkerAmountArray(int [] array) { workerAmount = array;}
+
     public void addWorker() {
-        if(workerAmount < 4) {
-            workerAmount++;
-            workerLabel.setWorkerLabel(workerAmount);
+        if(workerAmount[farmIndex] < 4) {
+            workerAmount[farmIndex]++;
+            workerLabel.setWorkerLabel(workerAmount[farmIndex]);
+            Save.saveVariables();
+            Save.loadVariables();
         }
     }
 
     public int getWorkerAmount() {
-        return workerAmount;
+        return workerAmount[farmIndex];
     }
 
     @Override
@@ -160,12 +168,12 @@ public class FarmScreen implements Screen {
         farmButtons.get(4).setReadyToUpgrade();
 
         for(int i=0; i<3; i++) {
-            if(boughtArray[farmIndex][i] && workerAmount == i+1) {
+            if(boughtArray[farmIndex][i] && workerAmount[farmIndex] == i) {
                 farmButtons.get(i+1).setReadyToUpgrade();
             }
         }
 
-        if(workerAmount == 2) {
+        if(workerAmount[farmIndex] == 1) {
             farmButtons.get(6).setReadyToUpgrade();
             if(boughtArray[farmIndex][1]) {
                 farmButtons.get(9).setReadyToUpgrade();
@@ -188,7 +196,7 @@ public class FarmScreen implements Screen {
             }
         }
 
-        if(workerAmount == 3) {
+        if(workerAmount[farmIndex] == 2) {
             if(boughtArray[farmIndex][4] && boughtArray[farmIndex][8]){
                 farmButtons.get(5).setReadyToUpgrade();
             }
@@ -197,7 +205,7 @@ public class FarmScreen implements Screen {
             }
         }
 
-        if(workerAmount == 4) {
+        if(workerAmount[farmIndex] == 3) {
             if(boughtArray[farmIndex][15]) {
                 farmButtons.get(17).setReadyToUpgrade();
                 farmButtons.get(18).setReadyToUpgrade();

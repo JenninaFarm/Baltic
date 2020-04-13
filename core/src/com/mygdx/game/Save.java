@@ -12,6 +12,7 @@ public class Save {
     private static boolean [] farmLocks = MapButton.getFarmLocks();
     private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
     private static boolean [] coinAdded = MapScreen.getCoinAdded();
+    private static int [] workerAmount = FarmScreen.getWorkerAmountArray();
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
 
@@ -53,6 +54,10 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("coinAdded" + i, coinAdded[i]);
+        }
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putInteger("workerAmount" + i, workerAmount[i]);
         }
 
         prefs.flush();
@@ -101,6 +106,11 @@ public class Save {
             coinAdded[i] = prefs.getBoolean("coinAdded" + i);
         }
         MapScreen.setCoinAdded(coinAdded);
+
+        for(int i=0; i<farmAmount; i++) {
+            workerAmount[i] = prefs.getInteger("workerAmount" + i);
+        }
+        FarmScreen.setWorkerAmountArray(workerAmount);
     }
 
     public static void newGame() {
@@ -161,5 +171,12 @@ public class Save {
             coinAdded[i] = prefs.getBoolean("coinAdded" + i);
         }
         MapScreen.setCoinAdded(coinAdded);
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putInteger("workerAmount" + i, 1);
+            prefs.flush();
+            workerAmount[i] = prefs.getInteger("workerAmount" + i);
+        }
+        FarmScreen.setWorkerAmountArray(workerAmount);
     }
 }

@@ -25,7 +25,7 @@ public class WorkerLabel extends Actor {
     }
 
     public void setWorkerLabel(int workerAmount) {
-        workerLabel.setText(Integer.toString(workerAmount));
+        workerLabel.setText(Integer.toString(workerAmount + 1));
     }
 
     public void draw(Batch batch, float alpha) {

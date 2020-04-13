@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class FarmWorker extends Actor {
 
     private Main main;
-    private FarmScreen farmScreen;
     private Button button1;
     private int cost;
 
@@ -36,18 +34,23 @@ public class FarmWorker extends Actor {
         button1.setSize(200, 50);
         button1.setPosition(getX(), getY());
         button1.setDisabled(true);
+        int workerAmount = farmScreen.getWorkerAmount();
+        if (workerAmount >= 3) {
+            button1.setChecked(true);
+            button1.getStyle().down = button1.getStyle().checked;
+        }
 
         button1.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
                 int workerAmount = farmScreen.getWorkerAmount();
-                if (currentMoney >= cost && workerAmount < 4) {
+                if (currentMoney >= cost && workerAmount < 3) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
                     farmScreen.addWorker();
                     button1.setChecked(false);
-                    //Save.saveVariables();
-                    //Save.loadVariables();
+                    Save.saveVariables();
+                    Save.loadVariables();
                 } else {
                     System.out.println("Not enough money!");
                     System.out.println("cost: " + cost);
@@ -55,7 +58,7 @@ public class FarmWorker extends Actor {
                 }
 
                 workerAmount = farmScreen.getWorkerAmount();
-                if (workerAmount >= 4) {
+                if (workerAmount >= 3) {
                     button1.setChecked(true);
                     button1.getStyle().down = button1.getStyle().checked;
                 }
