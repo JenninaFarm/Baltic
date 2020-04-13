@@ -55,7 +55,6 @@ public class ResearchScreen implements Screen {
     }
 
     public static void setBooleanArray(boolean [] array) {
-
         booleans = array;
     }
     private void createButtons() {

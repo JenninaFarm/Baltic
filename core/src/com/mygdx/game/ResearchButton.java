@@ -16,8 +16,6 @@ public class ResearchButton extends Actor {
 
     private Main main;
     private Button button1;
-    private float width;
-    private float height;
     private int index;
     private int cost;
     private boolean bought;
@@ -37,8 +35,8 @@ public class ResearchButton extends Actor {
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
 
-        width = 200;
-        height = 50;
+        float width = 200;
+        float height = 50;
 
         button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);

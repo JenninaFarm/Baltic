@@ -34,8 +34,8 @@ public class FarmButton extends Actor {
     private InfoLabel infoLabel;
 
 
-    private static boolean [][] availableBooleans = new boolean[5][19];
-    private static boolean [][] boughtBooleans = new boolean[5][19];
+    private static boolean [][] availableBooleans = new boolean[4][19];
+    private static boolean [][] boughtBooleans = new boolean[4][19];
 
     public FarmButton(Main m, final int buttonI, int farmI, boolean a, boolean b) {
         main = m;

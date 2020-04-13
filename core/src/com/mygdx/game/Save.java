@@ -9,10 +9,11 @@ public class Save {
     private static boolean [][] farmAvailable = FarmButton.getAvailableBooleans();
     private static boolean [][] farmBought = FarmButton.getBoughtBooleans();
     private static float [] multipliers = MoneyButton.getMultipliers();
+    private static boolean [] farmLocks = MapButton.getFarmLocks();
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
 
-    private static int farmAmount = 5;
+    private static int farmAmount = 4;
     private static int researchAmount = 19;
 
     public static void saveVariables() {
@@ -37,6 +38,10 @@ public class Save {
             for(int j=0; j<researchAmount; j++) {
                 prefs.putBoolean("farmbought" + i + j, farmBought[i][j]);
             }
+        }
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putBoolean("farmlock" + i, farmLocks[i]);
         }
 
         prefs.flush();
@@ -69,6 +74,11 @@ public class Save {
             }
         }
         FarmScreen.setBoughtArray(farmBought);
+
+        for(int i=0; i<farmAmount; i++) {
+            farmLocks[i] = prefs.getBoolean("farmlock" + i);
+        }
+        MapScreen.setFarmLocksArray(farmLocks);
     }
 
     public static void newGame() {
@@ -108,5 +118,12 @@ public class Save {
             }
         }
         FarmScreen.setBoughtArray(farmBought);
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putBoolean("farmlock" + i, false);
+            prefs.flush();
+            farmLocks[i] = prefs.getBoolean("farmlock" + i);
+        }
+        MapScreen.setFarmLocksArray(farmLocks);
     }
 }

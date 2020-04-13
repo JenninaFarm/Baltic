@@ -42,6 +42,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Camera camera;
 
+    private static boolean [] farmLocks;
+
     public MapScreen(Main m) {
         main = m;
         batch = main.getBatch();
@@ -104,6 +106,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public static void setSavedMultipliers(float [] array) {
         savedMultipliers = array;
     }
+    public static void setFarmLocksArray(boolean [] array) {
+        farmLocks = array;
+    }
 
     private void createCoins() {
         coins.add(new MoneyButton(main, 197, 82, 0, savedMultipliers[0]));
@@ -113,10 +118,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createFarms() {
-        farms.add(new MapButton(main, this, 150, 50, 0));
-        farms.add(new MapButton(main, this, 350, 190, 1));
-        farms.add(new MapButton(main, this, 620, 100, 2));
-        farms.add(new MapButton(main, this,570, 310, 3));
+        farms.add(new MapButton(main, this, 150, 50, 0, farmLocks[0]));
+        farms.add(new MapButton(main, this, 350, 190, 1, farmLocks[1]));
+        farms.add(new MapButton(main, this, 620, 100, 2, farmLocks[2]));
+        farms.add(new MapButton(main, this,570, 310, 3, farmLocks[3]));
     }
 
 
