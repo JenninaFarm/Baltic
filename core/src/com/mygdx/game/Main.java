@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class Main extends Game {
+	//pitää teksiä tälle jotain. Tällä hetkellä muuttuu joka kerta kun avaa sovelluksen.
+	final int STARTING_TIME = Utils.getCurrentTimeInSeconds();
+
 	private SpriteBatch batch;
 	private MainMenuScreen mainMenuScreen;
 	private MapScreen mapScreen;

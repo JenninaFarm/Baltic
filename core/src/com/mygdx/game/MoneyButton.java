@@ -15,14 +15,15 @@ public class MoneyButton extends Actor {
     private float width;
     private float height;
 
-    private int timeLastClicked;
+    //private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
     private int index;
     private int originalX;
     private int originalY;
 
-    private static float [] multipliers = new float[5];
+    private static float [] multipliers = new float[4];
+    private static int [] lastTimeClicked = new int[4];
 
     public MoneyButton(Main m, final int x, final int y, int i, float mp) {
 
@@ -39,18 +40,19 @@ public class MoneyButton extends Actor {
         setWidth(width);
         setHeight(height);
         setBounds(getX(), getY(), getWidth(), getHeight());
-        timeLastClicked = Utils.getCurrentTimeInSeconds();
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
-                if((timeWhenClickedInSec - timeLastClicked) >= 5) {
+                if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
                     countMoney();
 
                     System.out.println("money collected:" + money);
                     main.setMoney(main.getMoney() + money);
                     System.out.println("balance now:" + main.getMoney());
-                    timeLastClicked = timeWhenClickedInSec;
+                    lastTimeClicked[index] = timeWhenClickedInSec;
+                    Save.saveVariables();
+                    Save.loadVariables();
 
                     MoveToAction moveAction = new MoveToAction();
 
@@ -65,7 +67,7 @@ public class MoneyButton extends Actor {
     }
 
     private void countMoney() {
-        int timePassedInSec = timeWhenClickedInSec - timeLastClicked;
+        int timePassedInSec = timeWhenClickedInSec - lastTimeClicked[index];
         System.out.println("timePassed: " + timePassedInSec);
 
         money = (int)(timePassedInSec * multipliers[index]);
@@ -74,7 +76,7 @@ public class MoneyButton extends Actor {
     public void draw(Batch batch, float alpha) {
 
         int currentTime = Utils.getCurrentTimeInSeconds();
-        int timePassedInSec = currentTime - timeLastClicked;
+        int timePassedInSec = currentTime - lastTimeClicked[index];
         int potentialMoney = (int)(timePassedInSec * multipliers[index]);
         if(potentialMoney > 5 * multipliers[index] || getX() != 300) {
             batch.draw(button, this.getX(), this.getY(), width, height);
@@ -91,6 +93,17 @@ public class MoneyButton extends Actor {
     public static void addToMultiplier(float addedmp, int farmindex) {
         multipliers[farmindex] += addedmp;
         System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+    }
+
+    public static int[] getLastTimeClicked() {
+        return lastTimeClicked;
+    }
+    public static void setLastTimeClicked(int [] array) {
+        lastTimeClicked = array;
+    }
+    //called when new coin is added to stage. It set's the lastTimeClicked to active mode;
+    public void setClicked() {
+        lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();
     }
 
     public static float[] getMultipliers() {

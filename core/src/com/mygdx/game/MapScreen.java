@@ -43,6 +43,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Camera camera;
 
     private static boolean [] farmLocks;
+    private static boolean [] coinAdded = new boolean[4];
 
     public MapScreen(Main m) {
         main = m;
@@ -72,6 +73,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         });
 
         addActorsToStage();
+        addCoinsToStage();
 
         ((OrthographicCamera)camera).zoom += 27f;
     }
@@ -91,8 +93,23 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(coins.get(0));
     }
 
+    private void addCoinsToStage() {
+        coinAdded[0] = true;
+        for(int i=0; i<actorAmount; i++) {
+            if(coinAdded[i]) {
+                stage.addActor(coins.get(i));
+                coins.get(i).setClicked();
+            }
+        }
+    }
+
     public void addCoin(int index) {
         stage.addActor(coins.get(index));
+        coinAdded[index] = true;
+        coins.get(index).setClicked();
+
+        Save.saveVariables();
+        Save.loadVariables();
     }
 
     public void addInfoLabel(InfoLabel infoLabel) {
@@ -103,11 +120,17 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stageInfo.clear();
     }
 
+    public static boolean [] getCoinAdded() {
+        return coinAdded;
+    }
     public static void setSavedMultipliers(float [] array) {
         savedMultipliers = array;
     }
     public static void setFarmLocksArray(boolean [] array) {
         farmLocks = array;
+    }
+    public static void setCoinAdded(boolean [] array) {
+        coinAdded = array;
     }
 
     private void createCoins() {

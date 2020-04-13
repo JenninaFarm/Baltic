@@ -10,6 +10,8 @@ public class Save {
     private static boolean [][] farmBought = FarmButton.getBoughtBooleans();
     private static float [] multipliers = MoneyButton.getMultipliers();
     private static boolean [] farmLocks = MapButton.getFarmLocks();
+    private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
+    private static boolean [] coinAdded = MapScreen.getCoinAdded();
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
 
@@ -42,6 +44,15 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("farmlock" + i, farmLocks[i]);
+        }
+
+        //not working
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putInteger("lastTimeClicked" + i, lastTimeClicked[i]);
+        }
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putBoolean("coinAdded" + i, coinAdded[i]);
         }
 
         prefs.flush();
@@ -79,6 +90,17 @@ public class Save {
             farmLocks[i] = prefs.getBoolean("farmlock" + i);
         }
         MapScreen.setFarmLocksArray(farmLocks);
+
+        //not working
+        for(int i=0; i<farmAmount; i++) {
+            lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
+        }
+        MoneyButton.setLastTimeClicked(lastTimeClicked);
+
+        for(int i=0; i<farmAmount; i++) {
+            coinAdded[i] = prefs.getBoolean("coinAdded" + i);
+        }
+        MapScreen.setCoinAdded(coinAdded);
     }
 
     public static void newGame() {
@@ -125,5 +147,19 @@ public class Save {
             farmLocks[i] = prefs.getBoolean("farmlock" + i);
         }
         MapScreen.setFarmLocksArray(farmLocks);
+
+        //not tested
+        for(int i=0; i<farmAmount; i++) {
+            prefs.remove("lastTimeClicked" + i);
+            prefs.flush();
+        }
+        //pitäskö tähän laittaa set???
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putBoolean("coinAdded" + i, false);
+            prefs.flush();
+            coinAdded[i] = prefs.getBoolean("coinAdded" + i);
+        }
+        MapScreen.setCoinAdded(coinAdded);
     }
 }
