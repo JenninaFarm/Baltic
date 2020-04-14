@@ -37,6 +37,8 @@ public class FarmScreen implements Screen {
     private static boolean [][] boughtArray;
     private static int [] workerAmount = new int[4];
 
+    private Tutorial [] tutorial_4_Actors = new Tutorial[6];
+
     public FarmScreen(Main m, int i) {
         main = m;
         farmIndex = i;
@@ -51,6 +53,14 @@ public class FarmScreen implements Screen {
         moneyLabel = new MoneyLabel(main);
         workerLabel = new WorkerLabel(main, this);
         setIncomeLabel();
+
+        if(Tutorial.tutorial_4) {
+            Tutorial.tutorial_4_Stages[0] = true;
+            for(int j=0;j<5;j++) {
+                tutorial_4_Actors[j] = new Tutorial(4, j);
+            }
+            stageUI.addActor(tutorial_4_Actors[0]);
+        }
 
         createButtons();
         addActors();
@@ -154,6 +164,8 @@ public class FarmScreen implements Screen {
         batch.begin();
         batch.end();
 
+        manageTutorial_4();
+
         setUpgradesAvailable();
 
         stage.act(Gdx.graphics.getDeltaTime());
@@ -161,6 +173,20 @@ public class FarmScreen implements Screen {
         stageInfo.draw();
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
+    }
+
+    private void manageTutorial_4() {
+
+        for(int i=0; i<5; i++) {
+            if(Tutorial.tutorial_4_Stages[i] && Tutorial.tutorial_4) {
+                stageUI.addActor(tutorial_4_Actors[i]);
+            }
+        }
+        if(!Tutorial.tutorial_4) {
+            for(int j=0; j<5; j++) {
+                tutorial_4_Actors[j].setVisible(false);
+            }
+        }
     }
 
     public void setUpgradesAvailable() {

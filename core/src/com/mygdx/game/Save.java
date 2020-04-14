@@ -23,6 +23,8 @@ public class Save {
 
         prefs.putInteger("money", Main.getMoney());
 
+        //prefs.putBoolean("tutorial", Tutorial.tutorial);
+
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
         }
@@ -66,6 +68,8 @@ public class Save {
     public static void loadVariables() {
 
         Main.setMoney(prefs.getInteger("money", 600000));
+
+        //Tutorial.tutorial = prefs.getBoolean("tutorial");
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
