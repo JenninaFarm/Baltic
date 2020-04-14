@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -32,11 +33,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
     public static float [] savedMultipliers;
+    private Tutorial [] tutorialActors = new Tutorial[5];
     private MapResearchButton research;
     private ReturnButton returnButton;
     private Meter meter;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
+    private int tutorialIndex;
 
     private Vector2 dragNew, dragOld;
 
@@ -61,6 +64,18 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         meter = new Meter(main);
         createFarms();
         createCoins();
+
+        if(Tutorial.tutorial) {
+            Tutorial.tutorialStages[0] = true;
+            for(int i=0;i<5;i++) {
+                tutorialActors[i] = new Tutorial(i);
+            }
+            for(int i=0;i<5;i++) {
+                if(Tutorial.tutorialStages[i]) {
+                    stageUI.addActor(tutorialActors[i]);
+                }
+            }
+        }
 
         map = new MapBackground();
         map.setSize(800, 450);
