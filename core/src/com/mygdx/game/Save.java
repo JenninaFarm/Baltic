@@ -13,6 +13,7 @@ public class Save {
     private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
     private static boolean [] coinAdded = MapScreen.getCoinAdded();
     private static int [] workerAmount = FarmScreen.getWorkerAmountArray();
+    private static int [] maxAmount = MoneyButton.getMaxAmount();
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
 
@@ -58,6 +59,10 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("workerAmount" + i, workerAmount[i]);
+        }
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putInteger("maxAmount" + i, maxAmount[i]);
         }
 
         prefs.flush();
@@ -112,6 +117,11 @@ public class Save {
             workerAmount[i] = prefs.getInteger("workerAmount" + i);
         }
         FarmScreen.setWorkerAmountArray(workerAmount);
+
+        for(int i=0; i<farmAmount; i++) {
+            maxAmount[i] = prefs.getInteger("maxAmount" + i);
+        }
+        MoneyButton.setMaxAmount(maxAmount);
     }
 
     public static void newGame() {
@@ -183,6 +193,13 @@ public class Save {
             workerAmount[i] = prefs.getInteger("workerAmount" + i);
         }
         FarmScreen.setWorkerAmountArray(workerAmount);
+
+        for(int i=0; i<farmAmount; i++) {
+            prefs.putInteger("maxAmount" + i, 500);
+            prefs.flush();
+            maxAmount[i] = prefs.getInteger("maxAmount" + i);
+        }
+        MoneyButton.setMaxAmount(maxAmount);
     }
 
     public static void saveStartingTime() {

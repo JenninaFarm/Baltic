@@ -18,8 +18,6 @@ public class FarmButton extends Actor {
     private Main main;
     private Button button1;
 
-    private float width;
-    private float height;
     private int buttonIndex;
     private int farmIndex;
 
@@ -51,8 +49,8 @@ public class FarmButton extends Actor {
 
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
-        width = 200;
-        height = 50;
+        float width = 200;
+        float height = 50;
 
         setX(800/2f - width/2f);
         setY(380 - height/2f - buttonIndex*height);
@@ -91,6 +89,7 @@ public class FarmButton extends Actor {
                     main.setMoney(currentMoney-cost);
                     main.addBalticSituation(balticSituation);
                     MoneyButton.addToMultiplier(multiplier, farmIndex);
+                    MoneyButton.addToMaxAmount(cost/2, farmIndex);
                     boughtBooleans[farmIndex][buttonIndex] =  true;
                     Save.saveVariables();
                     Save.loadVariables();

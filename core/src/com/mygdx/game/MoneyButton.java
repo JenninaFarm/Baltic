@@ -23,6 +23,7 @@ public class MoneyButton extends Actor {
 
     private static float [] multipliers = new float[4];
     private static int [] lastTimeClicked = new int[4];
+    private static int [] maxAmount = {500, 500, 500, 500};
 
     public MoneyButton(Main m, final int x, final int y, int i, float mp) {
 
@@ -65,12 +66,16 @@ public class MoneyButton extends Actor {
         });
     }
 
-    private void countMoney() {
-        int timePassedInSec = timeWhenClickedInSec - lastTimeClicked[index];
-        System.out.println("timePassed: " + timePassedInSec);
-        System.out.println("lastTimeClicked: " + index + lastTimeClicked[index]);
+    public static int[] getMaxAmount() {
+        return maxAmount;
+    }
 
-        money = (int)(timePassedInSec * multipliers[index]);
+    public static void setMaxAmount(int [] array) {
+        maxAmount = array;
+    }
+
+    public static void addToMaxAmount(int amount, int index) {
+        maxAmount[index] += amount;
     }
 
     public void draw(Batch batch, float alpha) {
@@ -94,6 +99,19 @@ public class MoneyButton extends Actor {
     public static void addToMultiplier(float addedmp, int farmindex) {
         multipliers[farmindex] += addedmp;
         System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+    }
+
+    private void countMoney() {
+        int timePassedInSec = timeWhenClickedInSec - lastTimeClicked[index];
+        System.out.println("timePassed: " + timePassedInSec);
+        System.out.println("lastTimeClicked: " + index + lastTimeClicked[index]);
+
+        int possibleAmount = (int)(timePassedInSec * multipliers[index]);
+        if(possibleAmount > maxAmount[index]) {
+            money = maxAmount[index];
+        } else {
+            money = (int)(timePassedInSec * multipliers[index]);
+        }
     }
 
     public static int[] getLastTimeClicked() {
