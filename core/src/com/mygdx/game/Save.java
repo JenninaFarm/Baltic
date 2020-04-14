@@ -47,9 +47,9 @@ public class Save {
             prefs.putBoolean("farmlock" + i, farmLocks[i]);
         }
 
-        //not working
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("lastTimeClicked" + i, lastTimeClicked[i]);
+            System.out.println("lastTimeClicked saved: " + i + prefs.getInteger("lastTimeClicked" + i));
         }
 
         for(int i=0; i<farmAmount; i++) {
@@ -67,7 +67,6 @@ public class Save {
 
         Main.setMoney(prefs.getInteger("money", 600000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
-        System.out.println(prefs.getInteger("startingTime"));
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
@@ -98,9 +97,9 @@ public class Save {
         }
         MapScreen.setFarmLocksArray(farmLocks);
 
-        //not working
         for(int i=0; i<farmAmount; i++) {
             lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
+            System.out.println("lastTimeClicked loadVariables: " + i + prefs.getInteger("lastTimeClicked" + i));
         }
         MoneyButton.setLastTimeClicked(lastTimeClicked);
 
@@ -164,12 +163,12 @@ public class Save {
         }
         MapScreen.setFarmLocksArray(farmLocks);
 
-        //not tested
         for(int i=0; i<farmAmount; i++) {
-            prefs.remove("lastTimeClicked" + i);
+            prefs.putInteger("lastTimeClicked" + i, Utils.getCurrentTimeInSeconds());
             prefs.flush();
+            lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
         }
-        //pitäskö tähän laittaa set???
+        MoneyButton.setLastTimeClicked(lastTimeClicked);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("coinAdded" + i, false);

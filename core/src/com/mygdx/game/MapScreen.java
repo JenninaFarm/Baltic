@@ -98,7 +98,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             if(coinAdded[i]) {
                 stage.addActor(coins.get(i));
-                coins.get(i).setClicked();
+                //coins.get(i).setClicked();
             }
         }
     }

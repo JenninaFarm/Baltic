@@ -8,13 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class WorkerLabel extends Actor {
 
-    private Main main;
-    private FarmScreen farmScreen;
     private TextField workerLabel;
 
-    public WorkerLabel(Main m, FarmScreen fs) {
-        main = m;
-        farmScreen = fs;
+    public WorkerLabel(Main main, FarmScreen farmScreen) {
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
         workerLabel = new TextField(Integer.toString(farmScreen.getWorkerAmount()), mySkin);

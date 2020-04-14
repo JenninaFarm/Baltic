@@ -15,7 +15,6 @@ public class MoneyButton extends Actor {
     private float width;
     private float height;
 
-    //private int timeLastClicked;
     private int timeWhenClickedInSec;
     private int money;
     private int index;
@@ -48,8 +47,8 @@ public class MoneyButton extends Actor {
                     countMoney();
 
                     System.out.println("money collected:" + money);
-                    main.setMoney(main.getMoney() + money);
-                    System.out.println("balance now:" + main.getMoney());
+                    main.setMoney(main.nonStaticGetMoney() + money);
+                    System.out.println("balance now:" + main.nonStaticGetMoney());
                     lastTimeClicked[index] = timeWhenClickedInSec;
                     Save.saveVariables();
                     Save.loadVariables();
@@ -69,6 +68,7 @@ public class MoneyButton extends Actor {
     private void countMoney() {
         int timePassedInSec = timeWhenClickedInSec - lastTimeClicked[index];
         System.out.println("timePassed: " + timePassedInSec);
+        System.out.println("lastTimeClicked: " + index + lastTimeClicked[index]);
 
         money = (int)(timePassedInSec * multipliers[index]);
     }
@@ -81,6 +81,7 @@ public class MoneyButton extends Actor {
         if(potentialMoney > 5 * multipliers[index] || getX() != 300) {
             batch.draw(button, this.getX(), this.getY(), width, height);
 
+            //when coin is att 300, 410 location, then it comes to back it's original location
             if(getX() == 300 && getY() == 410) {
                 MoveToAction moveToAction = new MoveToAction();
                 moveToAction.setPosition(originalX, originalY);
@@ -98,9 +99,11 @@ public class MoneyButton extends Actor {
     public static int[] getLastTimeClicked() {
         return lastTimeClicked;
     }
+
     public static void setLastTimeClicked(int [] array) {
         lastTimeClicked = array;
     }
+
     //called when new coin is added to stage. It set's the lastTimeClicked to active mode;
     public void setClicked() {
         lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();

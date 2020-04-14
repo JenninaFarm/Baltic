@@ -120,7 +120,7 @@ public class Main extends Game {
 
 		Save.loadVariables();
 
-		//Save starting time for the game
+		//Save starting time for the game only when you begin a new game
 		if(!gameBegan) {
 			System.out.println("in !gameBegan if statement");
 			startingTime = Utils.getCurrentTimeInSeconds();
