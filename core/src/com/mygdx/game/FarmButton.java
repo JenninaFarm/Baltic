@@ -23,24 +23,19 @@ public class FarmButton extends Actor {
 
     private int cost;
     private float multiplier;
-    private boolean researched = false;
-    private boolean readyToUpgrade = false;
     private boolean available;
-    private boolean bought;
     private int balticSituation;
 
     private InfoLabel infoLabel;
 
 
-    private static boolean [][] availableBooleans = new boolean[4][19];
-    private static boolean [][] boughtBooleans = new boolean[4][19];
+    private static boolean [][] bought = new boolean[4][19];
+    private static boolean [] researched = new boolean[19];
 
-    public FarmButton(Main m, final int buttonI, int farmI, boolean a, boolean b) {
+    public FarmButton(Main m, final int buttonI, int farmI) {
         main = m;
         buttonIndex = buttonI;
         farmIndex = farmI;
-        available = a;
-        bought = b;
 
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + buttonIndex)) / 2;
@@ -59,7 +54,7 @@ public class FarmButton extends Actor {
         button1.setSize(width, height);
         button1.setPosition(getX(), getY());
 
-        if(bought) {
+        if(bought[farmIndex][buttonIndex]) {
             button1.getStyle().checked = button1.getStyle().over;
             button1.setChecked(true);
             button1.setDisabled(true);
@@ -80,17 +75,20 @@ public class FarmButton extends Actor {
                 } else {
                     button1.setDisabled(false);
                 }
-                if(available && currentMoney >= cost && !bought) {
+                if(available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
                     System.out.println("bought");
-                    bought = true;
+                    bought[farmIndex][buttonIndex] = true;
+                    //set button style
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
                     button1.setDisabled(true);
+                    //set new amount of money and balticSituation
                     main.setMoney(currentMoney-cost);
                     main.addBalticSituation(balticSituation);
+                    //set
                     MoneyButton.addToMultiplier(multiplier, farmIndex);
                     MoneyButton.addToMaxAmount(cost/2, farmIndex);
-                    boughtBooleans[farmIndex][buttonIndex] =  true;
+                    //save and load
                     Save.saveVariables();
                     Save.loadVariables();
                 } else {
@@ -116,24 +114,8 @@ public class FarmButton extends Actor {
         });
     }
 
-    public void setResearched() {
-        researched = true;
-        if(!bought && readyToUpgrade) {
-            button1.setChecked(false);
-            button1.setTouchable(Touchable.enabled);
-            available = true;
-            availableBooleans[farmIndex][buttonIndex] = true;
-        }
-    }
-
-    public void setReadyToUpgrade() {
-        readyToUpgrade = true;
-        if(researched && !bought) {
-            button1.setChecked(false);
-            button1.setTouchable(Touchable.enabled);
-            available = true;
-            availableBooleans[farmIndex][buttonIndex] = true;
-        }
+    public static void setResearched(boolean [] array) {
+        researched = array;
     }
 
     public void setUnavailable() {
@@ -141,19 +123,24 @@ public class FarmButton extends Actor {
         button1.getStyle().checked = button1.getStyle().checkedOver;
         button1.setChecked(true);
         button1.setTouchable(Touchable.disabled);
-        availableBooleans[farmIndex][buttonIndex] = false;
     }
 
     public Button getButton() {
         return button1;
     }
 
-    public static boolean [][] getAvailableBooleans() {
-        return availableBooleans;
+    public static boolean [][] getBoughtArray() {
+        return bought;
     }
 
-    public static boolean [][] getBoughtBooleans() {
-        return boughtBooleans;
+    public static void setBoughtArray(boolean [][] array) { bought = array; }
+
+    public void setAvailable() {
+        if(researched[buttonIndex] && !bought[farmIndex][buttonIndex]) {
+            button1.setChecked(false);
+            button1.setTouchable(Touchable.enabled);
+            available = true;
+        }
     }
 
     public void draw(Batch batch, float alpha) {

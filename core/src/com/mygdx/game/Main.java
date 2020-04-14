@@ -34,7 +34,7 @@ public class Main extends Game {
 		gameBegan = gb;
 	}
 
-public static int getBalticSituation() { return balticSituation; }
+	public static int getBalticSituation() { return balticSituation; }
 
 	public void changeLocale(Locale l) {
 		locale = l;
@@ -98,12 +98,6 @@ public static int getBalticSituation() { return balticSituation; }
 		farmScreens.get(index).clearStageInfo();
 	}
 
-	public void setResearched(int index) {
-		for(int i=0; i<farmAmount; i++) {
-			farmScreens.get(i).setResearched(index);
-		}
-	}
-
 	public static int getMoney() {
 		return money;
 	}
@@ -123,7 +117,6 @@ public static int getBalticSituation() { return balticSituation; }
 
 		//Save starting time for the game only when you begin a new game
 		if(!gameBegan) {
-			System.out.println("in !gameBegan if statement");
 			startingTime = Utils.getCurrentTimeInSeconds();
 			gameBegan = true;
 			Save.saveStartingTime();
@@ -143,7 +136,7 @@ public static int getBalticSituation() { return balticSituation; }
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
-		public static void setBalticSituation(int bs) {
+	public static void setBalticSituation(int bs) {
 		balticSituation = bs;
 	};
 

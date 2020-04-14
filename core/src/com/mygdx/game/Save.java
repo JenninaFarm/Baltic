@@ -6,8 +6,7 @@ import com.badlogic.gdx.Preferences;
 public class Save {
 
     private static boolean [] research = ResearchButton.getResearchBooleans();
-    private static boolean [][] farmAvailable = FarmButton.getAvailableBooleans();
-    private static boolean [][] farmBought = FarmButton.getBoughtBooleans();
+    private static boolean [][] farmBought = FarmButton.getBoughtArray();
     private static float [] multipliers = MoneyButton.getMultipliers();
     private static boolean [] farmLocks = MapButton.getFarmLocks();
     private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
@@ -31,12 +30,6 @@ public class Save {
 
         for(int i=0; i<researchAmount; i++) {
             prefs.putBoolean("research" + i, research[i]);
-        }
-
-        for(int i=0; i<farmAmount; i++) {
-            for(int j=0; j<researchAmount; j++) {
-                prefs.putBoolean("farmavailable" + i + j, farmAvailable[i][j]);
-            }
         }
 
         for(int i=0; i<farmAmount; i++) {
@@ -83,20 +76,14 @@ public class Save {
             research[i] = prefs.getBoolean("research" + i);
         }
         ResearchScreen.setBooleanArray(research);
-
-        for(int i=0; i<farmAmount; i++) {
-            for(int j=0; j<researchAmount; j++) {
-                farmAvailable[i][j] = prefs.getBoolean("farmavailable" + i + j);
-            }
-        }
-        FarmScreen.setAvailableArray(farmAvailable);
+        FarmButton.setResearched(research);
 
         for(int i=0; i<farmAmount; i++) {
             for(int j=0; j<researchAmount; j++) {
                 farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
             }
         }
-        FarmScreen.setBoughtArray(farmBought);
+        FarmButton.setBoughtArray(farmBought);
 
         for(int i=0; i<farmAmount; i++) {
             farmLocks[i] = prefs.getBoolean("farmlock" + i);
@@ -154,21 +141,12 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             for(int j=0; j<researchAmount; j++) {
-                prefs.putBoolean("farmavailable" + i + j, false);
-                prefs.flush();
-                farmAvailable[i][j] = prefs.getBoolean("farmavailable" + i + j);
-            }
-        }
-        FarmScreen.setAvailableArray(farmAvailable);
-
-        for(int i=0; i<farmAmount; i++) {
-            for(int j=0; j<researchAmount; j++) {
                 prefs.putBoolean("farmbought" + i + j, false);
                 prefs.flush();
                 farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
             }
         }
-        FarmScreen.setBoughtArray(farmBought);
+        FarmButton.setBoughtArray(farmBought);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("farmlock" + i, false);

@@ -33,8 +33,6 @@ public class FarmScreen implements Screen {
     private Vector2 dragNew, dragOld;
     private Camera camera;
 
-    private static boolean [][] availableArray;
-    private static boolean [][] boughtArray;
     private static int [] workerAmount = new int[4];
 
     public FarmScreen(Main m, int i) {
@@ -58,7 +56,7 @@ public class FarmScreen implements Screen {
 
     private  void createButtons() {
         for(int i=0; i<upgradeAmount; i++) {
-            farmButtons.add(new FarmButton(main, i, farmIndex, availableArray[farmIndex][i], boughtArray[farmIndex][i]));
+            farmButtons.add(new FarmButton(main, i, farmIndex));
         }
         workerButton = new FarmWorker(main, this);
     }
@@ -87,12 +85,6 @@ public class FarmScreen implements Screen {
         stageInfo.clear();
     }
 
-
-    public void setResearched(int index) {
-        farmButtons.get(index).setResearched();
-    }
-
-
     private void handleInput() {
 
         if (Gdx.input.justTouched()){
@@ -116,13 +108,6 @@ public class FarmScreen implements Screen {
         return workerAmount;
     }
 
-    public static void setAvailableArray(boolean [][] array) {
-        availableArray = array;
-    }
-
-    public static void setBoughtArray(boolean [][] arrayb) {
-        boughtArray = arrayb;
-    }
 
     public static void setWorkerAmountArray(int [] array) { workerAmount = array;}
 
@@ -163,51 +148,53 @@ public class FarmScreen implements Screen {
     }
 
     public void setUpgradesAvailable() {
-        farmButtons.get(0).setReadyToUpgrade();
-        farmButtons.get(4).setReadyToUpgrade();
+        boolean [][] boughtArray = FarmButton.getBoughtArray();
+
+        farmButtons.get(0).setAvailable();
+        farmButtons.get(4).setAvailable();
 
         for(int i=0; i<3; i++) {
-            if(boughtArray[farmIndex][i] && workerAmount[farmIndex] == i) {
-                farmButtons.get(i+1).setReadyToUpgrade();
+            if(boughtArray[farmIndex][i] && workerAmount[farmIndex] >= i) {
+                farmButtons.get(i+1).setAvailable();
             }
         }
 
-        if(workerAmount[farmIndex] == 1) {
-            farmButtons.get(6).setReadyToUpgrade();
+        if(workerAmount[farmIndex] >= 1) {
+            farmButtons.get(6).setAvailable();
             if(boughtArray[farmIndex][1]) {
-                farmButtons.get(9).setReadyToUpgrade();
+                farmButtons.get(9).setAvailable();
             }
             for(int i=0; i<2; i++) {
                 if(boughtArray[farmIndex][i+6]) {
-                    farmButtons.get(i+7).setReadyToUpgrade();
+                    farmButtons.get(i+7).setAvailable();
                 }
             }
             if(boughtArray[farmIndex][9]) {
-                farmButtons.get(10).setReadyToUpgrade();
+                farmButtons.get(10).setAvailable();
             }
             if(boughtArray[farmIndex][10]) {
-                farmButtons.get(11).setReadyToUpgrade();
-                farmButtons.get(13).setReadyToUpgrade();
+                farmButtons.get(11).setAvailable();
+                farmButtons.get(13).setAvailable();
             }
             if(boughtArray[farmIndex][13]) {
-                farmButtons.get(14).setReadyToUpgrade();
-                farmButtons.get(15).setReadyToUpgrade();
+                farmButtons.get(14).setAvailable();
+                farmButtons.get(15).setAvailable();
             }
         }
 
-        if(workerAmount[farmIndex] == 2) {
+        if(workerAmount[farmIndex] >= 2) {
             if(boughtArray[farmIndex][4] && boughtArray[farmIndex][8]){
-                farmButtons.get(5).setReadyToUpgrade();
+                farmButtons.get(5).setAvailable();
             }
             if(boughtArray[farmIndex][10]) {
-                farmButtons.get(12).setReadyToUpgrade();
+                farmButtons.get(12).setAvailable();
             }
         }
 
-        if(workerAmount[farmIndex] == 3) {
+        if(workerAmount[farmIndex] >= 3) {
             if(boughtArray[farmIndex][15]) {
-                farmButtons.get(17).setReadyToUpgrade();
-                farmButtons.get(18).setReadyToUpgrade();
+                farmButtons.get(17).setAvailable();
+                farmButtons.get(18).setAvailable();
                 if(boughtArray[farmIndex][17]) {
                     farmButtons.get(18).setUnavailable();
                 } else if(boughtArray[farmIndex][18]) {
