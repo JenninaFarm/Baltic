@@ -25,7 +25,7 @@ public class Main extends Game {
 	private OptionsScreen optionsScreen;
 
 	private static int money;
-	private int balticSituation = 0;
+	private static int balticSituation = 0;
 
 	private Skin mySkin;
 	private I18NBundle myBundle;
@@ -34,6 +34,8 @@ public class Main extends Game {
 	public static void setGameBegan(boolean gb) {
 		gameBegan = gb;
 	}
+
+public static int getBalticSituation() { return balticSituation; }
 
 	public void changeLocale(Locale l) {
 		locale = l;
@@ -142,7 +144,9 @@ public class Main extends Game {
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
-	public int getBalticSituation() { return balticSituation; };
+		public static void setBalticSituation(int bs) {
+		balticSituation = bs;
+	};
 
 	public SpriteBatch getBatch() {
 		return batch;

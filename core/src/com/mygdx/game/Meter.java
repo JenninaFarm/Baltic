@@ -18,7 +18,6 @@ public class Meter extends Actor {
 
     public Meter(Main m) {
         main = m;
-        balticSituation = main.getBalticSituation();
         meterTexture = new Texture[4];
         meterTexture[0] = new Texture(Gdx.files.internal("meters/meter-red.png"));
         meterTexture[1] = new Texture(Gdx.files.internal("meters/meter-orange.png"));
@@ -26,6 +25,9 @@ public class Meter extends Actor {
         meterTexture[3] = new Texture(Gdx.files.internal("meters/meter-green.png"));
 
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
+        balticSituation = main.getBalticSituation();
+
         balticMeter = new Label(Integer.toString(balticSituation), mySkin);
         balticMeter.setX(750);
         balticMeter.setY(35);
@@ -41,6 +43,7 @@ public class Meter extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
+        balticSituation = main.getBalticSituation();
         if(balticSituation < 30) {
             batch.draw(meterTexture[0], this.getX(), this.getY(), width, height);
         } else if(balticSituation < 60) {

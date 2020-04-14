@@ -23,6 +23,7 @@ public class Save {
     public static void saveVariables() {
 
         prefs.putInteger("money", Main.getMoney());
+        prefs.putInteger("balticSituation", Main.getBalticSituation());
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
@@ -50,7 +51,6 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("lastTimeClicked" + i, lastTimeClicked[i]);
-            System.out.println("lastTimeClicked saved: " + i + prefs.getInteger("lastTimeClicked" + i));
         }
 
         for(int i=0; i<farmAmount; i++) {
@@ -72,6 +72,7 @@ public class Save {
 
         Main.setMoney(prefs.getInteger("money", 600000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
+        Main.setBalticSituation(prefs.getInteger("balticSituation"));
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
@@ -104,7 +105,6 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
-            System.out.println("lastTimeClicked loadVariables: " + i + prefs.getInteger("lastTimeClicked" + i));
         }
         MoneyButton.setLastTimeClicked(lastTimeClicked);
 
@@ -133,6 +133,10 @@ public class Save {
         prefs.putBoolean("gameBegan", false);
         prefs.flush();
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
+
+        prefs.putInteger("balticSituation", 0);
+        prefs.flush();
+        Main.setBalticSituation(prefs.getInteger("balticSituation"));
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, 4);
