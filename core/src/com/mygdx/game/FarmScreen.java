@@ -129,7 +129,6 @@ public class FarmScreen implements Screen {
     public void addWorker() {
         if(workerAmount[farmIndex] < 4) {
             workerAmount[farmIndex]++;
-            workerLabel.setWorkerLabel(workerAmount[farmIndex]);
             Save.saveVariables();
             Save.loadVariables();
         }

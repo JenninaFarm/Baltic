@@ -9,8 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 public class WorkerLabel extends Actor {
 
     private TextField workerLabel;
+    private FarmScreen farmScreen;
 
-    public WorkerLabel(Main main, FarmScreen farmScreen) {
+    public WorkerLabel(Main main, FarmScreen fs) {
+        farmScreen = fs;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
         workerLabel = new TextField(Integer.toString(farmScreen.getWorkerAmount()), mySkin);
@@ -20,11 +22,8 @@ public class WorkerLabel extends Actor {
         workerLabel.setHeight(33);
     }
 
-    public void setWorkerLabel(int workerAmount) {
-        workerLabel.setText(Integer.toString(workerAmount + 1));
-    }
-
     public void draw(Batch batch, float alpha) {
+        workerLabel.setText(Integer.toString( farmScreen.getWorkerAmount()+ 1));
         workerLabel.draw(batch, alpha);
     }
 }

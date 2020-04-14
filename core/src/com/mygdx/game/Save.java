@@ -192,7 +192,7 @@ public class Save {
         MapScreen.setCoinAdded(coinAdded);
 
         for(int i=0; i<farmAmount; i++) {
-            prefs.putInteger("workerAmount" + i, 1);
+            prefs.putInteger("workerAmount" + i, 0);
             prefs.flush();
             workerAmount[i] = prefs.getInteger("workerAmount" + i);
         }
