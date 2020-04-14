@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class Main extends Game {
-	//pitää teksiä tälle jotain. Tällä hetkellä muuttuu joka kerta kun avaa sovelluksen.
 	private static boolean gameBegan = false;
 	private static int startingTime;
 
