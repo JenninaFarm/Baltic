@@ -46,6 +46,7 @@ public class ResearchButton extends Actor {
         if(bought) {
             button1.getStyle().checked = button1.getStyle().over;
             button1.setChecked(true);
+            button1.getStyle().checkedOver = button1.getStyle().up;
             button1.setDisabled(true);
 
         } else if(available){
@@ -53,7 +54,7 @@ public class ResearchButton extends Actor {
         } else {
             button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
-            button1.setTouchable(Touchable.disabled);
+            button1.setDisabled(true);
         }
 
         button1.addListener(new InputListener() {
@@ -67,6 +68,7 @@ public class ResearchButton extends Actor {
                     main.setMoney(currentMoney - cost);
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
+                    button1.getStyle().checkedOver = button1.getStyle().up;
                     button1.setDisabled(true);
                     bought = true;
                     researchBooleans[index] = true;
@@ -98,7 +100,7 @@ public class ResearchButton extends Actor {
         available = true;
         if(!bought) {
             button1.setChecked(false);
-            button1.setTouchable(Touchable.enabled);
+            button1.setDisabled(false);
         }
     }
 

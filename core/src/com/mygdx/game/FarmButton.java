@@ -57,6 +57,7 @@ public class FarmButton extends Actor {
         if(bought[farmIndex][buttonIndex]) {
             button1.getStyle().checked = button1.getStyle().over;
             button1.setChecked(true);
+            button1.getStyle().checkedOver = button1.getStyle().up;
             button1.setDisabled(true);
 
         } else if(available){
@@ -64,13 +65,13 @@ public class FarmButton extends Actor {
         } else {
             button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
-            button1.setTouchable(Touchable.disabled);
+            button1.setDisabled(true);
         }
 
         button1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                if(currentMoney < cost) {
+                if(currentMoney < cost || bought[farmIndex][buttonIndex]) {
                     button1.setDisabled(true);
                 } else {
                     button1.setDisabled(false);
@@ -81,6 +82,7 @@ public class FarmButton extends Actor {
                     //set button style
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
+                    button1.getStyle().checkedOver = button1.getStyle().up;
                     button1.setDisabled(true);
                     //set new amount of money and balticSituation
                     main.setMoney(currentMoney-cost);
@@ -122,7 +124,7 @@ public class FarmButton extends Actor {
         available = false;
         button1.getStyle().checked = button1.getStyle().checkedOver;
         button1.setChecked(true);
-        button1.setTouchable(Touchable.disabled);
+        button1.setDisabled(true);
     }
 
     public Button getButton() {
@@ -138,7 +140,7 @@ public class FarmButton extends Actor {
     public void setAvailable() {
         if(researched[buttonIndex] && !bought[farmIndex][buttonIndex]) {
             button1.setChecked(false);
-            button1.setTouchable(Touchable.enabled);
+            button1.setDisabled(false);
             available = true;
         }
     }
