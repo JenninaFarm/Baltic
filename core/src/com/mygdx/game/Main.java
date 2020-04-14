@@ -12,7 +12,8 @@ import java.util.Locale;
 
 public class Main extends Game {
 	//pitää teksiä tälle jotain. Tällä hetkellä muuttuu joka kerta kun avaa sovelluksen.
-	final int STARTING_TIME = Utils.getCurrentTimeInSeconds();
+	private static boolean gameBegan = false;
+	private static int startingTime;
 
 	private SpriteBatch batch;
 	private MainMenuScreen mainMenuScreen;
@@ -30,27 +31,8 @@ public class Main extends Game {
 	private I18NBundle myBundle;
 	private Locale locale = new Locale("en", "GB");
 
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-
-		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
-		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
-
-		Save.loadVariables();
-
-		mainMenuScreen = new MainMenuScreen(this);
-		mapScreen = new MapScreen(this);
-
-		farmScreens = new ArrayList<>();
-		for(int i=0; i<farmAmount; i++) {
-			farmScreens.add(new FarmScreen(this, i));
-		}
-		researchScreen = new ResearchScreen(this);
-		optionsScreen = new OptionsScreen(this);
-
-		setScreen(mainMenuScreen);
-		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
+	public static void setGameBegan(boolean gb) {
+		gameBegan = gb;
 	}
 
 	public void changeLocale(Locale l) {
@@ -89,6 +71,10 @@ public class Main extends Game {
 		}
 	}
 
+	public static int getStartingTime() {
+		return startingTime;
+	}
+
 	public void addBalticSituation(int amount) {
 		if(amount < 0 || amount > 4) {
 			System.out.println("Program is failing. Amount not possible");
@@ -123,6 +109,37 @@ public class Main extends Game {
 
 	public int nonStaticGetMoney() {
 		return money;
+	}
+
+	@Override
+	public void create () {
+		batch = new SpriteBatch();
+
+		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
+		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
+		Save.loadVariables();
+
+		//Save starting time for the game
+		if(!gameBegan) {
+			System.out.println("in !gameBegan if statement");
+			startingTime = Utils.getCurrentTimeInSeconds();
+			gameBegan = true;
+			Save.saveStartingTime();
+		}
+
+		mainMenuScreen = new MainMenuScreen(this);
+		mapScreen = new MapScreen(this);
+
+		farmScreens = new ArrayList<>();
+		for(int i=0; i<farmAmount; i++) {
+			farmScreens.add(new FarmScreen(this, i));
+		}
+		researchScreen = new ResearchScreen(this);
+		optionsScreen = new OptionsScreen(this);
+
+		setScreen(mainMenuScreen);
+		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 	}
 
 	public int getBalticSituation() { return balticSituation; };

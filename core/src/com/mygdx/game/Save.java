@@ -66,6 +66,8 @@ public class Save {
     public static void loadVariables() {
 
         Main.setMoney(prefs.getInteger("money", 600000));
+        Main.setGameBegan(prefs.getBoolean("gameBegan"));
+        System.out.println(prefs.getInteger("startingTime"));
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
@@ -118,6 +120,10 @@ public class Save {
         prefs.putInteger("money", 600000);
         prefs.flush();
         Main.setMoney(prefs.getInteger("money"));
+
+        prefs.putBoolean("gameBegan", false);
+        prefs.flush();
+        Main.setGameBegan(prefs.getBoolean("gameBegan"));
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, 4);
@@ -178,5 +184,11 @@ public class Save {
             workerAmount[i] = prefs.getInteger("workerAmount" + i);
         }
         FarmScreen.setWorkerAmountArray(workerAmount);
+    }
+
+    public static void saveStartingTime() {
+        prefs.putInteger("startingTime", Main.getStartingTime());
+        prefs.putBoolean("gameBegan", true);
+        prefs.flush();
     }
 }
