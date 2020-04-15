@@ -67,7 +67,7 @@ public class Save {
 
     public static void loadVariables() {
 
-        Main.setMoney(prefs.getInteger("money", 600000));
+        Main.setMoney(prefs.getInteger("money", 6000000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
 
@@ -120,7 +120,7 @@ public class Save {
 
     public static void newGame() {
 
-        prefs.putInteger("money", 600000);
+        prefs.putInteger("money", 6000000);
         prefs.flush();
         Main.setMoney(prefs.getInteger("money"));
 

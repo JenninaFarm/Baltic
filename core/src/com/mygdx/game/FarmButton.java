@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -47,8 +48,8 @@ public class FarmButton extends Actor {
         float width = 200;
         float height = 50;
 
-        setX(800/2f - width/2f);
-        setY(380 - height/2f - buttonIndex*height);
+        setX(550);
+        setY(330 - height/2f - buttonIndex*height);
 
         button1 = new TextButton(myBundle.get("research" + buttonIndex), mySkin);
         button1.setSize(width, height);
@@ -146,6 +147,34 @@ public class FarmButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
+        if(bought[farmIndex][0]) {
+            Texture wheat = new Texture(Gdx.files.internal("farmUpgrades/wheat.png"));
+            batch.draw(wheat, 250, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
+        }
+        if(bought[farmIndex][3]) {
+            Texture strawberry = new Texture(Gdx.files.internal("farmUpgrades/strawberry.png"));
+            batch.draw(strawberry, -20, -20, strawberry.getWidth()/2.5f, strawberry.getHeight()/2.5f);
+        }
+        if(bought[farmIndex][11]) {
+            Texture flowerSide = new Texture(Gdx.files.internal("farmUpgrades/flowerSide.png"));
+            batch.draw(flowerSide, 220, 145, flowerSide.getWidth()/2.6f, flowerSide.getHeight()/2.6f);
+        }
+        if(bought[farmIndex][4]) {
+            Texture tractor = new Texture(Gdx.files.internal("farmUpgrades/tractor.png"));
+            batch.draw(tractor, -10, 10, tractor.getWidth()/2.5f, tractor.getHeight()/2.5f);
+        }
+        if(bought[farmIndex][6]) {
+            Texture cow = new Texture(Gdx.files.internal("farmUpgrades/cow.png"));
+            batch.draw(cow, 340, 0, cow.getWidth()/5f, cow.getHeight()/5f);
+        }
+        if(bought[farmIndex][12]) {
+            Texture bees = new Texture(Gdx.files.internal("farmUpgrades/bees.png"));
+            batch.draw(bees, 370, 300, bees.getWidth()/2.5f, bees.getHeight()/2.5f);
+        }
+        if(bought[farmIndex][16]) {
+            Texture organicFIN = new Texture(Gdx.files.internal("farmUpgrades/organicFIN.png"));
+            batch.draw(organicFIN, 35, 324, organicFIN.getWidth()/2.5f, organicFIN.getHeight()/2.5f);
+        }
     }
 
     @Override

@@ -55,8 +55,6 @@ public class FarmScreen implements Screen {
         workerLabel = new WorkerLabel(main, this);
         setIncomeLabel();
 
-        stageUI.addActor(farmbackground);
-
         if(Tutorial.tutorial_4 && Tutorial.tutorial) {
             Tutorial.tutorial_4_Stages[0] = true;
             for(int j=0;j<5;j++) {
@@ -85,9 +83,11 @@ public class FarmScreen implements Screen {
             stage.addActor(farmButtons.get(i).getButton());
         }
         stage.addActor(workerButton.getButton());
+        stageUI.addActor(farmbackground);
         stageUI.addActor(incomeLabel);
         stageUI.addActor(moneyLabel);
         stageUI.addActor(workerLabel);
+        stageUI.addActor(farmButtons.get(0));
         stageUI.addActor(returnButton);
     }
 
@@ -223,6 +223,9 @@ public class FarmScreen implements Screen {
         }
 
         if(workerAmount[farmIndex] >= 3) {
+            if(boughtArray[farmIndex][14]) {
+                farmButtons.get(16).setAvailable();
+            }
             if(boughtArray[farmIndex][15]) {
                 farmButtons.get(17).setAvailable();
                 farmButtons.get(18).setAvailable();
