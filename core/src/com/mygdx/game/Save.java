@@ -13,6 +13,7 @@ public class Save {
     private static boolean [] coinAdded = MapScreen.getCoinAdded();
     private static int [] workerAmount = FarmScreen.getWorkerAmountArray();
     private static int [] maxAmount = MoneyButton.getMaxAmount();
+    private static boolean tutorial;
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
 
@@ -24,7 +25,8 @@ public class Save {
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
 
-        //prefs.putBoolean("tutorial", Tutorial.tutorial);
+        tutorial = Tutorial.tutorial;
+        prefs.putBoolean("tutorial", tutorial);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
@@ -69,7 +71,8 @@ public class Save {
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
 
-        //Tutorial.tutorial = prefs.getBoolean("tutorial");
+        tutorial = prefs.getBoolean("tutorial", true);
+        Tutorial.tutorial = tutorial;
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
@@ -186,6 +189,10 @@ public class Save {
             maxAmount[i] = prefs.getInteger("maxAmount" + i);
         }
         MoneyButton.setMaxAmount(maxAmount);
+    }
+
+    public static boolean getTutorial() {
+        return tutorial;
     }
 
     public static void saveStartingTime() {

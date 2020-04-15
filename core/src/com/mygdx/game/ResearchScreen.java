@@ -55,7 +55,7 @@ public class ResearchScreen implements Screen {
 
         createButtons();
 
-        if(Tutorial.tutorial_2) {
+        if(Tutorial.tutorial_2 && Tutorial.tutorial) {
             Tutorial.tutorial_2_Stages[0] = true;
             for(int i=0;i<5;i++) {
                 tutorial_2_Actors[i] = new Tutorial(2, i);
@@ -111,7 +111,7 @@ public class ResearchScreen implements Screen {
             setResearchesAvailable();
         }
 
-        if(Tutorial.tutorial_2) {
+        if(Tutorial.tutorial_2 && Tutorial.tutorial) {
             researchButtons[0].setResearchAvailable();
             returnButton.setVisible(false);
         }

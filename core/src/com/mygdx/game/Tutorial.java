@@ -13,7 +13,7 @@ public class Tutorial extends Actor {
     private int index;
     private Texture tutorialTexture;
 
-    public static boolean tutorial = true;
+    public static boolean tutorial = Save.getTutorial();
     public static boolean tutorial_1 = true;
     public static boolean tutorial_2 = true;
     public static boolean tutorial_3 = true;
@@ -126,6 +126,7 @@ public class Tutorial extends Actor {
                         } else {
                             tutorial_4 = false;
                             tutorial = false;
+                            Save.saveVariables();
                             for (int i = 0; i < tutorial_4_Stages.length; i++) {
                                 tutorial_4_Stages[i] = false;
                             }
