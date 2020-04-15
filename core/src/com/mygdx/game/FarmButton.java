@@ -56,11 +56,7 @@ public class FarmButton extends Actor {
         button1.setPosition(getX(), getY());
 
         if(bought[farmIndex][buttonIndex]) {
-            button1.getStyle().checked = button1.getStyle().over;
-            button1.setChecked(true);
-            button1.getStyle().checkedOver = button1.getStyle().up;
-            button1.setDisabled(true);
-
+            button1.setVisible(false);
         } else if(available){
             button1.setChecked(false);
         } else {
@@ -85,6 +81,7 @@ public class FarmButton extends Actor {
                     button1.setChecked(true);
                     button1.getStyle().checkedOver = button1.getStyle().up;
                     button1.setDisabled(true);
+                    button1.setVisible(false);
                     //set new amount of money and balticSituation
                     main.setMoney(currentMoney-cost);
                     main.addBalticSituation(balticSituation);
