@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -23,6 +24,7 @@ public class FarmScreen implements Screen {
     private Stage stageUI;
     private Stage stageInfo;
     private ReturnButton returnButton;
+    private Background farmbackground;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<>();
     private FarmWorker workerButton;
@@ -41,9 +43,10 @@ public class FarmScreen implements Screen {
         main = m;
         farmIndex = i;
         batch = main.getBatch();
+        farmbackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
 
-        stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
+        stageUI = new Stage(new FitViewport(800, 450), batch);
         stageInfo = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
@@ -76,6 +79,7 @@ public class FarmScreen implements Screen {
     }
 
     private void addActors() {
+        stageUI.addActor(farmbackground);
         for(int i=0; i<upgradeAmount; i++) {
             stage.addActor(farmButtons.get(i).getButton());
         }
@@ -153,10 +157,10 @@ public class FarmScreen implements Screen {
         setUpgradesAvailable();
 
         stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
         stageInfo.draw();
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
+        stage.draw();
     }
 
     private void manageTutorial_4() {
