@@ -26,20 +26,16 @@ public class MainMenuScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
-    private Table table;
     private Actor background;
 
     private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
-    private TextureRegion[] buttonTextureArray;
     private int buttonAmount = 2;
-    private Texture buttonRegionTexture;
 
     public MainMenuScreen(Main m) {
         main = m;
         batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
-        table = new Table();
 
         background = new StartmenuBackground();
         background.setSize(800, 450);
