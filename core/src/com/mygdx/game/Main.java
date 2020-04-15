@@ -89,6 +89,7 @@ public class Main extends Game {
 		researchScreen.addToStage(infoLabel);
 	}
 
+
 	public void addFarmScreenStage(InfoLabel infoLabel, int index) {
 		farmScreens.get(index).addToStage(infoLabel);
 	}

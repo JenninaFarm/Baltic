@@ -38,6 +38,8 @@ public class ResearchScreen implements Screen {
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
+    private Tutorial [] tutorial_2_Actors = new Tutorial[6];
+
 
     public ResearchScreen(Main m) {
         main = m;
@@ -50,7 +52,17 @@ public class ResearchScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
+
         createButtons();
+
+        if(Tutorial.tutorial_2) {
+            Tutorial.tutorial_2_Stages[0] = true;
+            for(int i=0;i<5;i++) {
+                tutorial_2_Actors[i] = new Tutorial(2, i);
+            }
+            stageUI.addActor(tutorial_2_Actors[0]);
+        }
+
         addActors();
     }
 
@@ -95,7 +107,16 @@ public class ResearchScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        setResearchesAvailable();
+        if(!Tutorial.tutorial) {
+            setResearchesAvailable();
+        }
+
+        if(Tutorial.tutorial_2) {
+            researchButtons[0].setResearchAvailable();
+            returnButton.setVisible(false);
+        }
+
+        manageTutorial_2();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
@@ -104,6 +125,21 @@ public class ResearchScreen implements Screen {
         stageUI.draw();
 
         stageInfo.draw();
+    }
+
+    private void manageTutorial_2() {
+
+        for(int i=0; i<5; i++) {
+            if(Tutorial.tutorial_2_Stages[i] && Tutorial.tutorial_2) {
+                stageUI.addActor(tutorial_2_Actors[i]);
+            }
+        }
+        if(!Tutorial.tutorial_2) {
+            returnButton.setVisible(true);
+            for(int j=0; j<5; j++) {
+                tutorial_2_Actors[j].setVisible(false);
+            }
+        }
     }
 
     private void handleInput() {

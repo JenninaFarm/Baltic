@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -43,6 +44,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private static boolean [] farmLocks;
     private static boolean [] coinAdded = new boolean[4];
 
+    private Tutorial [] tutorial_1_Actors = new Tutorial[6];
+    private Tutorial [] tutorial_3_Actors = new Tutorial[6];
+
     public MapScreen(Main m) {
         main = m;
         batch = main.getBatch();
@@ -59,6 +63,23 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         meter = new Meter(main);
         createFarms();
         createCoins();
+
+        if(Tutorial.tutorial) {
+            Tutorial.tutorial_1_Stages[0] = true;
+            for(int i=0;i<5;i++) {
+                tutorial_1_Actors[i] = new Tutorial(1, i);
+            }
+            stageUI.addActor(tutorial_1_Actors[0]);
+        }
+
+        if(Tutorial.tutorial) {
+            Tutorial.tutorial_3_Stages[0] = true;
+            for(int i=0;i<5;i++) {
+                tutorial_3_Actors[i] = new Tutorial(3, i);
+            }
+            stageUI.addActor(tutorial_3_Actors[0]);
+            tutorial_3_Actors[0].setVisible(false);
+        }
 
         map = new MapBackground();
         map.setSize(800, 450);
@@ -158,12 +179,65 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        if(Tutorial.tutorial_1) {
+            hideIconsTutorial_1();
+            manageTutorial_1();
+        }
+        if(!Tutorial.tutorial_1) {
+            for(int j=0; j<5; j++) {
+                tutorial_1_Actors[j].setVisible(false);
+            }
+            research.setVisible(true);
+        }
+
+        if(Tutorial.tutorial_3 && !Tutorial.tutorial_2) {
+            for (int i = 0; i < actorAmount; i++) {
+                farms.get(i).setVisible(true);
+            }
+            coins.get(0).setVisible(true);
+            tutorial_3_Actors[0].setVisible(true);
+            manageTutorial_3();
+        }
+
+        if(!Tutorial.tutorial_3) {
+            for (int j = 0; j < 5; j++) {
+                tutorial_3_Actors[j].setVisible(false);
+            }
+        }
+
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
         stageInfo.draw();
+    }
+
+    private void hideIconsTutorial_1() {
+
+        research.setVisible(false);
+        for (int i = 0; i < actorAmount; i++) {
+            farms.get(i).setVisible(false);
+        }
+        coins.get(0).setVisible(false);
+    }
+
+    private void manageTutorial_1() {
+
+        for(int i=0; i<5; i++) {
+            if(Tutorial.tutorial_1_Stages[i] && Tutorial.tutorial_1) {
+                stageUI.addActor(tutorial_1_Actors[i]);
+            }
+        }
+    }
+
+    private void manageTutorial_3() {
+
+        for(int i=0; i<5; i++) {
+            if(Tutorial.tutorial_3_Stages[i] && Tutorial.tutorial_3) {
+                stageUI.addActor(tutorial_3_Actors[i]);
+            }
+        }
     }
 
     private void handleInput() {

@@ -24,6 +24,8 @@ public class Save {
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
 
+        //prefs.putBoolean("tutorial", Tutorial.tutorial);
+
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
         }
@@ -66,6 +68,8 @@ public class Save {
         Main.setMoney(prefs.getInteger("money", 600000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
+
+        //Tutorial.tutorial = prefs.getBoolean("tutorial");
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
