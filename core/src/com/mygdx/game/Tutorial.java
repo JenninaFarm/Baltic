@@ -125,7 +125,6 @@ public class Tutorial extends Actor {
                             tutorial_4_Stages[index++] = true;
                         } else {
                             tutorial_4 = false;
-                            tutorial = false;
                             Save.saveVariables();
                             for (int i = 0; i < tutorial_4_Stages.length; i++) {
                                 tutorial_4_Stages[i] = false;

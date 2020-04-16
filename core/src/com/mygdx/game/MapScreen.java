@@ -27,7 +27,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Stage stage;
     private Stage stageUI;
     private Stage stageInfo;
-    private int actorAmount = 4;
+    private int actorAmount =4;
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
     public static float [] savedMultipliers;
@@ -47,7 +47,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Tutorial [] tutorial_1_Actors = new Tutorial[6];
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
+    private Boat boat1;
+    private MoneyButton boatcoins1;
+    private Boat boat2;
+    private MoneyButton boatcoins2;
+
     public MapScreen(Main m) {
+
         main = m;
         batch = main.getBatch();
 
@@ -62,7 +68,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         incomeLabel = new IncomeLabel(main, "total", 5);
         meter = new Meter(main);
         createFarms();
+        createBoats();
         createCoins();
+
 
         if(Tutorial.tutorial) {
             Tutorial.tutorial_1_Stages[0] = true;
@@ -131,6 +139,17 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Save.loadVariables();
     }
 
+    private void addBoatsToStage() {
+        if (Main.getBalticSituation() >= 25) {
+            stage.addActor(boat1);
+            stage.addActor(boatcoins1);
+        }
+        if (Main.getBalticSituation() >= 50) {
+            stage.addActor(boat2);
+            stage.addActor(boatcoins2);
+        }
+    }
+
     public void addInfoLabel(InfoLabel infoLabel) {
         stageInfo.addActor(infoLabel);
     }
@@ -154,16 +173,23 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private void createCoins() {
         coins.add(new MoneyButton(main, 197, 82, 0, savedMultipliers[0]));
-        coins.add(new MoneyButton(main, 396, 225, 1, savedMultipliers[1]));
+        coins.add(new MoneyButton(main, 357, 242, 1, savedMultipliers[1]));
         coins.add(new MoneyButton(main, 667, 133, 2, savedMultipliers[2]));
         coins.add(new MoneyButton(main, 617, 342, 3, savedMultipliers[3]));
     }
 
     private void createFarms() {
         farms.add(new MapButton(main, this, 150, 50, 0, farmLocks[0]));
-        farms.add(new MapButton(main, this, 350, 190, 1, farmLocks[1]));
+        farms.add(new MapButton(main, this, 310, 210, 1, farmLocks[1]));
         farms.add(new MapButton(main, this, 620, 100, 2, farmLocks[2]));
         farms.add(new MapButton(main, this,570, 310, 3, farmLocks[3]));
+    }
+
+    private void createBoats() {
+        boat1 = new Boat(420, 100);
+        boatcoins1 = new MoneyButton(main, 460, 130, 4, 10);
+        boat2 = new Boat(520, 200);
+        boatcoins2 = new MoneyButton(main, 560, 230, 5, 10);
     }
 
 
@@ -204,6 +230,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 tutorial_3_Actors[j].setVisible(false);
             }
         }
+
+        addBoatsToStage();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

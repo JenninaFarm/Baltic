@@ -65,7 +65,7 @@ public class FarmScreen implements Screen {
             for(int j=0;j<5;j++) {
                 tutorial_4_Actors[j] = new Tutorial(4, j);
             }
-            stageUI.addActor(tutorial_4_Actors[0]);
+            stage.addActor(tutorial_4_Actors[0]);
         }
 
         createButtons();
@@ -152,13 +152,16 @@ public class FarmScreen implements Screen {
         batch.begin();
         batch.end();
 
-        manageTutorial_4();
+        if(Tutorial.tutorial) {
+            manageTutorial_4();
+        }
 
         setUpgradesAvailable();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stageInfo.draw();
         stageUI.act(Gdx.graphics.getDeltaTime());
+
         stageUI.draw();
         stage.draw();
     }
@@ -174,6 +177,7 @@ public class FarmScreen implements Screen {
             for(int j=0; j<5; j++) {
                 tutorial_4_Actors[j].setVisible(false);
             }
+            Tutorial.tutorial = false;
         }
     }
 

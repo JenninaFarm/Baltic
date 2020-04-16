@@ -21,9 +21,9 @@ public class MoneyButton extends Actor {
     private int originalX;
     private int originalY;
 
-    private static float [] multipliers = new float[4];
-    private static int [] lastTimeClicked = new int[4];
-    private static int [] maxAmount = {500, 500, 500, 500};
+    private static float [] multipliers = new float[6];
+    private static int [] lastTimeClicked = new int[6];
+    private static int [] maxAmount = {500, 500, 500, 500, 5000, 5000};
 
     public MoneyButton(Main m, final int x, final int y, int i, float mp) {
 
@@ -44,7 +44,7 @@ public class MoneyButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
-                if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
+                //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
                     countMoney();
 
                     System.out.println("money collected:" + money);
@@ -60,7 +60,7 @@ public class MoneyButton extends Actor {
                     moveAction.setDuration(0.5f);
 
                     MoneyButton.this.addAction(moveAction);
-                }
+                //}
                 return true;
             }
         });
