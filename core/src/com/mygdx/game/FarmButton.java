@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -17,6 +18,7 @@ import static java.lang.Float.parseFloat;
 
 public class FarmButton extends Actor {
     private Main main;
+    private FarmScreen farmScreen;
     private Button button1;
 
     private int buttonIndex;
@@ -33,8 +35,9 @@ public class FarmButton extends Actor {
     private static boolean [][] bought = new boolean[4][19];
     private static boolean [] researched = new boolean[19];
 
-    public FarmButton(Main m, final int buttonI, int farmI) {
+    public FarmButton(Main m, FarmScreen fs, final int buttonI, int farmI) {
         main = m;
+        farmScreen = fs;
         buttonIndex = buttonI;
         farmIndex = farmI;
 
@@ -49,11 +52,12 @@ public class FarmButton extends Actor {
         float height = 50;
 
         setX(550);
-        setY(330 - height/2f - buttonIndex*height);
+        setY(320 - height/2f - buttonIndex*height);
 
-        button1 = new TextButton(myBundle.get("research" + buttonIndex), mySkin);
+        button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), mySkin);
         button1.setSize(width, height);
         button1.setPosition(getX(), getY());
+        setBounds(getX(), getY(), getWidth(), getHeight());
 
         if(bought[farmIndex][buttonIndex]) {
             button1.setVisible(false);
@@ -76,6 +80,7 @@ public class FarmButton extends Actor {
                 if(available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
                     System.out.println("bought");
                     bought[farmIndex][buttonIndex] = true;
+                    farmScreen.setFarmButtonY(buttonI);
                     //set button style
                     button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);

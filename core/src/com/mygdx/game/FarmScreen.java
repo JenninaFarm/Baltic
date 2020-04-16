@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class FarmScreen implements Screen {
     private Stage stageUI;
     private Stage stageInfo;
     private ReturnButton returnButton;
-    private Background farmbackground;
+    private static float [][] actorY = new float[4][19];
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<>();
     private FarmWorker workerButton;
@@ -36,6 +39,8 @@ public class FarmScreen implements Screen {
     private Camera camera;
 
     private static int [] workerAmount = new int[4];
+    private static Array<Actor> actors;
+    private Background farmBackground;
 
     private Tutorial [] tutorial_4_Actors = new Tutorial[6];
 
@@ -43,7 +48,7 @@ public class FarmScreen implements Screen {
         main = m;
         farmIndex = i;
         batch = main.getBatch();
-        farmbackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
+        farmBackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
@@ -65,30 +70,22 @@ public class FarmScreen implements Screen {
 
         createButtons();
         addActors();
+        actors = stage.getActors();
+        for(int j=0; j<upgradeAmount; j++) {
+            actors.get(j).setY(actorY[farmIndex][j]);
+        }
     }
 
-    private  void createButtons() {
-        for(int i=0; i<upgradeAmount; i++) {
-            farmButtons.add(new FarmButton(main, i, farmIndex));
-        }
-        workerButton = new FarmWorker(main, this);
+    public static float[][] getFarmActorYArray() {
+        return actorY;
     }
 
     private void setIncomeLabel() {
         incomeLabel = new IncomeLabel(main, "farm", farmIndex);
     }
 
-    private void addActors() {
-        for(int i=0; i<upgradeAmount; i++) {
-            stage.addActor(farmButtons.get(i).getButton());
-        }
-        stage.addActor(workerButton.getButton());
-        stageUI.addActor(farmbackground);
-        stageUI.addActor(incomeLabel);
-        stageUI.addActor(moneyLabel);
-        stageUI.addActor(workerLabel);
-        stageUI.addActor(farmButtons.get(0));
-        stageUI.addActor(returnButton);
+    public static void setFarmActorYArray(float [][] array) {
+        actorY = array;
     }
 
     public void addToStage(InfoLabel infoLabel) {
@@ -236,6 +233,44 @@ public class FarmScreen implements Screen {
                 }
             }
         }
+    }
+
+    private  void createButtons() {
+        for(int i=0; i<upgradeAmount; i++) {
+            farmButtons.add(new FarmButton(main, this, i, farmIndex));
+        }
+        workerButton = new FarmWorker(main, this);
+    }
+
+    private void addActors() {
+        for(int i=0; i<upgradeAmount; i++) {
+            stage.addActor(farmButtons.get(i).getButton());
+        }
+        stage.addActor(workerButton.getButton());
+        stageUI.addActor(farmBackground);
+        stageUI.addActor(incomeLabel);
+        stageUI.addActor(moneyLabel);
+        stageUI.addActor(workerLabel);
+        stageUI.addActor(farmButtons.get(0));
+        stageUI.addActor(returnButton);
+    }
+
+    public void setFarmButtonY(int buttonIndex) {
+        actors = stage.getActors();
+        for(int i=0; i<upgradeAmount; i++) {
+            if(buttonIndex == i) {
+                for(int j=i; j<upgradeAmount; j++) {
+                    moveY(actors.get(j), actors.get(j).getY(), j);
+                }
+            }
+        }
+    }
+
+    private void moveY(Actor actor, float y, int index) {
+        actor.setY(y+50);
+        actorY[farmIndex][index] = actor.getY();
+        Save.saveVariables();
+        Save.loadVariables();
     }
 
     public Stage getStage() {
