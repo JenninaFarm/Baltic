@@ -72,7 +72,9 @@ public class FarmScreen implements Screen {
         addActors();
         actors = stage.getActors();
         for(int j=0; j<upgradeAmount; j++) {
-            actors.get(j).setY(actorY[farmIndex][j]);
+            if(actorY[farmIndex][j] != 0) {
+                actors.get(j).setY(actorY[farmIndex][j]);
+            }
         }
     }
 
