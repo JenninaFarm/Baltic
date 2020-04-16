@@ -72,7 +72,7 @@ public class FarmButton extends Actor {
         button1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                if(currentMoney < cost || bought[farmIndex][buttonIndex]) {
+                if(currentMoney < cost || bought[farmIndex][buttonIndex] || !available) {
                     button1.setDisabled(true);
                 } else {
                     button1.setDisabled(false);
@@ -96,10 +96,6 @@ public class FarmButton extends Actor {
                     //save and load
                     Save.saveVariables();
                     Save.loadVariables();
-                } else {
-                    System.out.println("Not enough money!");
-                    System.out.println("cost: " + cost);
-                    System.out.println("current balance: " + main.getMoney());
                 }
 
                 return true;
