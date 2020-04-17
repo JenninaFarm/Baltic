@@ -104,13 +104,15 @@ public class FarmButton extends Actor {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 I18NBundle myBundle = main.getMyBundle();
+
                 infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + buttonIndex));
-                main.addFarmScreenStage(infoLabel, farmIndex);
+                farmScreen.addInfoLabel(infoLabel);
+                farmScreen.setInfoVisible(true);
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                main.clearInfoLabel(farmIndex);
+                farmScreen.setInfoVisible(false);
             }
         });
     }

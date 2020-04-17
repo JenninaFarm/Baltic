@@ -50,7 +50,6 @@ public class OptionsButton extends Actor {
                     Save.newGame();
                     Save.saveVariables();
                     Save.loadVariables();
-                    ResearchScreen.newGameReset(main);
                     Main.callCreate(main);
                 }
                 return true;

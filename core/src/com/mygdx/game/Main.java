@@ -46,17 +46,17 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(mainMenuScreen.getStage());
 		} else if (x == 2) {
 			setScreen(mapScreen);
-			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStageUI(), mapScreen.getStage(), mapScreen.getStageInfo());
+			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStageUI(), mapScreen.getStage());
 			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
-				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI(), farmScreens.get(y).getStageInfo());
+				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI());
 				Gdx.input.setInputProcessor(multiplexer);
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
-			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI(), researchScreen.getStageInfo());
+			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI());
 			Gdx.input.setInputProcessor(multiplexer);
 		} else if(x == 5) {
 			setScreen(optionsScreen);
@@ -83,20 +83,6 @@ public class Main extends Game {
 			balticSituation += amount;
 			System.out.println("baltic Situation = " + balticSituation);
 		}
-	}
-
-	public void addResearchScreenStage(InfoLabel infoLabel) {
-		researchScreen.addToStage(infoLabel);
-	}
-
-
-	public void addFarmScreenStage(InfoLabel infoLabel, int index) {
-		farmScreens.get(index).addToStage(infoLabel);
-	}
-
-	public void clearInfoLabel(int index) {
-		researchScreen.clearStageInfo();
-		farmScreens.get(index).clearStageInfo();
 	}
 
 	public static int getMoney() {

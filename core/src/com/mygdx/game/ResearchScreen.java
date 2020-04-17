@@ -29,12 +29,12 @@ public class ResearchScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Stage stageUI;
-    private Stage stageInfo;
     private static ResearchButton [] researchButtons = new ResearchButton [19];
     private static boolean [] booleans;
     private static int researchAmount = 19;
     private ReturnButton returnButton;
     private MoneyLabel moneyLabel;
+    private TextArea infoArea;
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
@@ -47,7 +47,6 @@ public class ResearchScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
-        stageInfo = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
@@ -71,7 +70,7 @@ public class ResearchScreen implements Screen {
     }
     private void createButtons() {
         for(int i=0; i<researchAmount; i++){
-            researchButtons[i] = (new ResearchButton(main, i, booleans[i]));
+            researchButtons[i] = (new ResearchButton(main, this, i, booleans[i]));
         }
     }
 
@@ -84,15 +83,14 @@ public class ResearchScreen implements Screen {
         stageUI.addActor(returnButton);
     }
 
-    public void addToStage(InfoLabel infoLabel) {
-        TextArea textArea = infoLabel.getInfoLabel();
-        stageInfo.addActor(textArea);
+    public void addInfoLabel(InfoLabel infoLabel) {
+        infoArea = infoLabel.getInfoLabel();
+        stageUI.addActor(infoArea);
     }
 
-    public void clearStageInfo() {
-        stageInfo.clear();
+    public void setInfoVisible(boolean visible) {
+        infoArea.setVisible(visible);
     }
-
 
     @Override
     public void show() {
@@ -123,8 +121,6 @@ public class ResearchScreen implements Screen {
 
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
-
-        stageInfo.draw();
     }
 
     private void manageTutorial_2() {
@@ -208,9 +204,6 @@ public class ResearchScreen implements Screen {
     public Stage getStageUI() {
         return stageUI;
     }
-    public Stage getStageInfo() {
-        return stageInfo;
-    }
 
     @Override
     public void resize(int width, int height) {
@@ -232,17 +225,9 @@ public class ResearchScreen implements Screen {
         Save.saveVariables();
     }
 
-    public static void newGameReset(Main main) {
-        for (int i=0; i<researchAmount; i++) {
-            researchButtons[i] = new ResearchButton(main, i, false);
-        }
-        setResearchesAvailable();
-    }
-
     @Override
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
-        stageInfo.dispose();
     }
 }

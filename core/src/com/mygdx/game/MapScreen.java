@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -26,16 +27,16 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Actor map;
     private Stage stage;
     private Stage stageUI;
-    private Stage stageInfo;
     private int actorAmount = 4;
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
-    public static float [] savedMultipliers;
+    private static float [] savedMultipliers;
     private MapResearchButton research;
     private ReturnButton returnButton;
     private Meter meter;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
+    private TextArea infoArea;
 
     private Vector2 dragNew, dragOld;
 
@@ -53,7 +54,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
-        stageInfo = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
         research = new MapResearchButton(main, 680, 270);
@@ -132,12 +132,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     public void addInfoLabel(InfoLabel infoLabel) {
-        stageInfo.addActor(infoLabel);
+        infoArea = infoLabel.getInfoLabel();
+        stageUI.addActor(infoArea);
     }
 
-    public void clearInfoLabel() {
-        stageInfo.clear();
+    public void setInfoVisible(boolean visible) {
+        infoArea.setVisible(visible);
     }
+
 
     public static boolean [] getCoinAdded() {
         return coinAdded;
@@ -210,7 +212,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
-        stageInfo.draw();
     }
 
     private void hideIconsTutorial_1() {
@@ -308,7 +309,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
-        stageInfo.dispose();
     }
 
     public Stage getStage() {
@@ -317,5 +317,4 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public Stage getStageUI() {
         return stageUI;
     }
-    public Stage getStageInfo() {return stageInfo;}
 }

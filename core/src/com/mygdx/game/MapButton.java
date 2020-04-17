@@ -98,13 +98,13 @@ public class MapButton extends Actor {
                     I18NBundle myBundle = main.getMyBundle();
                     infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index));
                     mapScreen.addInfoLabel(infoLabel);
+                    mapScreen.setInfoVisible(true);
                 }
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                mapScreen.clearInfoLabel();
-
+                mapScreen.setInfoVisible(false);
             }
         });
     }

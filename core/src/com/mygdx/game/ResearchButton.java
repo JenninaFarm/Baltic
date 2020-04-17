@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class ResearchButton extends Actor {
 
     private Main main;
+    private ResearchScreen researchScreen;
     private Button button1;
     private int index;
     private int cost;
@@ -24,8 +25,9 @@ public class ResearchButton extends Actor {
 
     private static boolean [] researchBooleans = new boolean [19];
 
-    public ResearchButton(Main m, int i, boolean b) {
+    public ResearchButton(Main m, ResearchScreen rs, int i, boolean b) {
         main = m;
+        researchScreen = rs;
         index = i;
         bought = b;
 
@@ -85,12 +87,13 @@ public class ResearchButton extends Actor {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 I18NBundle myBundle = main.getMyBundle();
                 infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index));
-                main.addResearchScreenStage(infoLabel);
+                researchScreen.addInfoLabel(infoLabel);
+                researchScreen.setInfoVisible(true);
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                main.clearInfoLabel(0);
+                researchScreen.setInfoVisible(false);
             }
         });
     }

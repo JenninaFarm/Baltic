@@ -25,7 +25,6 @@ public class FarmScreen implements Screen {
     private SpriteBatch batch;
     private Stage stage;
     private Stage stageUI;
-    private Stage stageInfo;
     private ReturnButton returnButton;
     private static float [][] actorY = new float[4][19];
 
@@ -35,6 +34,7 @@ public class FarmScreen implements Screen {
     private int upgradeAmount = 19;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
+    private TextArea infoArea;
     private Vector2 dragNew, dragOld;
     private Camera camera;
 
@@ -52,13 +52,12 @@ public class FarmScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
-        stageInfo = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
         workerLabel = new WorkerLabel(main, this);
-        setIncomeLabel();
+        incomeLabel = new IncomeLabel(main, "farm", farmIndex);
 
         if(Tutorial.tutorial_4 && Tutorial.tutorial) {
             Tutorial.tutorial_4_Stages[0] = true;
@@ -82,21 +81,17 @@ public class FarmScreen implements Screen {
         return actorY;
     }
 
-    private void setIncomeLabel() {
-        incomeLabel = new IncomeLabel(main, "farm", farmIndex);
-    }
-
     public static void setFarmActorYArray(float [][] array) {
         actorY = array;
     }
 
-    public void addToStage(InfoLabel infoLabel) {
-        TextArea textArea = infoLabel.getInfoLabel();
-        stageInfo.addActor(textArea);
+    public void addInfoLabel(InfoLabel infoLabel) {
+        infoArea = infoLabel.getInfoLabel();
+        stageUI.addActor(infoArea);
     }
 
-    public void clearStageInfo() {
-        stageInfo.clear();
+    public void setInfoVisible(boolean visible) {
+        infoArea.setVisible(visible);
     }
 
     private void handleInput() {
@@ -160,8 +155,6 @@ public class FarmScreen implements Screen {
         stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
         stage.draw();
-        stageInfo.draw();
-
     }
 
     private void manageTutorial_4() {
@@ -279,9 +272,6 @@ public class FarmScreen implements Screen {
     public Stage getStage() {
         return stage;
     }
-    public Stage getStageInfo() {
-        return stageInfo;
-    }
     public Stage getStageUI() {
         return stageUI;
     }
@@ -311,6 +301,5 @@ public class FarmScreen implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
-        stageInfo.dispose();
     }
 }
