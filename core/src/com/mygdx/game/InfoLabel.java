@@ -13,7 +13,7 @@ public class InfoLabel extends Actor {
         main = m;
 
         textArea = new TextArea(info, main.getMySkin());
-        textArea.setX(500);
+        textArea.setX(20);
         textArea.setY(50);
         textArea.setWidth(300);
         textArea.setHeight(300);
