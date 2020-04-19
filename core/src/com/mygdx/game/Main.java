@@ -149,6 +149,13 @@ public class Main extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
+		mainMenuScreen.dispose();
+		mapScreen.dispose();
+		for(int i=0; i<farmAmount; i++) {
+			farmScreens.get(i).dispose();
+		}
+		optionsScreen.dispose();
+		researchScreen.dispose();
 	}
 
 }
