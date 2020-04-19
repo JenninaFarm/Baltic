@@ -72,9 +72,10 @@ public class FarmButton extends Actor {
         button1.addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
+                farmScreen.setInfoVisible(false);
+
                 if(currentMoney < cost || bought[farmIndex][buttonIndex] || !available) {
                     button1.setDisabled(true);
-                    farmScreen.setInfoVisible(false);
                 } else {
                     button1.setDisabled(false);
                 }

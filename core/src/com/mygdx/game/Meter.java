@@ -55,7 +55,7 @@ public class Meter extends Actor {
         }
         //move label location if the number is 10 or over
         if(balticSituation >= 10) {
-            balticMeter.setX(743);
+            balticMeter.setX(744);
         }
         balticMeter.setText(balticSituation);
         balticMeter.draw(batch, alpha);
