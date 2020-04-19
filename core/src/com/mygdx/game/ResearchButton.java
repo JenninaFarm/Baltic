@@ -63,6 +63,7 @@ public class ResearchButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
+                researchScreen.setInfoVisible(false);
 
                 if(currentMoney >= cost && !bought && available) {
                     System.out.println("bought");

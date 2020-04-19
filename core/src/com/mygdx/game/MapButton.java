@@ -54,6 +54,7 @@ public class MapButton extends Actor {
                     System.out.println("to farm");
                     main.switchScreen(3, index);
                 } else {
+                    mapScreen.setInfoVisible(false);
                     int currentMoney = main.nonStaticGetMoney();
                     boolean [] researchBooleans = ResearchButton.getResearchBooleans();
                     if(index == 2) {
@@ -104,7 +105,9 @@ public class MapButton extends Actor {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                mapScreen.setInfoVisible(false);
+                if(!bought[index]) {
+                    mapScreen.setInfoVisible(false);
+                }
             }
         });
     }

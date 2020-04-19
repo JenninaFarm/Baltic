@@ -155,6 +155,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     public void setInfoVisible(boolean visible) {
+        infoArea.setDisabled(true);
         infoArea.setVisible(visible);
     }
 

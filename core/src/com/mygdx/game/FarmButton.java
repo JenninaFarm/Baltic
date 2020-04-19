@@ -74,6 +74,7 @@ public class FarmButton extends Actor {
                 int currentMoney = main.getMoney();
                 if(currentMoney < cost || bought[farmIndex][buttonIndex] || !available) {
                     button1.setDisabled(true);
+                    farmScreen.setInfoVisible(false);
                 } else {
                     button1.setDisabled(false);
                 }

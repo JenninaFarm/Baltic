@@ -91,6 +91,7 @@ public class FarmScreen implements Screen {
     }
 
     public void setInfoVisible(boolean visible) {
+        infoArea.setDisabled(true);
         infoArea.setVisible(visible);
     }
 
