@@ -73,7 +73,7 @@ public class Save {
         Main.setMoney(prefs.getInteger("money", 6000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
-        Tutorial.tutorial = prefs.getBoolean("tutorial", true);
+        Tutorial.tutorial = prefs.getBoolean("tutorial", false);
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
