@@ -8,9 +8,11 @@ public class Background extends Actor {
 
     private Texture texture;
 
-    public Background (Texture t) {
+    public Background (Texture t, int x, int y) {
 
         texture = t;
+        setX(x);
+        setY(y);
     }
 
     public void draw(Batch batch, float alpha) {
