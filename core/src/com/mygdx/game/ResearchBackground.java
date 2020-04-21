@@ -1,19 +1,20 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Background extends Actor {
+class ResearchBackground extends Actor {
 
     private Texture texture;
 
-    public Background (Texture t) {
+    public ResearchBackground () {
 
-        texture = t;
+        texture = new Texture(Gdx.files.internal("researchBackground.png"));
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(texture, this.getX(), this.getY(), 800, 450);
+        batch.draw(texture, this.getX(), -750, 2118, 1200);
     }
 }

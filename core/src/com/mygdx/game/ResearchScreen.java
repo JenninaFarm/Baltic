@@ -35,6 +35,7 @@ public class ResearchScreen implements Screen {
     private ReturnButton returnButton;
     private MoneyLabel moneyLabel;
     private TextArea infoArea;
+    private ResearchBackground background;
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
@@ -51,6 +52,7 @@ public class ResearchScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
+        background = new ResearchBackground();
 
         createButtons();
 
@@ -75,6 +77,7 @@ public class ResearchScreen implements Screen {
     }
 
     private void addActors() {
+        stage.addActor(background);
         for(int i=0; i<researchAmount; i++) {
             Button button = researchButtons[i].getButton();
             stage.addActor(button);
@@ -154,8 +157,8 @@ public class ResearchScreen implements Screen {
             }
         }
 
-        camera.position.x = MathUtils.clamp(camera.position.x, 400, 800);
-        camera.position.y = MathUtils.clamp(camera.position.y, 50, 225);
+        camera.position.x = MathUtils.clamp(camera.position.x, 400, 1720);
+        camera.position.y = MathUtils.clamp(camera.position.y, -500, 225);
     }
 
     public static void setResearchesAvailable() {
