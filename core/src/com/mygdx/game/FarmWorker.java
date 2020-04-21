@@ -25,7 +25,7 @@ public class FarmWorker extends Actor {
         cost = Integer.parseInt(myBundle.get("workerCost"));
 
         setWidth(200);
-        setHeight(50);
+        setHeight(60);
 
         setX(550);
         setY(350);

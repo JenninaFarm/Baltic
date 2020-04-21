@@ -16,7 +16,7 @@ public class InfoLabel extends Actor {
         textArea.setX(20);
         textArea.setY(50);
         textArea.setWidth(300);
-        textArea.setHeight(300);
+        textArea.setHeight(310);
     }
 
     public TextArea getInfoLabel() {

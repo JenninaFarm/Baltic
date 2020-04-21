@@ -37,7 +37,7 @@ public class ResearchButton extends Actor {
 
 
         float width = 200;
-        float height = 50;
+        float height = 60;
 
         button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);
@@ -63,7 +63,7 @@ public class ResearchButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 int currentMoney = main.getMoney();
-                researchScreen.setInfoVisible(false);
+                //researchScreen.setInfoVisible(false);
 
                 if(currentMoney >= cost && !bought && available) {
                     System.out.println("bought");

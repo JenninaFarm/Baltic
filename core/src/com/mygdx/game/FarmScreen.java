@@ -268,7 +268,7 @@ public class FarmScreen implements Screen {
     }
 
     private void moveY(Actor actor, float y, int index) {
-        actor.setY(y+50);
+        actor.setY(y+60);
         actorY[farmIndex][index] = actor.getY();
         Save.saveVariables();
         Save.loadVariables();
