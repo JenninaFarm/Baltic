@@ -18,13 +18,13 @@ public class Tutorial extends Actor {
     public static boolean tutorial_2 = true;
     public static boolean tutorial_3 = true;
     public static boolean tutorial_4 = true;
-    public static boolean [] tutorial_1_Stages = new boolean [5];
+    public static boolean [] tutorial_1_Stages = new boolean [4];
     public static boolean [] tutorial_2_Stages = new boolean [5];
     public static boolean [] tutorial_3_Stages = new boolean [5];
     public static boolean [] tutorial_4_Stages = new boolean [5];
 
-    private float width = 300f;
-    private float height = 300f;
+    private float width = 730f;
+    private float height = 400f;
 
     public Tutorial(int tutorialIndex, int stageIndex) {
 
@@ -32,8 +32,8 @@ public class Tutorial extends Actor {
 
             case 1:
                 index = stageIndex;
-                tutorialTexture = new Texture(Gdx.files.internal("tutorial/tutorialexample" + index + ".png"));
-                setX(0);
+                tutorialTexture = new Texture(Gdx.files.internal("tutorial/tutorial-1-" + index + ".png"));
+                setX(30);
                 setY(0);
                 setWidth(width);
                 setHeight(height);
@@ -41,7 +41,7 @@ public class Tutorial extends Actor {
 
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        if (index < 5) {
+                        if (index < 4) {
                             System.out.println("Next tutorial stage");
                             tutorial_1_Stages[index] = false;
                             tutorial_1_Stages[index++] = true;
@@ -58,8 +58,8 @@ public class Tutorial extends Actor {
 
             case 2:
                 index = stageIndex;
-                tutorialTexture = new Texture(Gdx.files.internal("tutorial2/tutorialexample" + index + ".png"));
-                setX(500);
+                tutorialTexture = new Texture(Gdx.files.internal("tutorial2/tutorial-2-" + index + ".png"));
+                setX(300);
                 setY(0);
                 setWidth(width);
                 setHeight(height);
@@ -67,7 +67,7 @@ public class Tutorial extends Actor {
 
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        if (index < 5) {
+                        if (index < 3) {
                             System.out.println("Next tutorial stage");
                             tutorial_2_Stages[index] = false;
                             tutorial_2_Stages[index++] = true;
@@ -84,7 +84,7 @@ public class Tutorial extends Actor {
 
             case 3:
                 index = stageIndex;
-                tutorialTexture = new Texture(Gdx.files.internal("tutorial3/tutorialexample" + index + ".png"));
+                tutorialTexture = new Texture(Gdx.files.internal("tutorial3/tutorial-3-" + index + ".png"));
                 setX(350);
                 setY(0);
                 setWidth(width);
@@ -93,7 +93,7 @@ public class Tutorial extends Actor {
 
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        if (index < 5) {
+                        if (index < 4) {
                             System.out.println("Next tutorial stage");
                             tutorial_3_Stages[index] = false;
                             tutorial_3_Stages[index++] = true;
@@ -110,8 +110,8 @@ public class Tutorial extends Actor {
 
             case 4:
                 index = stageIndex;
-                tutorialTexture = new Texture(Gdx.files.internal("tutorial4/tutorialexample" + index + ".png"));
-                setX(0);
+                tutorialTexture = new Texture(Gdx.files.internal("tutorial4/tutorial-4-" + index + ".png"));
+                setX(30);
                 setY(0);
                 setWidth(width);
                 setHeight(height);
@@ -119,7 +119,7 @@ public class Tutorial extends Actor {
 
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                        if (index < 5) {
+                        if (index < 4) {
                             System.out.println("Next tutorial stage");
                             tutorial_4_Stages[index] = false;
                             tutorial_4_Stages[index++] = true;

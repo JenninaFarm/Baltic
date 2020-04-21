@@ -56,7 +56,7 @@ public class ResearchScreen implements Screen {
 
         if(Tutorial.tutorial_2 && Tutorial.tutorial) {
             Tutorial.tutorial_2_Stages[0] = true;
-            for(int i=0;i<5;i++) {
+            for(int i=0;i<3;i++) {
                 tutorial_2_Actors[i] = new Tutorial(2, i);
             }
             stageUI.addActor(tutorial_2_Actors[0]);
@@ -126,14 +126,14 @@ public class ResearchScreen implements Screen {
 
     private void manageTutorial_2() {
 
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<3; i++) {
             if(Tutorial.tutorial_2_Stages[i] && Tutorial.tutorial_2) {
                 stageUI.addActor(tutorial_2_Actors[i]);
             }
         }
         if(!Tutorial.tutorial_2) {
             returnButton.setVisible(true);
-            for(int j=0; j<5; j++) {
+            for(int j=0; j<3; j++) {
                 tutorial_2_Actors[j].setVisible(false);
             }
         }

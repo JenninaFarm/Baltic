@@ -73,7 +73,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         if(Tutorial.tutorial) {
             Tutorial.tutorial_1_Stages[0] = true;
-            for(int i=0;i<5;i++) {
+            for(int i=0;i<4;i++) {
                 tutorial_1_Actors[i] = new Tutorial(1, i);
             }
             stageUI.addActor(tutorial_1_Actors[0]);
@@ -81,7 +81,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         if(Tutorial.tutorial) {
             Tutorial.tutorial_3_Stages[0] = true;
-            for(int i=0;i<5;i++) {
+            for(int i=0;i<4;i++) {
                 tutorial_3_Actors[i] = new Tutorial(3, i);
             }
             stageUI.addActor(tutorial_3_Actors[0]);
@@ -211,14 +211,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             manageTutorial_1();
         }
         if(!Tutorial.tutorial_1) {
-            for(int j=0; j<5; j++) {
+            for(int j=0; j<4; j++) {
                 tutorial_1_Actors[j].setVisible(false);
             }
             research.setVisible(true);
         }
 
         if(Tutorial.tutorial_3 && !Tutorial.tutorial_2) {
-            for (int i = 0; i < actorAmount; i++) {
+            for (int i = 0; i < 4; i++) {
                 farms.get(i).setVisible(true);
             }
             coins.get(0).setVisible(true);
@@ -227,7 +227,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
 
         if(!Tutorial.tutorial_3) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 4; j++) {
                 tutorial_3_Actors[j].setVisible(false);
             }
         }
@@ -252,7 +252,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private void manageTutorial_1() {
 
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<4; i++) {
             if(Tutorial.tutorial_1_Stages[i] && Tutorial.tutorial_1) {
                 stageUI.addActor(tutorial_1_Actors[i]);
             }
@@ -261,7 +261,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private void manageTutorial_3() {
 
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<4; i++) {
             if(Tutorial.tutorial_3_Stages[i] && Tutorial.tutorial_3) {
                 stageUI.addActor(tutorial_3_Actors[i]);
             }

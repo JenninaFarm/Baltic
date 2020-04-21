@@ -61,7 +61,7 @@ public class FarmScreen implements Screen {
 
         if(Tutorial.tutorial_4 && Tutorial.tutorial) {
             Tutorial.tutorial_4_Stages[0] = true;
-            for(int j=0;j<5;j++) {
+            for(int j=0;j<4;j++) {
                 tutorial_4_Actors[j] = new Tutorial(4, j);
             }
             stage.addActor(tutorial_4_Actors[0]);
@@ -163,13 +163,13 @@ public class FarmScreen implements Screen {
 
     private void manageTutorial_4() {
 
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<4; i++) {
             if(Tutorial.tutorial_4_Stages[i] && Tutorial.tutorial_4) {
                 stageUI.addActor(tutorial_4_Actors[i]);
             }
         }
         if(!Tutorial.tutorial_4) {
-            for(int j=0; j<5; j++) {
+            for(int j=0; j<4; j++) {
                 tutorial_4_Actors[j].setVisible(false);
             }
             Tutorial.tutorial = false;
