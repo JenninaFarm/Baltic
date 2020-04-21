@@ -200,7 +200,7 @@ public class Save {
 
         for(int i=0; i<farmAmount; i++) {
             for (int j = 0; j < researchAmount; j++) {
-                prefs.putFloat("farmActorY" + i + j, (295 - j * 60));
+                prefs.putFloat("farmActorY" + i + j, (283 - j * 60));
                 farmActorY[i][j] = prefs.getFloat("farmActorY" + i + j);
             }
         }

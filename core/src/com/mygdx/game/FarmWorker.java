@@ -24,14 +24,11 @@ public class FarmWorker extends Actor {
 
         cost = Integer.parseInt(myBundle.get("workerCost"));
 
-        setWidth(200);
-        setHeight(60);
-
         setX(550);
-        setY(350);
+        setY(340);
 
         button1 = new TextButton(myBundle.get("worker"), mySkin);
-        button1.setSize(200, 50);
+        button1.setSize(200, 60);
         button1.setPosition(getX(), getY());
         button1.setDisabled(true);
         int workerAmount = farmScreen.getWorkerAmount();

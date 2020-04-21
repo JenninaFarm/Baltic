@@ -52,7 +52,7 @@ public class FarmButton extends Actor {
         float height = 60;
 
         setX(550);
-        setY(320 - height/2f - buttonIndex*height);
+        setY(310 - height/2f - buttonIndex*height);
 
         button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), mySkin);
         button1.setSize(width, height);
