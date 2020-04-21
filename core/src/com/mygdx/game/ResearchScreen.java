@@ -158,7 +158,7 @@ public class ResearchScreen implements Screen {
         }
 
         camera.position.x = MathUtils.clamp(camera.position.x, 400, 1720);
-        camera.position.y = MathUtils.clamp(camera.position.y, -500, 225);
+        camera.position.y = MathUtils.clamp(camera.position.y, -340, 375);
     }
 
     public static void setResearchesAvailable() {

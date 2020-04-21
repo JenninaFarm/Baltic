@@ -15,6 +15,6 @@ class ResearchBackground extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(texture, this.getX(), -750, 2118, 1200);
+        batch.draw(texture, this.getX(), -570, 2118, 1200);
     }
 }
