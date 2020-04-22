@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -87,7 +88,11 @@ public class FarmScreen implements Screen {
 
     public void addInfoLabel(InfoLabel infoLabel) {
         infoArea = infoLabel.getInfoLabel();
-        stageUI.addActor(infoArea);
+        Table table = new Table();
+        table.add(infoArea).minWidth(300).prefHeight(310).pad(20);
+        table.setFillParent(true);
+        table.left().bottom();
+        stageUI.addActor(table);
     }
 
     public void setInfoVisible(boolean visible) {
