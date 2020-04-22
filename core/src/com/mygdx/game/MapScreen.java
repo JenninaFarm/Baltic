@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -151,7 +152,12 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     public void addInfoLabel(InfoLabel infoLabel) {
         infoArea = infoLabel.getInfoLabel();
-        stageUI.addActor(infoArea);
+        infoArea = infoLabel.getInfoLabel();
+        Table table = new Table();
+        table.add(infoArea).minWidth(270).prefHeight(67).pad(20).padBottom(100);
+        table.setFillParent(true);
+        table.left().bottom();
+        stageUI.addActor(table);
     }
 
     public void setInfoVisible(boolean visible) {
