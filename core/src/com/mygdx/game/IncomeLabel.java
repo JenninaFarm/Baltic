@@ -35,11 +35,18 @@ public class IncomeLabel extends Actor {
 
     public void draw(Batch batch, float alpha) {
         multipliers = MoneyButton.getMultipliers();
+        boolean [] farmsBought = MapButton.getFarmLocks();
+        int boughtAmount = 0;
+        for(int i=0; i<farmsBought.length; i++) {
+            if(farmsBought[i]) {
+                boughtAmount++;
+            }
+        }
         int incomePerMin = 0;
         if(index < 5) {
             incomePerMin = (int)(multipliers[index] * 60);
         } else {
-            for(int i=0; i<4; i++) {
+            for(int i=0; i<boughtAmount; i++) {
                 incomePerMin += (int)(multipliers[i] * 60);
             }
         }

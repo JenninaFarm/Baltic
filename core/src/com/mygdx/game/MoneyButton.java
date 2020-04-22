@@ -42,25 +42,24 @@ public class MoneyButton extends Actor {
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
                 //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
-                    countMoney();
+                countMoney();
 
-                    System.out.println("money collected:" + money);
-                    main.setMoney(main.nonStaticGetMoney() + money);
-                    System.out.println("balance now:" + main.nonStaticGetMoney());
-                    lastTimeClicked[index] = timeWhenClickedInSec;
-                    Save.saveVariables();
-                    Save.loadVariables();
+                System.out.println("money collected:" + money);
+                main.setMoney(main.nonStaticGetMoney() + money);
+                System.out.println("balance now:" + main.nonStaticGetMoney());
+                lastTimeClicked[index] = timeWhenClickedInSec;
+                Save.saveVariables();
+                Save.loadVariables();
 
-                    MoveToAction moveAction = new MoveToAction();
+                MoveToAction moveAction = new MoveToAction();
 
-                    moveAction.setPosition(300, 410);
-                    moveAction.setDuration(0.5f);
+                moveAction.setPosition(300, 410);
+                moveAction.setDuration(0.5f);
 
-                    MoneyButton.this.addAction(moveAction);
-                //}
+                MoneyButton.this.addAction(moveAction);
                 return true;
             }
         });
@@ -82,7 +81,11 @@ public class MoneyButton extends Actor {
 
         int currentTime = Utils.getCurrentTimeInSeconds();
         int timePassedInSec = currentTime - lastTimeClicked[index];
-        int potentialMoney = (int)(timePassedInSec * multipliers[index]);
+        int potentialMoney = 0;
+        boolean [][] plantBought= FarmButton.getBoughtArray();
+        if(plantBought[index][0] || plantBought[index][1] || plantBought[index][2] || plantBought[index][3]){
+            potentialMoney = (int)(timePassedInSec * multipliers[index]);
+        }
         if(potentialMoney > 5 * multipliers[index] || getX() != 300) {
             batch.draw(button, this.getX(), this.getY(), width, height);
 
