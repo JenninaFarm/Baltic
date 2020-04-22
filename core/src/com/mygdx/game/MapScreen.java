@@ -67,7 +67,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         moneyLabel = new MoneyLabel(main);
-        incomeLabel = new IncomeLabel(main, "total", 5);
+        incomeLabel = new IncomeLabel("total", 5);
         meter = new Meter(main);
         createFarms();
         createBoats();

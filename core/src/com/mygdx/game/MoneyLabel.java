@@ -12,14 +12,13 @@ public class MoneyLabel extends Actor {
 
     private Main main;
     private TextField moneyLabel;
-    private Skin mySkin;
     private int money;
     private Texture coin;
 
 
     public MoneyLabel(Main m) {
         main = m;
-        mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         money = main.nonStaticGetMoney();
 
         moneyLabel = new TextField(Integer.toString(money), mySkin);

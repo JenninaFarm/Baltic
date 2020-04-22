@@ -9,16 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class IncomeLabel extends Actor {
 
-    private Main main;
     private TextField label;
     private int index;
-    private float [] multipliers;
     private Texture coin;
     private String per;
 
 
-    public IncomeLabel(Main m, String perWhat, int i) {
-        main = m;
+    public IncomeLabel(String perWhat, int i) {
         per = perWhat;
         index = i;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
@@ -34,7 +31,7 @@ public class IncomeLabel extends Actor {
 
 
     public void draw(Batch batch, float alpha) {
-        multipliers = MoneyButton.getMultipliers();
+        float [] multipliers = MoneyButton.getMultipliers();
         boolean [] farmsBought = MapButton.getFarmLocks();
         int boughtAmount = 0;
         for(int i=0; i<farmsBought.length; i++) {
