@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -253,7 +254,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private void manageTutorial_1() {
 
         for(int i=0; i<4; i++) {
-            if(Tutorial.tutorial_1_Stages[i] && Tutorial.tutorial_1) {
+            if(Tutorial.tutorial_1_Stages[i]) {
                 stageUI.addActor(tutorial_1_Actors[i]);
             }
         }

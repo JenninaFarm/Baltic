@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,6 +21,8 @@ public class MoneyButton extends Actor {
     private int index;
     private int originalX;
     private int originalY;
+
+    private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
 
     private static float [] multipliers = new float[6];
     private static int [] lastTimeClicked = new int[6];
@@ -45,7 +48,8 @@ public class MoneyButton extends Actor {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
                 //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
-                countMoney();
+                    countMoney();
+                    coinSound.play();
 
                 System.out.println("money collected:" + money);
                 main.setMoney(main.nonStaticGetMoney() + money);

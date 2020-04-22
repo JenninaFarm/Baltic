@@ -43,7 +43,6 @@ public class Tutorial extends Actor {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 4) {
                             System.out.println("Next tutorial stage");
-                            tutorial_1_Stages[index] = false;
                             tutorial_1_Stages[index++] = true;
                         } else {
                             tutorial_1 = false;
@@ -59,7 +58,7 @@ public class Tutorial extends Actor {
             case 2:
                 index = stageIndex;
                 tutorialTexture = new Texture(Gdx.files.internal("tutorial2/tutorial-2-" + index + ".png"));
-                setX(300);
+                setX(30);
                 setY(0);
                 setWidth(width);
                 setHeight(height);

@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class Main extends Game {
+
 	private static boolean gameBegan = false;
 	private static int startingTime;
 
@@ -30,6 +32,10 @@ public class Main extends Game {
 	private I18NBundle myBundle;
 	private Locale locale = new Locale("en", "GB");
 
+	private Music mapMusic;
+	private Music researchMusic;
+	private Music farmMusic;
+
 	public static void setGameBegan(boolean gb) {
 		gameBegan = gb;
 	}
@@ -48,16 +54,26 @@ public class Main extends Game {
 			setScreen(mapScreen);
 			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStageUI(), mapScreen.getStage());
 			Gdx.input.setInputProcessor(multiplexer);
+			farmMusic.stop();
+			researchMusic.stop();
+			mapMusic.setLooping(true);
+			mapMusic.play();
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
 				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI());
 				Gdx.input.setInputProcessor(multiplexer);
+				//mapMusic.stop();
+				farmMusic.setLooping(true);
+				farmMusic.play();
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
 			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI());
 			Gdx.input.setInputProcessor(multiplexer);
+			mapMusic.stop();
+			researchMusic.setLooping(true);
+			researchMusic.play();
 		} else if(x == 5) {
 			setScreen(optionsScreen);
 			Gdx.input.setInputProcessor(optionsScreen.getStage());
@@ -121,6 +137,13 @@ public class Main extends Game {
 
 		setScreen(mainMenuScreen);
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
+
+		mapMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/map_background_music.mp3"));
+		mapMusic.setVolume(0.2f);
+		researchMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/research_background_music.mp3"));
+		researchMusic.setVolume(0.2f);
+		farmMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/farm_background_music.mp3"));
+
 	}
 
 	public static void setBalticSituation(int bs) {
