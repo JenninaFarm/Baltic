@@ -36,7 +36,7 @@ public class ResearchScreen implements Screen {
     private ReturnButton returnButton;
     private MoneyLabel moneyLabel;
     private TextArea infoArea;
-    private ResearchBackground background;
+    private Background background;
     private Camera camera;
     private Vector2 dragNew, dragOld;
 
@@ -53,7 +53,9 @@ public class ResearchScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
-        background = new ResearchBackground();
+        background = new Background(new Texture(Gdx.files.internal("researchBackground.png")));
+        background.setPosition(0, -570);
+        background.setSize(2118, 1200);
 
         createButtons();
 

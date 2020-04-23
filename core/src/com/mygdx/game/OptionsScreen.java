@@ -3,9 +3,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -16,7 +18,7 @@ public class OptionsScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
-    private StartmenuBackground background;
+    private Background background;
 
     private ArrayList<OptionsButton> optionsButtons = new ArrayList<>();
     private int buttonAmount = 5;
@@ -28,9 +30,8 @@ public class OptionsScreen implements Screen {
         batch = main.getBatch();
         stage = new Stage(new FitViewport(800, 450), batch);
 
-        background = new StartmenuBackground();
+        background = new Background(new Texture(Gdx.files.internal("startscreen.png")));
         background.setSize(800, 450);
-        background.setPosition(0, 0);
 
         createButtons();
         addActors();

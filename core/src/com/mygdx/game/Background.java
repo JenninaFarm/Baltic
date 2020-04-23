@@ -14,6 +14,6 @@ public class Background extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(texture, this.getX(), this.getY(), 800, 450);
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 }

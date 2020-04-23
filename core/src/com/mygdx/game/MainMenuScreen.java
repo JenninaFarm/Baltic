@@ -26,7 +26,7 @@ public class MainMenuScreen implements Screen {
     private Main main;
     private SpriteBatch batch;
     private Stage stage;
-    private Actor background;
+    private Background background;
 
     private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
     private int buttonAmount = 2;
@@ -37,9 +37,8 @@ public class MainMenuScreen implements Screen {
 
         stage = new Stage(new FitViewport(800, 450), batch);
 
-        background = new StartmenuBackground();
+        background = new Background(new Texture(Gdx.files.internal("startscreen.png")));
         background.setSize(800, 450);
-        background.setPosition(0, 0);
 
         createButtons();
         addActors();

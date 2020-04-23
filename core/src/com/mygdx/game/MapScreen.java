@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -26,7 +27,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Main main;
     private SpriteBatch batch;
-    private Actor map;
+    private Background map;
     private Stage stage;
     private Stage stageUI;
     private int actorAmount = 4;
@@ -90,9 +91,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             tutorial_3_Actors[0].setVisible(false);
         }
 
-        map = new MapBackground();
+        map = new Background(new Texture(Gdx.files.internal("map.png")));
         map.setSize(800, 450);
-        map.setPosition(0, 0);
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
                 ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);

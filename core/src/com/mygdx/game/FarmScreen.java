@@ -50,6 +50,7 @@ public class FarmScreen implements Screen {
         farmIndex = i;
         batch = main.getBatch();
         farmBackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
+        farmBackground.setSize(800, 450);
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
