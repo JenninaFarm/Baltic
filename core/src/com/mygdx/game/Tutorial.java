@@ -46,9 +46,6 @@ public class Tutorial extends Actor {
                             tutorial_1_Stages[index++] = true;
                         } else {
                             tutorial_1 = false;
-                            for (int i = 0; i < tutorial_1_Stages.length; i++) {
-                                tutorial_1_Stages[i] = false;
-                            }
                         }
                         return true;
                     }
@@ -68,13 +65,9 @@ public class Tutorial extends Actor {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 3) {
                             System.out.println("Next tutorial stage");
-                            tutorial_2_Stages[index] = false;
                             tutorial_2_Stages[index++] = true;
                         } else {
                             tutorial_2 = false;
-                            for (int i = 0; i < tutorial_2_Stages.length; i++) {
-                                tutorial_2_Stages[i] = false;
-                            }
                         }
                         return true;
                     }
@@ -94,13 +87,9 @@ public class Tutorial extends Actor {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 4) {
                             System.out.println("Next tutorial stage");
-                            tutorial_3_Stages[index] = false;
                             tutorial_3_Stages[index++] = true;
                         } else {
                             tutorial_3 = false;
-                            for (int i = 0; i < tutorial_3_Stages.length; i++) {
-                                tutorial_3_Stages[i] = false;
-                            }
                         }
                         return true;
                     }
@@ -120,14 +109,9 @@ public class Tutorial extends Actor {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 4) {
                             System.out.println("Next tutorial stage");
-                            tutorial_4_Stages[index] = false;
                             tutorial_4_Stages[index++] = true;
                         } else {
                             tutorial_4 = false;
-                            Save.saveVariables();
-                            for (int i = 0; i < tutorial_4_Stages.length; i++) {
-                                tutorial_4_Stages[i] = false;
-                            }
                         }
                         return true;
                     }
