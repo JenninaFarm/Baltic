@@ -12,11 +12,9 @@ public class IncomeLabel extends Actor {
     private TextField label;
     private int index;
     private Texture coin;
-    private String per;
 
 
-    public IncomeLabel(String perWhat, int i) {
-        per = perWhat;
+    IncomeLabel(int i) {
         index = i;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
@@ -47,7 +45,7 @@ public class IncomeLabel extends Actor {
                 incomePerMin += (int)(multipliers[i] * 60);
             }
         }
-        label.setText("       /min " + per + " " + incomePerMin);
+        label.setText("       /min " + incomePerMin);
         label.draw(batch, alpha);
         batch.draw(coin, label.getX(), label.getY() + 2, 30, 30);
     }

@@ -31,7 +31,7 @@ public class WorkerLabel extends Actor {
      *
      * @param fs FarmScreen where the WorkerLabel TextField is added.
      */
-    public WorkerLabel(FarmScreen fs) {
+    WorkerLabel(FarmScreen fs) {
         farmScreen = fs;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 

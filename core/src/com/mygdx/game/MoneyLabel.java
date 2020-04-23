@@ -16,7 +16,7 @@ public class MoneyLabel extends Actor {
     private Texture coin;
 
 
-    public MoneyLabel(Main m) {
+    MoneyLabel(Main m) {
         main = m;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         money = main.nonStaticGetMoney();
