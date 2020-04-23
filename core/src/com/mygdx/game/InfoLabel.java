@@ -6,11 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 public class InfoLabel extends Actor {
 
-    private Main main;
     private TextArea textArea;
 
-    public InfoLabel(Main m, String info) {
-        main = m;
+    InfoLabel(Main main, String info) {
 
         textArea = new TextArea(info, main.getMySkin());
         textArea.setX(20);
@@ -19,7 +17,7 @@ public class InfoLabel extends Actor {
         textArea.setHeight(310);
     }
 
-    public TextArea getInfoLabel() {
+    TextArea getInfoLabel() {
         return textArea;
     }
 

@@ -29,11 +29,10 @@ public class Meter extends Actor {
             meterTexture[i] = new TextureRegion(new Texture (Gdx.files.internal("meter/meter" + i + ".png")));
         }
 
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
         balticSituation = main.getBalticSituation();
 
-        balticMeter = new Label(Integer.toString(balticSituation), mySkin);
+        balticMeter = new Label(Integer.toString(balticSituation), main.getMySkin());
         balticMeter.setX(750);
         balticMeter.setY(35);
 

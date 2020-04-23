@@ -46,15 +46,13 @@ public class FarmButton extends Actor {
         multiplier = parseFloat(myBundle.get("upgradeMultiplier" + buttonIndex));
         balticSituation = Integer.parseInt(myBundle.get("upgradeBaltic" + buttonIndex));
 
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
-
         float width = 200;
         float height = 60;
 
         setX(550);
         setY(310 - height/2f - buttonIndex*height);
 
-        button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), mySkin);
+        button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), main.getMySkin());
         button1.setSize(width, height);
         button1.setPosition(getX(), getY());
         setBounds(getX(), getY(), getWidth(), getHeight());

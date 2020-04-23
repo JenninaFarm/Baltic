@@ -27,15 +27,15 @@ public class WorkerLabel extends Actor {
     private FarmScreen farmScreen;
 
     /**
-     * Constructor. Sets skin, x, y, width and height for the text field.
+     * Constructor. Sets FarmScreen, x- and y-coordinates, width and height for the text field.
      *
+     * @param main Main where the skin is asked
      * @param fs FarmScreen where the WorkerLabel TextField is added.
      */
-    WorkerLabel(FarmScreen fs) {
+    WorkerLabel(Main main,FarmScreen fs) {
         farmScreen = fs;
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
-        workerLabel = new TextField(Integer.toString(farmScreen.getWorkerAmount()), mySkin);
+        workerLabel = new TextField(Integer.toString(farmScreen.getWorkerAmount()), main.getMySkin());
         workerLabel.setX(700);
         workerLabel.setY(410);
         workerLabel.setWidth(50);

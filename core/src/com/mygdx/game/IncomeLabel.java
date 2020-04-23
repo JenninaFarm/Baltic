@@ -34,14 +34,14 @@ public class IncomeLabel extends Actor {
 
     /**
      * Constructor. Sets index, Skin, x- and y-coordinates, width, height and Texture of the label.
+     *
+     * @param main Main where the skin is asked
      * @param i index value for identifying farms and map.
      */
-    IncomeLabel(int i) {
+    IncomeLabel(Main main, int i) {
         index = i;
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
-
-        label = new TextField(Integer.toString(0), mySkin);
+        label = new TextField(Integer.toString(0), main.getMySkin());
         label.setX(470);
         label.setY(410);
         label.setWidth(220);

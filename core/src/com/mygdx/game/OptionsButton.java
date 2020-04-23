@@ -20,13 +20,12 @@ public class OptionsButton extends Actor {
 
     public OptionsButton(Main m, String label, int i) {
         main = m;
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         index = i;
 
         width = 200;
         height = 50;
 
-        button1 = new TextButton(label, mySkin);
+        button1 = new TextButton(label, main.getMySkin());
         button1.setSize(width, height);
         button1.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
         button1.setDisabled(true);

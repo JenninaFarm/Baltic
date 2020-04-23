@@ -21,7 +21,6 @@ public class MainMenuButton extends Actor {
     private float height;
     private int index;
 
-    private Skin mySkin;
     private Button textButton;
 
     public MainMenuButton(Main m, TextureRegion buttonTexture, int i) {
@@ -53,13 +52,12 @@ public class MainMenuButton extends Actor {
 
     public MainMenuButton(Main m, String label, int i) {
         main = m;
-        mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         index = i;
 
         width = 150;
         height = 50;
 
-        textButton = new TextButton(label, mySkin);
+        textButton = new TextButton(label, main.getMySkin());
         textButton.setSize(width, height);
         textButton.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
         textButton.addListener(new InputListener() {

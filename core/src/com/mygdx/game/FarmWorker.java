@@ -19,7 +19,6 @@ public class FarmWorker extends Actor {
     public FarmWorker(Main m, final FarmScreen farmScreen) {
         main = m;
 
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         I18NBundle myBundle = main.getMyBundle();
 
         cost = Integer.parseInt(myBundle.get("workerCost"));
@@ -27,7 +26,7 @@ public class FarmWorker extends Actor {
         setX(550);
         setY(340);
 
-        button1 = new TextButton(myBundle.get("worker"), mySkin);
+        button1 = new TextButton(myBundle.get("worker"), main.getMySkin());
         button1.setSize(200, 60);
         button1.setPosition(getX(), getY());
         button1.setDisabled(true);

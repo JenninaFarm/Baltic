@@ -33,13 +33,12 @@ public class ResearchButton extends Actor {
 
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + index));
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
 
         float width = 200;
         float height = 60;
 
-        button1 = new TextButton(myBundle.get("research" + i), mySkin);
+        button1 = new TextButton(myBundle.get("research" + i), main.getMySkin());
         button1.setSize(width, height);
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
 

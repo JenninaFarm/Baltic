@@ -44,10 +44,9 @@ public class MoneyLabel extends Actor {
 
     MoneyLabel(Main m) {
         main = m;
-        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
         currentMoney = main.nonStaticGetMoney();
 
-        moneyLabel = new TextField(Integer.toString(currentMoney), mySkin);
+        moneyLabel = new TextField(Integer.toString(currentMoney), main.getMySkin());
         moneyLabel.setX(300);
         moneyLabel.setY(410);
         moneyLabel.setWidth(150);
