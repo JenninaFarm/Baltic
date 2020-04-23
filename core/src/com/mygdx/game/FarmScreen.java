@@ -61,8 +61,8 @@ public class FarmScreen implements Screen {
         moneyLabel = new MoneyLabel(main);
         workerLabel = new WorkerLabel(main, this);
         incomeLabel = new IncomeLabel(main, farmIndex);
-        workerLabel = new WorkerLabel(this);
-        incomeLabel = new IncomeLabel(farmIndex);
+        workerLabel = new WorkerLabel(main, this);
+        incomeLabel = new IncomeLabel(main, farmIndex);
         farmUpgrades = new FarmUpgrades(farmIndex);
 
         if(Tutorial.tutorial_4 && Tutorial.tutorial && farmIndex == 0) {
@@ -93,11 +93,7 @@ public class FarmScreen implements Screen {
 
     public void addInfoLabel(InfoLabel il) {
         infoLabel = il;
-        Table table = new Table();
-        table.add(infoLabel).minWidth(300).prefHeight(310).pad(20);
-        table.setFillParent(true);
-        table.left().bottom();
-        stageUI.addActor(table);
+        stageUI.addActor(infoLabel);
     }
 
     public void setInfoVisible(boolean visible) {

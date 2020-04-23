@@ -78,7 +78,7 @@ public class Save {
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
         }
-        MapScreen.setSavedMultipliers(multipliers);
+        MoneyButton.setMultipliers(multipliers);
 
         for(int i=0; i<researchAmount; i++) {
             research[i] = prefs.getBoolean("research" + i);
@@ -141,11 +141,16 @@ public class Save {
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
 
         for(int i=0; i<farmAmount; i++) {
-            prefs.putFloat("multiplier" + i, 4);
+            if(i<5) {
+                prefs.putFloat("multiplier" + i, 4);
+            } else {
+                prefs.putFloat("multiplier" + i, 10);
+            }
+
             prefs.flush();
             multipliers[i] = prefs.getFloat("multiplier" + i);
         }
-        MapScreen.setSavedMultipliers(multipliers);
+        MoneyButton.setMultipliers(multipliers);
 
         for(int i=0; i<researchAmount; i++) {
             prefs.putBoolean("research" + i, false);
@@ -192,7 +197,11 @@ public class Save {
         FarmScreen.setWorkerAmountArray(workerAmount);
 
         for(int i=0; i<farmAmount; i++) {
-            prefs.putInteger("maxAmount" + i, 500);
+            if(i < 5) {
+                prefs.putInteger("maxAmount" + i, 0);
+            } else {
+                prefs.putInteger("maxAmount" + i, 5000);
+            }
             prefs.flush();
             maxAmount[i] = prefs.getInteger("maxAmount" + i);
         }

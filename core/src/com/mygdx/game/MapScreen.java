@@ -35,7 +35,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private int actorAmount = 4;
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     private ArrayList<MapButton> farms = new ArrayList<>();
-    private static float [] savedMultipliers;
     private MapResearchButton research;
     private ReturnButton returnButton;
     private Meter meter;
@@ -54,9 +53,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
     private Boat boat1;
-    private MoneyButton boatcoins1;
+    private MoneyButton boatCoins1;
     private Boat boat2;
-    private MoneyButton boatcoins2;
+    private MoneyButton boatCoins2;
 
     public MapScreen(Main m) {
 
@@ -128,7 +127,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             if(coinAdded[i]) {
                 stage.addActor(coins.get(i));
-                //coins.get(i).setClicked();
             }
         }
     }
@@ -145,11 +143,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private void addBoatsToStage() {
         if (Main.getBalticSituation() >= 25) {
             stage.addActor(boat1);
-            stage.addActor(boatcoins1);
+            stage.addActor(boatCoins1);
+            boatCoins1.setClicked();
         }
         if (Main.getBalticSituation() >= 50) {
             stage.addActor(boat2);
-            stage.addActor(boatcoins2);
+            stage.addActor(boatCoins2);
+            boatCoins2.setClicked();
         }
     }
 
@@ -165,9 +165,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public static boolean [] getCoinAdded() {
         return coinAdded;
     }
-    public static void setSavedMultipliers(float [] array) {
-        savedMultipliers = array;
-    }
     public static void setFarmLocksArray(boolean [] array) {
         farmLocks = array;
     }
@@ -176,10 +173,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createCoins() {
-        coins.add(new MoneyButton(main, 197, 82, 0, savedMultipliers[0]));
-        coins.add(new MoneyButton(main, 357, 242, 1, savedMultipliers[1]));
-        coins.add(new MoneyButton(main, 667, 133, 2, savedMultipliers[2]));
-        coins.add(new MoneyButton(main, 617, 342, 3, savedMultipliers[3]));
+        coins.add(new MoneyButton(main, 197, 82, 0));
+        coins.add(new MoneyButton(main, 357, 242, 1));
+        coins.add(new MoneyButton(main, 667, 133, 2));
+        coins.add(new MoneyButton(main, 617, 342, 3));
     }
 
     private void createFarms() {
@@ -191,9 +188,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private void createBoats() {
         boat1 = new Boat(420, 100);
-        boatcoins1 = new MoneyButton(main, 460, 130, 4, 10);
+        boatCoins1 = new MoneyButton(main, 460, 130, 4);
         boat2 = new Boat(520, 200);
-        boatcoins2 = new MoneyButton(main, 560, 230, 5, 10);
+        boatCoins2 = new MoneyButton(main, 560, 230, 5);
     }
 
 
