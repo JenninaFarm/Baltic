@@ -43,6 +43,7 @@ public class WorkerLabel extends Actor {
     }
 
     /**
+     * Calls the TextField draw(batch, alpha)-method.
      * Sets up the current number of workers in the farmScreen and adds one to it since every farm has one worker as default.
      *
      * @param batch batch that is used in draw method

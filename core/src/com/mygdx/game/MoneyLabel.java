@@ -8,20 +8,46 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
+/**
+ * * MoneyLabel is a object base class to create a TextField with information of how much money player currently has.
+ *  *
+ *  * @author  Jennina Färm
+ *  * @author  Tommi Häkkinen
+ *  * @version 2020.2204
+ *  * @since 1.8
+ */
+
 public class MoneyLabel extends Actor {
 
+    /**
+     * Main to ask the current money.
+     */
     private Main main;
+    /**
+     * TextField that is created and drawn
+     */
     private TextField moneyLabel;
-    private int money;
+    /**
+     * Variable to hold current amount of money
+     */
+    private int currentMoney;
+    /**
+     * Texture to identify the label content
+     */
     private Texture coin;
 
+    /**
+     * Constructor. Sets Main, Skin, currentMoney, TextField, x- and y-coordinates, width, height and Texture of the label.
+     *
+     * @param m Main where the currentMoney is asked
+     */
 
     MoneyLabel(Main m) {
         main = m;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
-        money = main.nonStaticGetMoney();
+        currentMoney = main.nonStaticGetMoney();
 
-        moneyLabel = new TextField(Integer.toString(money), mySkin);
+        moneyLabel = new TextField(Integer.toString(currentMoney), mySkin);
         moneyLabel.setX(300);
         moneyLabel.setY(410);
         moneyLabel.setWidth(150);
@@ -29,10 +55,17 @@ public class MoneyLabel extends Actor {
         coin = new Texture(Gdx.files.internal("coin-icon.png"));
     }
 
+    /**
+     * Sets current amount of money to the label.
+     * Calls the draw(bathc, alpsha) -method of the TextLabel and draws coin-texture over it.
+     *
+     * @param batch batch that is used in draw method
+     * @param alpha delta time?
+     */
 
     public void draw(Batch batch, float alpha) {
-        money = main.nonStaticGetMoney();
-        moneyLabel.setText("        " + money);
+        currentMoney = main.nonStaticGetMoney();
+        moneyLabel.setText("        " + currentMoney);
         moneyLabel.draw(batch, alpha);
         batch.draw(coin, moneyLabel.getX(), moneyLabel.getY() + 2, 30, 30);
     }

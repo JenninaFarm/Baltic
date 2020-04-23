@@ -7,13 +7,35 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
+/**
+ * * IncomeLabel is a object base class to create a TextField with information of how much income farm/farms are producing.
+ *  *
+ *  * @author  Jennina Färm
+ *  * @author  Tommi Häkkinen
+ *  * @version 2020.2204
+ *  * @since 1.8
+ */
+
 public class IncomeLabel extends Actor {
 
+    /**
+     * TextField that is created and drawn
+     */
     private TextField label;
+    /**
+     * Index for identifying farms and map
+     */
     private int index;
+    /**
+     * Texture to identify the label content
+     */
     private Texture coin;
 
 
+    /**
+     * Constructor. Sets index, Skin, x- and y-coordinates, width, height and Texture of the label.
+     * @param i index value for identifying farms and map.
+     */
     IncomeLabel(int i) {
         index = i;
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
@@ -27,16 +49,24 @@ public class IncomeLabel extends Actor {
         coin = new Texture(Gdx.files.internal("coin-icon.png"));
     }
 
+    /**
+     * Checks how many farms are bought and counts the multipliers together if in map.
+     * Counts income/min based on the multipliers and sets it to the label.
+     * Calls the draw(bathc, alpsha) -method of the TextLabel and draws coin-texture over it.
+     *
+     * @param batch batch that is used in draw method
+     * @param alpha delta time?
+     */
 
     public void draw(Batch batch, float alpha) {
-        float [] multipliers = MoneyButton.getMultipliers();
         boolean [] farmsBought = MapButton.getFarmLocks();
         int boughtAmount = 0;
-        for(int i=0; i<farmsBought.length; i++) {
-            if(farmsBought[i]) {
+        for(boolean bought : farmsBought) {
+            if(bought){
                 boughtAmount++;
             }
         }
+        float [] multipliers = MoneyButton.getMultipliers();
         int incomePerMin = 0;
         if(index < 5) {
             incomePerMin = (int)(multipliers[index] * 60);
