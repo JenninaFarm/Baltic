@@ -11,18 +11,14 @@ public class MapResearchButton extends Actor {
 
     private Main main;
     private Texture button;
-    private float width;
-    private float height;
 
     public MapResearchButton(Main m, int x, int y) {
         main = m;
         button = new Texture(Gdx.files.internal("researchmapicon.png"));
         setX(x);
         setY(y);
-        width = button.getWidth()/6f;
-        height = button.getHeight()/6f;
-        setWidth(width);
-        setHeight(height);
+        setWidth(button.getWidth() / 6f);
+        setHeight(button.getWidth() / 6f);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         addListener(new InputListener() {
@@ -35,6 +31,6 @@ public class MapResearchButton extends Actor {
     }
 
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
+        batch.draw(button, getX(), getY(), getWidth(), getHeight());
     }
 }

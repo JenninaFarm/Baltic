@@ -57,6 +57,6 @@ public class WorkerLabel extends Actor {
         int workerAmount = farmScreen.getWorkerAmount() + 1;
         workerLabel.setText("         " + workerAmount);
         workerLabel.draw(batch, alpha);
-        batch.draw(worker, 701, 411, worker.getWidth()/4.5f, worker.getHeight()/4.5f);
+        batch.draw(worker, workerLabel.getX() + 1, workerLabel.getY() + 1, worker.getWidth()/4.5f, worker.getHeight()/4.5f);
     }
 }
