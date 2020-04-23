@@ -70,7 +70,7 @@ public class Save {
 
     public static void loadVariables() {
 
-        Main.setMoney(prefs.getInteger("money", 6000));
+        Main.setMoney(prefs.getInteger("money", 6000000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
         Tutorial.tutorial = prefs.getBoolean("tutorial", true);
