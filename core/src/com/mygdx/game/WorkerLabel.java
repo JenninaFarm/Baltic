@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -24,8 +26,10 @@ public class WorkerLabel extends Actor {
      */
     private FarmScreen farmScreen;
 
+    private Texture worker;
+
     /**
-     * Constructor. Sets FarmScreen, x- and y-coordinates, width and height for the TextField.
+     * Constructor. Sets FarmScreen, x- and y-coordinates, width, height and Texture for the TextField.
      *
      * @param main Main where the skin is asked
      * @param fs FarmScreen where the WorkerLabel TextField is added.
@@ -36,12 +40,13 @@ public class WorkerLabel extends Actor {
         workerLabel = new TextField(Integer.toString(farmScreen.getWorkerAmount()), main.getMySkin());
         workerLabel.setX(700);
         workerLabel.setY(410);
-        workerLabel.setWidth(50);
+        workerLabel.setWidth(70);
         workerLabel.setHeight(33);
+        worker = new Texture(Gdx.files.internal("worker.png"));
     }
 
     /**
-     * Calls the TextField draw(batch, alpha)-method.
+     * Calls the TextField draw(batch, alpha)-method and draws the Texture over the TextField.
      * Sets up the current number of workers in the farmScreen and adds one to it since every farm has one worker as default.
      *
      * @param batch batch that is used in draw method
@@ -49,7 +54,9 @@ public class WorkerLabel extends Actor {
      */
 
     public void draw(Batch batch, float alpha) {
-        workerLabel.setText(Integer.toString( farmScreen.getWorkerAmount()+ 1));
+        int workerAmount = farmScreen.getWorkerAmount() + 1;
+        workerLabel.setText("         " + workerAmount);
         workerLabel.draw(batch, alpha);
+        batch.draw(worker, 701, 411, worker.getWidth()/4.5f, worker.getHeight()/4.5f);
     }
 }
