@@ -57,7 +57,7 @@ public class FarmScreen implements Screen {
         camera = stage.getCamera();
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
-        workerLabel = new WorkerLabel(main, this);
+        workerLabel = new WorkerLabel(this);
         incomeLabel = new IncomeLabel("farm", farmIndex);
 
         if(Tutorial.tutorial_4 && Tutorial.tutorial) {
