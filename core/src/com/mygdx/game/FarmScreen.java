@@ -35,7 +35,7 @@ public class FarmScreen implements Screen {
     private int upgradeAmount = 19;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
-    private TextArea infoArea;
+    private InfoLabel infoLabel;
     private Vector2 dragNew, dragOld;
     private Camera camera;
 
@@ -87,18 +87,17 @@ public class FarmScreen implements Screen {
         actorY = array;
     }
 
-    public void addInfoLabel(InfoLabel infoLabel) {
-        infoArea = infoLabel.getInfoLabel();
+    public void addInfoLabel(InfoLabel il) {
+        infoLabel = il;
         Table table = new Table();
-        table.add(infoArea).minWidth(300).prefHeight(310).pad(20);
+        table.add(infoLabel).minWidth(300).prefHeight(310).pad(20);
         table.setFillParent(true);
         table.left().bottom();
         stageUI.addActor(table);
     }
 
     public void setInfoVisible(boolean visible) {
-        infoArea.setDisabled(true);
-        infoArea.setVisible(visible);
+        infoLabel.setVisible(visible);
     }
 
     private void handleInput() {

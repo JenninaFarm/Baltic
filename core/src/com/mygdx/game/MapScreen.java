@@ -23,6 +23,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 
+import javax.sound.sampled.Line;
+
 public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Main main;
@@ -39,7 +41,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Meter meter;
     private MoneyLabel moneyLabel;
     private IncomeLabel incomeLabel;
-    private TextArea infoArea;
+    private InfoLabel infoLabel;
 
     private Vector2 dragNew, dragOld;
 
@@ -68,7 +70,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         moneyLabel = new MoneyLabel(main);
-        incomeLabel = new IncomeLabel(5);
+        incomeLabel = new IncomeLabel(main,5);
         meter = new Meter(main);
         createFarms();
         createBoats();
@@ -151,19 +153,13 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
-    public void addInfoLabel(InfoLabel infoLabel) {
-        infoArea = infoLabel.getInfoLabel();
-        infoArea = infoLabel.getInfoLabel();
-        Table table = new Table();
-        table.add(infoArea).minWidth(270).prefHeight(67).pad(20).padBottom(100);
-        table.setFillParent(true);
-        table.left().bottom();
-        stageUI.addActor(table);
+    public void addInfoLabel(InfoLabel il) {
+        infoLabel = il;
+        stageUI.addActor(infoLabel);
     }
 
     public void setInfoVisible(boolean visible) {
-        infoArea.setDisabled(true);
-        infoArea.setVisible(visible);
+        infoLabel.setVisible(visible);
     }
 
     public static boolean [] getCoinAdded() {

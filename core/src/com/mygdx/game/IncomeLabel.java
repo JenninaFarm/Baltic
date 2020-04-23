@@ -4,16 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
- * * IncomeLabel is a object base class to create a TextField with information of how much income farm/farms are producing.
- *  *
- *  * @author  Jennina Färm
- *  * @author  Tommi Häkkinen
- *  * @version 2020.2204
- *  * @since 1.8
+ * IncomeLabel is a object base class to create a TextField with information of how much income farm/farms are producing.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
  */
 
 public class IncomeLabel extends Actor {

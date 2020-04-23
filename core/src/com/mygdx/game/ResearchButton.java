@@ -34,25 +34,25 @@ public class ResearchButton extends Actor {
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + index));
 
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
 
         float width = 200;
         float height = 60;
 
-        button1 = new TextButton(myBundle.get("research" + i), main.getMySkin());
+        button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
-
+        //button1.getStyle().down = main.getMySkin().getDrawable("round-dark-green");
 
         if(bought) {
-            button1.getStyle().checked = button1.getStyle().over;
+            button1.getStyle().checked = button1.getStyle().down;
             button1.setChecked(true);
-            button1.getStyle().checkedOver = button1.getStyle().up;
             button1.setDisabled(true);
 
         } else if(available){
             button1.setChecked(false);
         } else {
-            button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
             button1.setDisabled(true);
         }
@@ -67,9 +67,7 @@ public class ResearchButton extends Actor {
                 if(currentMoney >= cost && !bought && available) {
                     System.out.println("bought");
                     main.setMoney(currentMoney - cost);
-                    button1.getStyle().checked = button1.getStyle().over;
                     button1.setChecked(true);
-                    button1.getStyle().checkedOver = button1.getStyle().up;
                     button1.setDisabled(true);
                     bought = true;
                     researchBooleans[index] = true;
@@ -86,7 +84,7 @@ public class ResearchButton extends Actor {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 I18NBundle myBundle = main.getMyBundle();
-                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index));
+                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
                 researchScreen.addInfoLabel(infoLabel);
                 researchScreen.setInfoVisible(true);
             }

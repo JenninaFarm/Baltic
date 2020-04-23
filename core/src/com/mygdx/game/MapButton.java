@@ -97,7 +97,7 @@ public class MapButton extends Actor {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 if(!bought[index]) {
                     I18NBundle myBundle = main.getMyBundle();
-                    infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index));
+                    infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
                     mapScreen.setInfoVisible(true);
                 }

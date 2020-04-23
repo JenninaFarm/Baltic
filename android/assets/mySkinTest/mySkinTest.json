@@ -227,13 +227,13 @@
 		"checkedOver": "round-red"
 	},
 	"toggle": {
-		"font": "font",
+		"font": "baloo2regular",
 		"fontColor": "black",
-		"up": "round-gray",
-		"down": "round-dark-gray",
-		"over": "round-light-gray",
-		"checked": "round-dark-gray",
-		"checkedOver": "round-light-gray"
+		"up": "round-green",
+		"down": "round-dark-green",
+		"over": "round-dark-green",
+		"checked": "round-dark-green",
+		"checkedOver": "round-dark-green"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {

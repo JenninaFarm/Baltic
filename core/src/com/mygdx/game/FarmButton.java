@@ -3,12 +3,9 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -46,13 +43,15 @@ public class FarmButton extends Actor {
         multiplier = parseFloat(myBundle.get("upgradeMultiplier" + buttonIndex));
         balticSituation = Integer.parseInt(myBundle.get("upgradeBaltic" + buttonIndex));
 
+        Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+
         float width = 200;
         float height = 60;
 
         setX(550);
         setY(310 - height/2f - buttonIndex*height);
 
-        button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), main.getMySkin());
+        button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), mySkin);
         button1.setSize(width, height);
         button1.setPosition(getX(), getY());
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -62,7 +61,6 @@ public class FarmButton extends Actor {
         } else if(available){
             button1.setChecked(false);
         } else {
-            button1.getStyle().checked = button1.getStyle().checkedOver;
             button1.setChecked(true);
             button1.setDisabled(true);
         }
@@ -82,10 +80,7 @@ public class FarmButton extends Actor {
                     bought[farmIndex][buttonIndex] = true;
                     farmScreen.setFarmButtonY(buttonI);
                     //set button style
-                    button1.getStyle().checked = button1.getStyle().over;
-                    button1.setChecked(true);
-                    button1.getStyle().checkedOver = button1.getStyle().up;
-                    button1.setDisabled(true);
+                    button1.setChecked(true);button1.setDisabled(true);
                     button1.setVisible(false);
                     //set new amount of money and balticSituation
                     main.setMoney(currentMoney-cost);
@@ -105,7 +100,7 @@ public class FarmButton extends Actor {
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 I18NBundle myBundle = main.getMyBundle();
 
-                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + buttonIndex));
+                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + buttonIndex), 20, 50, 300, 310);
                 farmScreen.addInfoLabel(infoLabel);
                 farmScreen.setInfoVisible(true);
             }
@@ -123,7 +118,6 @@ public class FarmButton extends Actor {
 
     public void setUnavailable() {
         available = false;
-        button1.getStyle().checked = button1.getStyle().checkedOver;
         button1.setChecked(true);
         button1.setDisabled(true);
     }

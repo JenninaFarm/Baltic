@@ -35,7 +35,7 @@ public class ResearchScreen implements Screen {
     private static int researchAmount = 19;
     private ReturnButton returnButton;
     private MoneyLabel moneyLabel;
-    private TextArea infoArea;
+    private InfoLabel infoLabel;
     private Background background;
     private Camera camera;
     private Vector2 dragNew, dragOld;
@@ -89,18 +89,13 @@ public class ResearchScreen implements Screen {
         stageUI.addActor(returnButton);
     }
 
-    public void addInfoLabel(InfoLabel infoLabel) {
-        infoArea = infoLabel.getInfoLabel();
-        Table table = new Table();
-        table.add(infoArea).minWidth(300).prefHeight(310).pad(20);
-        table.setFillParent(true);
-        table.left().bottom();
-        stageUI.addActor(table);
+    public void addInfoLabel(InfoLabel il) {
+        infoLabel = il;
+        stageUI.addActor(infoLabel);
     }
 
     public void setInfoVisible(boolean visible) {
-        infoArea.setDisabled(true);
-        infoArea.setVisible(visible);
+        infoLabel.setVisible(visible);
     }
 
     @Override
@@ -113,7 +108,7 @@ public class ResearchScreen implements Screen {
 
         handleInput();
         camera.update();
-        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if(!Tutorial.tutorial) {
