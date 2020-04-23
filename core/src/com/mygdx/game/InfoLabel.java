@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 /**
@@ -22,10 +21,14 @@ public class InfoLabel extends Actor {
     private TextArea textArea;
 
     /**
-     * Constructor. Sets
+     * Constructor. Sets x- and y-coordinates, width and height of the TextArea.
      *
-     * @param main
-     * @param info
+     * @param main Main where the skin is asked.
+     * @param info String that contains the content of the TextArea
+     * @param x x-coordinate of the TextArea
+     * @param y y-coordinate of the TextArea
+     * @param width width of the TextArea
+     * @param height height of the TextArea
      */
 
     InfoLabel(Main main, String info, int x, int y, int width, int height) {
@@ -37,6 +40,12 @@ public class InfoLabel extends Actor {
         textArea.setHeight(height);
     }
 
+    /**
+     * Calls the TextArea draw(batch, parentAlpha)-method.
+     *
+     * @param batch batch that is used in draw method
+     * @param parentAlpha delta time?
+     */
     @Override
     public void draw(Batch batch, float parentAlpha) {
         textArea.draw(batch, parentAlpha);

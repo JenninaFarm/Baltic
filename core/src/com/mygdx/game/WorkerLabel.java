@@ -25,7 +25,7 @@ public class WorkerLabel extends Actor {
     private FarmScreen farmScreen;
 
     /**
-     * Constructor. Sets FarmScreen, x- and y-coordinates, width and height for the text field.
+     * Constructor. Sets FarmScreen, x- and y-coordinates, width and height for the TextField.
      *
      * @param main Main where the skin is asked
      * @param fs FarmScreen where the WorkerLabel TextField is added.
