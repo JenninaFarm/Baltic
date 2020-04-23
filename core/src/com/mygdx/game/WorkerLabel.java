@@ -26,12 +26,15 @@ public class WorkerLabel extends Actor {
      */
     private FarmScreen farmScreen;
 
+    /**
+     * Texture that is created and  drawn
+     */
     private Texture worker;
 
     /**
      * Constructor. Sets FarmScreen, x- and y-coordinates, width, height and Texture for the TextField.
      *
-     * @param main Main where the skin is asked
+     * @param main Main that contains metadata
      * @param fs FarmScreen where the WorkerLabel TextField is added.
      */
     WorkerLabel(Main main,FarmScreen fs) {

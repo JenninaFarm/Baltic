@@ -1,39 +1,54 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
 import java.util.ArrayList;
+
+/**
+ * MainMenuScreen is a object base class to create a Screen.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 
 public class MainMenuScreen implements Screen {
 
+    /**
+     * Main to ask SpriteBatch and I18NBundle and pass over to other objects
+     */
     private Main main;
-    private SpriteBatch batch;
+
+    /**
+     * Stage to place Actors
+     */
     private Stage stage;
+
+    /**
+     * Background to create background for the screen
+     */
     private Background background;
 
-    private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<MainMenuButton>();
-    private int buttonAmount = 2;
+    /**
+     * ArrayList to contain MainMenuButtons
+     */
+    private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<>();
 
-    public MainMenuScreen(Main m) {
+    /**
+     * Constructor. Sets stage, background, buttons and inputProcessor of the MainMenuScreen.
+     *
+     * @param m Main that contains metadata
+     */
+    MainMenuScreen(Main m) {
         main = m;
-        batch = main.getBatch();
+        SpriteBatch batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
 
@@ -46,18 +61,31 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    /**
+     * Created buttons of the screen.
+     */
     private void createButtons() {
         I18NBundle myBundle = main.getMyBundle();
         mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main1"), 0));
         mainMenuButtons.add(new MainMenuButton(main, myBundle.get("main2"), 1));
     }
 
+    /**
+     * Sets Actors to the Stage
+     */
     private void addActors() {
         stage.addActor(background);
-        for(int i=0; i<buttonAmount; i++) {
-            Button button = mainMenuButtons.get(i).getButton();
-            stage.addActor(button);
-        }
+        stage.addActor(mainMenuButtons.get(0).getButton());
+        stage.addActor(mainMenuButtons.get(1).getButton());
+    }
+
+    /**
+     * Method to ask Stage of the screen.
+     *
+     * @return stage of the screen
+     */
+    Stage getStage() {
+        return stage;
     }
 
     @Override
@@ -65,41 +93,39 @@ public class MainMenuScreen implements Screen {
 
     }
 
+    /**
+     * Calls for the draw -method of the Stage
+     *
+     * @param delta delta time of the device
+     */
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
+    /**
+     * Calls the dispose -method of the Stage
+     */
     @Override
     public void dispose() {
         stage.dispose();
     }
 
-    public Stage getStage() {
-        return stage;
-    }
+
 }
