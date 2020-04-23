@@ -6,13 +6,36 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-
+/**
+ * MapResearchButton is a object base class to create a Texture which extends an Actor and has a InputListener.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class MapResearchButton extends Actor {
 
+    /**
+     * Main that is used to switch the screen
+     */
     private Main main;
+
+    /**
+     * Texture that is created and drawn
+     */
     private Texture button;
 
-    public MapResearchButton(Main m, int x, int y) {
+    /**
+     * Constructor. Sets x- and y-coordinates, width, height and boundaries of the Boat.
+     * It contains anonymous InputListener to detect touchDown of the MapResearchButton to switch screen.
+     *
+     * @param m Main to call switchScreen
+     * @param x x-coordinate of the Actor
+     * @param y y-coordinate of the Actor
+     */
+
+    MapResearchButton(Main m, int x, int y) {
         main = m;
         button = new Texture(Gdx.files.internal("researchmapicon.png"));
         setX(x);
@@ -29,6 +52,13 @@ public class MapResearchButton extends Actor {
             }
         });
     }
+
+    /**
+     * Draws the Texture with specific location and size.
+     *
+     * @param batch batch that is used in draw method
+     * @param alpha delta time?
+     */
 
     public void draw(Batch batch, float alpha) {
         batch.draw(button, getX(), getY(), getWidth(), getHeight());
