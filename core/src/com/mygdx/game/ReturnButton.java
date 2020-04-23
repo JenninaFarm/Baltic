@@ -33,6 +33,7 @@ public class ReturnButton extends Actor {
                 System.out.println("return");
                 main.switchScreen(index, 0);
                 Save.saveVariables();
+                Save.loadVariables();
                 return true;
             }
         });

@@ -86,7 +86,7 @@ public class MoneyButton extends Actor {
         int currentTime = Utils.getCurrentTimeInSeconds();
         int timePassedInSec = currentTime - lastTimeClicked[index];
         int potentialMoney = 0;
-        boolean [][] plantBought= FarmButton.getBoughtArray();
+        boolean [][] plantBought = FarmButton.getBoughtArray();
         if(plantBought[index][0] || plantBought[index][1] || plantBought[index][2] || plantBought[index][3]){
             potentialMoney = (int)(timePassedInSec * multipliers[index]);
         }

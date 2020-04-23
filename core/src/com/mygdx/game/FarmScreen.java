@@ -28,6 +28,7 @@ public class FarmScreen implements Screen {
     private Stage stageUI;
     private ReturnButton returnButton;
     private static float [][] actorY = new float[4][19];
+    private FarmUpgrades farmUpgrades;
 
     private ArrayList<FarmButton> farmButtons = new ArrayList<>();
     private FarmWorker workerButton;
@@ -60,8 +61,9 @@ public class FarmScreen implements Screen {
         moneyLabel = new MoneyLabel(main);
         workerLabel = new WorkerLabel(this);
         incomeLabel = new IncomeLabel(farmIndex);
+        farmUpgrades = new FarmUpgrades(farmIndex);
 
-        if(Tutorial.tutorial_4 && Tutorial.tutorial) {
+        if(Tutorial.tutorial_4 && Tutorial.tutorial && farmIndex == 0) {
             Tutorial.tutorial_4_Stages[0] = true;
             for(int j=0;j<4;j++) {
                 tutorial_4_Actors[j] = new Tutorial(4, j);
@@ -154,7 +156,7 @@ public class FarmScreen implements Screen {
         batch.begin();
         batch.end();
 
-        if(Tutorial.tutorial) {
+        if(Tutorial.tutorial && farmIndex == 0) {
             manageTutorial_4();
         }
 
@@ -179,6 +181,8 @@ public class FarmScreen implements Screen {
                 tutorial_4_Actors[j].setVisible(false);
             }
             Tutorial.tutorial = false;
+            Save.saveVariables();
+            Save.loadVariables();
         }
     }
 
@@ -242,7 +246,7 @@ public class FarmScreen implements Screen {
         }
     }
 
-    private  void createButtons() {
+    private void createButtons() {
         for(int i=0; i<upgradeAmount; i++) {
             farmButtons.add(new FarmButton(main, this, i, farmIndex));
         }
@@ -255,6 +259,7 @@ public class FarmScreen implements Screen {
         }
         stage.addActor(workerButton.getButton());
         stageUI.addActor(farmBackground);
+        stageUI.addActor(farmUpgrades);
         stageUI.addActor(incomeLabel);
         stageUI.addActor(moneyLabel);
         stageUI.addActor(workerLabel);

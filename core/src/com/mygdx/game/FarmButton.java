@@ -148,8 +148,8 @@ public class FarmButton extends Actor {
         }
     }
 
-    public void draw(Batch batch, float alpha) {
-        if(bought[farmIndex][0]) {
+    //public void draw(Batch batch, float alpha) {
+       /* if(bought[farmIndex][0]) {
             Texture wheat = new Texture(Gdx.files.internal("farmUpgrades/wheat.png"));
             batch.draw(wheat, 250, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
         }
@@ -176,8 +176,8 @@ public class FarmButton extends Actor {
         if(bought[farmIndex][16]) {
             Texture organicFIN = new Texture(Gdx.files.internal("farmUpgrades/organicFIN.png"));
             batch.draw(organicFIN, 35, 324, organicFIN.getWidth()/2.5f, organicFIN.getHeight()/2.5f);
-        }
-    }
+        } */
+    //}
 
     @Override
     public void act(float delta) {
