@@ -115,12 +115,11 @@ public class ResearchScreen implements Screen {
             setResearchesAvailable();
         }
 
-        if(Tutorial.tutorial_2 && Tutorial.tutorial) {
+        if(Tutorial.tutorial) {
             researchButtons[0].setResearchAvailable();
             returnButton.setVisible(false);
+            manageTutorial_2();
         }
-
-        manageTutorial_2();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

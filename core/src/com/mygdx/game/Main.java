@@ -28,13 +28,15 @@ public class Main extends Game {
 	private static int money;
 	private static int balticSituation = 0;
 
+	public static boolean finnish;
+
 	private Skin mySkin;
 	private I18NBundle myBundle;
 	private Locale locale = new Locale("en", "GB");
 
-	private Music mapMusic;
-	private Music researchMusic;
-	private Music farmMusic;
+	private static Music mapMusic;
+	private static Music researchMusic;
+	private static Music farmMusic;
 
 	public static void setGameBegan(boolean gb) {
 		gameBegan = gb;
@@ -86,6 +88,10 @@ public class Main extends Game {
 		} else {
 			money = amount;
 		}
+	}
+
+	public static void setLanguage(boolean language) {
+		finnish = language;
 	}
 
 	public static int getStartingTime() {
@@ -143,7 +149,6 @@ public class Main extends Game {
 		researchMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/research_background_music.mp3"));
 		researchMusic.setVolume(0.2f);
 		farmMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/farm_background_music.mp3"));
-
 	}
 
 	public static void setBalticSituation(int bs) {
@@ -161,6 +166,9 @@ public class Main extends Game {
 	public Skin getMySkin() { return mySkin;}
 
 	public static void callCreate(Main m) {
+		mapMusic.stop();
+		researchMusic.stop();
+		farmMusic.stop();
 		m.create();
 	}
 
@@ -179,6 +187,9 @@ public class Main extends Game {
 		}
 		optionsScreen.dispose();
 		researchScreen.dispose();
+		mapMusic.dispose();
+		researchMusic.dispose();
+		farmMusic.dispose();
 	}
 
 }
