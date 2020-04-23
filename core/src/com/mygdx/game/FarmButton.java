@@ -26,7 +26,6 @@ public class FarmButton extends Actor {
 
     private InfoLabel infoLabel;
 
-
     private static boolean [][] bought = new boolean[4][19];
     private static boolean [] researched = new boolean[19];
 
