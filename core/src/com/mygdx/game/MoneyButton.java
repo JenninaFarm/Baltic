@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
 public class MoneyButton extends Actor {
@@ -41,19 +42,11 @@ public class MoneyButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
-                //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
-                    countMoney(timeWhenClickedInSec);
-                    if (main.soundeffects_ON) {
-                        coinSound.play();
-                    }
                 moneyCollected = countMoney(timeWhenClickedInSec);
                 coinSound.play(timeWhenClickedInSec);
 
                 System.out.println("money collected:" + moneyCollected);
-                System.out.println("multiplier: " + multipliers[index]);
-                System.out.println("maxAmount: " + maxAmount[index]);
-
-                main.nonStaticSetMoney(main.nonStaticGetMoney() + moneyCollected);
+                main.setMoney(main.nonStaticGetMoney() + moneyCollected);
                 lastTimeClicked[index] = timeWhenClickedInSec;
                 Save.saveVariables();
                 Save.loadVariables();
@@ -84,8 +77,11 @@ public class MoneyButton extends Actor {
 
     public void draw(Batch batch, float alpha) {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
+        setTouchable(Touchable.disabled);
         if(potentialMoney > 5 * multipliers[index]) {
+            setTouchable(Touchable.enabled);
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
+
 
             //when coin is att 300, 410 location, then it comes to back it's original location
             if(getX() == 300 && getY() == 410) {
