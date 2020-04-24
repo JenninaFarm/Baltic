@@ -7,25 +7,48 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+/**
+ * ReturnButton is an object base class to create a button which switch screen to previous screen.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
+
 public class ReturnButton extends Actor {
 
+    /**
+     * Main for managing screen switch
+     */
     private Main main;
+
+    /**
+     * Texture of the Actor
+     */
     private Texture button;
-    private float width;
-    private float height;
+
+    /**
+     * Index of the screen where the Actor is switching screen to when clicked
+     */
     private int index;
 
-    public ReturnButton(Main m, int i) {
+    /**
+     * Constructor. Sets index, Texture, x- and y-coordinates, width and height of the ReturnButton.
+     * It contains anonymous InputListener to detect touchDown of the ReturnButton to switch screen.
+     *
+     * @param m Main contains meta data
+     * @param i Index of the screen where the Actor is switching screen to when clicked
+     */
+    ReturnButton(Main m, int i) {
 
         index = i;
         main = m;
         button = new Texture(Gdx.files.internal("back_button.png"));
         setX(6);
         setY(390);
-        width = button.getWidth()/4f;
-        height = button.getHeight()/4f;
-        setWidth(width);
-        setHeight(height);
+        setWidth(button.getWidth()/4f);
+        setHeight(button.getHeight()/4f);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         addListener(new InputListener() {
@@ -39,7 +62,13 @@ public class ReturnButton extends Actor {
         });
     }
 
+    /**
+     * Draw method of the Actor. Draws texture set to the ReturnButton.
+     *
+     * @param batch handles drawing
+     * @param alpha used to handle transparency
+     */
     public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
+        batch.draw(button, this.getX(), this.getY(), getWidth(), getHeight());
     }
 }
