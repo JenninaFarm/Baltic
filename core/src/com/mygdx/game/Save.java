@@ -25,8 +25,8 @@ public class Save {
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
         prefs.putBoolean("tutorial", Tutorial.tutorial);
-        prefs.putBoolean("music", Main.music_ON);
-        prefs.putBoolean("sound", Main.soundeffects_ON);
+        prefs.putBoolean("music", Main.getMusic());
+        prefs.putBoolean("sound", Main.getSound());
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
