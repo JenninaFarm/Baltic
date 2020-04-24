@@ -30,7 +30,7 @@ public class MapResearchButton extends Actor {
      * Constructor. Sets x- and y-coordinates, width, height and boundaries of the Boat.
      * It contains anonymous InputListener to detect touchDown of the MapResearchButton to switch screen.
      *
-     * @param m Main to call switchScreen
+     * @param m Main that contains meta data
      * @param x x-coordinate of the Actor
      * @param y y-coordinate of the Actor
      */

@@ -102,11 +102,29 @@
 			"b": 0.05206921,
 			"a": 1
 		}
+	},
+	"round-new-gray": {
+		"name": "round-gray",
+		"color": {
+			"r": 0.5882353,
+			"g": 0.5882353,
+			"b": 0.5882353,
+			"a": 1
+		}
+	},
+	"round-new-gray1": {
+		"name": "round-white",
+		"color": {
+			"r": 0.5882353,
+			"g": 0.5882353,
+			"b": 0.5882353,
+			"a": 1
+		}
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
 	"default": {
-		"up": "round-white",
+		"up": "round-green",
 		"down": "round-dark-gray",
 		"over": "round-light-gray"
 	},
@@ -159,6 +177,10 @@
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
 	"default": {
+		"font": "Baloo2-Regular20",
+		"fontColor": "black"
+	},
+	"title": {
 		"font": "font",
 		"fontColor": "black"
 	}
@@ -223,17 +245,17 @@
 		"up": "round-green",
 		"down": "round-dark-green",
 		"over": "round-dark-green",
-		"checked": "round-red",
-		"checkedOver": "round-red"
+		"checked": "round-new-gray1",
+		"checkedOver": "round-new-gray1"
 	},
 	"toggle": {
-		"font": "baloo2regular",
+		"font": "font",
 		"fontColor": "black",
-		"up": "round-green",
-		"down": "round-dark-green",
-		"over": "round-dark-green",
-		"checked": "round-dark-green",
-		"checkedOver": "round-dark-green"
+		"up": "round-gray",
+		"down": "round-dark-gray",
+		"over": "round-light-gray",
+		"checked": "round-dark-gray",
+		"checkedOver": "round-light-gray"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
