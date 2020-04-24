@@ -62,7 +62,7 @@ public class MapButton extends Actor {
                         if(researchBooleans[6]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
-                                main.setMoney(currentMoney-cost);
+                                main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.addCoin(index);
                                 Save.saveVariables();
                                 Save.loadVariables();
@@ -73,7 +73,7 @@ public class MapButton extends Actor {
                         if(researchBooleans[16]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
-                                main.setMoney(currentMoney-cost);
+                                main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.addCoin(index);
                                 Save.saveVariables();
                                 Save.loadVariables();
@@ -82,7 +82,7 @@ public class MapButton extends Actor {
                     } else {
                         if (currentMoney >= cost) {
                             bought[index] = true;
-                            main.setMoney(currentMoney - cost);
+                            main.nonStaticSetMoney(currentMoney - cost);
                             mapScreen.addCoin(index);
                             Save.saveVariables();
                             Save.loadVariables();
@@ -96,6 +96,7 @@ public class MapButton extends Actor {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 if(!bought[index]) {
+                    System.out.println("in hover");
                     I18NBundle myBundle = main.getMyBundle();
                     infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
