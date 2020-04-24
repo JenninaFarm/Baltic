@@ -126,9 +126,9 @@ public class Save {
         FarmScreen.setFarmActorYArray(farmActorY);
     }
 
-    public static void newGame() {
+    static void newGame() {
 
-        prefs.putInteger("money", 6000);
+        prefs.putInteger("money", 6000000);
         prefs.flush();
         Main.setMoney(prefs.getInteger("money"));
 

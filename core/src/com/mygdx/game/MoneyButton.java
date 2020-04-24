@@ -22,7 +22,7 @@ public class MoneyButton extends Actor {
 
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
 
-    private static float [] multipliers = new float[6];
+    private static float [] multipliers = {4, 4, 4, 4, 10, 10};
     private static int [] lastTimeClicked = new int[6];
     private int moneyCollected;
 
@@ -34,8 +34,8 @@ public class MoneyButton extends Actor {
         setX(originalX);
         setY(originalY);
         coin = new Texture(Gdx.files.internal("coin-icon.png"));
-        setWidth(coin.getWidth()/1.7f);
-        setHeight(coin.getHeight()/1.7f);
+        setWidth(coin.getWidth() / 1.7f);
+        setHeight(coin.getHeight() / 1.7f);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
         addListener(new InputListener() {
@@ -45,7 +45,10 @@ public class MoneyButton extends Actor {
                 coinSound.play(timeWhenClickedInSec);
 
                 System.out.println("money collected:" + moneyCollected);
-                main.setMoney(main.nonStaticGetMoney() + moneyCollected);
+                System.out.println("multiplier: " + multipliers[index]);
+                System.out.println("maxAmount: " + maxAmount[index]);
+
+                main.nonStaticSetMoney(main.nonStaticGetMoney() + moneyCollected);
                 lastTimeClicked[index] = timeWhenClickedInSec;
                 Save.saveVariables();
                 Save.loadVariables();
@@ -59,41 +62,6 @@ public class MoneyButton extends Actor {
                 return true;
             }
         });
-    }
-
-    public static void addToMaxAmount(int amount, int index) {
-        maxAmount[index] += amount;
-        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
-    }
-
-    public static void setMultipliers(float [] array) {
-        multipliers = array;
-    }
-
-    public static int[] getMaxAmount() {
-        return maxAmount;
-    }
-
-    public static void addToMultiplier(float addedmp, int farmindex) {
-        multipliers[farmindex] += addedmp;
-        System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
-    }
-
-    public static void setMaxAmount(int [] array) {
-        maxAmount = array;
-    }
-
-    public static int[] getLastTimeClicked() {
-        return lastTimeClicked;
-    }
-
-    public static void setLastTimeClicked(int [] array) {
-        lastTimeClicked = array;
-    }
-
-
-    public static float[] getMultipliers() {
-        return multipliers;
     }
 
     public int countMoney(int timeNowInSec) {
@@ -128,4 +96,39 @@ public class MoneyButton extends Actor {
     public void setClicked() {
         lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();
     }
+
+    public static void addToMaxAmount(int amount, int index) {
+        maxAmount[index] += amount;
+        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
+    }
+
+    public static int[] getMaxAmount() {
+        return maxAmount;
+    }
+
+    public static void setMaxAmount(int [] array) {
+        maxAmount = array;
+    }
+
+    public static void addToMultiplier(float addedmp, int farmindex) {
+        multipliers[farmindex] += addedmp;
+        System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+    }
+
+    public static int[] getLastTimeClicked() {
+        return lastTimeClicked;
+    }
+
+    public static void setLastTimeClicked(int [] array) {
+        lastTimeClicked = array;
+    }
+
+    public static float[] getMultipliers() {
+        return multipliers;
+    }
+
+    public static void setMultipliers(float [] array) {
+        multipliers = array;
+    }
+
 }

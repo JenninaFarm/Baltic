@@ -90,6 +90,14 @@ public class Main extends Game {
 		}
 	}
 
+	public void nonStaticSetMoney(int amount) {
+		if(amount < 0) {
+			System.out.println("Program is failing. Not enough money to this action.");
+		} else {
+			money = amount;
+		}
+	}
+
 	public static void setLanguage(boolean language) {
 		finnish = language;
 	}

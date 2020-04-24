@@ -144,12 +144,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         if (Main.getBalticSituation() >= 25) {
             stage.addActor(boat1);
             stage.addActor(boatCoins1);
-            boatCoins1.setClicked();
         }
         if (Main.getBalticSituation() >= 50) {
             stage.addActor(boat2);
             stage.addActor(boatCoins2);
-            boatCoins2.setClicked();
         }
     }
 
@@ -189,8 +187,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private void createBoats() {
         boat1 = new Boat(420, 100);
         boatCoins1 = new MoneyButton(main, 460, 130, 4);
+        boatCoins1.setClicked();
         boat2 = new Boat(520, 200);
         boatCoins2 = new MoneyButton(main, 560, 230, 5);
+        boatCoins2.setClicked();
     }
 
 
