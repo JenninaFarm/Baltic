@@ -27,6 +27,9 @@ public class Main extends Game {
 
 	private static int money;
 	private static int balticSituation = 0;
+	private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
+	private static float [] multipliers = new float[6];
+
 
 	public static boolean finnish;
 
@@ -107,6 +110,16 @@ public class Main extends Game {
 		}
 	}
 
+	public static void addToMaxAmount(int amount, int index) {
+		maxAmount[index] += amount;
+		System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
+	}
+
+	public static void addToMultiplier(float addedmp, int farmindex) {
+		multipliers[farmindex] += addedmp;
+		System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+	}
+
 	public static int getMoney() {
 		return money;
 	}
@@ -164,6 +177,22 @@ public class Main extends Game {
 	}
 
 	public Skin getMySkin() { return mySkin;}
+
+	public static float[] getMultipliers() {
+		return multipliers;
+	}
+
+	public static void setMultipliers(float [] array) {
+		multipliers = array;
+	}
+
+	public static int[] getMaxAmount() {
+		return maxAmount;
+	}
+
+	public static void setMaxAmount(int [] array) {
+		maxAmount = array;
+	}
 
 	public static void callCreate(Main m) {
 		mapMusic.stop();

@@ -65,7 +65,7 @@ public class IncomeLabel extends Actor {
                 boughtAmount++;
             }
         }
-        float [] multipliers = MoneyButton.getMultipliers();
+        float [] multipliers = Main.getMultipliers();
         int incomePerMin = 0;
         if(index < 5) {
             incomePerMin = (int)(multipliers[index] * 60);

@@ -7,12 +7,12 @@ public class Save {
 
     private static boolean [] research = ResearchButton.getResearchBooleans();
     private static boolean [][] farmBought = FarmButton.getBoughtArray();
-    private static float [] multipliers = MoneyButton.getMultipliers();
+    private static float [] multipliers = Main.getMultipliers();
     private static boolean [] farmLocks = MapButton.getFarmLocks();
     private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
     private static boolean [] coinAdded = MapScreen.getCoinAdded();
     private static int [] workerAmount = FarmScreen.getWorkerAmountArray();
-    private static int [] maxAmount = MoneyButton.getMaxAmount();
+    private static int [] maxAmount = Main.getMaxAmount();
     private static float [][] farmActorY = FarmScreen.getFarmActorYArray();
 
     private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
@@ -78,7 +78,7 @@ public class Save {
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
         }
-        MoneyButton.setMultipliers(multipliers);
+        Main.setMultipliers(multipliers);
 
         for(int i=0; i<researchAmount; i++) {
             research[i] = prefs.getBoolean("research" + i);
@@ -116,7 +116,7 @@ public class Save {
         for(int i=0; i<farmAmount; i++) {
             maxAmount[i] = prefs.getInteger("maxAmount" + i);
         }
-        MoneyButton.setMaxAmount(maxAmount);
+        Main.setMaxAmount(maxAmount);
 
         for(int i=0; i<farmAmount; i++) {
             for(int j=0; j<researchAmount; j++) {
@@ -150,7 +150,7 @@ public class Save {
             prefs.flush();
             multipliers[i] = prefs.getFloat("multiplier" + i);
         }
-        MoneyButton.setMultipliers(multipliers);
+        Main.setMultipliers(multipliers);
 
         for(int i=0; i<researchAmount; i++) {
             prefs.putBoolean("research" + i, false);
@@ -205,7 +205,7 @@ public class Save {
             prefs.flush();
             maxAmount[i] = prefs.getInteger("maxAmount" + i);
         }
-        MoneyButton.setMaxAmount(maxAmount);
+        Main.setMaxAmount(maxAmount);
 
         for(int i=0; i<farmAmount; i++) {
             for (int j = 0; j < researchAmount; j++) {

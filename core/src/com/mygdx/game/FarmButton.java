@@ -131,8 +131,8 @@ public class FarmButton extends Actor {
                     main.setMoney(currentMoney - cost);
                     main.addBalticSituation(balticSituation);
                     //set MoneyButton information
-                    MoneyButton.addToMultiplier(multiplier, farmIndex);
-                    MoneyButton.addToMaxAmount(cost / 2, farmIndex);
+                    main.addToMultiplier(multiplier, farmIndex);
+                    main.addToMaxAmount(cost / 2, farmIndex);
                     //save and load
                     Save.saveVariables();
                     Save.loadVariables();

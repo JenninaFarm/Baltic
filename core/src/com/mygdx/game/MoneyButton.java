@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 public class MoneyButton extends Actor {
 
     private Main main;
-    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
 
     private int timeWhenClickedInSec;
     private Texture coin;
@@ -22,9 +21,9 @@ public class MoneyButton extends Actor {
 
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
 
-    private static float [] multipliers = new float[6];
-    private static int [] lastTimeClicked = new int[6];
     private int moneyCollected;
+
+    private static int [] lastTimeClicked = new int[6];
 
     public MoneyButton(Main m, final int x, final int y, int i) {
         main = m;
@@ -61,28 +60,6 @@ public class MoneyButton extends Actor {
         });
     }
 
-    public static void addToMaxAmount(int amount, int index) {
-        maxAmount[index] += amount;
-        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
-    }
-
-    public static void setMultipliers(float [] array) {
-        multipliers = array;
-    }
-
-    public static int[] getMaxAmount() {
-        return maxAmount;
-    }
-
-    public static void addToMultiplier(float addedmp, int farmindex) {
-        multipliers[farmindex] += addedmp;
-        System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
-    }
-
-    public static void setMaxAmount(int [] array) {
-        maxAmount = array;
-    }
-
     public static int[] getLastTimeClicked() {
         return lastTimeClicked;
     }
@@ -92,17 +69,13 @@ public class MoneyButton extends Actor {
     }
 
 
-    public static float[] getMultipliers() {
-        return multipliers;
-    }
-
     public int countMoney(int timeNowInSec) {
         int countedMoney = 0;
         int timePassedInSec = timeNowInSec - lastTimeClicked[index];
 
-        int possibleAmount = (int)(timePassedInSec*multipliers[index]);
-        if(possibleAmount > maxAmount[index]) {
-            countedMoney = maxAmount[index];
+        int possibleAmount = (int)(timePassedInSec*main.getMultipliers()[index]);
+        if(possibleAmount > main.getMaxAmount()[index]) {
+            countedMoney = main.getMaxAmount()[index];
         } else {
             countedMoney = possibleAmount;
         }
@@ -111,7 +84,7 @@ public class MoneyButton extends Actor {
 
     public void draw(Batch batch, float alpha) {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
-        if(potentialMoney > 5 * multipliers[index]) {
+        if(potentialMoney > 5 * main.getMultipliers()[index]) {
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
 
             //when coin is att 300, 410 location, then it comes to back it's original location
