@@ -60,6 +60,7 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(multiplexer);
 			farmMusic.stop();
 			researchMusic.stop();
+			mapMusic.stop();
 			if (music_ON) {
 				mapMusic.play();
 			}
@@ -164,7 +165,7 @@ public class Main extends Game {
 
 		setScreen(mainMenuScreen);
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
-		mapMusic.play();
+		//mapMusic.play();
 	}
 
 	public static void setBalticSituation(int bs) {
@@ -183,8 +184,6 @@ public class Main extends Game {
 
 	public static void callCreate(Main m) {
 		mapMusic.stop();
-		researchMusic.stop();
-		farmMusic.stop();
 		m.create();
 	}
 

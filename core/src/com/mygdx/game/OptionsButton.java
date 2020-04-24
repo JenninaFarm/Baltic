@@ -37,17 +37,21 @@ public class OptionsButton extends Actor {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
                     if (main.music_ON) {
-                        main.setMusic(false);
+                        main.music_ON = false;
                         main.mapMusic.stop();
+                        System.out.println("Music off");
                     } else {
-                        main.setMusic(true);
+                        main.music_ON = true;
                         main.mapMusic.play();
+                        System.out.println("Music on");
                     }
                 } else if (index == 1) {
                     if (main.soundeffects_ON) {
                         main.soundeffects_ON = false;
+                        System.out.println("Sound off");
                     } else {
                         main.soundeffects_ON = true;
+                        System.out.println("Sound on");
                     }
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));
@@ -59,8 +63,6 @@ public class OptionsButton extends Actor {
                     main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();
-                    //Save.saveVariables();
-                    //Save.loadVariables();
                     main.callCreate(main);
                 }
                 return true;
