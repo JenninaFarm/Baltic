@@ -36,32 +36,32 @@ public class OptionsButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
-                    if (Main.music_ON) {
-                        Main.setMusic(false);
-                        Main.mapMusic.stop();
+                    if (main.music_ON) {
+                        main.setMusic(false);
+                        main.mapMusic.stop();
                     } else {
-                        Main.setMusic(true);
-                        Main.mapMusic.play();
+                        main.setMusic(true);
+                        main.mapMusic.play();
                     }
                 } else if (index == 1) {
-                    if (Main.soundeffects_ON) {
-                        Main.soundeffects_ON = false;
+                    if (main.soundeffects_ON) {
+                        main.soundeffects_ON = false;
                     } else {
-                        Main.soundeffects_ON = true;
+                        main.soundeffects_ON = true;
                     }
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));
-                    Main.setLanguage(true);
-                    Main.callCreate(main);
+                    main.setLanguage(true);
+                    main.callCreate(main);
                 } else if(index == 3) {
                     main.changeLocale(new Locale("en", "GB"));
-                    Main.setLanguage(false);
-                    Main.callCreate(main);
+                    main.setLanguage(false);
+                    main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();
                     //Save.saveVariables();
                     //Save.loadVariables();
-                    Main.callCreate(main);
+                    main.callCreate(main);
                 }
                 return true;
             }

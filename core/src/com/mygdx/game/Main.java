@@ -61,7 +61,6 @@ public class Main extends Game {
 			farmMusic.stop();
 			researchMusic.stop();
 			if (music_ON) {
-				//mapMusic.setLooping(true);
 				mapMusic.play();
 			}
 		} else if(x == 3) {
@@ -70,7 +69,6 @@ public class Main extends Game {
 				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI());
 				Gdx.input.setInputProcessor(multiplexer);
 				if (music_ON) {
-					//farmMusic.setLooping(true);
 					farmMusic.play();
 				}
 			}
@@ -80,7 +78,6 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(multiplexer);
 			mapMusic.stop();
 			if (music_ON) {
-				//researchMusic.setLooping(true);
 				researchMusic.play();
 			}
 		} else if(x == 5) {

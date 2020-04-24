@@ -43,7 +43,7 @@ public class MoneyButton extends Actor {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
                 //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
                     countMoney(timeWhenClickedInSec);
-                    if (Main.soundeffects_ON) {
+                    if (main.soundeffects_ON) {
                         coinSound.play();
                     }
                 moneyCollected = countMoney(timeWhenClickedInSec);
