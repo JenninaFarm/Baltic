@@ -27,7 +27,7 @@ public class OptionsButton extends Actor {
 
         button1 = new TextButton(label, main.getMySkin());
         button1.setSize(width, height);
-        button1.setPosition(800 / 2f - width / 2f, 450 / 2f - height / 2f - index * height);
+        button1.setPosition(800 / 2f - width / 2f, 500 / 2f - height / 2f - index * height);
         button1.setDisabled(true);
         button1.addListener(new InputListener() {
             @Override
@@ -36,22 +36,34 @@ public class OptionsButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
-
+                    if (main.music_ON) {
+                        main.music_ON = false;
+                        main.mapMusic.stop();
+                        System.out.println("Music off");
+                    } else {
+                        main.music_ON = true;
+                        main.mapMusic.play();
+                        System.out.println("Music on");
+                    }
                 } else if (index == 1) {
-
+                    if (main.soundeffects_ON) {
+                        main.soundeffects_ON = false;
+                        System.out.println("Sound off");
+                    } else {
+                        main.soundeffects_ON = true;
+                        System.out.println("Sound on");
+                    }
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));
-                    Main.setLanguage(true);
-                    Main.callCreate(main);
+                    main.setLanguage(true);
+                    main.callCreate(main);
                 } else if(index == 3) {
                     main.changeLocale(new Locale("en", "GB"));
-                    Main.setLanguage(false);
-                    Main.callCreate(main);
+                    main.setLanguage(false);
+                    main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();
-                    Save.saveVariables();
-                    Save.loadVariables();
-                    Main.callCreate(main);
+                    main.callCreate(main);
                 }
                 return true;
             }

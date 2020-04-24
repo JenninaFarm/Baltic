@@ -41,6 +41,11 @@ public class MoneyButton extends Actor {
         addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
+                //if((timeWhenClickedInSec - lastTimeClicked[index]) >= 5) {
+                    countMoney(timeWhenClickedInSec);
+                    if (main.soundeffects_ON) {
+                        coinSound.play();
+                    }
                 moneyCollected = countMoney(timeWhenClickedInSec);
                 coinSound.play(timeWhenClickedInSec);
 

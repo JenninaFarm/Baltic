@@ -210,7 +210,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             hideIconsTutorial_1();
             manageTutorial_1();
         }
-        if(!Tutorial.tutorial_1) {
+        if(!Tutorial.tutorial_1 && Tutorial.tutorial) {
             for(int j=0; j<4; j++) {
                 tutorial_1_Actors[j].setVisible(false);
             }
@@ -226,7 +226,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             manageTutorial_3();
         }
 
-        if(!Tutorial.tutorial_3) {
+        if(!Tutorial.tutorial_3 && Tutorial.tutorial) {
             for (int j = 0; j < 4; j++) {
                 tutorial_3_Actors[j].setVisible(false);
             }
