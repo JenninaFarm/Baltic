@@ -11,58 +11,167 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 
+/**
+ * FarmScreen is an object base class to create a Screen for farms.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
+
 public class FarmScreen implements Screen {
 
-    private Main main;
-    private int farmIndex;
-    private SpriteBatch batch;
-    private Stage stage;
-    private Stage stageUI;
-    private ReturnButton returnButton;
-    private static float [][] actorY = new float[4][19];
-    private FarmUpgrades farmUpgrades;
-
-    private ArrayList<FarmButton> farmButtons = new ArrayList<>();
-    private FarmWorker workerButton;
-    private WorkerLabel workerLabel;
-    private int upgradeAmount = 19;
-    private MoneyLabel moneyLabel;
-    private IncomeLabel incomeLabel;
-    private InfoLabel infoLabel;
-    private Vector2 dragNew, dragOld;
-    private Camera camera;
-
+    /**
+     * Array that contains the amount of workers in the farms
+     */
     private static int [] workerAmount = new int[4];
+    /**
+     * 2d array that contains the y-coordinates of the FarmButton objects
+     */
+    private static float [][] actorY = new float[4][19];
+    /**
+     * Array for Actors of the Stage
+     */
     private static Array<Actor> actors;
+    /**
+     * Main contains meta data of the game
+     */
+    private Main main;
+    /**
+     * Index to identify the farmScreen
+     */
+    private int farmIndex;
+    /**
+     * Batch to handle drawing
+     */
+    private SpriteBatch batch;
+    /**
+     * Stage to place Actors that are not moving with the camera
+     */
+    private Stage stage;
+    /**
+     * Stage to place Actors that are still in the camera viewport
+     */
+    private Stage stageUI;
+    /**
+     * Amount of farm upgrades
+     */
+    private int upgradeAmount = 19;
+    /**
+     * Actor of the ReturnButton
+     */
+    private ReturnButton returnButton;
+    /**
+     * Actor for the farm upgrade textures
+     */
+    private FarmUpgrades farmUpgrades;
+    /**
+     * ArrayList containing FarmButton Actors for buying farm upgrades
+     */
+    private ArrayList<FarmButton> farmButtons = new ArrayList<>();
+    /**
+     * Actor for FarmWorker buying Button
+     */
+    private FarmWorker workerButton;
+    /**
+     * Actor for showing how many workers farm has
+     */
+    private WorkerLabel workerLabel;
+    /**
+     * Actor for showing players amount of money
+     */
+    private MoneyLabel moneyLabel;
+    /**
+     * Actor for showing current income per minute in the farm
+     */
+    private IncomeLabel incomeLabel;
+    /**
+     * Actor to show information about the upgrades
+     */
+    private InfoLabel infoLabel;
+    /**
+     * Actor that creates background for the screen
+     */
     private Background farmBackground;
-
+    /**
+     * Holds the Vector of dragging in the screen
+     */
+    private Vector2 dragNew, dragOld;
+    /**
+     * Camera to move the viewport
+     */
+    private Camera camera;
+    /**
+     * Array for the Tutorial Actors
+     */
     private Tutorial [] tutorial_4_Actors = new Tutorial[6];
 
-    public FarmScreen(Main m, int i) {
+    /**
+     * Constructor. Creates all the private variables, arrays and objects.
+     *
+     * @param m Main contains meta data of the game
+     * @param i Index of the FarmScreen
+     */
+    FarmScreen(Main m, int i) {
         main = m;
         farmIndex = i;
         batch = main.getBatch();
-        farmBackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
-        farmBackground.setSize(800, 450);
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
-        returnButton = new ReturnButton(main, 2);
-        moneyLabel = new MoneyLabel(main);
-        workerLabel = new WorkerLabel(main, this);
-        incomeLabel = new IncomeLabel(main, farmIndex);
-        farmUpgrades = new FarmUpgrades(farmIndex);
 
+        checkIfTutorial();
+        createActors();
+        addActors();
+        setActorY();
+    }
+
+    /**
+     * Get -method to collect 2d array which contains y-coordinates of the stage Actors.
+     *
+     * @return 2d array of y-coordinates of the stage Actors
+     */
+    static float[][] getFarmActorYArray() {
+        return actorY;
+    }
+
+    /**
+     * Set -method to receive saved actorY array.
+     *
+     * @param array saved actorY array
+     */
+    static void setFarmActorYArray(float [][] array) {
+        actorY = array;
+    }
+
+    /**
+     * Get -method to collect array which contains amount of workers.
+     *
+     * @return array of amount of workers
+     */
+    static int[] getWorkerAmountArray() {
+        return workerAmount;
+    }
+
+    /**
+     * Set -method to receive saved workerAmount array.
+     *
+     * @param array saved workerAmount array
+     */
+    static void setWorkerAmountArray(int [] array) { workerAmount = array;}
+
+    /**
+     * Checks if tutorial is needed to set true, create and place to the stage.
+     */
+    private void checkIfTutorial() {
         if(Tutorial.tutorial_4 && Tutorial.tutorial && farmIndex == 0) {
             Tutorial.tutorial_4_Stages[0] = true;
             for(int j=0;j<4;j++) {
@@ -70,9 +179,46 @@ public class FarmScreen implements Screen {
             }
             stage.addActor(tutorial_4_Actors[0]);
         }
+    }
 
-        createButtons();
-        addActors();
+    /**
+     * Creates all the Actors of the constructor.
+     */
+    private void createActors() {
+        farmBackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
+        farmBackground.setSize(800, 450);
+        returnButton = new ReturnButton(main, 2);
+        moneyLabel = new MoneyLabel(main);
+        workerLabel = new WorkerLabel(main, this);
+        incomeLabel = new IncomeLabel(main, farmIndex);
+        farmUpgrades = new FarmUpgrades(farmIndex);
+        for(int i=0; i<upgradeAmount; i++) {
+            farmButtons.add(new FarmButton(main, this, i, farmIndex));
+        }
+        workerButton = new FarmWorker(main, this);
+    }
+
+    /**
+     * Places the Actors of the constructor to the Stages.
+     */
+    private void addActors() {
+        for(int i=0; i<upgradeAmount; i++) {
+            stage.addActor(farmButtons.get(i).getButton());
+        }
+        stage.addActor(workerButton.getButton());
+        stageUI.addActor(farmBackground);
+        stageUI.addActor(farmUpgrades);
+        stageUI.addActor(incomeLabel);
+        stageUI.addActor(moneyLabel);
+        stageUI.addActor(workerLabel);
+        stageUI.addActor(farmButtons.get(0));
+        stageUI.addActor(returnButton);
+    }
+
+    /**
+     * Sets the current y-coordinate of the FarmButtons
+     */
+    private void setActorY() {
         actors = stage.getActors();
         for(int j=0; j<upgradeAmount; j++) {
             if(actorY[farmIndex][j] != 0) {
@@ -81,23 +227,75 @@ public class FarmScreen implements Screen {
         }
     }
 
-    public static float[][] getFarmActorYArray() {
-        return actorY;
+    @Override
+    public void show() {
     }
 
-    public static void setFarmActorYArray(float [][] array) {
-        actorY = array;
+    /**
+     * Adds worker to the workerAmount array.
+     */
+    void addWorker() {
+        if(workerAmount[farmIndex] < 4) {
+            workerAmount[farmIndex]++;
+            Save.saveVariables();
+            Save.loadVariables();
+        }
     }
 
-    public void addInfoLabel(InfoLabel il) {
+    /**
+     * Adds InfoLabel to the stage.
+     *
+     * @param il InfoLabel that is added
+     */
+    void addInfoLabel(InfoLabel il) {
         infoLabel = il;
         stageUI.addActor(infoLabel);
     }
 
-    public void setInfoVisible(boolean visible) {
+    /**
+     * Sets InfoLabel visible or not.
+     *
+     * @param visible Boolean if InfoLabel is visible or not
+     */
+    void setInfoVisible(boolean visible) {
         infoLabel.setVisible(visible);
     }
 
+    /**
+     * Get method to collect the amount of workers in this screen.
+     *
+     * @return integer amount of workers
+     */
+    int getWorkerAmount() {
+        return workerAmount[farmIndex];
+    }
+
+    /**
+     * Updates camera input and location, checks if tutorial is on and if upgrades are available and calls draw -methods of the Stages.
+     *
+     * @param delta delta time of player's device
+     */
+    @Override
+    public void render(float delta) {
+
+        handleInput();
+        camera.update();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(Tutorial.tutorial && farmIndex == 0) {
+            manageTutorial_4();
+        }
+
+        setUpgradesAvailable();
+
+        stageUI.draw();
+        stage.draw();
+    }
+
+    /**
+     * Handles input of the camera movement and updates the location of the camera.
+     */
     private void handleInput() {
 
         if (Gdx.input.justTouched()){
@@ -117,53 +315,9 @@ public class FarmScreen implements Screen {
         camera.position.y = MathUtils.clamp(camera.position.y, -400, 250);
     }
 
-    public static int[] getWorkerAmountArray() {
-        return workerAmount;
-    }
-
-
-    public static void setWorkerAmountArray(int [] array) { workerAmount = array;}
-
-    public void addWorker() {
-        if(workerAmount[farmIndex] < 4) {
-            workerAmount[farmIndex]++;
-            Save.saveVariables();
-            Save.loadVariables();
-        }
-    }
-
-    public int getWorkerAmount() {
-        return workerAmount[farmIndex];
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-
-        handleInput();
-        camera.update();
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.begin();
-        batch.end();
-
-        if(Tutorial.tutorial && farmIndex == 0) {
-            manageTutorial_4();
-        }
-
-        setUpgradesAvailable();
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        stageUI.act(Gdx.graphics.getDeltaTime());
-
-        stageUI.draw();
-        stage.draw();
-    }
-
+    /**
+     * Controls how the tutorial is getting forward.
+     */
     private void manageTutorial_4() {
 
         for(int i=0; i<4; i++) {
@@ -181,7 +335,10 @@ public class FarmScreen implements Screen {
         }
     }
 
-    public void setUpgradesAvailable() {
+    /**
+     * Checks if certain upgrade is bought and farm has enough workers and sets next upgrade available.
+     */
+    private void setUpgradesAvailable() {
         boolean [][] boughtArray = FarmButton.getBoughtArray();
 
         farmButtons.get(0).setAvailable();
@@ -236,28 +393,12 @@ public class FarmScreen implements Screen {
         }
     }
 
-    private void createButtons() {
-        for(int i=0; i<upgradeAmount; i++) {
-            farmButtons.add(new FarmButton(main, this, i, farmIndex));
-        }
-        workerButton = new FarmWorker(main, this);
-    }
-
-    private void addActors() {
-        for(int i=0; i<upgradeAmount; i++) {
-            stage.addActor(farmButtons.get(i).getButton());
-        }
-        stage.addActor(workerButton.getButton());
-        stageUI.addActor(farmBackground);
-        stageUI.addActor(farmUpgrades);
-        stageUI.addActor(incomeLabel);
-        stageUI.addActor(moneyLabel);
-        stageUI.addActor(workerLabel);
-        stageUI.addActor(farmButtons.get(0));
-        stageUI.addActor(returnButton);
-    }
-
-    public void setFarmButtonY(int buttonIndex) {
+    /**
+     * Updates every following FarmButton y-coordinate of the given buttonIndex.
+     *
+     * @param buttonIndex y-coordinates are moved relative to this buttonIndex
+     */
+    void setFarmButtonY(int buttonIndex) {
         actors = stage.getActors();
         for(int i=0; i<upgradeAmount; i++) {
             if(buttonIndex == i) {
@@ -268,6 +409,13 @@ public class FarmScreen implements Screen {
         }
     }
 
+    /**
+     * Moves Actor y-coordinates up by 60 pixels. Saves new location to the actorY array and saves and loads new info.
+     *
+     * @param actor Actor that is wanted to move
+     * @param y Y-coordinate before the moving
+     * @param index Index of the moved Actor
+     */
     private void moveY(Actor actor, float y, int index) {
         actor.setY(y+60);
         actorY[farmIndex][index] = actor.getY();
@@ -275,34 +423,43 @@ public class FarmScreen implements Screen {
         Save.loadVariables();
     }
 
-    public Stage getStage() {
+    /**
+     * Get -method to collect stage
+     *
+     * @return stage of the farmScreen
+     */
+    Stage getStage() {
         return stage;
     }
-    public Stage getStageUI() {
+
+    /**
+     * Get -method to collect stageUI
+     *
+     * @return stageUI of the farmScreen
+     */
+    Stage getStageUI() {
         return stageUI;
     }
 
-
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
+    /**
+     * Disposes the Stages.
+     */
     @Override
     public void dispose() {
         stage.dispose();
