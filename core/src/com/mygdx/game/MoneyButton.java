@@ -23,7 +23,7 @@ public class MoneyButton extends Actor {
 
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
 
-    private static float [] multipliers = {4, 4, 4, 4, 10, 10};
+    private static float [] multipliers = {4, 4, 4, 4, 50, 50};
     private static int [] lastTimeClicked = new int[6];
     private int moneyCollected;
 

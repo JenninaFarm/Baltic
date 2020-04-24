@@ -141,7 +141,7 @@ public class Save {
             if(i<5) {
                 prefs.putFloat("multiplier" + i, 4);
             } else {
-                prefs.putFloat("multiplier" + i, 10);
+                prefs.putFloat("multiplier" + i, 50);
             }
         }
 
