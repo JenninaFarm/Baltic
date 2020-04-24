@@ -234,10 +234,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         addBoatsToStage();
 
-        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
-        stageUI.act(Gdx.graphics.getDeltaTime());
         stageUI.draw();
     }
 
@@ -338,10 +336,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stageUI.dispose();
     }
 
-    public Stage getStage() {
+    Stage getStage() {
         return stage;
     }
-    public Stage getStageUI() {
+    Stage getStageUI() {
         return stageUI;
     }
 }
