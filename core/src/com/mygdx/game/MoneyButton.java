@@ -27,7 +27,7 @@ public class MoneyButton extends Actor {
     private static int [] lastTimeClicked = new int[6];
     private int moneyCollected;
 
-    public MoneyButton(Main m, final int x, final int y, int i) {
+    MoneyButton(Main m, final int x, final int y, int i) {
         main = m;
         originalX = x;
         originalY = y;
@@ -62,17 +62,9 @@ public class MoneyButton extends Actor {
         });
     }
 
-    public int countMoney(int timeNowInSec) {
-        int countedMoney = 0;
-        int timePassedInSec = timeNowInSec - lastTimeClicked[index];
-
-        int possibleAmount = (int)(timePassedInSec*multipliers[index]);
-        if(possibleAmount > maxAmount[index]) {
-            countedMoney = maxAmount[index];
-        } else {
-            countedMoney = possibleAmount;
-        }
-        return countedMoney;
+    static void addToMaxAmount(int amount, int index) {
+        maxAmount[index] += amount;
+        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
     }
 
     public void draw(Batch batch, float alpha) {
@@ -93,27 +85,35 @@ public class MoneyButton extends Actor {
         }
     }
 
-    //called when new coin is added to stage. It set's the lastTimeClicked to active mode;
-    public void setClicked() {
-        lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();
-    }
-
-    public static void addToMaxAmount(int amount, int index) {
-        maxAmount[index] += amount;
-        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
-    }
-
-    public static int[] getMaxAmount() {
+    static int[] getMaxAmount() {
         return maxAmount;
     }
 
-    public static void setMaxAmount(int [] array) {
+    static void setMaxAmount(int [] array) {
         maxAmount = array;
     }
 
-    public static void addToMultiplier(float addedmp, int farmindex) {
+    static void addToMultiplier(float addedmp, int farmindex) {
         multipliers[farmindex] += addedmp;
         System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+    }
+
+    private int countMoney(int timeNowInSec) {
+        int countedMoney;
+        int timePassedInSec = timeNowInSec - lastTimeClicked[index];
+
+        int possibleAmount = (int)(timePassedInSec*multipliers[index]);
+        if(possibleAmount > maxAmount[index]) {
+            countedMoney = maxAmount[index];
+        } else {
+            countedMoney = possibleAmount;
+        }
+        return countedMoney;
+    }
+
+    //called when new coin is added to stage. It set's the lastTimeClicked to active mode;
+    void setClicked() {
+        lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();
     }
 
     public static int[] getLastTimeClicked() {

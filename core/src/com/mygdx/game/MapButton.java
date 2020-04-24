@@ -3,14 +3,10 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.I18NBundle;
-
-import java.awt.TextField;
-import java.time.ZonedDateTime;
 
 public class MapButton extends Actor {
 
@@ -95,8 +91,9 @@ public class MapButton extends Actor {
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                System.out.println("in enter");
                 if(!bought[index]) {
-                    System.out.println("in hover");
+                    System.out.println("in enter inside if");
                     I18NBundle myBundle = main.getMyBundle();
                     infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
@@ -106,7 +103,10 @@ public class MapButton extends Actor {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                System.out.println("iin exit");
                 if(!bought[index]) {
+                    System.out.println("in eexit inside if");
+
                     mapScreen.setInfoVisible(false);
                 }
             }

@@ -128,7 +128,7 @@ public class FarmButton extends Actor {
                     farmScreen.setFarmButtonY(buttonI);
                     button1.setVisible(false);
                     //set new amount of money and balticSituation
-                    main.setMoney(currentMoney - cost);
+                    main.nonStaticSetMoney(currentMoney - cost);
                     main.addBalticSituation(balticSituation);
                     //set MoneyButton information
                     MoneyButton.addToMultiplier(multiplier, farmIndex);

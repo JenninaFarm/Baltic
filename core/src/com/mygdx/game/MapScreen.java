@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,18 +11,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
-
-import javax.sound.sampled.Line;
 
 public class MapScreen extends ApplicationAdapter implements Screen {
 
@@ -57,7 +50,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Boat boat2;
     private MoneyButton boatCoins2;
 
-    public MapScreen(Main m) {
+    MapScreen(Main m) {
 
         main = m;
         batch = main.getBatch();
@@ -122,22 +115,12 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(coins.get(0));
     }
 
-    private void addCoinsToStage() {
-        coinAdded[0] = true;
-        for(int i=0; i<actorAmount; i++) {
-            if(coinAdded[i]) {
-                stage.addActor(coins.get(i));
-            }
-        }
+    static boolean [] getCoinAdded() {
+        return coinAdded;
     }
 
-    public void addCoin(int index) {
-        stage.addActor(coins.get(index));
-        coinAdded[index] = true;
-        coins.get(index).setClicked();
-
-        Save.saveVariables();
-        Save.loadVariables();
+    static void setCoinAdded(boolean [] array) {
+        coinAdded = array;
     }
 
     private void addBoatsToStage() {
@@ -151,23 +134,38 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
-    public void addInfoLabel(InfoLabel il) {
+    static void setFarmLocksArray(boolean [] array) {
+        farmLocks = array;
+    }
+
+    private void addCoinsToStage() {
+        coinAdded[0] = true;
+        for(int i=0; i<actorAmount; i++) {
+            if(coinAdded[i]) {
+                stage.addActor(coins.get(i));
+                if(MoneyButton.getLastTimeClicked()[i] == 0) {
+                    coins.get(i).setClicked();
+                }
+            }
+        }
+    }
+
+    void addCoin(int index) {
+        stage.addActor(coins.get(index));
+        coinAdded[index] = true;
+        coins.get(index).setClicked();
+
+        Save.saveVariables();
+        Save.loadVariables();
+    }
+
+    void addInfoLabel(InfoLabel il) {
         infoLabel = il;
         stageUI.addActor(infoLabel);
     }
 
-    public void setInfoVisible(boolean visible) {
+    void setInfoVisible(boolean visible) {
         infoLabel.setVisible(visible);
-    }
-
-    public static boolean [] getCoinAdded() {
-        return coinAdded;
-    }
-    public static void setFarmLocksArray(boolean [] array) {
-        farmLocks = array;
-    }
-    public static void setCoinAdded(boolean [] array) {
-        coinAdded = array;
     }
 
     private void createCoins() {
