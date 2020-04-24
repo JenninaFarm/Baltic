@@ -60,7 +60,6 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(multiplexer);
 			farmMusic.stop();
 			researchMusic.stop();
-			mapMusic.stop();
 			if (music_ON) {
 				mapMusic.play();
 			}
