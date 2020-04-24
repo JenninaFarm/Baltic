@@ -36,9 +36,9 @@ public class Main extends Game {
 	private I18NBundle myBundle;
 	private Locale locale = new Locale("en", "GB");
 
-	public static Music mapMusic;
-	private static Music researchMusic;
-	private static Music farmMusic;
+	private Music mapMusic;
+	private Music researchMusic;
+	private Music farmMusic;
 
 	public static void setGameBegan(boolean gb) {
 		gameBegan = gb;
@@ -110,8 +110,20 @@ public class Main extends Game {
 		music_ON = music;
 	}
 
+	public void stopMusic() {
+		mapMusic.stop();
+	}
+
+	public static boolean getMusic() {
+		return music_ON;
+	}
+
 	public static void setSound(boolean sound) {
 		soundeffects_ON = sound;
+	}
+
+	public static boolean getSound() {
+		return soundeffects_ON;
 	}
 
 	public static int getStartingTime() {
@@ -190,7 +202,7 @@ public class Main extends Game {
 	public Skin getMySkin() { return mySkin;}
 
 	public static void callCreate(Main m) {
-		mapMusic.stop();
+		m.stopMusic();
 		m.create();
 	}
 
