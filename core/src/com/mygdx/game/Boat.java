@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
- * Boat is a object base class to create a Texture which extends an Actor.
+ * Boat is an object base class to create a Texture which extends an Actor.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
