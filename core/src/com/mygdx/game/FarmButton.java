@@ -11,25 +11,76 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import static java.lang.Float.parseFloat;
 
+/**
+ * FarmButton is an object base class to create a buttons to FarmScreen.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
+
 public class FarmButton extends Actor {
+
+    /**
+     * 2d array that contains booleans if the buttons are bought or not.
+     */
+    private static boolean[][] bought = new boolean[4][19];
+    /**
+     * Array that contains booleans if the upgrades are researched or not.
+     */
+    private static boolean[] researched = new boolean[19];
+    /**
+     * Main for money and balticSituation handling and asking I18NBundle
+     */
     private Main main;
+    /**
+     * FarmScreen for InfoLabel and button position handling
+     */
     private FarmScreen farmScreen;
+    /**
+     * Button that is created and drawn
+     */
     private Button button1;
-
+    /**
+     * Index of the Button
+     */
     private int buttonIndex;
+    /**
+     * Index of the FarmScreen where the Button is
+     */
     private int farmIndex;
-
+    /**
+     * Cost of the Button.
+     */
     private int cost;
+    /**
+     * Multiplier change to effect the income speed.
+     */
     private float multiplier;
+    /**
+     * Boolean if the Button is available to buy.
+     */
     private boolean available;
+    /**
+     * BalticSituation change to effect the Baltic Sea and winning of the game.
+     */
     private int balticSituation;
-
+    /**
+     * InfoLabel that is drawn if player is hovering over the button.
+     */
     private InfoLabel infoLabel;
 
-    private static boolean [][] bought = new boolean[4][19];
-    private static boolean [] researched = new boolean[19];
-
-    public FarmButton(Main m, FarmScreen fs, final int buttonI, int farmI) {
+    /**
+     * Constructor. Sets I18NBundle, Skin, width, height, x- and y-coordinates and Button of the FarmButton.
+     * It contains anonymous InputListener to detect touchDown, enter and exit of the FarmButton to buy the Button or set InfoLabel visible or not.
+     *
+     * @param m Main contains meta data
+     * @param fs FarmScreen contains the Stage of the Button Actor
+     * @param buttonI To identify the Buttons
+     * @param farmI To identify the FarmScreen
+     */
+    FarmButton(Main m, FarmScreen fs, final int buttonI, int farmI) {
         main = m;
         farmScreen = fs;
         buttonIndex = buttonI;
@@ -42,20 +93,20 @@ public class FarmButton extends Actor {
 
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
-        float width = 200;
-        float height = 60;
+        setWidth(200);
+        setHeight(60);
 
         setX(550);
-        setY(310 - height/2f - buttonIndex*height);
+        setY(310 - getHeight() / 2f - buttonIndex * getHeight());
 
         button1 = new TextButton(myBundle.get("upgrade" + buttonIndex), mySkin);
-        button1.setSize(width, height);
+        button1.setSize(getWidth(), getHeight());
         button1.setPosition(getX(), getY());
         setBounds(getX(), getY(), getWidth(), getHeight());
 
-        if(bought[farmIndex][buttonIndex]) {
+        if (bought[farmIndex][buttonIndex]) {
             button1.setVisible(false);
-        } else if(available){
+        } else if (available) {
             button1.setChecked(false);
         } else {
             button1.setChecked(true);
@@ -63,33 +114,29 @@ public class FarmButton extends Actor {
         }
 
         button1.addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                int currentMoney = main.getMoney();
-                //farmScreen.setInfoVisible(false);
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                int currentMoney = main.nonStaticGetMoney();
 
-                if(currentMoney < cost || bought[farmIndex][buttonIndex] || !available) {
+                if (currentMoney < cost || bought[farmIndex][buttonIndex] || !available) {
                     button1.setDisabled(true);
                 } else {
                     button1.setDisabled(false);
                 }
-                if(available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
+                if (available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
                     System.out.println("bought");
                     bought[farmIndex][buttonIndex] = true;
                     farmScreen.setFarmButtonY(buttonI);
-                    //set button style
-                    button1.setChecked(true);button1.setDisabled(true);
                     button1.setVisible(false);
                     //set new amount of money and balticSituation
-                    main.setMoney(currentMoney-cost);
+                    main.setMoney(currentMoney - cost);
                     main.addBalticSituation(balticSituation);
-                    //set
+                    //set MoneyButton information
                     MoneyButton.addToMultiplier(multiplier, farmIndex);
-                    MoneyButton.addToMaxAmount(cost/2, farmIndex);
+                    MoneyButton.addToMaxAmount(cost / 2, farmIndex);
                     //save and load
                     Save.saveVariables();
                     Save.loadVariables();
                 }
-
                 return true;
             }
 
@@ -109,67 +156,50 @@ public class FarmButton extends Actor {
         });
     }
 
-    public static void setResearched(boolean [] array) {
+    /**
+     * Set -method to receive array of researched upgrades.
+     *
+     * @param array array that is received
+     */
+    static void setResearched(boolean[] array) {
         researched = array;
     }
 
-    public void setUnavailable() {
-        available = false;
-        button1.setChecked(true);
-        button1.setDisabled(true);
-    }
-
-    public Button getButton() {
-        return button1;
-    }
-
-    public static boolean [][] getBoughtArray() {
+    /**
+     * Get -method to collect a 2d array that contains if FarmButtons are bought.
+     *
+     * @return 2d boolean array if FarmButtons are bought.
+     */
+    static boolean[][] getBoughtArray() {
         return bought;
     }
 
-    public static void setBoughtArray(boolean [][] array) { bought = array; }
+    /**
+     * Set -method to receive 2d boolean array if FarmButtons are bought.
+     *
+     * @param array 2d boolean array that is updated.
+     */
+    static void setBoughtArray(boolean[][] array) {
+        bought = array;
+    }
 
-    public void setAvailable() {
-        if(researched[buttonIndex] && !bought[farmIndex][buttonIndex]) {
+    /**
+     * Sets Button available if the Button is researched already and not bought yet.
+     */
+    void setAvailable() {
+        if (researched[buttonIndex] && !bought[farmIndex][buttonIndex]) {
             button1.setChecked(false);
             button1.setDisabled(false);
             available = true;
         }
     }
 
-    //public void draw(Batch batch, float alpha) {
-       /* if(bought[farmIndex][0]) {
-            Texture wheat = new Texture(Gdx.files.internal("farmUpgrades/wheat.png"));
-            batch.draw(wheat, 250, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
-        }
-        if(bought[farmIndex][3]) {
-            Texture strawberry = new Texture(Gdx.files.internal("farmUpgrades/strawberry.png"));
-            batch.draw(strawberry, -20, -20, strawberry.getWidth()/2.5f, strawberry.getHeight()/2.5f);
-        }
-        if(bought[farmIndex][11]) {
-            Texture flowerSide = new Texture(Gdx.files.internal("farmUpgrades/flowerSide.png"));
-            batch.draw(flowerSide, 220, 145, flowerSide.getWidth()/2.6f, flowerSide.getHeight()/2.6f);
-        }
-        if(bought[farmIndex][4]) {
-            Texture tractor = new Texture(Gdx.files.internal("farmUpgrades/tractor.png"));
-            batch.draw(tractor, -10, 10, tractor.getWidth()/2.5f, tractor.getHeight()/2.5f);
-        }
-        if(bought[farmIndex][6]) {
-            Texture cow = new Texture(Gdx.files.internal("farmUpgrades/cow.png"));
-            batch.draw(cow, 340, 0, cow.getWidth()/5f, cow.getHeight()/5f);
-        }
-        if(bought[farmIndex][12]) {
-            Texture bees = new Texture(Gdx.files.internal("farmUpgrades/bees.png"));
-            batch.draw(bees, 370, 300, bees.getWidth()/2.5f, bees.getHeight()/2.5f);
-        }
-        if(bought[farmIndex][16]) {
-            Texture organicFIN = new Texture(Gdx.files.internal("farmUpgrades/organicFIN.png"));
-            batch.draw(organicFIN, 35, 324, organicFIN.getWidth()/2.5f, organicFIN.getHeight()/2.5f);
-        } */
-    //}
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
+    /**
+     * Get -method to collect Button of the object.
+     *
+     * @return TextButton that is created
+     */
+    public Button getButton() {
+        return button1;
     }
 }

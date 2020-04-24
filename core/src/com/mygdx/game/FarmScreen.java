@@ -234,11 +234,6 @@ public class FarmScreen implements Screen {
             if(boughtArray[farmIndex][15]) {
                 farmButtons.get(17).setAvailable();
                 farmButtons.get(18).setAvailable();
-                if(boughtArray[farmIndex][17]) {
-                    farmButtons.get(18).setUnavailable();
-                } else if(boughtArray[farmIndex][18]) {
-                    farmButtons.get(17).setUnavailable();
-                }
             }
         }
     }

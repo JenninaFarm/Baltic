@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -8,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 /**
- * MainMenuButton is a object base class to create a buttons to mainMenuScreen.
+ * MainMenuButton is an object base class to create a buttons to mainMenuScreen.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen

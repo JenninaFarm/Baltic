@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import java.util.ArrayList;
 
 /**
- * MainMenuScreen is a object base class to create a Screen.
+ * MainMenuScreen is an object base class to create a Screen.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen

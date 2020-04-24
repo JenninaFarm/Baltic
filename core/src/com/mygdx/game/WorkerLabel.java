@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
- * WorkerLabel is a object base class to create a TextField with information of how many workers specific farm has.
+ * WorkerLabel is an object base class to create a TextField with information of how many workers specific farm has.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen

@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
- * MapResearchButton is a object base class to create a Texture which extends an Actor and has a InputListener.
+ * MapResearchButton is an object base class to create a Texture which extends an Actor and has a InputListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
