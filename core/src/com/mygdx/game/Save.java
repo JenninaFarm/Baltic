@@ -24,7 +24,9 @@ public class Save {
 
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
-        prefs.putBoolean("tutorial1", Tutorial.tutorial);
+        prefs.putBoolean("tutorial", Tutorial.tutorial);
+        prefs.putBoolean("music", Main.music_ON);
+        prefs.putBoolean("sound", Main.soundeffects_ON);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
@@ -73,7 +75,9 @@ public class Save {
         Main.setMoney(prefs.getInteger("money", 6000000));
         Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
-        Tutorial.tutorial = prefs.getBoolean("tutorial1", true);
+        Tutorial.tutorial = prefs.getBoolean("tutorial", true);
+        Main.setMusic(prefs.getBoolean("music", true));
+        Main.setSound(prefs.getBoolean("sound", true));
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
@@ -129,74 +133,51 @@ public class Save {
     public static void newGame() {
 
         prefs.putInteger("money", 6000);
-        prefs.flush();
-        Main.setMoney(prefs.getInteger("money"));
-
         prefs.putBoolean("gameBegan", false);
-        prefs.flush();
-        Main.setGameBegan(prefs.getBoolean("gameBegan"));
-
         prefs.putInteger("balticSituation", 0);
-        prefs.flush();
-        Main.setBalticSituation(prefs.getInteger("balticSituation"));
+        //prefs.putBoolean("tutorial", Tutorial.tutorial);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, 4);
-            prefs.flush();
             multipliers[i] = prefs.getFloat("multiplier" + i);
         }
-        MapScreen.setSavedMultipliers(multipliers);
 
         for(int i=0; i<researchAmount; i++) {
             prefs.putBoolean("research" + i, false);
-            prefs.flush();
             research[i] = prefs.getBoolean("research" + i);
         }
-        ResearchScreen.setBooleanArray(research);
 
         for(int i=0; i<farmAmount; i++) {
             for(int j=0; j<researchAmount; j++) {
                 prefs.putBoolean("farmbought" + i + j, false);
-                prefs.flush();
                 farmBought[i][j] = prefs.getBoolean("farmbought" + i + j);
             }
         }
-        FarmButton.setBoughtArray(farmBought);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("farmlock" + i, false);
-            prefs.flush();
             farmLocks[i] = prefs.getBoolean("farmlock" + i);
         }
-        MapScreen.setFarmLocksArray(farmLocks);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("lastTimeClicked" + i, Utils.getCurrentTimeInSeconds());
-            prefs.flush();
             lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
         }
-        MoneyButton.setLastTimeClicked(lastTimeClicked);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putBoolean("coinAdded" + i, false);
-            prefs.flush();
             coinAdded[i] = prefs.getBoolean("coinAdded" + i);
         }
-        MapScreen.setCoinAdded(coinAdded);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("workerAmount" + i, 0);
-            prefs.flush();
             workerAmount[i] = prefs.getInteger("workerAmount" + i);
         }
-        FarmScreen.setWorkerAmountArray(workerAmount);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putInteger("maxAmount" + i, 500);
-            prefs.flush();
             maxAmount[i] = prefs.getInteger("maxAmount" + i);
         }
-        MoneyButton.setMaxAmount(maxAmount);
 
         for(int i=0; i<farmAmount; i++) {
             for (int j = 0; j < researchAmount; j++) {
@@ -204,6 +185,20 @@ public class Save {
                 farmActorY[i][j] = prefs.getFloat("farmActorY" + i + j);
             }
         }
+
+        prefs.flush();
+
+        Main.setMoney(prefs.getInteger("money"));
+        Main.setGameBegan(prefs.getBoolean("gameBegan"));
+        Main.setBalticSituation(prefs.getInteger("balticSituation"));
+        MapScreen.setSavedMultipliers(multipliers);
+        ResearchScreen.setBooleanArray(research);
+        FarmButton.setBoughtArray(farmBought);
+        MapScreen.setFarmLocksArray(farmLocks);
+        MoneyButton.setLastTimeClicked(lastTimeClicked);
+        MapScreen.setCoinAdded(coinAdded);
+        FarmScreen.setWorkerAmountArray(workerAmount);
+        MoneyButton.setMaxAmount(maxAmount);
         FarmScreen.setFarmActorYArray(farmActorY);
     }
 

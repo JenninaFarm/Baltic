@@ -29,12 +29,14 @@ public class Main extends Game {
 	private static int balticSituation = 0;
 
 	public static boolean finnish;
+	public static boolean music_ON;
+	public static boolean soundeffects_ON;
 
 	private Skin mySkin;
 	private I18NBundle myBundle;
 	private Locale locale = new Locale("en", "GB");
 
-	private static Music mapMusic;
+	public static Music mapMusic;
 	private static Music researchMusic;
 	private static Music farmMusic;
 
@@ -58,24 +60,29 @@ public class Main extends Game {
 			Gdx.input.setInputProcessor(multiplexer);
 			farmMusic.stop();
 			researchMusic.stop();
-			mapMusic.setLooping(true);
-			mapMusic.play();
+			if (music_ON) {
+				//mapMusic.setLooping(true);
+				mapMusic.play();
+			}
 		} else if(x == 3) {
 			if(y >= 0) {
 				setScreen(farmScreens.get(y));
 				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI());
 				Gdx.input.setInputProcessor(multiplexer);
-				//mapMusic.stop();
-				farmMusic.setLooping(true);
-				farmMusic.play();
+				if (music_ON) {
+					//farmMusic.setLooping(true);
+					farmMusic.play();
+				}
 			}
 		} else if (x == 4) {
 			setScreen(researchScreen);
 			InputMultiplexer multiplexer = new InputMultiplexer(researchScreen.getStage(), researchScreen.getStageUI());
 			Gdx.input.setInputProcessor(multiplexer);
 			mapMusic.stop();
-			researchMusic.setLooping(true);
-			researchMusic.play();
+			if (music_ON) {
+				//researchMusic.setLooping(true);
+				researchMusic.play();
+			}
 		} else if(x == 5) {
 			setScreen(optionsScreen);
 			Gdx.input.setInputProcessor(optionsScreen.getStage());
@@ -92,6 +99,14 @@ public class Main extends Game {
 
 	public static void setLanguage(boolean language) {
 		finnish = language;
+	}
+
+	public static void setMusic(boolean music) {
+		music_ON = music;
+	}
+
+	public static void setSound(boolean sound) {
+		soundeffects_ON = sound;
 	}
 
 	public static int getStartingTime() {
@@ -141,19 +156,23 @@ public class Main extends Game {
 		researchScreen = new ResearchScreen(this);
 		optionsScreen = new OptionsScreen(this);
 
-		setScreen(mainMenuScreen);
-		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
-
 		mapMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/map_background_music.mp3"));
+		mapMusic.setLooping(true);
 		mapMusic.setVolume(0.2f);
 		researchMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/research_background_music.mp3"));
+		researchMusic.setLooping(true);
 		researchMusic.setVolume(0.2f);
 		farmMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/farm_background_music.mp3"));
+		farmMusic.setLooping(true);
+
+		setScreen(mainMenuScreen);
+		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
+		mapMusic.play();
 	}
 
 	public static void setBalticSituation(int bs) {
 		balticSituation = bs;
-	};
+	}
 
 	public SpriteBatch getBatch() {
 		return batch;

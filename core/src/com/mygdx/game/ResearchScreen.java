@@ -135,7 +135,7 @@ public class ResearchScreen implements Screen {
                 stageUI.addActor(tutorial_2_Actors[i]);
             }
         }
-        if(!Tutorial.tutorial_2) {
+        if(!Tutorial.tutorial_2 && Tutorial.tutorial) {
             returnButton.setVisible(true);
             for(int j=0; j<3; j++) {
                 tutorial_2_Actors[j].setVisible(false);
