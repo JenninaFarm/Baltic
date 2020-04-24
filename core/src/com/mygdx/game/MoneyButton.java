@@ -46,7 +46,7 @@ public class MoneyButton extends Actor {
                 coinSound.play(timeWhenClickedInSec);
 
                 System.out.println("money collected:" + moneyCollected);
-                main.setMoney(main.nonStaticGetMoney() + moneyCollected);
+                main.nonStaticSetMoney(main.nonStaticGetMoney() + moneyCollected);
                 lastTimeClicked[index] = timeWhenClickedInSec;
                 Save.saveVariables();
                 Save.loadVariables();
