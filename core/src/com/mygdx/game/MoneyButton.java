@@ -31,28 +31,52 @@ public class MoneyButton extends Actor {
     private Texture coin;
 
     /**
-     *
-     */
-    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
-    /**
      * Sound of the coin when clicked
      */
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
+
+    /**
+     * Array for storing maximum amounts of moneyCollected
+     */
+    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
+    /**
+     * Array for storing multipliers of the MoneyButtons
+     */
+    private static float [] multipliers = {4, 4, 4, 4, 50, 50};
+    /**
+     * Array for storing last time in seconds when MoneyButton is clicked
+     */
+    private static int [] lastTimeClicked = new int[6];
+    /**
+     * Original x-coordination
+     */
     private int originalX;
+    /**
+     * Original y-coordination
+     */
     private int originalY;
     /**
-     *
+     * Index to identify the coins
      */
     private int index;
-
-    private int timeWhenClickedInSec;
     /**
-     *
+     * Amount of money collected form the MoneyButton
      */
     private int moneyCollected;
-    private static float [] multipliers = {4, 4, 4, 4, 50, 50};
-    private static int [] lastTimeClicked = new int[6];
+    /**
+     * Time in seconds when the MoneyButton was last clicked
+     */
+    private int timeWhenClickedInSec;
 
+    /**
+     * Constructor. Creates all the private variables and sets x- and y-coordinates, Texture, width and height of the MoneyButton.
+     * It contains anonymous InputListener to detect touchDown of the MoneyButton to collect earned money.
+     *
+     * @param m Main contains meta data of the game
+     * @param x X-coordinate that will be the original
+     * @param y Y-coordinate that will be the original
+     * @param i Index of the button
+     */
     MoneyButton(Main m, final int x, final int y, int i) {
         main = m;
         originalX = x;
@@ -69,7 +93,7 @@ public class MoneyButton extends Actor {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
                 moneyCollected = countMoney(timeWhenClickedInSec);
-                if (main.soundeffects_ON) {
+                if (Main.soundeffects_ON) {
                     coinSound.play(1f);
                 }
                 System.out.println("money collected:" + moneyCollected);
@@ -88,53 +112,88 @@ public class MoneyButton extends Actor {
         });
     }
 
-    private void move(int toX, int toY) throws InterruptedException {
-        int amountX = toX - originalX;
-        int amounty = toY - originalY;
-        for(int i=0; i<Math.abs(amountX); i++){
-            setX(getX() + i+1);
-            for(int j=0; j<Math.abs(amounty); j++) {
-                setY(getY() + j + 1);
-            }
-        }
-    }
-
+    /**
+     * Adds given amount to the maximum amount of money that can be collected.
+     *
+     * @param amount Amount that is added to the already existing amount
+     * @param index Index of the MoneyButton where its added
+     */
     static void addToMaxAmount(int amount, int index) {
         maxAmount[index] += amount;
         System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
     }
 
-    public void draw(Batch batch, float alpha) {
-        int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
-        setTouchable(Touchable.disabled);
-        if(potentialMoney > 7 * multipliers[index] || getX() != 300) {
-            setTouchable(Touchable.enabled);
-            batch.draw(coin, getX(), getY(), getWidth(), getHeight());
-
-
-            //when coin is att 300, 410 location, then it comes to back it's original location
-            if(getX() == 300 && getY() == 410) {
-                MoveToAction moveToAction = new MoveToAction();
-                moveToAction.setPosition(originalX, originalY);
-                moveToAction.setDuration(0f);
-                MoneyButton.this.addAction(moveToAction);
-            }
-        }
+    /**
+     * Adds given amount to the multiplier.
+     *
+     * @param addedMp Amount that is added to the already existing amount
+     * @param farmIndex Index of the farmScreen
+     */
+    static void addToMultiplier(float addedMp, int farmIndex) {
+        multipliers[farmIndex] += addedMp;
+        System.out.println("New multiplier for farm " + farmIndex + ": " + multipliers[farmIndex]);
     }
 
+    /**
+     * Get -method to collect the maxAmount array.
+     *
+     * @return Array that contains maximum amounts of money that can be collected
+     */
     static int[] getMaxAmount() {
         return maxAmount;
     }
 
+    /**
+     * Set -method to receive updated maxAmount array.
+     *
+     * @param array Array that is set to be maxAmount
+     */
     static void setMaxAmount(int [] array) {
         maxAmount = array;
     }
 
-    static void addToMultiplier(float addedmp, int farmindex) {
-        multipliers[farmindex] += addedmp;
-        System.out.println("New multiplier for farm " + farmindex + ": " + multipliers[farmindex]);
+    /**
+     * Get -method to collect the lastTimeArray array.
+     *
+     * @return Array that contains last time the MoneyButton has been clicked
+     */
+    static int[] getLastTimeClicked() {
+        return lastTimeClicked;
     }
 
+    /**
+     * Set -method to receive updated lastTimeClicked array.
+     *
+     * @param array Array that is set to be lastTimeClicked
+     */
+    static void setLastTimeClicked(int [] array) {
+        lastTimeClicked = array;
+    }
+
+    /**
+     * Get -method to collect the multipliers array.
+     *
+     * @return Array that contains multipliers of the farmScreens
+     */
+    static float[] getMultipliers() {
+        return multipliers;
+    }
+
+    /**
+     * Set -method to receive updated multipliers array.
+     *
+     * @param array Array that is set to be multipliers
+     */
+    static void setMultipliers(float [] array) {
+        multipliers = array;
+    }
+
+    /**
+     * Counts money that can be collected based on the time that has passed since the lastTimeClicked.
+     *
+     * @param timeNowInSec Time when counted
+     * @return amount of money the farm or boat has produced
+     */
     private int countMoney(int timeNowInSec) {
         int countedMoney;
         int timePassedInSec = timeNowInSec - lastTimeClicked[index];
@@ -148,28 +207,47 @@ public class MoneyButton extends Actor {
         return countedMoney;
     }
 
-    //called when new coin is added to stage. It set's the lastTimeClicked to active mode;
+    /**
+     * Draws the Texture with specific location and size. Sets Actor Touchable if it has money to collect.
+     * Moves coin back to original when it has arrived to new location.
+     *
+     * @param batch Batch is used to handle the drawing
+     * @param alpha Alpha determines transparency of the drawing
+     */
+    public void draw(Batch batch, float alpha) {
+        int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
+        setTouchable(Touchable.disabled);
+        if(potentialMoney > 7 * multipliers[index] || getX() != 300) {
+            setTouchable(Touchable.enabled);
+            batch.draw(coin, getX(), getY(), getWidth(), getHeight());
+
+            // if coin is moving, it can not be touched
+            if(getX() != originalX && getY() != originalY) {
+                setTouchable(Touchable.disabled);
+            }
+
+            //when coin is att 300, 410 location, then it comes to back it's original location
+            if(getX() == 300 && getY() == 410) {
+                MoveToAction moveToAction = new MoveToAction();
+                moveToAction.setPosition(originalX, originalY);
+                moveToAction.setDuration(0f);
+                MoneyButton.this.addAction(moveToAction);
+            }
+        }
+    }
+
+    /**
+     * Sets current time in seconds to the lastTimeClicked.
+     */
+    //called when new coin is added to stage. It set's the lastTimeClicked to lastTimeClicked;
     void setClicked() {
         lastTimeClicked[index] = Utils.getCurrentTimeInSeconds();
     }
 
-    public static int[] getLastTimeClicked() {
-        return lastTimeClicked;
-    }
-
-    public static void setLastTimeClicked(int [] array) {
-        lastTimeClicked = array;
-    }
-
-    public static float[] getMultipliers() {
-        return multipliers;
-    }
-
-    public static void setMultipliers(float [] array) {
-        multipliers = array;
-    }
-
-    public void disposeCoinSound() {
+    /**
+     * Disposes the coinSound.
+     */
+    void disposeCoinSound() {
         coinSound.dispose();
     }
 }

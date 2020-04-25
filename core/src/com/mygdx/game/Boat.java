@@ -40,8 +40,8 @@ public class Boat extends Actor {
     /**
      * Draws the Texture with specific location and size.
      *
-     * @param batch batch that is used in draw method
-     * @param alpha delta time?
+     * @param batch Batch is used to handle the drawing
+     * @param alpha Alpha determines transparency of the drawing
      */
 
     public void draw(Batch batch, float alpha) {
