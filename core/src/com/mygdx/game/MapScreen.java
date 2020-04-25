@@ -169,10 +169,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createCoins() {
-        coins.add(new MoneyButton(main, 197, 82, 0));
-        coins.add(new MoneyButton(main, 357, 242, 1));
-        coins.add(new MoneyButton(main, 667, 133, 2));
-        coins.add(new MoneyButton(main, 617, 342, 3));
+        coins.add(new MoneyButton(main,197, 82, 0));
+        coins.add(new MoneyButton(main,357, 242, 1));
+        coins.add(new MoneyButton(main,667, 133, 2));
+        coins.add(new MoneyButton(main,617, 342, 3));
     }
 
     private void createFarms() {
@@ -233,6 +233,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         addBoatsToStage();
 
         stage.draw();
+        stage.act(Gdx.graphics.getDeltaTime());
 
         stageUI.draw();
     }

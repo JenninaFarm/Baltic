@@ -10,19 +10,39 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
+/**
+ * MoneyButton is an object base class to create a Texture extending Actor with inputListener.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class MoneyButton extends Actor {
 
-    private Main main;
+    /**
+     *
+     */
     private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
-
-    private int timeWhenClickedInSec;
+    /**
+     * Main to handle meta data of the game
+     */
+    private Main main;
+    /**
+     * Texture that is created and drawn
+     */
     private Texture coin;
+    /**
+     * Sound of the coin clicked
+     */
+    private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
     private int index;
     private int originalX;
     private int originalY;
-
-    private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
-
+    /**
+     *
+     */
+    private int timeWhenClickedInSec;
     private static float [] multipliers = {4, 4, 4, 4, 50, 50};
     private static int [] lastTimeClicked = new int[6];
     private int moneyCollected;
@@ -52,15 +72,25 @@ public class MoneyButton extends Actor {
                 Save.saveVariables();
                 Save.loadVariables();
 
-                MoveToAction moveAction = new MoveToAction();
+                MoveToAction moveToAction = new MoveToAction();
+                moveToAction.setPosition(300, 410);
+                moveToAction.setDuration(0.5f);
+                MoneyButton.this.addAction(moveToAction);
 
-                moveAction.setPosition(300, 410);
-                moveAction.setDuration(0.5f);
-
-                MoneyButton.this.addAction(moveAction);
                 return true;
             }
         });
+    }
+
+    private void move(int toX, int toY) throws InterruptedException {
+        int amountX = toX - originalX;
+        int amounty = toY - originalY;
+        for(int i=0; i<Math.abs(amountX); i++){
+            setX(getX() + i+1);
+            for(int j=0; j<Math.abs(amounty); j++) {
+                setY(getY() + j + 1);
+            }
+        }
     }
 
     static void addToMaxAmount(int amount, int index) {
@@ -71,7 +101,7 @@ public class MoneyButton extends Actor {
     public void draw(Batch batch, float alpha) {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
         setTouchable(Touchable.disabled);
-        if(potentialMoney > 5 * multipliers[index]) {
+        if(potentialMoney > 10 * multipliers[index] || potentialMoney < 2 * multipliers[index]) {
             setTouchable(Touchable.enabled);
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
 

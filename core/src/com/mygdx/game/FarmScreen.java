@@ -291,6 +291,7 @@ public class FarmScreen implements Screen {
 
         stageUI.draw();
         stage.draw();
+        stage.act(Gdx.graphics.getDeltaTime());
     }
 
     /**
