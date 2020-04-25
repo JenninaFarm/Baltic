@@ -9,11 +9,39 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import java.util.Locale;
 
+/**
+ * OptionsButton is an object base class to create buttons to OptionsScreen.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class OptionsButton extends Actor {
+
+    /**
+     * Main to ask Skin and Locale
+     */
     private Main main;
+
+    /**
+     * Button that is created and drawn
+     */
     private Button button1;
+
+    /**
+     * Index of the Button
+     */
     private int index;
 
+    /**
+     * Constructor. Sets width, height, TextButton and position of the OptionsButton.
+     * It contains anonymous InputListener to detect touchDown of the OptionsButton to change options like music and language and start a new game.
+     *
+     * @param m Main contains meta data of the game
+     * @param label String to be set in TextButton
+     * @param i Index to identify the Button
+     */
     public OptionsButton(Main m, String label, int i) {
         main = m;
         index = i;
@@ -58,31 +86,27 @@ public class OptionsButton extends Actor {
                     }
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));
-                    main.setLanguage(true);
-                    main.callCreate(main);
+                    Main.setLanguage(true);
+                    Main.callCreate(main);
                 } else if(index == 3) {
                     main.changeLocale(new Locale("en", "GB"));
-                    main.setLanguage(false);
-                    main.callCreate(main);
+                    Main.setLanguage(false);
+                    Main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();
-                    main.callCreate(main);
+                    Main.callCreate(main);
                 }
                 return true;
             }
         });
     }
 
+    /**
+     * Get-method to collect TextButton of the Object.
+     *
+     * @return TextButton that is created
+     */
     public Button getButton() {
         return button1;
-    }
-
-    public void draw(Batch batch, float alpha) {
-        //batch.draw(button, this.getX(), this.getY(), width, height);
-    }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
     }
 }

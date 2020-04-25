@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 /**
- * MainMenuButton is an object base class to create a buttons to mainMenuScreen.
+ * MainMenuButton is an object base class to create buttons to mainMenuScreen.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
