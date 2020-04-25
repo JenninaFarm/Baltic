@@ -48,10 +48,6 @@ public class FarmScreen implements Screen {
      */
     private int farmIndex;
     /**
-     * Batch to handle drawing
-     */
-    private SpriteBatch batch;
-    /**
      * Stage to place Actors that are not moving with the camera
      */
     private Stage stage;
@@ -64,7 +60,7 @@ public class FarmScreen implements Screen {
      */
     private int upgradeAmount = 19;
     /**
-     * Actor of the ReturnButton
+     * Actor of the ReturnButton to get back to previous screen
      */
     private ReturnButton returnButton;
     /**
@@ -121,7 +117,7 @@ public class FarmScreen implements Screen {
     FarmScreen(Main m, int i) {
         main = m;
         farmIndex = i;
-        batch = main.getBatch();
+        SpriteBatch batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
@@ -271,7 +267,7 @@ public class FarmScreen implements Screen {
     }
 
     /**
-     * Updates camera input and location, checks if tutorial is on and if upgrades are available and calls draw -methods of the Stages.
+     * Updates camera input and location, checks if tutorial is on and if upgrades are available and calls draw and act-methods of the Stages.
      *
      * @param delta delta time of player's device
      */

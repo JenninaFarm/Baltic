@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -18,55 +17,186 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 
+/**
+ * MapScreen is an object base class to create a Screen for the map.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class MapScreen extends ApplicationAdapter implements Screen {
 
-    private Main main;
-    private SpriteBatch batch;
-    private MapBackground map;
-    private Stage stage;
-    private Stage stageUI;
-    private int actorAmount = 4;
-    private ArrayList<MoneyButton> coins = new ArrayList<>();
-    private ArrayList<MapButton> farms = new ArrayList<>();
-    private MapResearchButton research;
-    private ReturnButton returnButton;
-    private Meter meter;
-    private MoneyLabel moneyLabel;
-    private IncomeLabel incomeLabel;
-    private InfoLabel infoLabel;
-
-    private Vector2 dragNew, dragOld;
-
-    private Camera camera;
-
+    /**
+     * Array containing booleans if the coins of farm are added
+     */
     private static boolean [] coinAdded = new boolean[4];
-
+    /**
+     * Main to ask SpriteBatch, handle balticSituation and pass over to Actors
+     */
+    private Main main;
+    /**
+     * Stage to place Actors that are not moving with the camera
+     */
+    private Stage stage;
+    /**
+     * Stage to place Actors that are still in the camera viewport
+     */
+    private Stage stageUI;
+    /**
+     * Amount of MapButtons and their MoneyButtons
+     */
+    private int actorAmount = 4;
+    /**
+     * Actor that creates background for the MapScreen
+     */
+    private MapBackground map;
+    /**
+     * ArrayList containing MoneyButton Actors for collecting money from MapButtons
+     */
+    private ArrayList<MoneyButton> coins = new ArrayList<>();
+    /**
+     * ArrayList containing MapButton Actors for buying them and switching screens
+     */
+    private ArrayList<MapButton> farms = new ArrayList<>();
+    /**
+     * Actor for switching screen to ResearchScreen
+     */
+    private MapResearchButton research;
+    /**
+     * Actor of the ReturnButton to get back to previous screen
+     */
+    private ReturnButton returnButton;
+    /**
+     * Actor for visualizing progress of the game
+     */
+    private Meter meter;
+    /**
+     * Actor for showing players amount of money
+     */
+    private MoneyLabel moneyLabel;
+    /**
+     * Actor for showing current income per minute in the farms
+     */
+    private IncomeLabel incomeLabel;
+    /**
+     * Actor for showing information about the MapButtons that are not bought
+     */
+    private InfoLabel infoLabel;
+    /**
+     * Actor for the boat Texture
+     */
+    private Boat boat1;
+    /**
+     * Actor for collecting money form the boat
+     */
+    private MoneyButton boatCoins1;
+    /**
+     * Actor for the boat Texture
+     */
+    private Boat boat2;
+    /**
+     * Actor for collecting money form the boat
+     */
+    private MoneyButton boatCoins2;
+    /**
+     * Holds the Vector of dragging in the screen
+     */
+    private Vector2 dragNew, dragOld;
+    /**
+     * Camera to move the viewport
+     */
+    private Camera camera;
+    /**
+     * Array for the Tutorial Actors
+     */
     private Tutorial [] tutorial_1_Actors = new Tutorial[6];
+
+    /**
+     * Array for the Tutorial Actors
+     */
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
-    private Boat boat1;
-    private MoneyButton boatCoins1;
-    private Boat boat2;
-    private MoneyButton boatCoins2;
-
+    /**
+     * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
+     *
+     * @param m Main contains meta data of the game
+     */
     MapScreen(Main m) {
 
         main = m;
-        batch = main.getBatch();
+        SpriteBatch batch = main.getBatch();
 
         stageUI = new Stage(new FitViewport(800, 450), batch);
         stage = new Stage(new FitViewport(800, 450), batch);
         camera = stage.getCamera();
 
+        createActors();
+        checkIfTutorial();
+        addActorsToStage();
+
+        ((OrthographicCamera)camera).zoom += 27f;
+    }
+
+    /**
+     * Get -method to collect the coinAdded array.
+     *
+     * @return Array that contains if the coins are added to the stage or not
+     */
+    static boolean [] getCoinAdded() {
+        return coinAdded;
+    }
+
+    /**
+     * Set -method to receive updated coinAdded array.
+     *
+     * @param array Array that is set to be coinAdded
+     */
+    static void setCoinAdded(boolean [] array) {
+        coinAdded = array;
+    }
+
+    /**
+     * Creates all the Actors of the constructor.
+     */
+    private void createActors() {
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         moneyLabel = new MoneyLabel(main);
         incomeLabel = new IncomeLabel(main, 5);
         meter = new Meter(main);
-        createFarms();
-        createBoats();
-        createCoins();
 
+        farms.add(new MapButton(main, this, 150, 50, 0));
+        farms.add(new MapButton(main, this, 310, 210, 1));
+        farms.add(new MapButton(main, this, 620, 100, 2));
+        farms.add(new MapButton(main, this, 570, 310, 3));
+
+        boat1 = new Boat(420, 100);
+        boatCoins1 = new MoneyButton(main, 460, 130, 4);
+        boatCoins1.setClicked();
+        boat2 = new Boat(520, 200);
+        boatCoins2 = new MoneyButton(main, 560, 230, 5);
+        boatCoins2.setClicked();
+
+        coins.add(new MoneyButton(main,197, 82, 0));
+        coins.add(new MoneyButton(main,357, 242, 1));
+        coins.add(new MoneyButton(main,667, 133, 2));
+        coins.add(new MoneyButton(main,617, 342, 3));
+
+        map = new MapBackground();
+        map.setSize(800, 450);
+        map.addListener(new ActorGestureListener() {
+            public void zoom (InputEvent event, float initialDistance, float distance) {
+                ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
+                camera.update();
+            }
+        });
+    }
+
+    /**
+     * Checks if tutorial is needed to set true, create and place to the stage.
+     */
+    private void checkIfTutorial() {
         if (Tutorial.tutorial) {
             Tutorial.tutorial_1_Stages[0] = true;
             for (int i = 0; i < 4; i++) {
@@ -83,22 +213,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             stageUI.addActor(tutorial_3_Actors[0]);
             tutorial_3_Actors[0].setVisible(false);
         }
-
-        map = new MapBackground();
-        map.setSize(800, 450);
-        map.addListener(new ActorGestureListener() {
-            public void zoom (InputEvent event, float initialDistance, float distance) {
-                ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
-                camera.update();
-            }
-        });
-
-        addActorsToStage();
-        addCoinsToStage();
-
-        ((OrthographicCamera)camera).zoom += 27f;
     }
 
+    /**
+     * Places the Actors of the constructor to the Stages.
+     */
     private void addActorsToStage() {
         stageUI.addActor(moneyLabel);
         stageUI.addActor(incomeLabel);
@@ -112,28 +231,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             stage.addActor(farms.get(i));
         }
         stage.addActor(coins.get(0));
-    }
 
-    static boolean [] getCoinAdded() {
-        return coinAdded;
-    }
-
-    static void setCoinAdded(boolean [] array) {
-        coinAdded = array;
-    }
-
-    private void addBoatsToStage() {
-        if (Main.getBalticSituation() >= 25) {
-            stage.addActor(boat1);
-            stage.addActor(boatCoins1);
-        }
-        if (Main.getBalticSituation() >= 50) {
-            stage.addActor(boat2);
-            stage.addActor(boatCoins2);
-        }
-    }
-
-    private void addCoinsToStage() {
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
             if(coinAdded[i]) {
@@ -145,6 +243,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
+    /**
+     * Adds coin with certain index to the stage and sets it clicked so it has a starting time.
+     *
+     * @param index Index of the coin added
+     */
     void addCoin(int index) {
         stage.addActor(coins.get(index));
         coinAdded[index] = true;
@@ -154,43 +257,35 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Save.loadVariables();
     }
 
-    void addInfoLabel(InfoLabel il) {
-        infoLabel = il;
-        stageUI.addActor(infoLabel);
-    }
-
-    void setInfoVisible(boolean visible) {
-        infoLabel.setVisible(visible);
-    }
-
-    private void createCoins() {
-        coins.add(new MoneyButton(main,197, 82, 0));
-        coins.add(new MoneyButton(main,357, 242, 1));
-        coins.add(new MoneyButton(main,667, 133, 2));
-        coins.add(new MoneyButton(main,617, 342, 3));
-    }
-
-    private void createFarms() {
-        farms.add(new MapButton(main, this, 150, 50, 0));
-        farms.add(new MapButton(main, this, 310, 210, 1));
-        farms.add(new MapButton(main, this, 620, 100, 2));
-        farms.add(new MapButton(main, this, 570, 310, 3));
-    }
-
-    private void createBoats() {
-        boat1 = new Boat(420, 100);
-        boatCoins1 = new MoneyButton(main, 460, 130, 4);
-        boatCoins1.setClicked();
-        boat2 = new Boat(520, 200);
-        boatCoins2 = new MoneyButton(main, 560, 230, 5);
-        boatCoins2.setClicked();
-    }
-
 
     @Override
     public void show() {
     }
 
+    /**
+     * Adds InfoLabel to the stage.
+     *
+     * @param il InfoLabel that is added
+     */
+    void addInfoLabel(InfoLabel il) {
+        infoLabel = il;
+        stageUI.addActor(infoLabel);
+    }
+
+    /**
+     * Sets InfoLabel visible or not.
+     *
+     * @param visible Boolean if InfoLabel is visible or not
+     */
+    void setInfoVisible(boolean visible) {
+        infoLabel.setVisible(visible);
+    }
+
+    /**
+     * Updates camera input and location, checks if tutorial is on and if boats need to be added and calls draw- and act -methods of the Stages.
+     *
+     * @param delta delta time of player's device
+     */
     @Override
     public void render(float delta) {
 
@@ -233,6 +328,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stageUI.draw();
     }
 
+    /**
+     * Hides all unneeded Actors in the MapScreen
+     */
     private void hideIconsTutorial_1() {
 
         research.setVisible(false);
@@ -242,6 +340,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         coins.get(0).setVisible(false);
     }
 
+    /**
+     * Controls how the tutorial is getting forward.
+     */
     private void manageTutorial_1() {
 
         for(int i=0; i<4; i++) {
@@ -251,6 +352,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
+    /**
+     * Controls how the tutorial is getting forward.
+     */
     private void manageTutorial_3() {
 
         for(int i=0; i<4; i++) {
@@ -260,6 +364,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
+    /**
+     * Handles input of the camera movement and updates the location of the camera.
+     */
     private void handleInput() {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
@@ -303,13 +410,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     @Override
-    public void resize(int width, int height) {
-        camera.viewportWidth = 30f;
-        camera.viewportHeight = 30f * height / width;
-        camera.update();
-    }
-
-    @Override
     public void pause() {
 
     }
@@ -324,6 +424,36 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     }
 
+    /**
+     * Adds boats to the stage if balticSituation is good enough.
+     */
+    private void addBoatsToStage() {
+        if (Main.getBalticSituation() >= 25) {
+            stage.addActor(boat1);
+            stage.addActor(boatCoins1);
+        }
+        if (Main.getBalticSituation() >= 50) {
+            stage.addActor(boat2);
+            stage.addActor(boatCoins2);
+        }
+    }
+
+    /**
+     * Resize the viewport width and height to 30 units to be congruence despite of device resolution.
+     *
+     * @param width width of the viewport
+     * @param height height of the viewport
+     */
+    @Override
+    public void resize(int width, int height) {
+        camera.viewportWidth = 30f;
+        camera.viewportHeight = 30f * height / width;
+        camera.update();
+    }
+
+    /**
+     * Disposes stages and coin sounds
+     */
     @Override
     public void dispose() {
         stage.dispose();
@@ -333,9 +463,20 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
+    /**
+     * Get -method to collect stage
+     *
+     * @return stage of the MapScreen
+     */
     Stage getStage() {
         return stage;
     }
+
+    /**
+     * Get -method to collect stageUI
+     *
+     * @return stageUI of the MapScreen
+     */
     Stage getStageUI() {
         return stageUI;
     }
