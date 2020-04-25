@@ -89,11 +89,12 @@ public class FarmUpgrades extends Actor {
 
        if(bought[farmIndex][0]) {
             batch.draw(wheat, 250, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
-            batch.draw(wheat, 450, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
+            batch.draw(wheat, 500, 200, wheat.getWidth()/2.5f, wheat.getHeight()/2.5f);
        }
         if(bought[farmIndex][3]) {
             batch.draw(strawberry, -20, -20, strawberry.getWidth()/2.5f, strawberry.getHeight()/2.5f);
             batch.draw(strawberry, 150, -20, strawberry.getWidth()/2.5f, strawberry.getHeight()/2.5f);
+            batch.draw(strawberry, 300, -20, strawberry.getWidth()/2.5f, strawberry.getHeight()/2.5f);
         }
         if(bought[farmIndex][11]) {
             batch.draw(flowerStrip, 220, 145, flowerStrip.getWidth()/2.6f, flowerStrip.getHeight()/2.6f);
@@ -111,7 +112,7 @@ public class FarmUpgrades extends Actor {
             if(Main.finnish) {
                 batch.draw(organicFIN, 35, 324, organicFIN.getWidth() / 2.5f, organicFIN.getHeight() / 2.5f);
             } else {
-                batch.draw(organicEN, 35, 324, organicFIN.getWidth() / 2.5f, organicFIN.getHeight() / 2.5f);
+                batch.draw(organicEN, 35, 314, organicFIN.getWidth() / 2.5f, organicFIN.getHeight() / 2.5f);
             }
         }
     }

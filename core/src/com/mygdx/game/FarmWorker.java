@@ -1,22 +1,46 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.I18NBundle;
 
+/**
+ * FarmWorker is an object base class to create a TextButton where you can buy worker to the farm.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
+
 public class FarmWorker extends Actor {
 
+    /**
+     * To handle meta data
+     */
     private Main main;
+
+    /**
+     * Button that is created and drawn
+     */
     private Button button1;
+
+    /**
+     * The cost of the worker
+     */
     private int cost;
 
-    public FarmWorker(Main m, final FarmScreen farmScreen) {
+    /**
+     * Constructor. Sets index, Texture, x- and y-coordinates, width and height of the FarmWorker.
+     * It contains anonymous InputListener to detect touchDown of the FarmWorker to buy the worker.
+     *
+     * @param m Main contains meta data of the game
+     * @param farmScreen FarmScreen to add bought workers
+     */
+    FarmWorker(Main m, final FarmScreen farmScreen) {
         main = m;
 
         I18NBundle myBundle = main.getMyBundle();
@@ -33,24 +57,21 @@ public class FarmWorker extends Actor {
         int workerAmount = farmScreen.getWorkerAmount();
         if (workerAmount >= 3) {
             button1.setChecked(true);
-            button1.getStyle().down = button1.getStyle().checked;
         }
 
         button1.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                int currentMoney = main.getMoney();
+                int currentMoney = main.nonStaticGetMoney();
                 int workerAmount = farmScreen.getWorkerAmount();
                 if (currentMoney >= cost && workerAmount < 3) {
                     System.out.println("bought");
-                    main.setMoney(currentMoney - cost);
+                    main.nonStaticSetMoney(currentMoney - cost);
                     farmScreen.addWorker();
                     button1.setChecked(false);
                     Save.saveVariables();
                     Save.loadVariables();
                 } else {
-                    System.out.println("Not enough money!");
-                    System.out.println("cost: " + cost);
-                    System.out.println("current balance: " + main.getMoney());
+                    System.out.println("Not enough money or max amount reached!");
                 }
 
                 workerAmount = farmScreen.getWorkerAmount();
@@ -63,6 +84,11 @@ public class FarmWorker extends Actor {
         });
     }
 
+    /**
+     * Get -method to collect created Button.
+     *
+     * @return Button that is created
+     */
     public Button getButton() {
         return button1;
     }
