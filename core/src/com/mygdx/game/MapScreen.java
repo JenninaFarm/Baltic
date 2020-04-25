@@ -230,7 +230,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
-        stage.addActor(coins.get(0));
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -461,6 +460,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             coins.get(i).disposeCoinSound();
         }
+    }
     }
 
     /**

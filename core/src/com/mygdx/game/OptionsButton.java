@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -42,7 +41,7 @@ public class OptionsButton extends Actor {
      * @param label String to be set in TextButton
      * @param i Index to identify the Button
      */
-    public OptionsButton(Main m, String label, int i) {
+    OptionsButton(Main m, String label, int i) {
         main = m;
         index = i;
 
