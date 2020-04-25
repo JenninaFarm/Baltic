@@ -43,8 +43,9 @@ public class MoneyButton extends Actor {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 timeWhenClickedInSec = Utils.getCurrentTimeInSeconds();
                 moneyCollected = countMoney(timeWhenClickedInSec);
-                coinSound.play(timeWhenClickedInSec);
-
+                if (main.soundeffects_ON) {
+                    coinSound.play(1f);
+                }
                 System.out.println("money collected:" + moneyCollected);
                 main.nonStaticSetMoney(main.nonStaticGetMoney() + moneyCollected);
                 lastTimeClicked[index] = timeWhenClickedInSec;
@@ -132,4 +133,7 @@ public class MoneyButton extends Actor {
         multipliers = array;
     }
 
+    public void disposeCoinSound() {
+        coinSound.dispose();
+    }
 }
