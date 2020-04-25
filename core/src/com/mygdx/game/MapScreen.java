@@ -72,7 +72,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      */
     private Meter meter;
     /**
-     * Actor for showing players amount of money
+     * Actor for showing player's amount of money
      */
     private MoneyLabel moneyLabel;
     /**

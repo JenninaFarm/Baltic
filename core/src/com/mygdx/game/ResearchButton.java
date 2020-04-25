@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -10,26 +9,61 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.I18NBundle;
 
-
+/**
+ * MapButton is an object base class to create create a buttons to ResearchScreen with inputListener.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class ResearchButton extends Actor {
 
+    /**
+     * Array that contains booleans if ResearchButtons are bought or not
+     */
+    private static boolean [] researchBought = new boolean [19];
+    /**
+     * Main for money handling and asking I18NBundle
+     */
     private Main main;
+    /**
+     * ResearchScreen for InfoLabel
+     */
     private ResearchScreen researchScreen;
+    /**
+     * Button that created and drawn
+     */
     private Button button1;
+    /**
+     * Index to identify the Button
+     */
     private int index;
+    /**
+     * Cost of the ResearchButton
+     */
     private int cost;
-    private boolean bought;
+    /**
+     * Boolean to know if the ResearchButton is available to buy
+     */
     private boolean available = false;
-
+    /**
+     * Actor for showing information about the research
+     */
     private InfoLabel infoLabel;
 
-    private static boolean [] researchBooleans = new boolean [19];
-
-    public ResearchButton(Main m, ResearchScreen rs, int i, boolean b) {
+    /**
+     * Constructor. Creates all the private variables and sets x- and y-coordinates, width and height of the ResearchButton.
+     * It contains anonymous InputListener to detect touchDown, enter and exit of the ResearchButton to buy the Button or set InfoLabel visible or not.
+     *
+     * @param m Main contains meta data of the game
+     * @param rs ResearchScreen handling InfoLabel
+     * @param i Index of the ResearchButton
+     */
+    ResearchButton(Main m, ResearchScreen rs, int i) {
         main = m;
         researchScreen = rs;
         index = i;
-        bought = b;
 
         I18NBundle myBundle = main.getMyBundle();
         cost = Integer.parseInt(myBundle.get("researchCost" + index));
@@ -43,9 +77,8 @@ public class ResearchButton extends Actor {
         button1 = new TextButton(myBundle.get("research" + i), mySkin);
         button1.setSize(width, height);
         button1.setPosition(Integer.parseInt(myBundle.get("researchX" + i)), Integer.parseInt(myBundle.get("researchY" + i)));
-        //button1.getStyle().down = main.getMySkin().getDrawable("round-dark-green");
 
-        if(bought) {
+        if(researchBought[index]) {
             button1.getStyle().checked = button1.getStyle().down;
             button1.setChecked(true);
             button1.setDisabled(true);
@@ -61,23 +94,17 @@ public class ResearchButton extends Actor {
 
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                int currentMoney = main.getMoney();
+                int currentMoney = main.nonStaticGetMoney();
+                //uncomment this to set InfoLabel invisible in desktop
                 //researchScreen.setInfoVisible(false);
 
-                if(currentMoney >= cost && !bought && available) {
+                if(currentMoney >= cost && !researchBought[index] && available) {
                     System.out.println("bought");
-                    main.setMoney(currentMoney - cost);
+                    main.nonStaticSetMoney(currentMoney - cost);
                     button1.getStyle().checked = button1.getStyle().down;
                     button1.setChecked(true);
                     button1.setDisabled(true);
-                    bought = true;
-                    researchBooleans[index] = true;
-                } else if(bought) {
-                    System.out.println("Already researched");
-                } else {
-                    System.out.println("Not enough money!");
-                    System.out.println("cost: " + cost);
-                    System.out.println("current balance: " + main.getMoney());
+                    researchBought[index] = true;
                 }
                 return false;
             }
@@ -97,29 +124,41 @@ public class ResearchButton extends Actor {
         });
     }
 
-    public void setResearchAvailable() {
+    /**
+     * Set -method to receive updated researchBought array.
+     *
+     * @param research Array that is set to be researchBought
+     */
+    static void setBooleanArray(boolean[] research) {
+        researchBought = research;
+    }
+
+    /**
+     * Get -method to collect the researchBought array.
+     *
+     * @return Array that contains if the ResearchButton have been bought or not
+     */
+    static boolean [] getResearchBooleans() {
+        return researchBought;
+    }
+
+    /**
+     * Sets researchButton available if research is bought already
+     */
+    void setResearchAvailable() {
         available = true;
-        if(!bought) {
+        if(!researchBought[index]) {
             button1.setChecked(false);
             button1.setDisabled(false);
         }
     }
 
+    /**
+     * Get -method to collect Button of the object.
+     *
+     * @return TextButton that is created
+     */
     public Button getButton() {
         return button1;
-    }
-
-
-    public static boolean [] getResearchBooleans() {
-        return researchBooleans;
-    }
-
-    public void draw(Batch batch, float alpha) {
-        //button1.draw(batch, alpha);
-    }
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
     }
 }

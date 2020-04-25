@@ -26,143 +26,81 @@ import java.util.ArrayList;
 
 public class ResearchScreen implements Screen {
 
-    private Main main;
-    private SpriteBatch batch;
-    private Stage stage;
-    private Stage stageUI;
-    private static ResearchButton [] researchButtons = new ResearchButton [19];
-    private static boolean [] booleans;
+    /**
+     * Amount of researches
+     */
     private static int researchAmount = 19;
+    /**
+     * Array for the ResearchButtons
+     */
+    private static ResearchButton [] researchButtons = new ResearchButton [19];
+    /**
+     * Main to ask SpiteBatch and pass over
+     */
+    private Main main;
+    /**
+     * Stage to place Actors that are not moving with the camera
+     */
+    private Stage stage;
+    /**
+     * Stage to place Actors that are still in the camera viewport
+     */
+    private Stage stageUI;
+    /**
+     * Actor of the ReturnButton to get back to previous screen
+     */
     private ReturnButton returnButton;
+    /**
+     * Actor for showing player's amount of money
+     */
     private MoneyLabel moneyLabel;
+    /**
+     * Actor for showing information about the ResearchButtons
+     */
     private InfoLabel infoLabel;
+    /**
+     * Actor that creates background for the MapScreen
+     */
     private Background background;
+    /**
+     * Camera to move the viewport
+     */
     private Camera camera;
+    /**
+     * Holds the Vector of dragging in the screen
+     */
     private Vector2 dragNew, dragOld;
-
+    /**
+     * Array for the Tutorial Actors
+     */
     private Tutorial [] tutorial_2_Actors = new Tutorial[6];
 
-
-    public ResearchScreen(Main m) {
+    /**
+     * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
+     *
+     * @param m Main contains meta data of the game
+     */
+    ResearchScreen(Main m) {
         main = m;
-        batch = main.getBatch();
+        SpriteBatch batch = main.getBatch();
 
         stage = new Stage(new FitViewport(800, 450), batch);
         stageUI = new Stage(new FitViewport(800, 450), batch);
 
         camera = stage.getCamera();
-        returnButton = new ReturnButton(main, 2);
-        moneyLabel = new MoneyLabel(main);
-        background = new Background(new Texture(Gdx.files.internal("researchBackground.png")));
-        background.setPosition(0, -570);
-        background.setSize(2118, 1200);
 
-        createButtons();
+        createActors();
 
-        if(Tutorial.tutorial_2 && Tutorial.tutorial) {
-            Tutorial.tutorial_2_Stages[0] = true;
-            for(int i=0;i<3;i++) {
-                tutorial_2_Actors[i] = new Tutorial(2, i);
-            }
-            stageUI.addActor(tutorial_2_Actors[0]);
-        }
+        checkIfTutorial();
 
         addActors();
     }
 
-    public static void setBooleanArray(boolean [] array) {
-        booleans = array;
-    }
-    private void createButtons() {
-        for(int i=0; i<researchAmount; i++){
-            researchButtons[i] = (new ResearchButton(main, this, i, booleans[i]));
-        }
-    }
-
-    private void addActors() {
-        stage.addActor(background);
-        for(int i=0; i<researchAmount; i++) {
-            Button button = researchButtons[i].getButton();
-            stage.addActor(button);
-        }
-        stageUI.addActor(moneyLabel);
-        stageUI.addActor(returnButton);
-    }
-
-    public void addInfoLabel(InfoLabel il) {
-        infoLabel = il;
-        stageUI.addActor(infoLabel);
-    }
-
-    public void setInfoVisible(boolean visible) {
-        infoLabel.setVisible(visible);
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-
-        handleInput();
-        camera.update();
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        if(!Tutorial.tutorial) {
-            setResearchesAvailable();
-        }
-
-        if(Tutorial.tutorial) {
-            researchButtons[0].setResearchAvailable();
-            returnButton.setVisible(false);
-            manageTutorial_2();
-        }
-
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-
-        stageUI.act(Gdx.graphics.getDeltaTime());
-        stageUI.draw();
-    }
-
-    private void manageTutorial_2() {
-
-        for(int i=0; i<3; i++) {
-            if(Tutorial.tutorial_2_Stages[i] && Tutorial.tutorial_2) {
-                stageUI.addActor(tutorial_2_Actors[i]);
-            }
-        }
-        if(!Tutorial.tutorial_2 && Tutorial.tutorial) {
-            returnButton.setVisible(true);
-            for(int j=0; j<3; j++) {
-                tutorial_2_Actors[j].setVisible(false);
-            }
-        }
-    }
-
-    private void handleInput() {
-
-        if (Gdx.input.justTouched()){
-            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            dragOld = dragNew;
-        }
-
-        if (Gdx.input.isTouched()){
-            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            if (!dragNew.equals(dragOld)){
-                ((OrthographicCamera)camera).translate(dragOld.x - dragNew.x, dragNew.y - dragOld.y);
-                dragOld = dragNew;
-            }
-        }
-
-        camera.position.x = MathUtils.clamp(camera.position.x, 400, 1720);
-        camera.position.y = MathUtils.clamp(camera.position.y, -340, 375);
-    }
-
-    public static void setResearchesAvailable() {
+    /**
+     * Checks if certain research is bought and sets next upgrade available.
+     */
+    private static void setResearchesAvailable() {
+        boolean [] booleans = ResearchButton.getResearchBooleans();
         researchButtons[0].setResearchAvailable();
         researchButtons[4].setResearchAvailable();
         researchButtons[6].setResearchAvailable();
@@ -203,10 +141,155 @@ public class ResearchScreen implements Screen {
         }
     }
 
-    public Stage getStage() {
+    /**
+     * Creates all the Actors of the constructor.
+     */
+    private void createActors() {
+        returnButton = new ReturnButton(main, 2);
+        moneyLabel = new MoneyLabel(main);
+        background = new Background(new Texture(Gdx.files.internal("researchBackground.png")));
+        background.setPosition(0, -570);
+        background.setSize(2118, 1200);
+        for(int i=0; i<researchAmount; i++){
+            researchButtons[i] = (new ResearchButton(main, this, i));
+        }
+    }
+
+    /**
+     * Checks if tutorial is needed to set true, create and place to the stage.
+     */
+    private void checkIfTutorial() {
+        if(Tutorial.tutorial_2 && Tutorial.tutorial) {
+            Tutorial.tutorial_2_Stages[0] = true;
+            for(int i=0;i<3;i++) {
+                tutorial_2_Actors[i] = new Tutorial(2, i);
+            }
+            stageUI.addActor(tutorial_2_Actors[0]);
+        }
+    }
+
+    /**
+     * Places the Actors of the constructor to the Stages.
+     */
+    private void addActors() {
+        stage.addActor(background);
+        for(int i=0; i<researchAmount; i++) {
+            Button button = researchButtons[i].getButton();
+            stage.addActor(button);
+        }
+        stageUI.addActor(moneyLabel);
+        stageUI.addActor(returnButton);
+    }
+
+    /**
+     * Adds InfoLabel to the stage.
+     *
+     * @param il InfoLabel that is added
+     */
+    void addInfoLabel(InfoLabel il) {
+        infoLabel = il;
+        stageUI.addActor(infoLabel);
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    /**
+     * Sets InfoLabel visible or not.
+     *
+     * @param visible Boolean if InfoLabel is visible or not
+     */
+    void setInfoVisible(boolean visible) {
+        infoLabel.setVisible(visible);
+    }
+
+    /**
+     * Updates camera input and location, checks if tutorial is on and calls draw- and act -methods of the Stages.
+     *
+     * @param delta delta time of player's device
+     */
+    @Override
+    public void render(float delta) {
+
+        handleInput();
+        camera.update();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(!Tutorial.tutorial) {
+            setResearchesAvailable();
+        }
+
+        if(Tutorial.tutorial) {
+            researchButtons[0].setResearchAvailable();
+            returnButton.setVisible(false);
+            manageTutorial_2();
+        }
+
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
+
+        stageUI.act(Gdx.graphics.getDeltaTime());
+        stageUI.draw();
+    }
+
+    /**
+     * Controls how the tutorial is getting forward.
+     */
+    private void manageTutorial_2() {
+
+        for(int i=0; i<3; i++) {
+            if(Tutorial.tutorial_2_Stages[i] && Tutorial.tutorial_2) {
+                stageUI.addActor(tutorial_2_Actors[i]);
+            }
+        }
+        if(!Tutorial.tutorial_2 && Tutorial.tutorial) {
+            returnButton.setVisible(true);
+            for(int j=0; j<3; j++) {
+                tutorial_2_Actors[j].setVisible(false);
+            }
+        }
+    }
+
+    /**
+     * Handles input of the camera movement and updates the location of the camera.
+     */
+    private void handleInput() {
+
+        if (Gdx.input.justTouched()){
+            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            dragOld = dragNew;
+        }
+
+        if (Gdx.input.isTouched()){
+            dragNew = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            if (!dragNew.equals(dragOld)){
+                ((OrthographicCamera)camera).translate(dragOld.x - dragNew.x, dragNew.y - dragOld.y);
+                dragOld = dragNew;
+            }
+        }
+
+        camera.position.x = MathUtils.clamp(camera.position.x, 400, 1720);
+        camera.position.y = MathUtils.clamp(camera.position.y, -340, 375);
+    }
+
+    /**
+     * Get -method to collect stage
+     *
+     * @return stage of the ResearchScreen
+     */
+    Stage getStage() {
         return stage;
     }
-    public Stage getStageUI() {
+
+    /**
+     * Get -method to collect stageUI
+     *
+     * @return stageUI of the ResearchScreen
+     */
+    Stage getStageUI() {
         return stageUI;
     }
 
@@ -227,9 +310,11 @@ public class ResearchScreen implements Screen {
 
     @Override
     public void hide() {
-        Save.saveVariables();
     }
 
+    /**
+     * Disposes the stages
+     */
     @Override
     public void dispose() {
         stage.dispose();

@@ -87,7 +87,7 @@ public class Save {
         for(int i=0; i<researchAmount; i++) {
             research[i] = prefs.getBoolean("research" + i);
         }
-        ResearchScreen.setBooleanArray(research);
+        ResearchButton.setBooleanArray(research);
         FarmButton.setResearched(research);
 
         for(int i=0; i<farmAmount; i++) {
