@@ -118,6 +118,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
     /**
+     * Actors for cloud textures
+     */
+    private Cloud cloud;
+    private Cloud cloud2;
+    private Cloud cloud3;
+    private Cloud cloud4;
+
+    /**
      * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
      *
      * @param m Main contains meta data of the game
@@ -133,6 +141,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         createActors();
         checkIfTutorial();
+
         addActorsToStage();
 
         ((OrthographicCamera)camera).zoom += 27f;
@@ -183,6 +192,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         coins.add(new MoneyButton(main,667, 133, 2));
         coins.add(new MoneyButton(main,617, 342, 3));
 
+        cloud = new Cloud(-540, 0, 900);
+        cloud2 = new Cloud(-600, -150, 1100);
+        cloud3 = new Cloud(-600, -500, 800);
+        cloud4 = new Cloud(30, -40, 900);
+
         map = new MapBackground();
         map.setSize(800, 450);
         map.addListener(new ActorGestureListener() {
@@ -227,9 +241,12 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(research);
         stage.addActor(meter);
 
+        addBoatsToStage();
+
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
+        //stage.addActor(coins.get(0));
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -240,6 +257,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 }
             }
         }
+
+        stage.addActor(cloud);
+        stage.addActor(cloud2);
+        stage.addActor(cloud3);
+        stage.addActor(cloud4);
     }
 
     /**
@@ -281,7 +303,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Updates camera input and location, checks if tutorial is on and if boats need to be added and calls draw- and act -methods of the Stages.
+     * Updates camera input and location, checks if tutorial is on, moves the cloud textures and calls draw- and act -methods of the Stages.
      *
      * @param delta delta time of player's device
      */
@@ -292,6 +314,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         camera.update();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        cloud.cloudMove();
+        cloud2.cloudMove();
+        cloud3.cloudMove();
+        cloud4.cloudMove();
 
         if(Tutorial.tutorial_1 && Tutorial.tutorial) {
             hideIconsTutorial_1();
@@ -318,8 +345,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 tutorial_3_Actors[j].setVisible(false);
             }
         }
-
-        addBoatsToStage();
 
         stage.draw();
         stage.act(Gdx.graphics.getDeltaTime());
@@ -460,7 +485,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             coins.get(i).disposeCoinSound();
         }
-    }
     }
 
     /**
