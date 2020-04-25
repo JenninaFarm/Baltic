@@ -122,6 +122,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      *
      * @param m Main contains meta data of the game
      */
+    private Cloud cloud;
+    private Cloud cloud2;
+    private Cloud cloud3;
+    private Cloud cloud4;
+
     MapScreen(Main m) {
 
         main = m;
@@ -213,6 +218,26 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             stageUI.addActor(tutorial_3_Actors[0]);
             tutorial_3_Actors[0].setVisible(false);
         }
+
+        map = new MapBackground();
+        map.setSize(800, 450);
+        map.addListener(new ActorGestureListener() {
+            public void zoom (InputEvent event, float initialDistance, float distance) {
+                ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
+                camera.update();
+            }
+        });
+
+        cloud = new Cloud(-540, 0, 900);
+        cloud2 = new Cloud(-600, -150, 1100);
+        cloud3 = new Cloud(-600, -500, 800);
+        cloud4 = new Cloud(30, -40, 900);
+
+        addActorsToStage();
+        addCoinsToStage();
+        addCloudsToStage();
+
+        ((OrthographicCamera)camera).zoom += 27f;
     }
 
     /**
@@ -227,10 +252,24 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(research);
         stage.addActor(meter);
 
+        addBoatsToStage();
+
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
         stage.addActor(coins.get(0));
+    }
+
+    private void addCloudsToStage() {
+        stage.addActor(cloud);
+        stage.addActor(cloud2);
+        stage.addActor(cloud3);
+        stage.addActor(cloud4);
+    }
+
+    static boolean [] getCoinAdded() {
+        return coinAdded;
+    }
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -294,6 +333,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        cloud.cloudMove();
+        cloud2.cloudMove();
+        cloud3.cloudMove();
+        cloud4.cloudMove();
+
         if(Tutorial.tutorial_1 && Tutorial.tutorial) {
             hideIconsTutorial_1();
             manageTutorial_1();
@@ -319,8 +363,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 tutorial_3_Actors[j].setVisible(false);
             }
         }
-
-        addBoatsToStage();
 
         stage.draw();
         stage.act(Gdx.graphics.getDeltaTime());
