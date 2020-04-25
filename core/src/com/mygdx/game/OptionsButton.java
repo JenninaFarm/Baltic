@@ -24,7 +24,15 @@ public class OptionsButton extends Actor {
         button1 = new TextButton(label, main.getMySkin());
         button1.setSize(getWidth(), getHeight());
         button1.setPosition(800 / 2f - getWidth() / 2f, 500 / 2f - getHeight() / 2f - index * getHeight());
-        button1.setDisabled(true);
+        if(index > 2) {
+            button1.setDisabled(true);
+        }
+        if(!Main.music_ON && index == 0) {
+            button1.setChecked(true);
+        }
+        if(!Main.soundeffects_ON && index == 1) {
+            button1.setChecked(true);
+        }
         button1.addListener(new InputListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {

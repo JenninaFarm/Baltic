@@ -21,31 +21,37 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 public class MoneyButton extends Actor {
 
     /**
-     *
-     */
-    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
-    /**
      * Main to handle meta data of the game
      */
     private Main main;
+
     /**
      * Texture that is created and drawn
      */
     private Texture coin;
+
     /**
-     * Sound of the coin clicked
+     *
+     */
+    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
+    /**
+     * Sound of the coin when clicked
      */
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
-    private int index;
     private int originalX;
     private int originalY;
     /**
      *
      */
+    private int index;
+
     private int timeWhenClickedInSec;
+    /**
+     *
+     */
+    private int moneyCollected;
     private static float [] multipliers = {4, 4, 4, 4, 50, 50};
     private static int [] lastTimeClicked = new int[6];
-    private int moneyCollected;
 
     MoneyButton(Main m, final int x, final int y, int i) {
         main = m;
@@ -101,7 +107,7 @@ public class MoneyButton extends Actor {
     public void draw(Batch batch, float alpha) {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
         setTouchable(Touchable.disabled);
-        if(potentialMoney > 10 * multipliers[index] || potentialMoney < 2 * multipliers[index]) {
+        if(potentialMoney > 7 * multipliers[index] || getX() != 300) {
             setTouchable(Touchable.enabled);
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
 
