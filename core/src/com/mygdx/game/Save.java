@@ -15,7 +15,7 @@ public class Save {
     private static int [] maxAmount = MoneyButton.getMaxAmount();
     private static float [][] farmActorY = FarmScreen.getFarmActorYArray();
 
-    private static Preferences prefs = Gdx.app.getPreferences("baltic_savefile");
+    private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile2");
 
     private static int farmAmount = 4;
     private static int researchAmount = 19;
@@ -132,7 +132,7 @@ public class Save {
 
     static void newGame() {
 
-        prefs.putInteger("money", 6000);
+        prefs.putInteger("money", 6000000);
         prefs.putBoolean("gameBegan", false);
         prefs.putInteger("balticSituation", 0);
 
