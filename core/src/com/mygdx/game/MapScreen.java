@@ -118,15 +118,18 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
     /**
-     * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
-     *
-     * @param m Main contains meta data of the game
+     * Actors for cloud textures
      */
     private Cloud cloud;
     private Cloud cloud2;
     private Cloud cloud3;
     private Cloud cloud4;
 
+    /**
+     * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
+     *
+     * @param m Main contains meta data of the game
+     */
     MapScreen(Main m) {
 
         main = m;
@@ -138,6 +141,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         createActors();
         checkIfTutorial();
+
         addActorsToStage();
 
         ((OrthographicCamera)camera).zoom += 27f;
@@ -188,6 +192,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         coins.add(new MoneyButton(main,667, 133, 2));
         coins.add(new MoneyButton(main,617, 342, 3));
 
+        cloud = new Cloud(-540, 0, 900);
+        cloud2 = new Cloud(-600, -150, 1100);
+        cloud3 = new Cloud(-600, -500, 800);
+        cloud4 = new Cloud(30, -40, 900);
+
         map = new MapBackground();
         map.setSize(800, 450);
         map.addListener(new ActorGestureListener() {
@@ -218,26 +227,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             stageUI.addActor(tutorial_3_Actors[0]);
             tutorial_3_Actors[0].setVisible(false);
         }
-
-        map = new MapBackground();
-        map.setSize(800, 450);
-        map.addListener(new ActorGestureListener() {
-            public void zoom (InputEvent event, float initialDistance, float distance) {
-                ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
-                camera.update();
-            }
-        });
-
-        cloud = new Cloud(-540, 0, 900);
-        cloud2 = new Cloud(-600, -150, 1100);
-        cloud3 = new Cloud(-600, -500, 800);
-        cloud4 = new Cloud(30, -40, 900);
-
-        addActorsToStage();
-        addCoinsToStage();
-        addCloudsToStage();
-
-        ((OrthographicCamera)camera).zoom += 27f;
     }
 
     /**
@@ -257,19 +246,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
-        stage.addActor(coins.get(0));
-    }
-
-    private void addCloudsToStage() {
-        stage.addActor(cloud);
-        stage.addActor(cloud2);
-        stage.addActor(cloud3);
-        stage.addActor(cloud4);
-    }
-
-    static boolean [] getCoinAdded() {
-        return coinAdded;
-    }
+        //stage.addActor(coins.get(0));
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -280,6 +257,11 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 }
             }
         }
+
+        stage.addActor(cloud);
+        stage.addActor(cloud2);
+        stage.addActor(cloud3);
+        stage.addActor(cloud4);
     }
 
     /**
@@ -321,7 +303,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Updates camera input and location, checks if tutorial is on and if boats need to be added and calls draw- and act -methods of the Stages.
+     * Updates camera input and location, checks if tutorial is on, moves the cloud textures and calls draw- and act -methods of the Stages.
      *
      * @param delta delta time of player's device
      */
