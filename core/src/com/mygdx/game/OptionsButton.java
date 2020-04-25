@@ -32,20 +32,20 @@ public class OptionsButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
-                    if (main.getMusic()) {
-                        main.setMusic(false);
+                    if (Main.getMusic()) {
+                        Main.setMusic(false);
                         main.stopMusic();
                         System.out.println("Music off");
                     } else {
-                        main.setMusic(true);
+                        Main.setMusic(true);
                         System.out.println("Music on");
                     }
                 } else if (index == 1) {
-                    if (main.getSound()) {
-                        main.setSound(false);
+                    if (Main.getSound()) {
+                        Main.setSound(false);
                         System.out.println("Sound off");
                     } else {
-                        main.setSound(true);
+                        Main.setSound(true);
                         System.out.println("Sound on");
                     }
                 } else if (index == 2) {

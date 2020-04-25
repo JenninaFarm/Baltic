@@ -332,6 +332,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
+        for(int i=0; i<actorAmount; i++) {
+            coins.get(i).disposeCoinSound();
+        }
     }
 
     Stage getStage() {

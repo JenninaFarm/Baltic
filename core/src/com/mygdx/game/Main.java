@@ -54,12 +54,17 @@ public class Main extends Game {
 		if(x == 1) {
 			setScreen(mainMenuScreen);
 			Gdx.input.setInputProcessor(mainMenuScreen.getStage());
+			mapMusic.pause();
+			if (music_ON) {
+				mapMusic.play();
+			}
 		} else if (x == 2) {
 			setScreen(mapScreen);
 			InputMultiplexer multiplexer = new InputMultiplexer(mapScreen.getStageUI(), mapScreen.getStage());
 			Gdx.input.setInputProcessor(multiplexer);
 			farmMusic.stop();
 			researchMusic.stop();
+			mapMusic.pause();
 			if (music_ON) {
 				mapMusic.play();
 			}
@@ -68,7 +73,9 @@ public class Main extends Game {
 				setScreen(farmScreens.get(y));
 				InputMultiplexer multiplexer = new InputMultiplexer(farmScreens.get(y).getStage(), farmScreens.get(y).getStageUI());
 				Gdx.input.setInputProcessor(multiplexer);
+				mapMusic.pause();
 				if (music_ON) {
+					mapMusic.play();
 					farmMusic.play();
 				}
 			}
@@ -181,10 +188,13 @@ public class Main extends Game {
 		researchMusic.setVolume(0.2f);
 		farmMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/farm_background_music.mp3"));
 		farmMusic.setLooping(true);
+		farmMusic.setVolume(0.6f);
 
 		setScreen(mainMenuScreen);
 		Gdx.input.setInputProcessor(mainMenuScreen.getStage());
-		//mapMusic.play();
+		if (music_ON) {
+			mapMusic.play();
+		}
 	}
 
 	public static void setBalticSituation(int bs) {
