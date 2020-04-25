@@ -241,7 +241,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(research);
         stage.addActor(meter);
 
-        addBoatsToStage();
+        if (Main.getBalticSituation() >= 25) {
+            stage.addActor(boat1);
+            stage.addActor(boatCoins1);
+        }
+        if (Main.getBalticSituation() >= 50) {
+            stage.addActor(boat2);
+            stage.addActor(boatCoins2);
+        }
 
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
@@ -446,20 +453,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     @Override
     public void hide() {
 
-    }
-
-    /**
-     * Adds boats to the stage if balticSituation is good enough.
-     */
-    private void addBoatsToStage() {
-        if (Main.getBalticSituation() >= 25) {
-            stage.addActor(boat1);
-            stage.addActor(boatCoins1);
-        }
-        if (Main.getBalticSituation() >= 50) {
-            stage.addActor(boat2);
-            stage.addActor(boatCoins2);
-        }
     }
 
     /**
