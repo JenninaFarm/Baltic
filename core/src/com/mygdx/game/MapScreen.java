@@ -39,7 +39,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Camera camera;
 
-    private static boolean [] farmLocks;
     private static boolean [] coinAdded = new boolean[4];
 
     private Tutorial [] tutorial_1_Actors = new Tutorial[6];
@@ -134,10 +133,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
-    static void setFarmLocksArray(boolean [] array) {
-        farmLocks = array;
-    }
-
     private void addCoinsToStage() {
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -176,10 +171,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     private void createFarms() {
-        farms.add(new MapButton(main, this, 150, 50, 0, farmLocks[0]));
-        farms.add(new MapButton(main, this, 310, 210, 1, farmLocks[1]));
-        farms.add(new MapButton(main, this, 620, 100, 2, farmLocks[2]));
-        farms.add(new MapButton(main, this,570, 310, 3, farmLocks[3]));
+        farms.add(new MapButton(main, this, 150, 50, 0));
+        farms.add(new MapButton(main, this, 310, 210, 1));
+        farms.add(new MapButton(main, this, 620, 100, 2));
+        farms.add(new MapButton(main, this, 570, 310, 3));
     }
 
     private void createBoats() {

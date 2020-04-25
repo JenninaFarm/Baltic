@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import static java.lang.Float.parseFloat;
 
 /**
- * FarmButton is an object base class to create a buttons to FarmScreen.
+ * FarmButton is an object base class to create a buttons to FarmScreen with inputListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen

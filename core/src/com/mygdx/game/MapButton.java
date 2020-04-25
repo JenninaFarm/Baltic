@@ -8,21 +8,60 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
+/**
+ * MapButton is an object base class to create Texture with inputListener.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class MapButton extends Actor {
 
+    /**
+     * Array for storing if the MapButtons are bought or not
+     */
+    private static boolean [] bought = new boolean[4];
+    /**
+     * Main to handle money, switch screens and ask I18NBundle
+     */
     private Main main;
+    /**
+     * MapScreen to handle coins (MoneyButtons) and infoLabels
+     */
     private MapScreen mapScreen;
+    /**
+     * Texture that is created and drawn
+     */
     private Texture button;
+    /**
+     * Texture that is created and drawn if MapButton has not been bought
+     */
     private Texture lock;
+    /**
+     * InfoLabel of the not bought MapButton
+     */
     private InfoLabel infoLabel;
-    private float width;
-    private float height;
+    /**
+     * Index to identify the MapButton
+     */
     private int index;
+    /**
+     * Cost of the MapButton
+     */
     private int cost;
 
-    private static boolean [] bought = new boolean[4];
-
-    public MapButton(Main m, MapScreen ms, int x, int y, int i, boolean b) {
+    /**
+     * Constructor. Creates all the private variables and sets x- and y-coordinates, Textures, width and height of the MapButton.
+     * It contains anonymous InputListener to detect touchDown, enter and exit of the MoneyButton to switch screens or show more info.
+     *
+     * @param m Main contains meta data of the game
+     * @param ms MapScreen for InfoLabel and coin handling
+     * @param x X-coordinate of the MapButton
+     * @param y Y-coordinate of the MapButton
+     * @param i Index of the MapButton
+     */
+    MapButton(Main m, MapScreen ms, int x, int y, int i) {
 
         index = i;
         main = m;
@@ -32,13 +71,10 @@ public class MapButton extends Actor {
         lock = new Texture(Gdx.files.internal("lock-icon.png"));
         setX(x);
         setY(y);
-        width = button.getWidth()/7f;
-        height = button.getHeight()/7f;
-        setWidth(width);
-        setHeight(height);
+        setWidth(button.getWidth()/7f);
+        setHeight(button.getHeight()/7f);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
-        bought[index] = b;
         //set first farm bought
         if(index == 0) {
             bought[index] = true;
@@ -86,7 +122,6 @@ public class MapButton extends Actor {
                     }
                 }
                 return true;
-
             }
 
             @Override
@@ -113,19 +148,34 @@ public class MapButton extends Actor {
         });
     }
 
-    public static boolean[] getFarmLocks() {
+    /**
+     * Get -method to collect the bought array.
+     *
+     * @return Array that contains if the MapButtons have been bought or not
+     */
+    static boolean[] getFarmLocks() {
         return bought;
     }
 
-    public void draw(Batch batch, float alpha) {
-        batch.draw(button, this.getX(), this.getY(), width, height);
-        if(!bought[index] && index != 0) {
-            batch.draw(lock, this.getX()+8, this.getY()+15, width/1.5f, height/1.5f);
-        }
+    /**
+     * Set -method to receive updated bought array.
+     *
+     * @param array Array that is set to be bought
+     */
+    static void setFarmLocksArray(boolean[] array) {
+        bought = array;
     }
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
+    /**
+     * Draws button Texture with specific location and size. If the MapButton has not been bought, draws a lock over the button Texture.
+     *
+     * @param batch Batch is used to handle the drawing
+     * @param alpha Alpha determines transparency of the drawing
+     */
+    public void draw(Batch batch, float alpha) {
+        batch.draw(button, this.getX(), this.getY(), getWidth(), getHeight());
+        if(!bought[index] && index != 0) {
+            batch.draw(lock, this.getX()+8, this.getY()+15, getWidth()/1.5f, getHeight()/1.5f);
+        }
     }
 }

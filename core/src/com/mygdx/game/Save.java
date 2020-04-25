@@ -100,7 +100,7 @@ public class Save {
         for(int i=0; i<farmAmount; i++) {
             farmLocks[i] = prefs.getBoolean("farmlock" + i);
         }
-        MapScreen.setFarmLocksArray(farmLocks);
+        MapButton.setFarmLocksArray(farmLocks);
 
         for(int i=0; i<farmAmount; i++) {
             lastTimeClicked[i] = prefs.getInteger("lastTimeClicked" + i);
