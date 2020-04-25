@@ -22,7 +22,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
     private Main main;
     private SpriteBatch batch;
-    private Background map;
+    private MapBackground map;
     private Stage stage;
     private Stage stageUI;
     private int actorAmount = 4;
@@ -62,30 +62,30 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         research = new MapResearchButton(main, 680, 270);
         returnButton = new ReturnButton(main, 1);
         moneyLabel = new MoneyLabel(main);
-        incomeLabel = new IncomeLabel(main,5);
+        incomeLabel = new IncomeLabel(main, 5);
         meter = new Meter(main);
         createFarms();
         createBoats();
         createCoins();
 
-        if(Tutorial.tutorial) {
+        if (Tutorial.tutorial) {
             Tutorial.tutorial_1_Stages[0] = true;
-            for(int i=0;i<4;i++) {
+            for (int i = 0; i < 4; i++) {
                 tutorial_1_Actors[i] = new Tutorial(1, i);
             }
             stageUI.addActor(tutorial_1_Actors[0]);
         }
 
-        if(Tutorial.tutorial) {
+        if (Tutorial.tutorial) {
             Tutorial.tutorial_3_Stages[0] = true;
-            for(int i=0;i<4;i++) {
+            for (int i = 0; i < 4; i++) {
                 tutorial_3_Actors[i] = new Tutorial(3, i);
             }
             stageUI.addActor(tutorial_3_Actors[0]);
             tutorial_3_Actors[0].setVisible(false);
         }
 
-        map = new Background(new Texture(Gdx.files.internal("map.png")));
+        map = new MapBackground();
         map.setSize(800, 450);
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
