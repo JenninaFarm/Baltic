@@ -19,35 +19,35 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class MapButton extends Actor {
 
     /**
-     * Array for storing if the MapButtons are bought or not
+     * Array for storing if the MapButtons are bought or not.
      */
     private static boolean [] bought = new boolean[4];
     /**
-     * Main to handle money, switch screens and ask I18NBundle
+     * Main to handle money, switch screens and ask I18NBundle.
      */
     private Main main;
     /**
-     * MapScreen to handle coins (MoneyButtons) and infoLabels
+     * MapScreen to handle coins (MoneyButtons) and infoLabels.
      */
     private MapScreen mapScreen;
     /**
-     * Texture that is created and drawn
+     * Texture that is created and drawn.
      */
     private Texture button;
     /**
-     * Texture that is created and drawn if MapButton has not been bought
+     * Texture that is created and drawn if MapButton has not been bought.
      */
     private Texture lock;
     /**
-     * InfoLabel of the not bought MapButton
+     * InfoLabel of the not yet bought MapButton.
      */
     private InfoLabel infoLabel;
     /**
-     * Index to identify the MapButton
+     * Index to identify the MapButton.
      */
     private int index;
     /**
-     * Cost of the MapButton
+     * Cost of the MapButton.
      */
     private int cost;
 

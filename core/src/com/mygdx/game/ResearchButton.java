@@ -20,35 +20,35 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class ResearchButton extends Actor {
 
     /**
-     * Array that contains booleans if ResearchButtons are bought or not
+     * Array that contains booleans if ResearchButtons are bought or not.
      */
     private static boolean [] researchBought = new boolean [19];
     /**
-     * Main for money handling and asking I18NBundle
+     * Main for money handling and asking I18NBundle.
      */
     private Main main;
     /**
-     * ResearchScreen for InfoLabel
+     * ResearchScreen for InfoLabel.
      */
     private ResearchScreen researchScreen;
     /**
-     * Button that created and drawn
+     * Button that created and drawn.
      */
     private Button button1;
     /**
-     * Index to identify the Button
+     * Index to identify the Button.
      */
     private int index;
     /**
-     * Cost of the ResearchButton
+     * Cost of the ResearchButton.
      */
     private int cost;
     /**
-     * Boolean to know if the ResearchButton is available to buy
+     * Boolean to know if the ResearchButton is available to buy.
      */
     private boolean available = false;
     /**
-     * Actor for showing information about the research
+     * Actor for showing information about the research.
      */
     private InfoLabel infoLabel;
 
@@ -143,7 +143,7 @@ public class ResearchButton extends Actor {
     }
 
     /**
-     * Sets researchButton available if research is bought already
+     * Sets researchButton available if research is bought already.
      */
     void setResearchAvailable() {
         available = true;

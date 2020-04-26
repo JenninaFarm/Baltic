@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
- * ReturnButton is an object base class to create a button which switch screen to previous screen.
+ * ReturnButton is an object base class to create a button which switches screen to previous screen.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -19,17 +19,17 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class ReturnButton extends Actor {
 
     /**
-     * Main for managing screen switch
+     * Main for managing screen switch.
      */
     private Main main;
 
     /**
-     * Texture of the Actor
+     * Texture of the Actor.
      */
     private Texture button;
 
     /**
-     * Index of the screen where the Actor is switching screen to when clicked
+     * Index of the screen where the Actor is switching screen to when clicked.
      */
     private int index;
 

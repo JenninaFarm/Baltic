@@ -21,50 +21,47 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 public class MoneyButton extends Actor {
 
     /**
-     * Main to handle meta data of the game
+     * Main to handle meta data of the game.
      */
     private Main main;
-
     /**
-     * Texture that is created and drawn
+     * Texture that is created and drawn.
      */
     private Texture coin;
-
     /**
-     * Sound of the coin when clicked
+     * Sound of the coin when collected.
      */
     private Sound coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin.wav"));
-
     /**
-     * Array for storing maximum amounts of moneyCollected
+     * Array for storing maximum amounts of moneyCollected.
      */
     private static int [] maxAmount = {0, 0, 0, 0, 20000, 20000};
     /**
-     * Array for storing multipliers of the MoneyButtons
+     * Array for storing multipliers of the MoneyButtons.
      */
     private static float [] multipliers = {4, 4, 4, 4, 30, 30};
     /**
-     * Array for storing last time in seconds when MoneyButton is clicked
+     * Array for storing last time in seconds when MoneyButton was clicked.
      */
     private static int [] lastTimeClicked = new int[6];
     /**
-     * Original x-coordination
+     * Original x-coordination.
      */
     private int originalX;
     /**
-     * Original y-coordination
+     * Original y-coordination.
      */
     private int originalY;
     /**
-     * Index to identify the coins
+     * Index to identify the coins.
      */
     private int index;
     /**
-     * Amount of money collected form the MoneyButton
+     * Amount of money collected form the MoneyButton.
      */
     private int moneyCollected;
     /**
-     * Time in seconds when the MoneyButton was last clicked
+     * Time in seconds when the MoneyButton was last clicked.
      */
     private int timeWhenClickedInSec;
 
@@ -116,7 +113,7 @@ public class MoneyButton extends Actor {
      * Adds given amount to the maximum amount of money that can be collected.
      *
      * @param amount Amount that is added to the already existing amount
-     * @param index Index of the MoneyButton where its added
+     * @param index Index of the MoneyButton where it's added
      */
     static void addToMaxAmount(int amount, int index) {
         if(maxAmount[index] + amount > 50000) {
@@ -212,7 +209,7 @@ public class MoneyButton extends Actor {
 
     /**
      * Draws the Texture with specific location and size. Sets Actor Touchable if it has money to collect.
-     * Moves coin back to original when it has arrived to new location.
+     * Moves coin back to original position when it has completed its action.
      *
      * @param batch Batch is used to handle the drawing
      * @param alpha Alpha determines transparency of the drawing

@@ -17,12 +17,12 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class MapResearchButton extends Actor {
 
     /**
-     * Main that is used to switch the screen
+     * Main that is used to switch the screen.
      */
     private Main main;
 
     /**
-     * Texture that is created and drawn
+     * Texture that is created and drawn.
      */
     private Texture button;
 
@@ -57,7 +57,7 @@ public class MapResearchButton extends Actor {
      * Draws the Texture with specific location and size.
      *
      * @param batch batch that is used in draw method
-     * @param alpha delta time?
+     * @param alpha used to handle transparency
      */
 
     public void draw(Batch batch, float alpha) {

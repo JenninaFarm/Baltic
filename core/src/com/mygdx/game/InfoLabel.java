@@ -16,14 +16,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 public class InfoLabel extends Actor {
 
     /**
-     * TextArea that is created and drawn
+     * TextArea that is created and drawn.
      */
     private TextArea textArea;
 
     /**
      * Constructor. Sets x- and y-coordinates, width and height of the TextArea.
      *
-     * @param main Main where the skin is asked.
+     * @param main Main where the skin is asked
      * @param info String that contains the content of the TextArea
      * @param x x-coordinate of the TextArea
      * @param y y-coordinate of the TextArea
@@ -44,7 +44,7 @@ public class InfoLabel extends Actor {
      * Calls the TextArea draw(batch, parentAlpha)-method.
      *
      * @param batch batch that is used in draw method
-     * @param parentAlpha delta time?
+     * @param parentAlpha used to handle transparency
      */
     @Override
     public void draw(Batch batch, float parentAlpha) {

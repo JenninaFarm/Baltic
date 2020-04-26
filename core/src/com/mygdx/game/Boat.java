@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Boat extends Actor {
 
     /**
-     * Texture which is created and drawn
+     * Texture which is created and drawn.
      */
     private Texture texture;
 

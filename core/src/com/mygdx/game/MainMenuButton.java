@@ -18,12 +18,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class MainMenuButton extends Actor {
 
     /**
-     * Main to switch screens and ask Skin.
+     * Main to switch screens and get Skin.
      */
     private Main main;
 
     /**
-     * Index of the button to control what action they have.
+     * Index of the button to control which action they have.
      */
     private int index;
 

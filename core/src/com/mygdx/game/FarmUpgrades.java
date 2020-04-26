@@ -16,47 +16,47 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class FarmUpgrades extends Actor {
 
     /**
-     * Index to identify the farmScreen
+     * Index to identify the farmScreen.
      */
     private int farmIndex;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture wheat;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture strawberry;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture flowerStrip;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture tractor;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture cow;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture bees;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture organicFIN;
 
     /**
-     * Texture that created and drawn
+     * Texture that is created and drawn.
      */
     private Texture organicEN;
 

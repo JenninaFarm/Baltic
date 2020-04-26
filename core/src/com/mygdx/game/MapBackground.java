@@ -17,19 +17,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class MapBackground extends Actor {
 
     /**
-     * Texture that is created and drawn under condition
+     * Texture that is created and drawn under condition.
      */
     private Texture map1;
     /**
-     * Texture that is created and drawn under condition
+     * Texture that is created and drawn under condition.
      */
     private Texture map2;
     /**
-     * Texture that is created and drawn under condition
+     * Texture that is created and drawn under condition.
      */
     private Texture map3;
     /**
-     * Texture that is created and drawn under condition
+     * Texture that is created and drawn under condition.
      */
     private Texture map4;
 
