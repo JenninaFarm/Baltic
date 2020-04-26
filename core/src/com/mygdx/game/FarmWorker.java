@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -56,7 +57,7 @@ public class FarmWorker extends Actor {
         button1.setDisabled(true);
         int workerAmount = farmScreen.getWorkerAmount();
         if (workerAmount >= 3) {
-            button1.setChecked(true);
+            button1.setVisible(false);
         }
 
         button1.addListener(new InputListener() {
@@ -76,8 +77,7 @@ public class FarmWorker extends Actor {
 
                 workerAmount = farmScreen.getWorkerAmount();
                 if (workerAmount >= 3) {
-                    button1.setChecked(true);
-                    button1.getStyle().down = button1.getStyle().checked;
+                    button1.setVisible(false);
                 }
                 return true;
             }

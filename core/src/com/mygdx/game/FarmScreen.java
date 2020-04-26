@@ -286,6 +286,7 @@ public class FarmScreen implements Screen {
         setUpgradesAvailable();
 
         stageUI.draw();
+        stageUI.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         stage.act(Gdx.graphics.getDeltaTime());
     }
