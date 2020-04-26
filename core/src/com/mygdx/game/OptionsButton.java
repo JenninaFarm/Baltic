@@ -57,7 +57,7 @@ public class OptionsButton extends Actor {
         if(!Main.music_ON && index == 0) {
             button1.setChecked(true);
         }
-        if(!Main.soundeffects_ON && index == 1) {
+        if(!Main.getSound() && index == 1) {
             button1.setChecked(true);
         }
         button1.addListener(new InputListener() {

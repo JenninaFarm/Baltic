@@ -7,26 +7,81 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
+/**
+ * Tutorial is an object base class to create a Texture which extends an Actor.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class Tutorial extends Actor {
 
-    private int index;
-    private Texture tutorialTexture;
-    private Texture tutorialTexture_EN;
-
-    public static boolean tutorial = Save.getTutorial();
+    /**
+     * boolean if tutorial is true or not
+     */
+    public static boolean tutorial = true;
+    /**
+     * boolean if first part is true or not
+     */
     public static boolean tutorial_1 = true;
+    /**
+     * boolean if second part is true or not
+     */
     public static boolean tutorial_2 = true;
+    /**
+     * boolean if third part is true or not
+     */
     public static boolean tutorial_3 = true;
+    /**
+     * boolean if fourth part is true or not
+     */
     public static boolean tutorial_4 = true;
+    /**
+     * boolean array containing information if first part stages are true or not
+     */
     public static boolean [] tutorial_1_Stages = new boolean [4];
+    /**
+     * boolean array containing information if second part stages are true or not
+     */
     public static boolean [] tutorial_2_Stages = new boolean [5];
+    /**
+     * boolean array containing information if third part stages are true or not
+     */
     public static boolean [] tutorial_3_Stages = new boolean [5];
+    /**
+     * boolean array containing information if fourth part stages are true or not
+     */
     public static boolean [] tutorial_4_Stages = new boolean [5];
-
+    /**
+     * Index to identify the Tutorial
+     */
+    private int index;
+    /**
+     * Texture that is created and drawn in Finnish
+     */
+    private Texture tutorialTexture;
+    /**
+     * Texture that is created and drawn is English
+     */
+    private Texture tutorialTexture_EN;
+    /**
+     * Width of the Texture
+     */
     private float width = 730f;
+    /**
+     * Height of the Texture
+     */
     private float height = 400f;
 
-    public Tutorial(int tutorialIndex, int stageIndex) {
+    /**
+     * Constructor. Creates all the private variables, arrays and Textures and sets x- and y-coordinates of the MapButton.
+     * It contains anonymous InputListener to detect touchDown to switch Texture.
+     *
+     * @param tutorialIndex Index to identify the Tutorial
+     * @param stageIndex Index to identify the stage
+     */
+    Tutorial(int tutorialIndex, int stageIndex) {
 
         switch (tutorialIndex) {
 
@@ -124,6 +179,12 @@ public class Tutorial extends Actor {
         }
     }
 
+    /**
+     * Draw method of the Actor. Draws texture depending on the language used.
+     *
+     * @param batch handles drawing
+     * @param alpha used to handle transparency
+     */
     public void draw(Batch batch, float alpha) {
         if(Main.finnish){
             batch.draw(tutorialTexture, getX(), getY(), width, height);

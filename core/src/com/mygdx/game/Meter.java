@@ -5,30 +5,45 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+/**
+ * Meter is an object base class to create a Texture which extends an Actor.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class Meter extends Actor {
 
+    /**
+     * Main contains meta data of the game
+     */
     private Main main;
+    /**
+     * Array containing Textures of the meter
+     */
     private TextureRegion [] meterTexture;
+    /**
+     * Label for showing current balticSituation
+     */
     private Label balticMeter;
-    private float width;
-    private float height;
+    /**
+     * Amount of balticSituation
+     */
     private int balticSituation;
 
-    public Meter(Main m) {
+    /**
+     * Constructor. Sets all the private variables, array and objects.
+     * @param m Main contains meta data of the game
+     */
+    Meter(Main m) {
         main = m;
         meterTexture = new TextureRegion[9];
         for(int i=0; i<meterTexture.length; i++) {
             meterTexture[i] = new TextureRegion(new Texture (Gdx.files.internal("meter/meter" + i + ".png")));
         }
-
 
         balticSituation = main.getBalticSituation();
 
@@ -36,21 +51,24 @@ public class Meter extends Actor {
         balticMeter.setX(753);
         balticMeter.setY(39);
 
-
         setX(730);
         setY(30);
-        width = meterTexture[0].getRegionWidth()/4f;
-        height = meterTexture[0].getRegionHeight()/4f;
-        setWidth(width);
-        setHeight(height);
+        setWidth(meterTexture[0].getRegionWidth()/4f);
+        setHeight(meterTexture[0].getRegionHeight()/4f);
         setBounds(getX(), getY(), getWidth(), getHeight());
     }
 
+    /**
+     * Draw method of the Actor. Draws texture and sets Label location depending on the balticSituation.
+     *
+     * @param batch handles drawing
+     * @param alpha used to handle transparency
+     */
     public void draw(Batch batch, float alpha) {
         balticSituation = main.getBalticSituation();
         int [] balticState = {0, 5, 10, 18, 25, 35, 50, 67, 90, 120};
         for(int i=0; i<meterTexture.length; i++) {
-            if(balticSituation >= balticState[i] && balticSituation < balticState[i+1]) {
+            if(balticSituation >= balticState[i] && balticSituation <= balticState[i+1]) {
                 batch.draw(meterTexture[i], getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
             }
         }

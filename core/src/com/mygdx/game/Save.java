@@ -3,24 +3,70 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
+/**
+ * Utils is a static class for handling memory.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
+
 public class Save {
 
+    /**
+     * Array containing information if researchButton has been bought
+     */
     private static boolean [] research = ResearchButton.getResearchBooleans();
+    /**
+     * 2d array containing information if FarmButtons has been bought
+     */
     private static boolean [][] farmBought = FarmButton.getBoughtArray();
+    /**
+     * Array containing information what are the current multipliers
+     */
     private static float [] multipliers = MoneyButton.getMultipliers();
+    /**
+     * Array containing information if MapButtons has been bought
+     */
     private static boolean [] farmLocks = MapButton.getFarmLocks();
+    /**
+     * Array for containing information when MoneyButton has been clicked last time
+     */
     private static int [] lastTimeClicked = MoneyButton.getLastTimeClicked();
+    /**
+     * Array for containing information if MoneyButton has been added to the Stage
+     */
     private static boolean [] coinAdded = MapScreen.getCoinAdded();
+    /**
+     * Array containing information of the amount of workers in FarmScreen
+     */
     private static int [] workerAmount = FarmScreen.getWorkerAmountArray();
+    /**
+     * Array containing information of the maximum amount of money that could be collected
+     */
     private static int [] maxAmount = MoneyButton.getMaxAmount();
+    /**
+     * 2d array containing information of FarmButtons's current Y locations
+     */
     private static float [][] farmActorY = FarmScreen.getFarmActorYArray();
-
+    /**
+     * Preferences object to handle the saving and loading methods
+     */
     private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile3");
-
+    /**
+     * Amount of the farmScreens
+     */
     private static int farmAmount = 4;
+    /**
+     * Amount of the researches
+     */
     private static int researchAmount = 19;
 
-    public static void saveVariables() {
+    /**
+     * Saves all the private arrays and some crucial variables of the game
+     */
+    static void saveVariables() {
 
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
@@ -70,10 +116,12 @@ public class Save {
         prefs.flush();
     }
 
-    public static void loadVariables() {
+    /**
+     * Loads all the private arrays and some crucial variables of the game from the saved file
+     */
+    static void loadVariables() {
 
         Main.setMoney(prefs.getInteger("money", 7000));
-        Main.setGameBegan(prefs.getBoolean("gameBegan"));
         Main.setBalticSituation(prefs.getInteger("balticSituation"));
         Tutorial.tutorial = prefs.getBoolean("tutorial", true);
         Main.setMusic(prefs.getBoolean("music", true));
@@ -130,6 +178,9 @@ public class Save {
         FarmScreen.setFarmActorYArray(farmActorY);
     }
 
+    /**
+     * Put all the private arrays and crucial variables as they should be in the beginning of the game.
+     */
     static void newGame() {
 
         prefs.putInteger("money", 7000000);
@@ -189,15 +240,5 @@ public class Save {
         prefs.flush();
 
         loadVariables();
-    }
-
-    public static boolean getTutorial() {
-        return Tutorial.tutorial;
-    }
-
-    public static void saveStartingTime() {
-        prefs.putInteger("startingTime", Main.getStartingTime());
-        prefs.putBoolean("gameBegan", true);
-        prefs.flush();
     }
 }
