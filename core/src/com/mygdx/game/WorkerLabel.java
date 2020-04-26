@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
- * WorkerLabel is an object base class to create a TextField with information of how many workers specific farm has.
+ * WorkerLabel is an object base class to create a TextField with information of how many workers a specific farm has.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -18,16 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 public class WorkerLabel extends Actor {
 
     /**
-     * TextField that is created and drawn
+     * TextField that is created and drawn.
      */
     private TextField workerLabel;
     /**
-     * FarmScreen where the textField is added
+     * FarmScreen where the textField is added.
      */
     private FarmScreen farmScreen;
-
     /**
-     * Texture that is created and  drawn
+     * Texture that is created and  drawn.
      */
     private Texture worker;
 
@@ -49,11 +48,11 @@ public class WorkerLabel extends Actor {
     }
 
     /**
-     * Calls the TextField draw(batch, alpha)-method and draws the Texture over the TextField.
+     * Calls the TextField's draw()-method and draws the Texture over the TextField.
      * Sets up the current number of workers in the farmScreen and adds one to it since every farm has one worker as default.
      *
      * @param batch batch that is used in draw method
-     * @param alpha delta time?
+     * @param alpha used to handle transparency
      */
 
     public void draw(Batch batch, float alpha) {

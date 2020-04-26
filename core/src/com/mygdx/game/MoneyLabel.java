@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 /**
- * * MoneyLabel is a object base class to create a TextField with information of how much money player currently has.
+ * * MoneyLabel is an object base class to create a TextField with information of how much money player currently has.
  *  *
  *  * @author  Jennina Färm
  *  * @author  Tommi Häkkinen
@@ -22,15 +22,15 @@ public class MoneyLabel extends Actor {
      */
     private Main main;
     /**
-     * TextField that is created and drawn
+     * TextField that is created and drawn.
      */
     private TextField moneyLabel;
     /**
-     * Variable to hold current amount of money
+     * Variable to hold current amount of money.
      */
     private int currentMoney;
     /**
-     * Texture to identify the label content
+     * Texture to identify the label content.
      */
     private Texture coin;
 
@@ -54,10 +54,10 @@ public class MoneyLabel extends Actor {
 
     /**
      * Sets current amount of money to the label.
-     * Calls the draw(bathc, alpsha) -method of the TextLabel and draws coin-texture over it.
+     * Calls the draw() -method of the TextLabel and draws coin-texture over it.
      *
      * @param batch batch that is used in draw method
-     * @param alpha delta time?
+     * @param alpha used to handle transparency
      */
 
     public void draw(Batch batch, float alpha) {

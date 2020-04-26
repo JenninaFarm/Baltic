@@ -18,15 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 public class IncomeLabel extends Actor {
 
     /**
-     * TextField that is created and drawn
+     * TextField that is created and drawn.
      */
     private TextField label;
     /**
-     * Index for identifying farms and map
+     * Index for identifying farm screens and map screen.
      */
     private int index;
     /**
-     * Texture to identify the label content
+     * Texture to identify the label content.
      */
     private Texture coin;
 
@@ -34,7 +34,7 @@ public class IncomeLabel extends Actor {
     /**
      * Constructor. Sets index, Skin, x- and y-coordinates, width, height and Texture of the label.
      *
-     * @param main Main where the skin is asked
+     * @param main Main where the skin is asked.
      * @param i index value for identifying farms and map.
      */
     IncomeLabel(Main main, int i) {
@@ -49,12 +49,12 @@ public class IncomeLabel extends Actor {
     }
 
     /**
-     * Checks how many farms are bought and counts the multipliers together if in map.
+     * Checks how many farms are bought and adds their income multipliers together.
      * Counts income/min based on the multipliers and sets it to the label.
-     * Calls the draw(bathc, alpsha) -method of the TextLabel and draws coin-texture over it.
+     * Calls the draw() -method of the TextLabel and draws coin-texture on it.
      *
      * @param batch batch that is used in draw method
-     * @param alpha delta time?
+     * @param alpha used to handle transparency
      */
 
     public void draw(Batch batch, float alpha) {

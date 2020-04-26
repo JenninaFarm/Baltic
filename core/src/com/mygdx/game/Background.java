@@ -16,7 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Background extends Actor {
 
     /**
-     * Texture that is created and drawn
+     * Texture that is created and drawn.
      */
     private Texture texture;
 

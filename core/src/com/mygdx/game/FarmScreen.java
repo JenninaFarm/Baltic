@@ -28,83 +28,83 @@ import java.util.ArrayList;
 public class FarmScreen implements Screen {
 
     /**
-     * Array that contains the amount of workers in the farms
+     * Array that contains the amount of workers on the farms.
      */
     private static int [] workerAmount = new int[4];
     /**
-     * 2d array that contains the y-coordinates of the FarmButton objects
+     * 2d array that contains the y-coordinates of the FarmButton objects.
      */
     private static float [][] actorY = new float[4][19];
     /**
-     * Array for Actors of the Stage
+     * Array for Actors of the Stage.
      */
     private static Array<Actor> actors;
     /**
-     * Main contains meta data of the game
+     * Main contains meta data of the game.
      */
     private Main main;
     /**
-     * Index to identify the farmScreen
+     * Index to identify the farmScreen.
      */
     private int farmIndex;
     /**
-     * Stage to place Actors that are not moving with the camera
+     * Stage to place Actors that are not moving with the camera.
      */
     private Stage stage;
     /**
-     * Stage to place Actors that are still in the camera viewport
+     * Stage to place Actors that are still in the camera viewport.
      */
     private Stage stageUI;
     /**
-     * Amount of farm upgrades
+     * Amount of farm upgrades.
      */
     private int upgradeAmount = 19;
     /**
-     * Actor of the ReturnButton to get back to previous screen
+     * Actor of the ReturnButton to get back to previous screen.
      */
     private ReturnButton returnButton;
     /**
-     * Actor for the farm upgrade textures
+     * Actor for the farm upgrade textures.
      */
     private FarmUpgrades farmUpgrades;
     /**
-     * ArrayList containing FarmButton Actors for buying farm upgrades
+     * ArrayList containing FarmButton Actors for buying farm upgrades.
      */
     private ArrayList<FarmButton> farmButtons = new ArrayList<>();
     /**
-     * Actor for FarmWorker buying Button
+     * Actor for FarmWorker buying Button.
      */
     private FarmWorker workerButton;
     /**
-     * Actor for showing how many workers farm has
+     * Actor for showing how many workers a farm has.
      */
     private WorkerLabel workerLabel;
     /**
-     * Actor for showing players amount of money
+     * Actor for showing player's current amount of money.
      */
     private MoneyLabel moneyLabel;
     /**
-     * Actor for showing current income per minute in the farm
+     * Actor for showing current income per minute on the farm.
      */
     private IncomeLabel incomeLabel;
     /**
-     * Actor to show information about the upgrades
+     * Actor to show information about the upgrades.
      */
     private InfoLabel infoLabel;
     /**
-     * Actor that creates background for the screen
+     * Actor that creates background for the screen.
      */
     private Background farmBackground;
     /**
-     * Holds the Vector of dragging in the screen
+     * Holds the Vector of dragging in the screen.
      */
     private Vector2 dragNew, dragOld;
     /**
-     * Camera to move the viewport
+     * Camera to move the viewport.
      */
     private Camera camera;
     /**
-     * Array for the Tutorial Actors
+     * Array for the Tutorial Actors.
      */
     private Tutorial [] tutorial_4_Actors = new Tutorial[6];
 
@@ -165,7 +165,7 @@ public class FarmScreen implements Screen {
     static void setWorkerAmountArray(int [] array) { workerAmount = array;}
 
     /**
-     * Checks if tutorial is needed to set true, create and place to the stage.
+     * Checks if tutorial is needed to set true, created and placed on the stage.
      */
     private void checkIfTutorial() {
         if(Tutorial.tutorial_4 && Tutorial.tutorial && farmIndex == 0) {
@@ -228,7 +228,7 @@ public class FarmScreen implements Screen {
     }
 
     /**
-     * Adds worker to the workerAmount array.
+     * Adds a worker to the workerAmount array.
      */
     void addWorker() {
         if(workerAmount[farmIndex] < 4) {
@@ -314,7 +314,7 @@ public class FarmScreen implements Screen {
     }
 
     /**
-     * Controls how the tutorial is getting forward.
+     * Controls how the tutorial is advancing.
      */
     private void manageTutorial_4() {
 

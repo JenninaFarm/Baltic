@@ -18,27 +18,27 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Cloud extends Actor {
 
     /**
-     * Original x-coordination
+     * Original x-coordination.
      */
     private int originalX;
     /**
-     * Original y-coordination
+     * Original y-coordination.
      */
     private int originalY;
     /**
-     * Texture that is created and drawn
+     * Texture that is created and drawn.
      */
     private Texture cloudTexture;
     /**
-     * Speed of the x -axel
+     * Object's speed on the x-axel.
      */
     private float cloudSpeedX;
     /**
-     * Speed of the y -axel
+     * Object's speed on the y-axel
      */
     private float cloudSpeedY;
     /**
-     * Maximum distance the cloud is moving
+     * Maximum distance the Cloud is moving.
      */
     private float maxDistance;
 
@@ -65,7 +65,7 @@ public class Cloud extends Actor {
     }
 
     /**
-     * Moves the could with speed set until reached maximumDistance
+     * Moves the Cloud with set speed and resets its position when maxDistance is reached.
      */
      void cloudMove() {
 

@@ -23,37 +23,31 @@ import java.util.ArrayList;
 public class OptionsScreen implements Screen {
 
     /**
-     * Main to ask I18NBundle and pass over to Actors
+     * Main to ask I18NBundle and pass over to Actors.
      */
     private Main main;
-
     /**
-     * Handles drawing
+     * Handles drawing.
      */
     private SpriteBatch batch;
-
     /**
-     * Stage to place Actors that are not moving with the camera
+     * Stage to place Actors that are not moving with the camera.
      */
     private Stage stage;
-
     /**
-     * Actor that creates background for the MapScreen
+     * Actor that creates background for the MapScreen.
      */
     private Background background;
-
     /**
-     * ArrayList containing OptionsButton Actors
+     * ArrayList containing OptionsButton Actors.
      */
     private ArrayList<OptionsButton> optionsButtons = new ArrayList<>();
-
     /**
-     * Amount of optionsButtons
+     * Amount of optionsButtons.
      */
     private int buttonAmount = 5;
-
     /**
-     * Actor of the ReturnButton to get back to previous screen
+     * Actor of the ReturnButton to get back to previous screen.
      */
     private ReturnButton returnButton;
 
@@ -77,7 +71,7 @@ public class OptionsScreen implements Screen {
     }
 
     /**
-     * Creates OptionsButtons and ReturnButton
+     * Creates OptionsButtons and ReturnButton.
      */
     private void createButtons() {
         I18NBundle myBundle = main.getMyBundle();
@@ -88,7 +82,7 @@ public class OptionsScreen implements Screen {
     }
 
     /**
-     * Adds actors to the stage
+     * Adds actors to the stage.
      */
     private void addActors() {
         stage.addActor(background);
@@ -119,7 +113,7 @@ public class OptionsScreen implements Screen {
     }
 
     /**
-     * Get -method to collect stage
+     * Get -method to collect stage.
      *
      * @return stage of the MapScreen
      */
@@ -148,7 +142,7 @@ public class OptionsScreen implements Screen {
     }
 
     /**
-     * Disposes stage
+     * Disposes stage.
      */
     @Override
     public void dispose() {

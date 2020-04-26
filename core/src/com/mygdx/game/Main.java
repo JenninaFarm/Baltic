@@ -22,80 +22,80 @@ import java.util.Locale;
 public class Main extends Game {
 
 	/**
-	 * boolean if game is in Finnish or English
+	 * Boolean if game is in Finnish or English.
 	 */
 	static boolean finnish;
 	/**
-	 * boolean if music is on
+	 * Boolean if music is on.
 	 */
 	static boolean music_ON;
 	/**
-	 * amount of current money
+	 * Amount of current money.
 	 */
 	private static int money;
 	/**
-	 * Amount of current balticSituation
+	 * Amount of current balticSituation.
 	 */
 	private static int balticSituation;
 	/**
-	 * boolean if sound effects are on
+	 * Boolean if sound effects are on.
 	 */
 	private static boolean soundEffects_ON;
 	/**
-	 * SpriteBatch handles drawing
+	 * SpriteBatch handles drawing.
 	 */
 	private SpriteBatch batch;
 	/**
-	 * Screen fot main menu
+	 * Screen for main menu.
 	 */
 	private MainMenuScreen mainMenuScreen;
 	/**
-	 * Screen for map
+	 * Screen for map.
 	 */
 	private MapScreen mapScreen;
 	/**
-	 * ArrayList holding screen for farms
+	 * ArrayList holding screens for farms.
 	 */
 	private ArrayList<FarmScreen> farmScreens;
 	/**
-	 * Screen for research center
+	 * Screen for research center.
 	 */
 	private ResearchScreen researchScreen;
 	/**
-	 * Screen for chancing options
+	 * Screen for chancing options.
 	 */
 	private OptionsScreen optionsScreen;
 	/**
-	 * amount of farm
+	 * Amount of farms.
 	 */
 	private int farmAmount = 4;
 	/**
-	 * Handles button and text styles
+	 * Handles button and text styles.
 	 */
 	private Skin mySkin;
 	/**
-	 * Has stable information of the game
+	 * Has stable information of the game.
 	 */
 	private I18NBundle myBundle;
 	/**
-	 * Handles languages
+	 * Handles languages.
 	 */
 	private Locale locale = new Locale("fi", "FI");
 	/**
-	 * music of map
+	 * Music of map screen.
 	 */
 	private Music mapMusic;
 	/**
-	 * music of research
+	 * Music of research screen.
 	 */
 	private Music researchMusic;
 	/**
-	 * music of farm
+	 * Music of farm screen.
 	 */
 	private Music farmMusic;
 
 	/**
-	 * Set -method to receive language boolean
+	 * Set -method to receive language boolean.
 	 * @param language sets if languages is Finnish not
 	 */
 	public static void setLanguage(boolean language) {
@@ -103,7 +103,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect if music is on or not
+	 * Get -method to collect if music is on or not.
 	 * @return boolean if music is on
 	 */
 	static boolean getMusic() {
@@ -111,7 +111,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Set -method to receive music boolean
+	 * Set -method to receive music boolean.
 	 * @param music sets if music is on or not
 	 */
 	static void setMusic(boolean music) {
@@ -119,7 +119,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect boolean if sound effects are on
+	 * Get -method to collect boolean if sound effects are on.
 	 * @return if sound effects are on
 	 */
 	static boolean getSound() {
@@ -127,7 +127,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Set -method to receive sound boolean
+	 * Set -method to receive sound boolean.
 	 * @param sound sets if sound effects are on or not
 	 */
 	static void setSound(boolean sound) {
@@ -135,7 +135,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect current amount of money
+	 * Get -method to collect current amount of money.
 	 * @return current amount of money
 	 */
 	public static int getMoney() {
@@ -143,7 +143,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Set -method to receive updated amount of money
+	 * Set -method to receive updated amount of money.
 	 *
 	 * @param amount sets new amount of money
 	 */
@@ -156,13 +156,13 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect current balticSituation
+	 * Get -method to collect current balticSituation.
 	 * @return current amount of balticSituation
 	 */
 	static int getBalticSituation() { return balticSituation; }
 
 	/**
-	 * Set -method to receive balticSituation
+	 * Set -method to receive balticSituation.
 	 * @param bs int that is new balticSituation
 	 */
 	static void setBalticSituation(int bs) {
@@ -276,7 +276,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Adds given amount to current amount of balticSituation if given amount is between 0-4
+	 * Adds given amount to current amount of balticSituation if given amount is between 0-4.
 	 *
 	 * @param amount amount that is dried to add to baltic situation
 	 */
@@ -290,7 +290,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Non static set -method to receive updated amount of money
+	 * Non static set -method to receive updated amount of money.
 	 * @param amount sets new amount of money
 	 */
 	void nonStaticSetMoney(int amount) {
@@ -302,14 +302,14 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Stops playing music
+	 * Stops playing music.
 	 */
 	void stopMusic() {
 		mapMusic.stop();
 	}
 
 	/**
-	 * Non static get -method to collect current amount of money
+	 * Non static get -method to collect current amount of money.
 	 * @return current amount of money
 	 */
 	int nonStaticGetMoney() {
@@ -317,7 +317,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect SpriteBatch to handle drawing
+	 * Get -method to collect SpriteBatch to handle drawing.
 	 * @return SpriteBatch
 	 */
 	public SpriteBatch getBatch() {
@@ -325,7 +325,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect I18NBundle containing stable information of the game
+	 * Get -method to collect I18NBundle containing stable information of the game.
 	 * @return I18NBundle
 	 */
 	I18NBundle getMyBundle() {
@@ -333,7 +333,7 @@ public class Main extends Game {
 	}
 
 	/**
-	 * Get -method to collect Skin of the buttons and text
+	 * Get -method to collect Skin of the buttons and text.
 	 * @return Skin
 	 */
 	Skin getMySkin() { return mySkin;}

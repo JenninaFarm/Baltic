@@ -20,17 +20,17 @@ import com.badlogic.gdx.utils.I18NBundle;
 public class FarmWorker extends Actor {
 
     /**
-     * To handle meta data
+     * To handle meta data.
      */
     private Main main;
 
     /**
-     * Button that is created and drawn
+     * Button that is created and drawn.
      */
     private Button button1;
 
     /**
-     * The cost of the worker
+     * The cost of the worker.
      */
     private int cost;
 

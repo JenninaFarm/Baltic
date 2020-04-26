@@ -19,17 +19,15 @@ import java.util.Locale;
 public class OptionsButton extends Actor {
 
     /**
-     * Main to ask Skin and Locale
+     * Main to ask Skin and Locale.
      */
     private Main main;
-
     /**
-     * Button that is created and drawn
+     * Button that is created and drawn.
      */
     private Button button1;
-
     /**
-     * Index of the Button
+     * Index of the Button.
      */
     private int index;
 
