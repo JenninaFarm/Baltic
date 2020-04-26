@@ -310,7 +310,7 @@ public class FarmScreen implements Screen {
         }
 
         camera.position.x = MathUtils.clamp(camera.position.x, 300, 500);
-        camera.position.y = MathUtils.clamp(camera.position.y, -400, 250);
+        camera.position.y = MathUtils.clamp(camera.position.y, -600, 250);
     }
 
     /**

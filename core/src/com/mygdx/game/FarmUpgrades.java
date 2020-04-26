@@ -103,7 +103,7 @@ public class FarmUpgrades extends Actor {
             batch.draw(tractor, -10, 10, tractor.getWidth()/2.5f, tractor.getHeight()/2.5f);
         }
         if(bought[farmIndex][6]) {
-            batch.draw(cow, 340, 0, cow.getWidth()/5f, cow.getHeight()/5f);
+            batch.draw(cow, 320, 0, cow.getWidth()/5f, cow.getHeight()/5f);
         }
         if(bought[farmIndex][12]) {
             batch.draw(bees, 370, 300, bees.getWidth()/2.5f, bees.getHeight()/2.5f);
