@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 
 /**
- * Background is an object base class to create Textures which extends an Actor.
+ * MapBackground is an object base class to create Textures which extends an Actor.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
