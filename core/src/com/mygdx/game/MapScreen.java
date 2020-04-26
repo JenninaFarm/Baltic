@@ -241,15 +241,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.addActor(research);
         stage.addActor(meter);
 
-        if (Main.getBalticSituation() >= 25) {
-            stage.addActor(boat1);
-            stage.addActor(boatCoins1);
-        }
-        if (Main.getBalticSituation() >= 50) {
-            stage.addActor(boat2);
-            stage.addActor(boatCoins2);
-        }
-
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
@@ -322,6 +313,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        addBoatIfNeeded();
+
         cloud.cloudMove();
         cloud2.cloudMove();
         cloud3.cloudMove();
@@ -357,6 +350,20 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         stage.act(Gdx.graphics.getDeltaTime());
 
         stageUI.draw();
+    }
+
+    /**
+     * Adds boat and boatCoin if balticSituation is good enough
+     */
+    private void addBoatIfNeeded() {
+        if (Main.getBalticSituation() >= 25) {
+            stage.addActor(boat1);
+            stage.addActor(boatCoins1);
+        }
+        if (Main.getBalticSituation() >= 50) {
+            stage.addActor(boat2);
+            stage.addActor(boatCoins2);
+        }
     }
 
     /**

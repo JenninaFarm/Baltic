@@ -33,8 +33,8 @@ public class Meter extends Actor {
         balticSituation = main.getBalticSituation();
 
         balticMeter = new Label(Integer.toString(balticSituation), main.getMySkin());
-        balticMeter.setX(750);
-        balticMeter.setY(35);
+        balticMeter.setX(753);
+        balticMeter.setY(39);
 
 
         setX(730);
@@ -48,7 +48,7 @@ public class Meter extends Actor {
 
     public void draw(Batch batch, float alpha) {
         balticSituation = main.getBalticSituation();
-        int [] balticState = {0, 5, 10, 18, 25, 35, 50, 67, 90, 100};
+        int [] balticState = {0, 5, 10, 18, 25, 35, 50, 67, 90, 120};
         for(int i=0; i<meterTexture.length; i++) {
             if(balticSituation >= balticState[i] && balticSituation < balticState[i+1]) {
                 batch.draw(meterTexture[i], getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
@@ -56,8 +56,14 @@ public class Meter extends Actor {
         }
 
         //move label location if the number is 10 or over
-        if(balticSituation >= 10) {
-            balticMeter.setX(744);
+        if(balticSituation >= 10 && balticSituation < 20 || balticSituation >= 60 && balticSituation < 100) {
+            balticMeter.setX(747);
+        } else if(balticSituation >= 30 && balticSituation < 40 || balticSituation >= 50 && balticSituation < 60) {
+            balticMeter.setX(746);
+        } else if (balticSituation >= 40 && balticSituation < 49) {
+            balticMeter.setX(745);
+        } else if(balticSituation >= 100) {
+            balticMeter.setX(741);
         }
         balticMeter.setText(balticSituation);
         balticMeter.draw(batch, alpha);

@@ -126,7 +126,6 @@ public class MapButton extends Actor {
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                System.out.println("in enter");
                 if(!bought[index]) {
                     System.out.println("in enter inside if");
                     I18NBundle myBundle = main.getMyBundle();
@@ -138,7 +137,6 @@ public class MapButton extends Actor {
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                System.out.println("iin exit");
                 if(!bought[index]) {
                     System.out.println("in eexit inside if");
 
