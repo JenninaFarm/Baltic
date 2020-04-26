@@ -185,6 +185,13 @@ public class Main extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 
+		Save.loadVariables();
+
+		if(finnish) {
+			changeLocale(new Locale("fi", "FI"));
+		} else {
+			changeLocale(new Locale("en", "GB"));
+		}
 		myBundle = I18NBundle.createBundle(Gdx.files.internal("MyBundle"), locale);
 		mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 

@@ -86,10 +86,12 @@ public class OptionsButton extends Actor {
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));
                     Main.setLanguage(true);
+                    Save.saveVariables();
                     Main.callCreate(main);
                 } else if(index == 3) {
                     main.changeLocale(new Locale("en", "GB"));
                     Main.setLanguage(false);
+                    Save.saveVariables();
                     Main.callCreate(main);
                 } else if (index == 4) {
                     Save.newGame();

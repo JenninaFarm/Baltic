@@ -73,6 +73,7 @@ public class Save {
         prefs.putBoolean("tutorial", Tutorial.tutorial);
         prefs.putBoolean("music", Main.getMusic());
         prefs.putBoolean("sound", Main.getSound());
+        prefs.putBoolean("language", Main.finnish);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, multipliers[i]);
@@ -126,6 +127,7 @@ public class Save {
         Tutorial.tutorial = prefs.getBoolean("tutorial", true);
         Main.setMusic(prefs.getBoolean("music", true));
         Main.setSound(prefs.getBoolean("sound", true));
+        Main.finnish = prefs.getBoolean("language");
 
         for(int i=0; i<farmAmount; i++) {
             multipliers[i] = prefs.getFloat("multiplier" + i, 4);
