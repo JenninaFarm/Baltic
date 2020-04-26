@@ -218,7 +218,6 @@ public class MoneyButton extends Actor {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
         setTouchable(Touchable.disabled);
         if(potentialMoney > 7 * multipliers[index] || potentialMoney < 2 * multipliers[index] && getX() != originalX) {
-            System.out.println("getX: " + getX() + "potentialMoney: " + potentialMoney);
             setTouchable(Touchable.enabled);
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
 

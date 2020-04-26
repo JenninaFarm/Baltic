@@ -56,7 +56,7 @@ public class Meter extends Actor {
         }
 
         //move label location if the number is 10 or over
-        if(balticSituation >= 10 && balticSituation < 20 || balticSituation >= 60 && balticSituation < 100) {
+        if(balticSituation >= 10 && balticSituation < 30 || balticSituation >= 60 && balticSituation < 100) {
             balticMeter.setX(747);
         } else if(balticSituation >= 30 && balticSituation < 40 || balticSituation >= 50 && balticSituation < 60) {
             balticMeter.setX(746);
