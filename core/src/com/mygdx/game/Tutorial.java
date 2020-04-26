@@ -18,59 +18,59 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class Tutorial extends Actor {
 
     /**
-     * boolean if tutorial is true or not
+     * Boolean if tutorial is true or not.
      */
     public static boolean tutorial = true;
     /**
-     * boolean if first part is true or not
+     * Boolean if first part is true or not.
      */
     public static boolean tutorial_1 = true;
     /**
-     * boolean if second part is true or not
+     * Boolean if second part is true or not.
      */
     public static boolean tutorial_2 = true;
     /**
-     * boolean if third part is true or not
+     * Boolean if third part is true or not.
      */
     public static boolean tutorial_3 = true;
     /**
-     * boolean if fourth part is true or not
+     * Boolean if fourth part is true or not.
      */
     public static boolean tutorial_4 = true;
     /**
-     * boolean array containing information if first part stages are true or not
+     * Boolean array containing information if first part stages have been completed.
      */
     public static boolean [] tutorial_1_Stages = new boolean [4];
     /**
-     * boolean array containing information if second part stages are true or not
+     * Boolean array containing information if second part stages have been completed.
      */
     public static boolean [] tutorial_2_Stages = new boolean [5];
     /**
-     * boolean array containing information if third part stages are true or not
+     * Boolean array containing information if third part stages have been completed.
      */
     public static boolean [] tutorial_3_Stages = new boolean [5];
     /**
-     * boolean array containing information if fourth part stages are true or not
+     * Boolean array containing information if fourth part stages have been completed.
      */
     public static boolean [] tutorial_4_Stages = new boolean [5];
     /**
-     * Index to identify the Tutorial
+     * Index to identify the Tutorial.
      */
     private int index;
     /**
-     * Texture that is created and drawn in Finnish
+     * Texture that is created and drawn in Finnish.
      */
     private Texture tutorialTexture;
     /**
-     * Texture that is created and drawn is English
+     * Texture that is created and drawn is English.
      */
     private Texture tutorialTexture_EN;
     /**
-     * Width of the Texture
+     * Width of the Texture.
      */
     private float width = 730f;
     /**
-     * Height of the Texture
+     * Height of the Texture.
      */
     private float height = 400f;
 

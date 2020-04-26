@@ -18,19 +18,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 public class Meter extends Actor {
 
     /**
-     * Main contains meta data of the game
+     * Main contains meta data of the game.
      */
     private Main main;
     /**
-     * Array containing Textures of the meter
+     * Array containing Textures of the meter.
      */
     private TextureRegion [] meterTexture;
     /**
-     * Label for showing current balticSituation
+     * Label for showing current balticSituation.
      */
     private Label balticMeter;
     /**
-     * Amount of balticSituation
+     * Amount of balticSituation.
      */
     private int balticSituation;
 

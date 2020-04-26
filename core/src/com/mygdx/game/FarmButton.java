@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import static java.lang.Float.parseFloat;
 
 /**
- * FarmButton is an object base class to create a buttons to FarmScreen with inputListener.
+ * FarmButton is an object base class to create buttons to FarmScreen with inputListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -31,23 +31,23 @@ public class FarmButton extends Actor {
      */
     private static boolean[] researched = new boolean[19];
     /**
-     * Main for money and balticSituation handling and asking I18NBundle
+     * Main for money and balticSituation handling and asking I18NBundle.
      */
     private Main main;
     /**
-     * FarmScreen for InfoLabel and button position handling
+     * FarmScreen for InfoLabel and button position handling.
      */
     private FarmScreen farmScreen;
     /**
-     * Button that is created and drawn
+     * Button that is created and drawn.
      */
     private Button button1;
     /**
-     * Index of the Button
+     * Index of the Button.
      */
     private int buttonIndex;
     /**
-     * Index of the FarmScreen where the Button is
+     * Index of the FarmScreen where the Button is to be created.
      */
     private int farmIndex;
     /**
@@ -55,7 +55,7 @@ public class FarmButton extends Actor {
      */
     private int cost;
     /**
-     * Multiplier change to effect the income speed.
+     * Multiplier to increase the income speed.
      */
     private float multiplier;
     /**
@@ -63,7 +63,7 @@ public class FarmButton extends Actor {
      */
     private boolean available;
     /**
-     * BalticSituation change to effect the Baltic Sea and winning of the game.
+     * BalticSituation affects game progress.
      */
     private int balticSituation;
     /**
@@ -73,7 +73,7 @@ public class FarmButton extends Actor {
 
     /**
      * Constructor. Sets I18NBundle, Skin, width, height, x- and y-coordinates and Button of the FarmButton.
-     * It contains anonymous InputListener to detect touchDown, enter and exit of the FarmButton to buy the Button or set InfoLabel visible or not.
+     * It contains anonymous InputListener to detect touchDown, enter and exit of the FarmButton to buy the Button or set InfoLabel visible or hidden.
      *
      * @param m Main contains meta data
      * @param fs FarmScreen contains the Stage of the Button Actor

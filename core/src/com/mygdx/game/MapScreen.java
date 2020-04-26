@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import java.util.ArrayList;
 
 /**
- * MapScreen is an object base class to create a Screen for the map.
+ * MapScreen is an object base class to create a Screen for the map view.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -28,97 +28,97 @@ import java.util.ArrayList;
 public class MapScreen extends ApplicationAdapter implements Screen {
 
     /**
-     * Array containing booleans if the coins of farm are added
+     * Array containing booleans if the coins of farms are added.
      */
     private static boolean [] coinAdded = new boolean[4];
     /**
-     * Main to ask SpriteBatch, handle balticSituation and pass over to Actors
+     * Main to ask SpriteBatch, handle balticSituation and pass over to Actors.
      */
     private Main main;
     /**
-     * Stage to place Actors that are not moving with the camera
+     * Stage to place Actors that are not moving with the camera.
      */
     private Stage stage;
     /**
-     * Stage to place Actors that are still in the camera viewport
+     * Stage to place Actors that are still in the camera viewport.
      */
     private Stage stageUI;
     /**
-     * Amount of MapButtons and their MoneyButtons
+     * Amount of MapButtons and their MoneyButtons.
      */
     private int actorAmount = 4;
     /**
-     * Actor that creates background for the MapScreen
+     * Actor that creates background for the MapScreen.
      */
     private MapBackground map;
     /**
-     * ArrayList containing MoneyButton Actors for collecting money from MapButtons
+     * ArrayList containing MoneyButton Actors for collecting money from MapButtons.
      */
     private ArrayList<MoneyButton> coins = new ArrayList<>();
     /**
-     * ArrayList containing MapButton Actors for buying them and switching screens
+     * ArrayList containing MapButton Actors for buying them and switching screens.
      */
     private ArrayList<MapButton> farms = new ArrayList<>();
     /**
-     * Actor for switching screen to ResearchScreen
+     * Actor for switching screen to ResearchScreen.
      */
     private MapResearchButton research;
     /**
-     * Actor of the ReturnButton to get back to previous screen
+     * Actor of the ReturnButton to get back to previous screen.
      */
     private ReturnButton returnButton;
     /**
-     * Actor for visualizing progress of the game
+     * Actor for visualizing the progress of the game.
      */
     private Meter meter;
     /**
-     * Actor for showing player's amount of money
+     * Actor for showing player's amount of money.
      */
     private MoneyLabel moneyLabel;
     /**
-     * Actor for showing current income per minute in the farms
+     * Actor for showing current income per minute of the farms.
      */
     private IncomeLabel incomeLabel;
     /**
-     * Actor for showing information about the MapButtons that are not bought
+     * Actor for showing information about the MapButtons that have not been bought.
      */
     private InfoLabel infoLabel;
     /**
-     * Actor for the boat Texture
+     * Actor for the boat Texture.
      */
     private Boat boat1;
     /**
-     * Actor for collecting money form the boat
+     * Actor for collecting money form the boat.
      */
     private MoneyButton boatCoins1;
     /**
-     * Actor for the boat Texture
+     * Actor for the boat Texture.
      */
     private Boat boat2;
     /**
-     * Actor for collecting money form the boat
+     * Actor for collecting money form the boat.
      */
     private MoneyButton boatCoins2;
     /**
-     * Holds the Vector of dragging in the screen
+     * Holds the Vector of dragging in the screen.
      */
     private Vector2 dragNew, dragOld;
     /**
-     * Camera to move the viewport
+     * Camera to move the viewport.
      */
     private Camera camera;
     /**
-     * Array for the Tutorial Actors
+     * Array for the Tutorial Actors.
      */
     private Tutorial [] tutorial_1_Actors = new Tutorial[6];
 
     /**
-     * Array for the Tutorial Actors
+     * Array for the Tutorial Actors.
      */
     private Tutorial [] tutorial_3_Actors = new Tutorial[6];
 
     /**
-     * Actors for cloud textures
+     * Actors for cloud textures.
      */
     private Cloud cloud;
     private Cloud cloud2;
@@ -353,7 +353,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Adds boat and boatCoin if balticSituation is good enough
+     * Adds boat and boatCoin if balticSituation is good enough.
      */
     private void addBoatIfNeeded() {
         if (Main.getBalticSituation() >= 25) {
@@ -367,7 +367,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Hides all unneeded Actors in the MapScreen
+     * Hides all unneeded Actors in the MapScreen for the tutorial.
      */
     private void hideIconsTutorial_1() {
 
@@ -379,7 +379,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Controls how the tutorial is getting forward.
+     * Controls how the tutorial is advancing in its first stage.
      */
     private void manageTutorial_1() {
 
@@ -391,7 +391,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Controls how the tutorial is getting forward.
+     * Controls how the tutorial is advancing in its third stage.
      */
     private void manageTutorial_3() {
 
@@ -476,7 +476,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Disposes stages and coin sounds
+     * Disposes stages and coin sounds.
      */
     @Override
     public void dispose() {
@@ -488,7 +488,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Get -method to collect stage
+     * Get -method to collect stage.
      *
      * @return stage of the MapScreen
      */
@@ -497,7 +497,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Get -method to collect stageUI
+     * Get -method to collect stageUI.
      *
      * @return stageUI of the MapScreen
      */

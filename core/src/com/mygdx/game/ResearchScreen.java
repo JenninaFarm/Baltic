@@ -24,54 +24,62 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 
+/**
+ * ResearchScreen is an object base class to create a Screen for the research view.
+ *
+ * @author  Jennina Färm
+ * @author  Tommi Häkkinen
+ * @version 2020.2204
+ * @since 1.8
+ */
 public class ResearchScreen implements Screen {
 
     /**
-     * Amount of researches
+     * Amount of researches.
      */
     private static int researchAmount = 19;
     /**
-     * Array for the ResearchButtons
+     * Array for the ResearchButtons.
      */
     private static ResearchButton [] researchButtons = new ResearchButton [19];
     /**
-     * Main to ask SpiteBatch and pass over
+     * Main to get SpriteBatch and pass it on.
      */
     private Main main;
     /**
-     * Stage to place Actors that are not moving with the camera
+     * Stage to place Actors that are not moving with the camera.
      */
     private Stage stage;
     /**
-     * Stage to place Actors that are still in the camera viewport
+     * Stage to place Actors that are still in the camera viewport.
      */
     private Stage stageUI;
     /**
-     * Actor of the ReturnButton to get back to previous screen
+     * Actor of the ReturnButton to get back to previous screen.
      */
     private ReturnButton returnButton;
     /**
-     * Actor for showing player's amount of money
+     * Actor for showing player's amount of money.
      */
     private MoneyLabel moneyLabel;
     /**
-     * Actor for showing information about the ResearchButtons
+     * Actor for showing information about the ResearchButtons.
      */
     private InfoLabel infoLabel;
     /**
-     * Actor that creates background for the MapScreen
+     * Actor that creates a background for the ResearchScreen.
      */
     private Background background;
     /**
-     * Camera to move the viewport
+     * Camera to move the viewport.
      */
     private Camera camera;
     /**
-     * Holds the Vector of dragging in the screen
+     * Holds the Vector of dragging in the screen.
      */
     private Vector2 dragNew, dragOld;
     /**
-     * Array for the Tutorial Actors
+     * Array for the Tutorial Actors.
      */
     private Tutorial [] tutorial_2_Actors = new Tutorial[6];
 
@@ -156,7 +164,7 @@ public class ResearchScreen implements Screen {
     }
 
     /**
-     * Checks if tutorial is needed to set true, create and place to the stage.
+     * Checks if tutorial is needed to set true, created and placed to the stage.
      */
     private void checkIfTutorial() {
         if(Tutorial.tutorial_2 && Tutorial.tutorial) {
@@ -236,7 +244,7 @@ public class ResearchScreen implements Screen {
     }
 
     /**
-     * Controls how the tutorial is getting forward.
+     * Controls how the tutorial is advancing in its second stage.
      */
     private void manageTutorial_2() {
 
@@ -276,7 +284,7 @@ public class ResearchScreen implements Screen {
     }
 
     /**
-     * Get -method to collect stage
+     * Get -method to collect stage.
      *
      * @return stage of the ResearchScreen
      */
@@ -285,7 +293,7 @@ public class ResearchScreen implements Screen {
     }
 
     /**
-     * Get -method to collect stageUI
+     * Get -method to collect stageUI.
      *
      * @return stageUI of the ResearchScreen
      */
@@ -313,7 +321,7 @@ public class ResearchScreen implements Screen {
     }
 
     /**
-     * Disposes the stages
+     * Disposes the stages.
      */
     @Override
     public void dispose() {

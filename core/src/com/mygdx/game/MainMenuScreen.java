@@ -22,22 +22,22 @@ import java.util.ArrayList;
 public class MainMenuScreen implements Screen {
 
     /**
-     * Main to ask SpriteBatch and I18NBundle and pass over to other objects
+     * Main to get SpriteBatch and I18NBundle and pass over to other objects.
      */
     private Main main;
 
     /**
-     * Stage to place Actors
+     * Stage to place Actors.
      */
     private Stage stage;
 
     /**
-     * Background to create background for the screen
+     * Background to create background for the screen.
      */
     private Background background;
 
     /**
-     * ArrayList to contain MainMenuButtons
+     * ArrayList to contain MainMenuButtons.
      */
     private ArrayList<MainMenuButton> mainMenuButtons = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class MainMenuScreen implements Screen {
     }
 
     /**
-     * Created buttons of the screen.
+     * Creates buttons for the screen.
      */
     private void createButtons() {
         I18NBundle myBundle = main.getMyBundle();
@@ -71,7 +71,7 @@ public class MainMenuScreen implements Screen {
     }
 
     /**
-     * Sets Actors to the Stage
+     * Sets Actors to the Stage.
      */
     private void addActors() {
         stage.addActor(background);
@@ -93,7 +93,7 @@ public class MainMenuScreen implements Screen {
     }
 
     /**
-     * Calls for the draw -method of the Stage
+     * Calls for the draw -method of the Stage.
      *
      * @param delta delta time of the device
      */
@@ -121,7 +121,7 @@ public class MainMenuScreen implements Screen {
     }
 
     /**
-     * Calls the dispose -method of the Stage
+     * Calls the dispose -method of the Stage.
      */
     @Override
     public void dispose() {
