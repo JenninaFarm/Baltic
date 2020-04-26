@@ -66,7 +66,7 @@ public class Meter extends Actor {
      */
     public void draw(Batch batch, float alpha) {
         balticSituation = main.getBalticSituation();
-        int [] balticState = {0, 7, 15, 27, 43, 60, 70, 85, 99, 100};
+        int [] balticState = {-1, 7, 15, 27, 43, 60, 70, 85, 99, 100};
         for(int i=0; i<meterTexture.length; i++) {
             if(balticSituation > balticState[i] && balticSituation <= balticState[i+1]) {
                 batch.draw(meterTexture[i], getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
