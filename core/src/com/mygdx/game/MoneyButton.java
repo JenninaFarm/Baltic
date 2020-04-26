@@ -217,7 +217,8 @@ public class MoneyButton extends Actor {
     public void draw(Batch batch, float alpha) {
         int potentialMoney = countMoney(Utils.getCurrentTimeInSeconds());
         setTouchable(Touchable.disabled);
-        if(potentialMoney > 7 * multipliers[index] || getX() != 300) {
+        if(potentialMoney > 7 * multipliers[index] || potentialMoney < 2 * multipliers[index] && getX() != originalX) {
+            System.out.println("getX: " + getX() + "potentialMoney: " + potentialMoney);
             setTouchable(Touchable.enabled);
             batch.draw(coin, getX(), getY(), getWidth(), getHeight());
 
@@ -225,14 +226,13 @@ public class MoneyButton extends Actor {
             if(getX() != originalX && getY() != originalY) {
                 setTouchable(Touchable.disabled);
             }
-
-            //when coin is att 300, 410 location, then it comes to back it's original location
-            if(getX() == 300 && getY() == 410) {
-                MoveToAction moveToAction = new MoveToAction();
-                moveToAction.setPosition(originalX, originalY);
-                moveToAction.setDuration(0f);
-                MoneyButton.this.addAction(moveToAction);
-            }
+        }
+        //when coin is att 300, 410 location, then it comes to back it's original location
+        if(getX() == 300 && getY() == 410) {
+            MoveToAction moveToAction = new MoveToAction();
+            moveToAction.setPosition(originalX, originalY);
+            moveToAction.setDuration(0f);
+            MoneyButton.this.addAction(moveToAction);
         }
     }
 

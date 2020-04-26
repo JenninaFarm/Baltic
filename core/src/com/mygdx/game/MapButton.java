@@ -127,7 +127,6 @@ public class MapButton extends Actor {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 if(!bought[index]) {
-                    System.out.println("in enter inside if");
                     I18NBundle myBundle = main.getMyBundle();
                     infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
@@ -138,8 +137,6 @@ public class MapButton extends Actor {
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 if(!bought[index]) {
-                    System.out.println("in eexit inside if");
-
                     mapScreen.setInfoVisible(false);
                 }
             }
