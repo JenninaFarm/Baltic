@@ -38,11 +38,11 @@ public class MoneyButton extends Actor {
     /**
      * Array for storing maximum amounts of moneyCollected
      */
-    private static int [] maxAmount = {0, 0, 0, 0, 5000, 5000};
+    private static int [] maxAmount = {0, 0, 0, 0, 20000, 20000};
     /**
      * Array for storing multipliers of the MoneyButtons
      */
-    private static float [] multipliers = {4, 4, 4, 4, 50, 50};
+    private static float [] multipliers = {4, 4, 4, 4, 30, 30};
     /**
      * Array for storing last time in seconds when MoneyButton is clicked
      */
@@ -119,8 +119,11 @@ public class MoneyButton extends Actor {
      * @param index Index of the MoneyButton where its added
      */
     static void addToMaxAmount(int amount, int index) {
-        maxAmount[index] += amount;
-        System.out.println("new max Amount: " + index + " farm: " + maxAmount[index]);
+        if(maxAmount[index] + amount > 50000) {
+            maxAmount[index] = 50000;
+        } else {
+            maxAmount[index] += amount;
+        }
     }
 
     /**

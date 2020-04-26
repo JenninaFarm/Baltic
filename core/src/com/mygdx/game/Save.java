@@ -192,7 +192,7 @@ public class Save {
             if(i<5) {
                 prefs.putFloat("multiplier" + i, 4);
             } else {
-                prefs.putFloat("multiplier" + i, 50);
+                prefs.putFloat("multiplier" + i, 30);
             }
         }
 
@@ -227,7 +227,7 @@ public class Save {
             if(i < 5) {
                 prefs.putInteger("maxAmount" + i, 0);
             } else {
-                prefs.putInteger("maxAmount" + i, 5000);
+                prefs.putInteger("maxAmount" + i, 20000);
             }
         }
 
