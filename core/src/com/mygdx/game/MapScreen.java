@@ -111,14 +111,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      * Array for the Tutorial stage 1 Actors.
      */
     private Tutorial [] tutorial_1_Actors = new Tutorial[4];
-
     /**
      * Array for the Tutorial stage 3 Actors.
      */
     private Tutorial [] tutorial_3_Actors = new Tutorial[4];
-
+    /**
+     * Boolean for the tutorial stage that activates when the game's completion condition is met.
+     */
     private Tutorial endGame;
-
     /**
      * Actors for cloud textures.
      */
@@ -126,12 +126,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Cloud cloud2;
     private Cloud cloud3;
     private Cloud cloud4;
-
     /**
      * Boolean to detect if boat1 is added
      */
     private boolean boat1Added = false;
-
     /**
      * Boolean to detect if boat2 is added
      */
@@ -438,6 +436,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
     }
 
+    /**
+     * Runs the end game tutorial screen when the game's completion condition is met and hides other actors from the background.
+     */
     private void triggerEndGame() {
         if(Tutorial.endGame) {
             moneyLabel.setVisible(false);

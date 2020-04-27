@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -51,6 +52,10 @@ public class ResearchButton extends Actor {
      * Actor for showing information about the research.
      */
     private InfoLabel infoLabel;
+    /**
+     * Sound that plays when a research is completed.
+     */
+     private Sound researchSound = Gdx.audio.newSound(Gdx.files.internal("sounds/research_buy.wav"));
 
     /**
      * Constructor. Creates all the private variables and sets x- and y-coordinates, width and height of the ResearchButton.
@@ -98,6 +103,7 @@ public class ResearchButton extends Actor {
 
                 if(currentMoney >= cost && !researchBought[index] && available) {
                     System.out.println("bought");
+                    researchSound.play(0.6f);
                     main.nonStaticSetMoney(currentMoney - cost);
                     button1.getStyle().checked = button1.getStyle().down;
                     button1.setChecked(true);

@@ -75,6 +75,10 @@ public class FarmButton extends Actor {
      * Sound of the cow when bought livestock upgrade.
      */
     private Sound cowSound = Gdx.audio.newSound(Gdx.files.internal("sounds/cow.wav"));
+    /**
+     * Sound that plays when an upgrade is purchased.
+     */
+    private Sound upgradeSound = Gdx.audio.newSound(Gdx.files.internal("sounds/upgrade_buy.wav"));
 
     /**
      * Constructor. Sets I18NBundle, Skin, width, height, x- and y-coordinates and Button of the FarmButton.
@@ -130,6 +134,7 @@ public class FarmButton extends Actor {
                 }
                 if (available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
                     System.out.println("bought");
+                    upgradeSound.play(0.6f);
                     bought[farmIndex][buttonIndex] = true;
                     farmScreen.setFarmButtonY(buttonI);
                     button1.setVisible(false);
