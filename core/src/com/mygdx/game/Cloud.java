@@ -26,6 +26,14 @@ public class Cloud extends Actor {
      */
     private int originalY;
     /**
+     * X which is controlling the movement
+     */
+    private float x;
+    /**
+     * Y which is controlling the movement
+     */
+    private float y;
+    /**
      * Texture that is created and drawn.
      */
     private Texture cloudTexture;
@@ -45,14 +53,16 @@ public class Cloud extends Actor {
     /**
      * Constructor. Sets all the private variables and objects.
      *
-     * @param x x-coordinate to be set as an originalX
-     * @param y y-coordinate to be set as an originalY
+     * @param xLoc x-coordinate to be set as an originalX
+     * @param yLoc y-coordinate to be set as an originalY
      * @param max Maximum distance moved
      */
-    Cloud(int x, int y, float max) {
+    Cloud(int xLoc, int yLoc, float max) {
 
-        originalX = x;
-        originalY = y;
+        originalX = xLoc;
+        originalY = yLoc;
+        x = xLoc;
+        y = yLoc;
         int random = MathUtils.random(3, 6);
         cloudSpeedX = 0.4f;
         cloudSpeedY = 0.2f;
@@ -67,13 +77,13 @@ public class Cloud extends Actor {
     /**
      * Moves the Cloud with set speed and resets its position when maxDistance is reached.
      */
-     void cloudMove() {
+    void cloudMove() {
 
-        setX(getX() + cloudSpeedX);
-        setY(getY() + cloudSpeedY);
-        if (getX() >= maxDistance) {
-            setX(originalX);
-            setY(originalY);
+        this.x += cloudSpeedX;
+        this.y += cloudSpeedY;
+        if (this.x >= maxDistance) {
+            this.x = originalX;
+            this.y = originalY;
         }
     }
 
@@ -84,6 +94,7 @@ public class Cloud extends Actor {
      * @param alpha used to handle transparency
      */
     public void draw(Batch batch, float alpha) {
-        batch.draw(cloudTexture, getX(), getY(), getWidth(), getHeight());
+        batch.draw(this.cloudTexture, this.x, this.y, this.getWidth(), this.getHeight());
     }
 }
+

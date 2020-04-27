@@ -126,6 +126,16 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     private Cloud cloud4;
 
     /**
+     * Boolean to detect if boat1 is added
+     */
+    private boolean boat1Added = false;
+
+    /**
+     * Boolean to detect if boat2 is added
+     */
+    private boolean boat2Added = false;
+
+    /**
      * Constructor. Creates most of the private variables, arrays and objects and adds Actors to the stage.
      *
      * @param m Main contains meta data of the game
@@ -244,7 +254,6 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         for(int i=0; i<actorAmount; i++) {
             stage.addActor(farms.get(i));
         }
-        //stage.addActor(coins.get(0));
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
@@ -255,6 +264,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 }
             }
         }
+        addBoatIfNeeded();
 
         stage.addActor(cloud);
         stage.addActor(cloud2);
@@ -356,13 +366,15 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      * Adds boat and boatCoin if balticSituation is good enough.
      */
     private void addBoatIfNeeded() {
-        if (Main.getBalticSituation() >= 25) {
+        if (Main.getBalticSituation() >= 25 && !boat1Added) {
             stage.addActor(boat1);
             stage.addActor(boatCoins1);
+            boat1Added = true;
         }
-        if (Main.getBalticSituation() >= 50) {
+        if (Main.getBalticSituation() >= 50 && !boat2Added) {
             stage.addActor(boat2);
             stage.addActor(boatCoins2);
+            boat2Added = true;
         }
     }
 
