@@ -59,10 +59,10 @@ public class OptionsScreen implements Screen {
     OptionsScreen(Main m) {
         main = m;
         batch = main.getBatch();
-        stage = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
+        stage = new Stage(new FitViewport(main.WIDTH, main.HEIGHT), batch);
 
         background = new Background(new Texture(Gdx.files.internal("startscreen2.png")));
-        background.setSize(main.WIDTH, main.HEIGTH);
+        background.setSize(main.WIDTH, main.HEIGHT);
 
         createButtons();
         addActors();

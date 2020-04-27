@@ -48,7 +48,7 @@ public class Main extends Game {
 	/**
 	 * Viewport lenght
 	 */
-	final int HEIGTH = 450;
+	final int HEIGHT = 450;
 	/**
 	 * SpriteBatch handles drawing.
 	 */
