@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,7 +12,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import static java.lang.Float.parseFloat;
 
 /**
- * FarmButton is an object base class to create buttons to FarmScreen with inputListener.
+ * FarmButton is an object base class to create buttons to FarmScreen with ActorGestureListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -74,7 +73,7 @@ public class FarmButton extends Actor {
 
     /**
      * Constructor. Sets I18NBundle, Skin, width, height, x- and y-coordinates and Button of the FarmButton.
-     * It contains anonymous InputListener to detect touchDown, enter and exit of the FarmButton to buy the Button or set InfoLabel visible or hidden.
+     * It contains anonymous ActorGestureListener to detect touchDown, enter and exit of the FarmButton to buy the Button or set InfoLabel visible or hidden.
      *
      * @param m Main contains meta data
      * @param fs FarmScreen contains the Stage of the Button Actor

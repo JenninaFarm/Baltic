@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
- * MapButton is an object base class to create create a buttons to ResearchScreen with inputListener.
+ * MapButton is an object base class to create create a buttons to ResearchScreen with ActorGestureListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -55,7 +54,7 @@ public class ResearchButton extends Actor {
 
     /**
      * Constructor. Creates all the private variables and sets x- and y-coordinates, width and height of the ResearchButton.
-     * It contains anonymous InputListener to detect touchDown, enter and exit of the ResearchButton to buy the Button or set InfoLabel visible or not.
+     * It contains anonymous ActorGestureListener to detect touchDown, enter and exit of the ResearchButton to buy the Button or set InfoLabel visible or not.
      *
      * @param m Main contains meta data of the game
      * @param rs ResearchScreen handling InfoLabel

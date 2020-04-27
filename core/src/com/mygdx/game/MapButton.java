@@ -5,12 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
- * MapButton is an object base class to create Texture with inputListener.
+ * MapButton is an object base class to create Texture with ActorGestureListener.
  *
  * @author  Jennina Färm
  * @author  Tommi Häkkinen
@@ -54,7 +53,7 @@ public class MapButton extends Actor {
 
     /**
      * Constructor. Creates all the private variables and sets x- and y-coordinates, Textures, width and height of the MapButton.
-     * It contains anonymous InputListener to detect touchDown, enter and exit of the MoneyButton to switch screens or show more info.
+     * It contains anonymous ActorGestureListener to detect touchDown, enter and exit of the MoneyButton to switch screens or show more info.
      *
      * @param m Main contains meta data of the game
      * @param ms MapScreen for InfoLabel and coin handling
