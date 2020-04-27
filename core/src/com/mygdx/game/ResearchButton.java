@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
@@ -90,10 +91,8 @@ public class ResearchButton extends Actor {
             button1.setDisabled(true);
         }
 
-        button1.addListener(new InputListener() {
-
-            @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        button1.addListener(new ActorGestureListener() {
+            public void tap(InputEvent event, float x, float y, int count, int button) {
                 int currentMoney = main.nonStaticGetMoney();
                 //uncomment this to set InfoLabel invisible in desktop
                 //researchScreen.setInfoVisible(false);
@@ -106,19 +105,16 @@ public class ResearchButton extends Actor {
                     button1.setDisabled(true);
                     researchBought[index] = true;
                 }
-                return false;
             }
-
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public boolean longPress(Actor actor, float x, float y) {
                 I18NBundle myBundle = main.getMyBundle();
                 infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
                 researchScreen.addInfoLabel(infoLabel);
                 researchScreen.setInfoVisible(true);
+                return true;
             }
 
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 researchScreen.setInfoVisible(false);
             }
         });

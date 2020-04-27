@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.I18NBundle;
 
 /**
@@ -80,8 +81,8 @@ public class MapButton extends Actor {
             bought[index] = true;
         }
 
-        addListener(new InputListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+        addListener(new ActorGestureListener() {
+            public void tap(InputEvent event, float x, float y, int count, int button) {
                 if(bought[index]) {
                     System.out.println("to farm");
                     main.switchScreen(3, index);
@@ -121,21 +122,19 @@ public class MapButton extends Actor {
                         }
                     }
                 }
-                return true;
             }
-
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public boolean longPress(Actor actor, float x, float y) {
                 if(!bought[index]) {
                     I18NBundle myBundle = main.getMyBundle();
                     infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
                     mapScreen.setInfoVisible(true);
+
                 }
+                return true;
             }
 
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if(!bought[index]) {
                     mapScreen.setInfoVisible(false);
                 }
