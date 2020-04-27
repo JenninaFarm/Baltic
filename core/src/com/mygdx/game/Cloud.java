@@ -18,21 +18,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Cloud extends Actor {
 
     /**
-     * Original x-coordination.
-     */
-    private int originalX;
-    /**
-     * Original y-coordination.
-     */
-    private int originalY;
-    /**
      * X which is controlling the movement
      */
-    private float x;
+    private float textureX;
     /**
      * Y which is controlling the movement
      */
-    private float y;
+    private float textureY;
     /**
      * Texture that is created and drawn.
      */
@@ -53,23 +45,21 @@ public class Cloud extends Actor {
     /**
      * Constructor. Sets all the private variables and objects.
      *
-     * @param xLoc x-coordinate to be set as an originalX
-     * @param yLoc y-coordinate to be set as an originalY
+     * @param x x-coordinate to be set as an originalX
+     * @param y y-coordinate to be set as an originalY
      * @param max Maximum distance moved
      */
-    Cloud(int xLoc, int yLoc, float max) {
+    Cloud(int x, int y, float max) {
 
-        originalX = xLoc;
-        originalY = yLoc;
-        x = xLoc;
-        y = yLoc;
+        textureX = x;
+        textureY = y;
         int random = MathUtils.random(3, 6);
         cloudSpeedX = 0.4f;
         cloudSpeedY = 0.2f;
         maxDistance = max;
         cloudTexture = new Texture(Gdx.files.internal("clouds/cloud" + MathUtils.random(1, 5) + ".png"));
-        setX(x);
-        setY(y);
+        setX(textureX);
+        setY(textureY);
         setWidth(cloudTexture.getWidth() / random);
         setHeight(cloudTexture.getHeight() / random);
     }
@@ -79,11 +69,11 @@ public class Cloud extends Actor {
      */
     void cloudMove() {
 
-        this.x += cloudSpeedX;
-        this.y += cloudSpeedY;
-        if (this.x >= maxDistance) {
-            this.x = originalX;
-            this.y = originalY;
+        this.textureX += cloudSpeedX;
+        this.textureY += cloudSpeedY;
+        if (this.textureX >= maxDistance) {
+            this.textureX = getX();
+            this.textureY = getY();
         }
     }
 
@@ -94,7 +84,7 @@ public class Cloud extends Actor {
      * @param alpha used to handle transparency
      */
     public void draw(Batch batch, float alpha) {
-        batch.draw(this.cloudTexture, this.x, this.y, this.getWidth(), this.getHeight());
+        batch.draw(this.cloudTexture, this.textureX, this.textureY, this.getWidth(), this.getHeight());
     }
 }
 
