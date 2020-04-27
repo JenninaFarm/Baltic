@@ -259,11 +259,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         coinAdded[0] = true;
         for(int i=0; i<actorAmount; i++) {
-            if(coinAdded[i]) {
-                stage.addActor(coins.get(i));
-                if(MoneyButton.getLastTimeClicked()[i] == 0) {
-                    coins.get(i).setClicked();
-                }
+            stage.addActor(coins.get(i));
+        }
+        for(int i=0; i<actorAmount; i++) {
+            if(!coinAdded[i]) {
+                coins.get(i).setVisible(false);
+            }
+            if(MoneyButton.getLastTimeClicked()[i] == 0) {
+                coins.get(i).setClicked();
             }
         }
 
@@ -290,12 +293,12 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Adds coin with certain index to the stage and sets it clicked so it has a starting time.
+     * Sets coin with certain index visible and sets it clicked so it has a starting time.
      *
      * @param index Index of the coin added
      */
-    void addCoin(int index) {
-        stage.addActor(coins.get(index));
+    void setCoinVisible(int index) {
+        coins.get(index).setVisible(true);
         coinAdded[index] = true;
         coins.get(index).setClicked();
 

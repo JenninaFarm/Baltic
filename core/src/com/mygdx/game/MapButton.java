@@ -97,7 +97,7 @@ public class MapButton extends Actor {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
                                 main.nonStaticSetMoney(currentMoney-cost);
-                                mapScreen.addCoin(index);
+                                mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
                                 Save.loadVariables();
                             }
@@ -108,7 +108,7 @@ public class MapButton extends Actor {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
                                 main.nonStaticSetMoney(currentMoney-cost);
-                                mapScreen.addCoin(index);
+                                mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
                                 Save.loadVariables();
                             }
@@ -117,7 +117,7 @@ public class MapButton extends Actor {
                         if (currentMoney >= cost) {
                             bought[index] = true;
                             main.nonStaticSetMoney(currentMoney - cost);
-                            mapScreen.addCoin(index);
+                            mapScreen.setCoinVisible(index);
                             Save.saveVariables();
                             Save.loadVariables();
                         }
