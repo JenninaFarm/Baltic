@@ -72,7 +72,9 @@ public class FarmWorker extends Actor {
                 int workerAmount = farmScreen.getWorkerAmount();
                 if (currentMoney >= cost && workerAmount < 3) {
                     System.out.println("bought");
-                    workerSound.play(0.6f);
+                    if (Main.getSound()) {
+                        workerSound.play(0.6f);
+                    }
                     main.nonStaticSetMoney(currentMoney - cost);
                     farmScreen.addWorker();
                     button1.setChecked(false);

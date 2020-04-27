@@ -61,5 +61,4 @@ public class MapBackground extends Actor {
             batch.draw(map1, getX(), getY(), getWidth(), getHeight());
         }
     }
-
 }

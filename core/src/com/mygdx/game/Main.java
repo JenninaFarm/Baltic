@@ -46,7 +46,7 @@ public class Main extends Game {
 	 */
 	final int WIDTH = 800;
 	/**
-	 * Viewport lenght
+	 * Viewport height
 	 */
 	final int HEIGHT = 450;
 	/**

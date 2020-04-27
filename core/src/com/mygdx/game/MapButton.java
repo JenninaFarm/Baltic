@@ -101,7 +101,9 @@ public class MapButton extends Actor {
                         if(researchBooleans[6]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
-                                farmSound.play(0.5f);
+                                if (Main.getSound()) {
+                                    farmSound.play(0.5f);
+                                }
                                 main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
@@ -113,7 +115,9 @@ public class MapButton extends Actor {
                         if(researchBooleans[16]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
-                                farmSound.play(0.6f);
+                                if (Main.getSound()) {
+                                    farmSound.play(0.6f);
+                                }
                                 main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
@@ -123,7 +127,9 @@ public class MapButton extends Actor {
                     } else {
                         if (currentMoney >= cost) {
                             bought[index] = true;
-                            farmSound.play(0.6f);
+                            if (Main.getSound()) {
+                                farmSound.play(0.6f);
+                            }
                             main.nonStaticSetMoney(currentMoney - cost);
                             mapScreen.setCoinVisible(index);
                             Save.saveVariables();
