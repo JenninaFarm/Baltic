@@ -363,9 +363,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         }
 
         if(Tutorial.tutorial_3 && !Tutorial.tutorial_2) {
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 2; i++) {
                 farms.get(i).setVisible(true);
             }
+            research.setVisible(false);
             coins.get(0).setVisible(true);
             tutorial_3_Actors[0].setVisible(true);
             manageTutorial_3();
@@ -375,6 +376,9 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             for (int j = 0; j < 4; j++) {
                 tutorial_3_Actors[j].setVisible(false);
             }
+            farms.get(2).setVisible(true);
+            farms.get(3).setVisible(true);
+            research.setVisible(true);
         }
 
         stage.draw();

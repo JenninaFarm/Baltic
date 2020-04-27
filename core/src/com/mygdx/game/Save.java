@@ -53,7 +53,7 @@ public class Save {
     /**
      * Preferences object that creates a save file and handles the saving and loading methods.
      */
-    private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile5");
+    private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile4");
     /**
      * Amount of the farmScreens.
      */
