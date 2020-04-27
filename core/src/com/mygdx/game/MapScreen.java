@@ -145,8 +145,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         main = m;
         SpriteBatch batch = main.getBatch();
 
-        stageUI = new Stage(new FitViewport(800, 450), batch);
-        stage = new Stage(new FitViewport(800, 450), batch);
+        stageUI = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
+        stage = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
         camera = stage.getCamera();
 
         createActors();
@@ -208,7 +208,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         cloud4 = new Cloud(30, -40, 900);
 
         map = new MapBackground();
-        map.setSize(800, 450);
+        map.setSize(main.WIDTH, main.HEIGTH);
         map.addListener(new ActorGestureListener() {
             public void zoom (InputEvent event, float initialDistance, float distance) {
                 ((OrthographicCamera)camera).zoom = ((initialDistance / distance) * ((OrthographicCamera)camera).zoom);
@@ -455,8 +455,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         float effectiveViewportWidth = camera.viewportWidth * ((OrthographicCamera)camera).zoom;
         float effectiveViewportHeight = camera.viewportHeight * ((OrthographicCamera)camera).zoom;
 
-        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, 800 - effectiveViewportWidth / 2f);
-        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, 450 - effectiveViewportHeight / 2f);
+        camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, main.WIDTH - effectiveViewportWidth / 2f);
+        camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, main.HEIGTH - effectiveViewportHeight / 2f);
     }
 
     @Override

@@ -50,7 +50,7 @@ public class MainMenuButton extends Actor {
 
         textButton = new TextButton(label, main.getMySkin());
         textButton.setSize(getWidth(), getHeight());
-        textButton.setPosition(800 / 2f - getWidth() / 2f, 450 / 3f - getHeight() / 2f - index * getHeight());
+        textButton.setPosition(main.WIDTH / 2f - getWidth() / 2f, main.HEIGTH / 3f - getHeight() / 2f - index * getHeight());
         textButton.addListener(new InputListener() {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {

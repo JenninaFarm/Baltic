@@ -42,6 +42,14 @@ public class Main extends Game {
 	 */
 	private static boolean soundEffects_ON;
 	/**
+	 * Viewport width
+	 */
+	final int WIDTH = 800;
+	/**
+	 * Viewport lenght
+	 */
+	final int HEIGTH = 450;
+	/**
 	 * SpriteBatch handles drawing.
 	 */
 	private SpriteBatch batch;

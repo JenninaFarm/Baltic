@@ -119,8 +119,8 @@ public class FarmScreen implements Screen {
         farmIndex = i;
         SpriteBatch batch = main.getBatch();
 
-        stage = new Stage(new FitViewport(800, 450), batch);
-        stageUI = new Stage(new FitViewport(800, 450), batch);
+        stage = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
+        stageUI = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
 
         camera = stage.getCamera();
 
@@ -182,7 +182,7 @@ public class FarmScreen implements Screen {
      */
     private void createActors() {
         farmBackground = new Background(new Texture(Gdx.files.internal("farm-background.png")));
-        farmBackground.setSize(800, 450);
+        farmBackground.setSize(main.WIDTH, main.HEIGTH);
         returnButton = new ReturnButton(main, 2);
         moneyLabel = new MoneyLabel(main);
         workerLabel = new WorkerLabel(main, this);

@@ -92,8 +92,8 @@ public class ResearchScreen implements Screen {
         main = m;
         SpriteBatch batch = main.getBatch();
 
-        stage = new Stage(new FitViewport(800, 450), batch);
-        stageUI = new Stage(new FitViewport(800, 450), batch);
+        stage = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
+        stageUI = new Stage(new FitViewport(main.WIDTH, main.HEIGTH), batch);
 
         camera = stage.getCamera();
 

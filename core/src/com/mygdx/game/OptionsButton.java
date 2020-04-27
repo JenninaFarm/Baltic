@@ -48,7 +48,7 @@ public class OptionsButton extends Actor {
 
         button1 = new TextButton(label, main.getMySkin());
         button1.setSize(getWidth(), getHeight());
-        button1.setPosition(800 / 2f - getWidth() / 2f, 500 / 2f - getHeight() / 2f - index * getHeight());
+        button1.setPosition(main.WIDTH / 2f - getWidth() / 2f, 500 / 2f - getHeight() / 2f - index * getHeight());
         if(index > 2) {
             button1.setDisabled(true);
         }
