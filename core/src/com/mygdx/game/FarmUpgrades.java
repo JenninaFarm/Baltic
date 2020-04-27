@@ -1,9 +1,12 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 
 /**
  * FarmUpgrades is an object base class to create Textures which extends an Actor.
@@ -44,7 +47,10 @@ public class FarmUpgrades extends Actor {
      * Texture that is created and drawn.
      */
     private Texture cow;
-
+    /**
+     * Texture that is created and drawn.
+     */
+    private Texture cow2;
     /**
      * Texture that is created and drawn.
      */
@@ -59,6 +65,11 @@ public class FarmUpgrades extends Actor {
      * Texture that is created and drawn.
      */
     private Texture organicEN;
+    /**
+     * Sound of the cow when bought livestock upgrade.
+     */
+    private Sound cowSound = Gdx.audio.newSound(Gdx.files.internal("sounds/cow.wav"));
+
 
     /**
      * Constructor. Creates all the Textures.
@@ -72,9 +83,17 @@ public class FarmUpgrades extends Actor {
         flowerStrip = new Texture(Gdx.files.internal("farmUpgrades/flowerSide.png"));
         tractor = new Texture(Gdx.files.internal("farmUpgrades/tractor.png"));
         cow = new Texture(Gdx.files.internal("farmUpgrades/cow.png"));
+        cow2 = new Texture(Gdx.files.internal("farmUpgrades/cow2.png"));
         bees = new Texture(Gdx.files.internal("farmUpgrades/bees.png"));
         organicFIN = new Texture(Gdx.files.internal("farmUpgrades/organicFIN.png"));
         organicEN = new Texture(Gdx.files.internal("farmUpgrades/organicEN.png"));
+
+        setBounds(370, 70, 330, 130);
+        addListener(new ActorGestureListener() {
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                cowSound.play(0.8f);
+            }
+        });
     }
 
     /**
@@ -103,8 +122,8 @@ public class FarmUpgrades extends Actor {
             batch.draw(tractor, -10, 10, tractor.getWidth()/2.5f, tractor.getHeight()/2.5f);
         }
         if(bought[farmIndex][6]) {
-            batch.draw(cow, 500, 50, cow.getWidth()/5f, cow.getHeight()/5f);
-            batch.draw(cow, 320, 0, cow.getWidth()/5f, cow.getHeight()/5f);
+            batch.draw(cow2, 520, 50, cow.getWidth()/5f, cow.getHeight()/5f);
+            batch.draw(cow, 320, 0, cow.getWidth()/4.5f, cow.getHeight()/4.5f);
         }
         if(bought[farmIndex][12]) {
             batch.draw(bees, 370, 300, bees.getWidth()/2.5f, bees.getHeight()/2.5f);
@@ -116,5 +135,12 @@ public class FarmUpgrades extends Actor {
                 batch.draw(organicEN, 35, 314, organicFIN.getWidth() / 2.5f, organicFIN.getHeight() / 2.5f);
             }
         }
+    }
+
+    /**
+     * Disposes the coinSound.
+     */
+    void disposeCowSound() {
+        cowSound.dispose();
     }
 }

@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -70,6 +71,10 @@ public class FarmButton extends Actor {
      * InfoLabel that is drawn if player is hovering over the button.
      */
     private InfoLabel infoLabel;
+    /**
+     * Sound of the cow when bought livestock upgrade.
+     */
+    private Sound cowSound = Gdx.audio.newSound(Gdx.files.internal("sounds/cow.wav"));
 
     /**
      * Constructor. Sets I18NBundle, Skin, width, height, x- and y-coordinates and Button of the FarmButton.
@@ -137,6 +142,9 @@ public class FarmButton extends Actor {
                     //save and load
                     Save.saveVariables();
                     Save.loadVariables();
+                    if(Main.getSound() && buttonIndex == 6) {
+                        cowSound.play(0.8f);
+                    }
                 }
             }
             public boolean longPress(Actor actor, float x, float y) {
@@ -197,5 +205,12 @@ public class FarmButton extends Actor {
      */
     public Button getButton() {
         return button1;
+    }
+
+    /**
+     * Disposes the cowSound.
+     */
+    void disposeCowSound() {
+        cowSound.dispose();
     }
 }

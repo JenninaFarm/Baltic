@@ -460,11 +460,15 @@ public class FarmScreen implements Screen {
     }
 
     /**
-     * Disposes the Stages.
+     * Disposes the Stages and button sounds.
      */
     @Override
     public void dispose() {
         stage.dispose();
         stageUI.dispose();
+        for(int i=0; i<upgradeAmount; i++) {
+            farmButtons.get(i).disposeCowSound();
+        }
+        farmUpgrades.disposeCowSound();
     }
 }
