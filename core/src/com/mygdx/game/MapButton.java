@@ -82,7 +82,7 @@ public class MapButton extends Actor {
             bought[index] = true;
         }
 
-        addListener(new ActorGestureListener() {
+        addListener(new ActorGestureListener(2.5f, 0f, 0.25f, 0f) {
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 if(bought[index]) {
                     System.out.println("to farm");

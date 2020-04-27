@@ -95,7 +95,7 @@ public class ResearchButton extends Actor {
             button1.setDisabled(true);
         }
 
-        button1.addListener(new ActorGestureListener() {
+        button1.addListener(new ActorGestureListener(2.5f, 0f, 0.25f, 0f) {
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 int currentMoney = main.nonStaticGetMoney();
                 //uncomment this to set InfoLabel invisible in desktop
