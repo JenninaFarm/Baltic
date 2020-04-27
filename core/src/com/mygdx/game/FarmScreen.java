@@ -373,6 +373,9 @@ public class FarmScreen implements Screen {
         }
 
         if(workerAmount[farmIndex] >= 2) {
+            if(boughtArray[farmIndex][2]) {
+                farmButtons.get(3).setAvailable();
+            }
             if(boughtArray[farmIndex][4] && boughtArray[farmIndex][8]){
                 farmButtons.get(5).setAvailable();
             }
@@ -382,9 +385,6 @@ public class FarmScreen implements Screen {
         }
 
         if(workerAmount[farmIndex] >= 3) {
-            if(boughtArray[farmIndex][2]) {
-                farmButtons.get(3).setAvailable();
-            }
             if(boughtArray[farmIndex][14]) {
                 farmButtons.get(16).setAvailable();
             }

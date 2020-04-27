@@ -67,7 +67,7 @@ public class MapButton extends Actor {
         main = m;
         mapScreen = ms;
         I18NBundle myBundle = main.getMyBundle();
-        infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
+        infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 120, 300, 70);
         cost = (int)(1000* Math.pow(10, (i-1)));
         button = new Texture(Gdx.files.internal("farm-icon.png"));
         lock = new Texture(Gdx.files.internal("lock-icon.png"));
