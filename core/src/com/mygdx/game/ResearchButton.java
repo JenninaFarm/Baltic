@@ -65,11 +65,11 @@ public class ResearchButton extends Actor {
         researchScreen = rs;
         index = i;
 
-        I18NBundle myBundle = main.getMyBundle();
-        cost = Integer.parseInt(myBundle.get("researchCost" + index));
-
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
+        I18NBundle myBundle = main.getMyBundle();
 
+        cost = Integer.parseInt(myBundle.get("researchCost" + index));
+        infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
 
         float width = 200;
         float height = 60;
@@ -103,17 +103,18 @@ public class ResearchButton extends Actor {
                     button1.setChecked(true);
                     button1.setDisabled(true);
                     researchBought[index] = true;
+                    Save.saveVariables();
+                    Save.loadVariables();
                 }
             }
             public boolean longPress(Actor actor, float x, float y) {
-                I18NBundle myBundle = main.getMyBundle();
-                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
                 researchScreen.addInfoLabel(infoLabel);
                 researchScreen.setInfoVisible(true);
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                researchScreen.addInfoLabel(infoLabel);
                 researchScreen.setInfoVisible(false);
             }
         });

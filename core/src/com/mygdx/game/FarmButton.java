@@ -90,6 +90,7 @@ public class FarmButton extends Actor {
         cost = Integer.parseInt(myBundle.get("researchCost" + buttonIndex)) / 2;
         multiplier = parseFloat(myBundle.get("upgradeMultiplier" + buttonIndex));
         balticSituation = Integer.parseInt(myBundle.get("upgradeBaltic" + buttonIndex));
+        infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + buttonIndex), 20, 50, 300, 310);
 
         Skin mySkin = new Skin(Gdx.files.internal("mySkinTest/mySkinTest.json"));
 
@@ -139,15 +140,13 @@ public class FarmButton extends Actor {
                 }
             }
             public boolean longPress(Actor actor, float x, float y) {
-                I18NBundle myBundle = main.getMyBundle();
-
-                infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + buttonIndex), 20, 50, 300, 310);
                 farmScreen.addInfoLabel(infoLabel);
                 farmScreen.setInfoVisible(true);
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                farmScreen.addInfoLabel(infoLabel);
                 farmScreen.setInfoVisible(false);
             }
         });

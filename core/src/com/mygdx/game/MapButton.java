@@ -66,6 +66,8 @@ public class MapButton extends Actor {
         index = i;
         main = m;
         mapScreen = ms;
+        I18NBundle myBundle = main.getMyBundle();
+        infoLabel = new InfoLabel(main, myBundle.get("researchInfo" + index), 20, 50, 300, 310);
         cost = (int)(1000* Math.pow(10, (i-1)));
         button = new Texture(Gdx.files.internal("farm-icon.png"));
         lock = new Texture(Gdx.files.internal("lock-icon.png"));
@@ -124,8 +126,6 @@ public class MapButton extends Actor {
             }
             public boolean longPress(Actor actor, float x, float y) {
                 if(!bought[index]) {
-                    I18NBundle myBundle = main.getMyBundle();
-                    infoLabel = new InfoLabel(main, myBundle.get("farmInfo" + index), 20, 150, 270, 76);
                     mapScreen.addInfoLabel(infoLabel);
                     mapScreen.setInfoVisible(true);
 
@@ -135,6 +135,7 @@ public class MapButton extends Actor {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if(!bought[index]) {
+                    mapScreen.addInfoLabel(infoLabel);
                     mapScreen.setInfoVisible(false);
                 }
             }
