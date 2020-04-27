@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -50,6 +51,10 @@ public class MapButton extends Actor {
      * Cost of the MapButton.
      */
     private int cost;
+    /**
+     * Sound that plays when a new farm is unlocked.
+     */
+    private Sound farmSound = Gdx.audio.newSound(Gdx.files.internal("sounds/upgrade_buy.wav"));
 
     /**
      * Constructor. Creates all the private variables and sets x- and y-coordinates, Textures, width and height of the MapButton.
@@ -96,6 +101,7 @@ public class MapButton extends Actor {
                         if(researchBooleans[6]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
+                                farmSound.play(0.6f);
                                 main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
@@ -107,6 +113,7 @@ public class MapButton extends Actor {
                         if(researchBooleans[16]) {
                             if(currentMoney >= cost) {
                                 bought[index] = true;
+                                farmSound.play(0.6f);
                                 main.nonStaticSetMoney(currentMoney-cost);
                                 mapScreen.setCoinVisible(index);
                                 Save.saveVariables();
@@ -116,6 +123,7 @@ public class MapButton extends Actor {
                     } else {
                         if (currentMoney >= cost) {
                             bought[index] = true;
+                            farmSound.play(0.6f);
                             main.nonStaticSetMoney(currentMoney - cost);
                             mapScreen.setCoinVisible(index);
                             Save.saveVariables();

@@ -91,7 +91,7 @@ public class Tutorial extends Actor {
                 index = stageIndex;
                 tutorialTexture = new Texture(Gdx.files.internal("tutorial1/tutorial-1-" + index + ".png"));
                 tutorialTexture_EN = new Texture(Gdx.files.internal("tutorial1-EN/tutorial-1-" + index + "-en.png"));
-                setX(30);
+                setX(200);
                 setY(0);
                 setWidth(width);
                 setHeight(height);
@@ -114,7 +114,7 @@ public class Tutorial extends Actor {
                 index = stageIndex;
                 tutorialTexture = new Texture(Gdx.files.internal("tutorial2/tutorial-2-" + index + ".png"));
                 tutorialTexture_EN = new Texture(Gdx.files.internal("tutorial2-EN/tutorial-2-" + index + "-en.png"));
-                setX(30);
+                setX(400);
                 setY(0);
                 setWidth(width);
                 setHeight(height);
