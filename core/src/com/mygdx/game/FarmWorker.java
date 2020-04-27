@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -34,6 +36,11 @@ public class FarmWorker extends Actor {
     private int cost;
 
     /**
+     * Sound that plays when a new worker is added to the farm.
+     */
+    private Sound workerSound = Gdx.audio.newSound(Gdx.files.internal("sounds/upgrade_buy.wav"));
+
+    /**
      * Constructor. Sets index, Texture, x- and y-coordinates, width and height of the FarmWorker.
      * It contains anonymous InputListener to detect touchDown of the FarmWorker to buy the worker.
      *
@@ -65,6 +72,7 @@ public class FarmWorker extends Actor {
                 int workerAmount = farmScreen.getWorkerAmount();
                 if (currentMoney >= cost && workerAmount < 3) {
                     System.out.println("bought");
+                    workerSound.play(0.6f);
                     main.nonStaticSetMoney(currentMoney - cost);
                     farmScreen.addWorker();
                     button1.setChecked(false);
