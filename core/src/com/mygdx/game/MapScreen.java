@@ -525,6 +525,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         float effectiveViewportWidth = camera.viewportWidth * ((OrthographicCamera)camera).zoom;
         float effectiveViewportHeight = camera.viewportHeight * ((OrthographicCamera)camera).zoom;
 
+        System.out.println("camera height" + camera.viewportHeight);
+
         camera.position.x = MathUtils.clamp(camera.position.x, effectiveViewportWidth / 2f, main.WIDTH - effectiveViewportWidth / 2f);
         camera.position.y = MathUtils.clamp(camera.position.y, effectiveViewportHeight / 2f, main.HEIGTH - effectiveViewportHeight / 2f);
     }

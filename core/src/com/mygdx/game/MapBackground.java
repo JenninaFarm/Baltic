@@ -51,9 +51,9 @@ public class MapBackground extends Actor {
      */
     public void draw(Batch batch, float alpha) {
         int balticSituation = Main.getBalticSituation();
-        if (balticSituation < 25) {
+        if (balticSituation <= 25) {
             batch.draw(map4, getX(), getY(), getWidth(), getHeight());
-        } else if (balticSituation >= 26 && balticSituation < 50) {
+        } else if (balticSituation >= 26 && balticSituation <= 50) {
             batch.draw(map3, getX(), getY(), getWidth(), getHeight());
         } else if (balticSituation >= 50 && balticSituation < 75) {
             batch.draw(map2, getX(), getY(), getWidth(), getHeight());
