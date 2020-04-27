@@ -53,7 +53,7 @@ public class Save {
     /**
      * Preferences object that creates a save file and handles the saving and loading methods.
      */
-    private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile3");
+    private static Preferences prefs = Gdx.app.getPreferences("balticproject_savefile4");
     /**
      * Amount of the farmScreens.
      */
@@ -71,6 +71,7 @@ public class Save {
         prefs.putInteger("money", Main.getMoney());
         prefs.putInteger("balticSituation", Main.getBalticSituation());
         prefs.putBoolean("tutorial", Tutorial.tutorial);
+        prefs.putBoolean("endgame", Tutorial.endGame);
         prefs.putBoolean("music", Main.getMusic());
         prefs.putBoolean("sound", Main.getSound());
         prefs.putBoolean("language", Main.finnish);
@@ -123,8 +124,9 @@ public class Save {
     static void loadVariables() {
 
         Main.setMoney(prefs.getInteger("money", 7000));
-        Main.setBalticSituation(prefs.getInteger("balticSituation"));
+        Main.setBalticSituation(prefs.getInteger("balticSituation", 0));
         Tutorial.tutorial = prefs.getBoolean("tutorial", true);
+        Tutorial.endGame = prefs.getBoolean("endgame", true);
         Main.setMusic(prefs.getBoolean("music", true));
         Main.setSound(prefs.getBoolean("sound", true));
         Main.finnish = prefs.getBoolean("language");
@@ -188,6 +190,8 @@ public class Save {
         prefs.putInteger("money", 7000000);
         prefs.putBoolean("gameBegan", false);
         prefs.putInteger("balticSituation", 0);
+        prefs.putBoolean("tutorial", false);
+        prefs.putBoolean("endgame", true);
 
         for(int i=0; i<farmAmount; i++) {
             prefs.putFloat("multiplier" + i, 4);

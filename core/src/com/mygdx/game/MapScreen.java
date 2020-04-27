@@ -108,14 +108,16 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      */
     private Camera camera;
     /**
-     * Array for the Tutorial Actors.
+     * Array for the Tutorial stage 1 Actors.
      */
-    private Tutorial [] tutorial_1_Actors = new Tutorial[6];
+    private Tutorial [] tutorial_1_Actors = new Tutorial[4];
 
     /**
-     * Array for the Tutorial Actors.
+     * Array for the Tutorial stage 3 Actors.
      */
-    private Tutorial [] tutorial_3_Actors = new Tutorial[6];
+    private Tutorial [] tutorial_3_Actors = new Tutorial[4];
+
+    private Tutorial endGame;
 
     /**
      * Actors for cloud textures.
@@ -207,6 +209,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
         cloud3 = new Cloud(-600, -500, 800);
         cloud4 = new Cloud(30, -40, 900);
 
+        endGame = new Tutorial(5, 1);
+
         map = new MapBackground();
         map.setSize(main.WIDTH, main.HEIGTH);
         map.addListener(new ActorGestureListener() {
@@ -218,7 +222,7 @@ public class MapScreen extends ApplicationAdapter implements Screen {
     }
 
     /**
-     * Checks if tutorial is needed to set true, create and place to the stage.
+     * Checks if tutorial is needed to set true, created and placed to the stage.
      */
     private void checkIfTutorial() {
         if (Tutorial.tutorial) {
@@ -264,12 +268,27 @@ public class MapScreen extends ApplicationAdapter implements Screen {
                 }
             }
         }
-        addBoatIfNeeded();
+
+        stage.addActor(boat1);
+        stage.addActor(boat2);
+        stage.addActor(boatCoins1);
+        stage.addActor(boatCoins2);
+        if(!boat1Added) {
+            boat1.setVisible(false);
+            boatCoins1.setVisible(false);
+        }
+        if(!boat2Added) {
+            boat2.setVisible(false);
+            boatCoins2.setVisible(false);
+        }
 
         stage.addActor(cloud);
         stage.addActor(cloud2);
         stage.addActor(cloud3);
         stage.addActor(cloud4);
+
+        stageUI.addActor(endGame);
+        endGame.setVisible(false);
     }
 
     /**
@@ -325,6 +344,10 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         addBoatIfNeeded();
 
+        if(Main.getBalticSituation() >= 100) {
+            triggerEndGame();
+        }
+
         cloud.cloudMove();
         cloud2.cloudMove();
         cloud3.cloudMove();
@@ -367,13 +390,14 @@ public class MapScreen extends ApplicationAdapter implements Screen {
      */
     private void addBoatIfNeeded() {
         if (Main.getBalticSituation() >= 25 && !boat1Added) {
-            stage.addActor(boat1);
-            stage.addActor(boatCoins1);
+            boat1.setVisible(true);
+            boatCoins1.setVisible(true);
             boat1Added = true;
+            System.out.println("Boat in action");
         }
         if (Main.getBalticSituation() >= 50 && !boat2Added) {
-            stage.addActor(boat2);
-            stage.addActor(boatCoins2);
+            boat2.setVisible(true);
+            boatCoins2.setVisible(true);
             boat2Added = true;
         }
     }
@@ -411,6 +435,44 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             if(Tutorial.tutorial_3_Stages[i] && Tutorial.tutorial_3) {
                 stageUI.addActor(tutorial_3_Actors[i]);
             }
+        }
+    }
+
+    private void triggerEndGame() {
+        if(Tutorial.endGame) {
+            moneyLabel.setVisible(false);
+            incomeLabel.setVisible(false);
+            returnButton.setVisible(false);
+            boatCoins1.setVisible(false);
+            boatCoins2.setVisible(false);
+            boat1.setVisible(false);
+            boat2.setVisible(false);
+            for(int i=0; i<4; i++) {
+                coins.get(i).setVisible(false);
+            }
+            for(int i=0; i<4; i++) {
+                farms.get(i).setVisible(false);
+            }
+            research.setVisible(false);
+            meter.setVisible(false);
+            endGame.setVisible(true);
+        } else {
+            endGame.setVisible(false);
+            moneyLabel.setVisible(true);
+            incomeLabel.setVisible(true);
+            returnButton.setVisible(true);
+            boatCoins1.setVisible(true);
+            boatCoins2.setVisible(true);
+            boat1.setVisible(true);
+            boat2.setVisible(true);
+            for(int i=0; i<4; i++) {
+                coins.get(i).setVisible(true);
+            }
+            for(int i=0; i<4; i++) {
+                farms.get(i).setVisible(true);
+            }
+            research.setVisible(true);
+            meter.setVisible(true);
         }
     }
 

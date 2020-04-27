@@ -37,6 +37,8 @@ public class Tutorial extends Actor {
      * Boolean if fourth part is true or not.
      */
     public static boolean tutorial_4 = true;
+
+    public static boolean endGame = true;
     /**
      * Boolean array containing information if first part stages have been completed.
      */
@@ -176,6 +178,25 @@ public class Tutorial extends Actor {
                     }
                 });
                 break;
+
+            case 5:
+                tutorialTexture = new Texture(Gdx.files.internal("endgame/end_screen_fin.png"));
+                tutorialTexture_EN = new Texture(Gdx.files.internal("endgame/end_screen_en.png"));
+                setX(0);
+                setY(0);
+                setWidth(800);
+                setHeight(450);
+                setBounds(getX(), getY(), getWidth(), getHeight());
+
+                addListener(new InputListener() {
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        endGame = false;
+                        Save.saveVariables();
+                        Save.loadVariables();
+                        return true;
+                    }
+                });
+                break;
         }
     }
 
@@ -187,9 +208,9 @@ public class Tutorial extends Actor {
      */
     public void draw(Batch batch, float alpha) {
         if(Main.finnish){
-            batch.draw(tutorialTexture, getX(), getY(), width, height);
+            batch.draw(tutorialTexture, getX(), getY(), getWidth(), getHeight());
         } else {
-            batch.draw(tutorialTexture_EN, getX(), getY(), width, height);
+            batch.draw(tutorialTexture_EN, getX(), getY(), getWidth(), getHeight());
         }
     }
 }
