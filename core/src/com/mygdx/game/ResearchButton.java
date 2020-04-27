@@ -103,7 +103,7 @@ public class ResearchButton extends Actor {
 
                 if(currentMoney >= cost && !researchBought[index] && available) {
                     System.out.println("bought");
-                    researchSound.play(0.6f);
+                    researchSound.play(0.5f);
                     main.nonStaticSetMoney(currentMoney - cost);
                     button1.getStyle().checked = button1.getStyle().down;
                     button1.setChecked(true);

@@ -91,7 +91,7 @@ public class FarmUpgrades extends Actor {
         setBounds(370, 70, 330, 130);
         addListener(new ActorGestureListener() {
             public void tap(InputEvent event, float x, float y, int count, int button) {
-                cowSound.play(0.8f);
+                cowSound.play(0.5f);
             }
         });
     }
