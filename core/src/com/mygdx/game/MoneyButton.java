@@ -116,8 +116,8 @@ public class MoneyButton extends Actor {
      * @param index Index of the MoneyButton where it's added
      */
     static void addToMaxAmount(int amount, int index) {
-        if(maxAmount[index] + amount > 50000) {
-            maxAmount[index] = 50000;
+        if(maxAmount[index] + amount > 80000) {
+            maxAmount[index] = 80000;
         } else if(maxAmount[index] + amount < 1000)
             maxAmount[index] = 1000;
         else {
