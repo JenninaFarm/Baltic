@@ -134,7 +134,9 @@ public class FarmButton extends Actor {
                 }
                 if (available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
                     System.out.println("bought");
-                    upgradeSound.play(0.5f);
+                    if(Main.getSound()) {
+                        upgradeSound.play(0.5f);
+                    }
                     bought[farmIndex][buttonIndex] = true;
                     farmScreen.setFarmButtonY(buttonI);
                     button1.setVisible(false);
