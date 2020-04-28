@@ -157,7 +157,6 @@ public class Main extends Game {
 	 */
 	public static void setMoney(int amount) {
 		if(amount < 0) {
-			System.out.println("Program is failing. Not enough money to this action.");
 		} else {
 			money = amount;
 		}
@@ -297,10 +296,8 @@ public class Main extends Game {
 	 */
 	void addBalticSituation(int amount) {
 		if(amount < 0 || amount > 4) {
-			System.out.println("Program is failing. Amount not possible");
 		} else {
 			balticSituation += amount;
-			System.out.println("baltic Situation = " + balticSituation);
 		}
 	}
 
@@ -310,7 +307,6 @@ public class Main extends Game {
 	 */
 	void nonStaticSetMoney(int amount) {
 		if(amount < 0) {
-			System.out.println("Program is failing. Not enough money to this action.");
 		} else {
 			money = amount;
 		}

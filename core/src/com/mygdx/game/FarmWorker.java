@@ -71,7 +71,6 @@ public class FarmWorker extends Actor {
                 int currentMoney = main.nonStaticGetMoney();
                 int workerAmount = farmScreen.getWorkerAmount();
                 if (currentMoney >= cost && workerAmount < 3) {
-                    System.out.println("bought");
                     if (Main.getSound()) {
                         workerSound.play(0.6f);
                     }
@@ -80,8 +79,6 @@ public class FarmWorker extends Actor {
                     button1.setChecked(false);
                     Save.saveVariables();
                     Save.loadVariables();
-                } else {
-                    System.out.println("Not enough money or max amount reached!");
                 }
 
                 workerAmount = farmScreen.getWorkerAmount();

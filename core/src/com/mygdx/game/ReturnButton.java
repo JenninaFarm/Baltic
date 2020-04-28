@@ -53,7 +53,6 @@ public class ReturnButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("return");
                 main.switchScreen(index, 0);
                 Save.saveVariables();
                 Save.loadVariables();

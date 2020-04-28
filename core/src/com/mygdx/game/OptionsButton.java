@@ -68,18 +68,14 @@ public class OptionsButton extends Actor {
                     if (Main.getMusic()) {
                         Main.setMusic(false);
                         main.stopMusic();
-                        System.out.println("Music off");
                     } else {
                         Main.setMusic(true);
-                        System.out.println("Music on");
                     }
                 } else if (index == 1) {
                     if (Main.getSound()) {
                         Main.setSound(false);
-                        System.out.println("Sound off");
                     } else {
                         Main.setSound(true);
-                        System.out.println("Sound on");
                     }
                 } else if (index == 2) {
                     main.changeLocale(new Locale("fi", "FI"));

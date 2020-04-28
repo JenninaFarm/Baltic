@@ -90,7 +90,6 @@ public class MapButton extends Actor {
         addListener(new ActorGestureListener(2.5f, 0f, 0.25f, 0f) {
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 if(bought[index]) {
-                    System.out.println("to farm");
                     main.switchScreen(3, index);
                 } else {
                     //mapScreen.setInfoVisible(false);

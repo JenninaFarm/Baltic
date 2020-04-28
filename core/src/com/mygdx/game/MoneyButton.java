@@ -93,7 +93,6 @@ public class MoneyButton extends Actor {
                 if (Main.getSound()) {
                     coinSound.play(0.8f);
                 }
-                System.out.println("money collected:" + moneyCollected);
                 main.nonStaticSetMoney(main.nonStaticGetMoney() + moneyCollected);
                 lastTimeClicked[index] = timeWhenClickedInSec;
                 Save.saveVariables();
@@ -133,7 +132,6 @@ public class MoneyButton extends Actor {
      */
     static void addToMultiplier(float addedMp, int farmIndex) {
         multipliers[farmIndex] += addedMp;
-        System.out.println("New multiplier for farm " + farmIndex + ": " + multipliers[farmIndex]);
     }
 
     /**

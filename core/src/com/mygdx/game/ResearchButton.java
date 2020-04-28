@@ -102,7 +102,6 @@ public class ResearchButton extends Actor {
                 //researchScreen.setInfoVisible(false);
 
                 if(currentMoney >= cost && !researchBought[index] && available) {
-                    System.out.println("bought");
                     if(Main.getSound()) {
                         researchSound.play(0.5f);
                     }

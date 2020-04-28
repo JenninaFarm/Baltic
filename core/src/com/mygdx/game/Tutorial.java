@@ -100,7 +100,6 @@ public class Tutorial extends Actor {
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 3) {
-                            System.out.println("Next tutorial1 stage");
                             tutorial_1_Stages[++index] = true;
                         } else {
                             tutorial_1 = false;
@@ -123,7 +122,6 @@ public class Tutorial extends Actor {
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 2) {
-                            System.out.println("Next tutorial1 stage");
                             tutorial_2_Stages[++index] = true;
                         } else {
                             tutorial_2 = false;
@@ -146,7 +144,6 @@ public class Tutorial extends Actor {
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 3) {
-                            System.out.println("Next tutorial1 stage");
                             tutorial_3_Stages[++index] = true;
                         } else {
                             tutorial_3 = false;
@@ -169,7 +166,6 @@ public class Tutorial extends Actor {
                 addListener(new InputListener() {
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         if (index < 3) {
-                            System.out.println("Next tutorial1 stage");
                             tutorial_4_Stages[++index] = true;
                         } else {
                             tutorial_4 = false;

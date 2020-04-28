@@ -46,7 +46,6 @@ public class MapResearchButton extends Actor {
 
         addListener(new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-                System.out.println("to research");
                 main.switchScreen(4, 0);
                 return true;
             }

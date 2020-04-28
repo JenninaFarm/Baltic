@@ -55,10 +55,8 @@ public class MainMenuButton extends Actor {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 if (index == 0) {
-                    System.out.println("to map");
                     main.switchScreen(2, 0);
                 } else if (index == 1) {
-                    System.out.println("to options");
                     main.switchScreen(5, 0);
                 }
                 return true;

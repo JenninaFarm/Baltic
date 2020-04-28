@@ -133,7 +133,6 @@ public class FarmButton extends Actor {
                     button1.setDisabled(false);
                 }
                 if (available && currentMoney >= cost && !bought[farmIndex][buttonIndex]) {
-                    System.out.println("bought");
                     if(Main.getSound()) {
                         upgradeSound.play(0.5f);
                     }
