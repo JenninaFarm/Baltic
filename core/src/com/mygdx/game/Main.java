@@ -106,7 +106,7 @@ public class Main extends Game {
 	 * Set -method to receive language boolean.
 	 * @param language sets if languages is Finnish not
 	 */
-	public static void setLanguage(boolean language) {
+	static void setLanguage(boolean language) {
 		finnish = language;
 	}
 

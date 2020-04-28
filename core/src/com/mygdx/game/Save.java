@@ -187,7 +187,7 @@ public class Save {
      */
     static void newGame() {
 
-        prefs.putInteger("money", 7000000);
+        prefs.putInteger("money", 7000);
         prefs.putBoolean("gameBegan", false);
         prefs.putInteger("balticSituation", 0);
         prefs.putBoolean("tutorial", false);
