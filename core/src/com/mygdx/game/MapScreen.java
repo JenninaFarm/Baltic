@@ -192,10 +192,8 @@ public class MapScreen extends ApplicationAdapter implements Screen {
 
         boat1 = new Boat(420, 100);
         boatCoins1 = new MoneyButton(main, 460, 130, 4);
-        boatCoins1.setClicked();
         boat2 = new Boat(520, 200);
         boatCoins2 = new MoneyButton(main, 560, 230, 5);
-        boatCoins2.setClicked();
 
         coins.add(new MoneyButton(main,197, 82, 0));
         coins.add(new MoneyButton(main,357, 242, 1));
@@ -398,11 +396,12 @@ public class MapScreen extends ApplicationAdapter implements Screen {
             boat1.setVisible(true);
             boatCoins1.setVisible(true);
             boat1Added = true;
-            System.out.println("Boat in action");
+            boatCoins1.setClicked();
         }
         if (Main.getBalticSituation() >= 50 && !boat2Added) {
             boat2.setVisible(true);
             boatCoins2.setVisible(true);
+            boatCoins2.setClicked();
             boat2Added = true;
         }
     }

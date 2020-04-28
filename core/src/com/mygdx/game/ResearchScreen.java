@@ -112,12 +112,14 @@ public class ResearchScreen implements Screen {
         researchButtons[0].setResearchAvailable();
         researchButtons[4].setResearchAvailable();
         researchButtons[6].setResearchAvailable();
-        researchButtons[9].setResearchAvailable();
 
         for(int i=0; i<3; i++) {
             if(booleans[i]) {
                 researchButtons[i+1].setResearchAvailable();
             }
+        }
+        if(booleans[0]) {
+            researchButtons[9].setResearchAvailable();
         }
         if(booleans[4] && booleans[8]) {
             researchButtons[5].setResearchAvailable();
