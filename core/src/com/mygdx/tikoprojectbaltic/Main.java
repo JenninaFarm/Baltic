@@ -3,7 +3,10 @@ package com.mygdx.tikoprojectbaltic;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -101,6 +104,16 @@ public class Main extends Game {
 	 * Music of farm screen.
 	 */
 	private Music farmMusic;
+
+	private AssetManager assetManager;
+
+	public Main() {
+		assetManager = new AssetManager( new InternalFileHandleResolver());
+		assetManager.load("textB.png", Texture.class);
+		assetManager.finishLoading();
+
+
+	}
 
 	/**
 	 * Set -method to receive language boolean.
